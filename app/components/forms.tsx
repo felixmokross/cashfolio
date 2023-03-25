@@ -28,12 +28,10 @@ type ErrorMessageProps = { error?: string; errorId: string };
 
 export const Input = function Input({
   label,
-  name,
   error,
   groupClassName,
-  defaultValue,
-  disabled,
   type,
+  ...props
 }: InputProps) {
   const id = `input-${useId()}`;
   const errorId = `input-error-${useId()}`;
@@ -42,13 +40,11 @@ export const Input = function Input({
       <Label htmlFor={id}>{label}</Label>
       <input
         type={type || "text"}
-        name={name}
         id={id}
         className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:opacity-50 sm:text-sm"
         aria-invalid={error ? "true" : undefined}
         aria-describedby={error ? errorId : undefined}
-        defaultValue={defaultValue}
-        disabled={disabled}
+        {...props}
       />
       <ErrorMessage error={error} errorId={errorId} />
     </div>
@@ -60,12 +56,9 @@ export type InputProps = {
   label: string;
   error?: string;
   groupClassName?: string;
-} & Pick<
-  DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >,
-  "defaultValue" | "disabled" | "ref" | "type"
+} & DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
 >;
 
 export function Select({

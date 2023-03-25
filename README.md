@@ -39,3 +39,8 @@ npm run deploy
 You can run `flyctl info` to get the url and ip address of your server.
 
 Check out the [fly docs](https://fly.io/docs/getting-started/node/) for more information.
+
+## Environment Variables
+
+- `DATABASE_URL`: The Postgres connection string
+- `SESSION_SECRET`: can be generated e.g. using `openssl rand -hex 32`
