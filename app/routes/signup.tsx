@@ -1,5 +1,9 @@
 import type { User } from "@prisma/client";
-import type { ActionFunction, MetaFunction } from "@remix-run/node";
+import type {
+  ActionFunction,
+  DataFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
@@ -7,7 +11,7 @@ import { Form, Link } from "react-router-dom";
 import { Button } from "~/components/button";
 import { Input } from "~/components/forms";
 import { LogoSmall } from "~/components/logo";
-import { createUser } from "~/models/users.server";
+import { createUser, getUserByAuth0UserId } from "~/models/users.server";
 import { getSession } from "~/session.server";
 import type { FormErrors } from "~/utils";
 import { safeRedirect } from "~/utils";
@@ -19,14 +23,28 @@ type ActionData = {
 
 type SignupValues = Partial<Pick<User, "preferredLocale">>;
 
-const defaultRedirectTo = "/";
+export async function loader({ request }: DataFunctionArgs) {
+  const session = await getSession(request);
+  const userId = session.get("userId");
+  if (!userId) {
+    return redirect(`/signin?redirectTo=${encodeURIComponent(request.url)}`);
+  }
+
+  const user = await getUserByAuth0UserId(userId);
+  if (user) {
+    return redirect(
+      safeRedirect(new URL(request.url).searchParams.get("redirectTo"))
+    );
+  }
+
+  return null;
+}
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const preferredLocale = formData.get("preferredLocale");
   const redirectTo = safeRedirect(
-    new URL(request.url).searchParams.get("redirectTo"),
-    defaultRedirectTo
+    new URL(request.url).searchParams.get("redirectTo")
   );
 
   if (typeof preferredLocale !== "string" || preferredLocale.length < 2) {
@@ -45,7 +63,6 @@ export const action: ActionFunction = async ({ request }) => {
 
   await createUser({ auth0UserId: userId, preferredLocale });
 
-  console.log(`redirecting to ${redirectTo}`);
   return redirect(redirectTo);
 };
 

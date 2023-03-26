@@ -1,3 +1,16 @@
+import type { DataFunctionArgs } from "@remix-run/node";
+import { redirect } from "react-router";
+import { getSession } from "~/session.server";
+
+export async function loader({ request }: DataFunctionArgs) {
+  // do not show this page if we are signed in
+  const session = await getSession(request);
+  const userId = session.get("userId");
+  if (userId) return redirect("/");
+
+  return null;
+}
+
 export default function SignedOut() {
   return (
     <>
