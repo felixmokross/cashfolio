@@ -1,19 +1,17 @@
 import type { User } from "@prisma/client";
 import { prisma } from "~/prisma.server";
 
-export async function getUserByEmail(email: User["email"]) {
-  return prisma.user.findUnique({ where: { email } });
+export async function getUserByAuth0UserId(auth0UserId: User["auth0UserId"]) {
+  return prisma.user.findUnique({ where: { auth0UserId } });
 }
 
-export async function createUser(
-  email: User["email"],
-  //   refCurrency: string,
-  preferredLocale?: string
-) {
+export async function createUser({
+  auth0UserId,
+  preferredLocale,
+}: Pick<User, "auth0UserId" | "preferredLocale">) {
   return prisma.user.create({
     data: {
-      email,
-      //   refCurrency,
+      auth0UserId,
       preferredLocale,
     },
   });

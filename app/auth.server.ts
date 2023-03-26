@@ -1,19 +1,22 @@
-import type { DataFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Issuer } from "openid-client";
 import invariant from "tiny-invariant";
+import { getUserByAuth0UserId } from "./models/users.server";
 import { getSession } from "./session.server";
 
-export function withAuth<TResult>(
-  callback: (args: DataFunctionArgs & { userId: string }) => Promise<TResult>
-) {
-  return async (args: DataFunctionArgs) => {
-    const session = await getSession(args.request);
-    const userId = session.get("userId");
-    if (!userId) return redirect("/signin");
+export async function getUser(request: Request) {
+  const session = await getSession(request);
+  const userId = session.get("userId");
+  if (!userId) {
+    throw redirect(`/signin?redirectTo=${encodeURIComponent(request.url)}`);
+  }
 
-    return await callback({ ...args, userId });
-  };
+  const user = await getUserByAuth0UserId(userId);
+  if (!user) {
+    throw redirect(`/signup?redirectTo=${encodeURIComponent(request.url)}`);
+  }
+
+  return user;
 }
 
 export async function getOidcClient() {

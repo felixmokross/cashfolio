@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id              String @id @default(cuid())
-  email           String @unique
+  auth0UserId     String @unique
   preferredLocale String @default("en")
   refCurrency     String @default("USD")
 

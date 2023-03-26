@@ -1,4 +1,5 @@
 import type { ComponentPropsWithoutRef, ElementType } from "react";
+import invariant from "tiny-invariant";
 
 // inspired by Formik
 export type FormErrors<Values> = {
@@ -36,11 +37,13 @@ export function safeRedirect(
   to: FormDataEntryValue | string | null | undefined,
   defaultRedirect: string = DEFAULT_REDIRECT
 ) {
+  invariant(process.env.BASE_URL, "BASE_URL must be set");
+
   if (!to || typeof to !== "string") {
     return defaultRedirect;
   }
 
-  if (!to.startsWith("/") || to.startsWith("//")) {
+  if (!to.startsWith(`${process.env.BASE_URL}/`)) {
     return defaultRedirect;
   }
 
