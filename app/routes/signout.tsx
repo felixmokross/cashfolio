@@ -1,6 +1,6 @@
 import type { LoaderFunction } from "react-router";
 import { redirect } from "react-router";
-import { getOidcLogoutUrl } from "~/oidc.server";
+import { getOidcLogoutUrl } from "~/auth.server";
 import { getSession, sessionStorage } from "~/session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {

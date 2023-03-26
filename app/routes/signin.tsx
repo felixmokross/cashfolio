@@ -3,7 +3,7 @@ import { generators } from "openid-client";
 import { createSigninSession } from "~/signin-session.server";
 import { safeRedirect } from "~/utils";
 import { createId } from "@paralleldrive/cuid2";
-import { getOidcClient } from "~/oidc.server";
+import { getOidcClient } from "~/auth.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const codeVerifier = generators.codeVerifier();

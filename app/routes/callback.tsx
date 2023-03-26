@@ -1,6 +1,6 @@
 import type { LoaderFunction } from "react-router";
 import invariant from "tiny-invariant";
-import { getOidcClient } from "~/oidc.server";
+import { getOidcClient } from "~/auth.server";
 import { createUserSession } from "~/session.server";
 import { getSigninSession } from "~/signin-session.server";
 
