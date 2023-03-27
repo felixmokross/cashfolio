@@ -2,12 +2,12 @@ import type { LoaderFunction } from "react-router";
 import invariant from "tiny-invariant";
 import { getOidcClient } from "~/auth.server";
 import { createUserSession } from "~/session.server";
-import { getSigninSession } from "~/signin-session.server";
+import { getLoginSession } from "~/login-session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const oidcClient = await getOidcClient();
 
-  const signinSession = await getSigninSession(request);
+  const loginSession = await getLoginSession(request);
 
   invariant(process.env.BASE_URL, "BASE_URL must be set");
 
@@ -16,8 +16,8 @@ export const loader: LoaderFunction = async ({ request }) => {
     `${process.env.BASE_URL}/callback`,
     params,
     {
-      code_verifier: signinSession.get("codeVerifier"),
-      state: signinSession.get("state"),
+      code_verifier: loginSession.get("codeVerifier"),
+      state: loginSession.get("state"),
     }
   );
 
@@ -26,7 +26,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   invariant(tokenSet.id_token, "tokenSet does not have id_token!");
   return await createUserSession({
     request,
-    redirectTo: signinSession.get("redirectTo") || "/",
+    redirectTo: loginSession.get("redirectTo") || "/",
     userId: claims.sub,
     idToken: tokenSet.id_token,
   });

@@ -5,7 +5,7 @@ import { generators, Issuer } from "openid-client";
 import invariant from "tiny-invariant";
 import { getUserByAuth0UserId } from "./models/users.server";
 import { getSession } from "./session.server";
-import { createSigninSession } from "./signin-session.server";
+import { createLoginSession } from "./login-session.server";
 import { safeRedirect } from "./utils";
 
 export async function authorize(
@@ -16,7 +16,7 @@ export async function authorize(
     new URL(request.url).searchParams.get("redirectTo")
   );
 
-  // do not execute this loader if we are already signed in
+  // do not execute this loader if we are already logged in
   const session = await getSession(request);
   const userId = session.get("userId");
   if (userId) {
@@ -42,7 +42,7 @@ export async function authorize(
     url.searchParams.set("screen_hint", "signup");
   }
 
-  return await createSigninSession({
+  return await createLoginSession({
     request,
     url: url.toString(),
     redirectTo,
@@ -57,7 +57,7 @@ export async function getUser(request: Request) {
   const session = await getSession(request);
   const userId = session.get("userId");
   if (!userId) {
-    throw redirect(`/signin?redirectTo=${encodeURIComponent(request.url)}`);
+    throw redirect(`/login?redirectTo=${encodeURIComponent(request.url)}`);
   }
 
   const user = await getUserByAuth0UserId(userId);
@@ -95,6 +95,6 @@ export function getOidcLogoutUrl(idToken: string) {
   }/oidc/logout?id_token_hint=${encodeURIComponent(
     idToken
   )}&post_logout_redirect_uri=${encodeURIComponent(
-    `${process.env.BASE_URL}/signed-out`
+    `${process.env.BASE_URL}/logged-out`
   )}`;
 }

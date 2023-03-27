@@ -1,9 +1,6 @@
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
-import {
-  getSigninSession,
-  signinSessionStorage,
-} from "./signin-session.server";
+import { getLoginSession, loginSessionStorage } from "./login-session.server";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
@@ -49,8 +46,8 @@ export async function createUserSession({
       ],
       [
         "Set-Cookie",
-        await signinSessionStorage.destroySession(
-          await getSigninSession(request)
+        await loginSessionStorage.destroySession(
+          await getLoginSession(request)
         ),
       ],
     ],

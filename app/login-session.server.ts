@@ -3,9 +3,9 @@ import invariant from "tiny-invariant";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
-export const signinSessionStorage = createCookieSessionStorage({
+export const loginSessionStorage = createCookieSessionStorage({
   cookie: {
-    name: "__signin_session",
+    name: "__login_session",
     httpOnly: true,
     path: "/",
     sameSite: "lax",
@@ -14,12 +14,12 @@ export const signinSessionStorage = createCookieSessionStorage({
   },
 });
 
-export async function getSigninSession(request: Request) {
+export async function getLoginSession(request: Request) {
   const cookie = request.headers.get("Cookie");
-  return signinSessionStorage.getSession(cookie);
+  return loginSessionStorage.getSession(cookie);
 }
 
-export async function createSigninSession({
+export async function createLoginSession({
   request,
   url,
   redirectTo,
@@ -32,13 +32,13 @@ export async function createSigninSession({
   codeVerifier: string;
   state: string;
 }) {
-  const signinSession = await getSigninSession(request);
-  signinSession.flash("redirectTo", redirectTo);
-  signinSession.flash("codeVerifier", codeVerifier);
-  signinSession.flash("state", state);
+  const loginSession = await getLoginSession(request);
+  loginSession.flash("redirectTo", redirectTo);
+  loginSession.flash("codeVerifier", codeVerifier);
+  loginSession.flash("state", state);
   return redirect(url, {
     headers: {
-      "Set-Cookie": await signinSessionStorage.commitSession(signinSession),
+      "Set-Cookie": await loginSessionStorage.commitSession(loginSession),
     },
   });
 }

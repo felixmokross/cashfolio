@@ -5,7 +5,7 @@ import { getSession } from "~/session.server";
 import { getTitle } from "~/utils";
 
 export async function loader({ request }: DataFunctionArgs) {
-  // do not show this page if we are signed in
+  // do not show this page if we are logged in
   const session = await getSession(request);
   const userId = session.get("userId");
   if (userId) return redirect("/");
@@ -13,18 +13,18 @@ export async function loader({ request }: DataFunctionArgs) {
   return null;
 }
 
-export const meta: MetaFunction = () => ({ title: getTitle("Signed Out") });
+export const meta: MetaFunction = () => ({ title: getTitle("Logged Out") });
 
-export default function SignedOut() {
+export default function LoggedOut() {
   return (
     <>
-      <h1>Signed out</h1>
+      <h1>Logged Out</h1>
 
       <p>
-        <Link to="../signin">&rarr; Sign in</Link>
+        <Link to="../login">&rarr; Log In</Link>
       </p>
       <p>
-        <Link to="../signup">&rarr; Sign up</Link>
+        <Link to="../signup">&rarr; Sign Up</Link>
       </p>
     </>
   );

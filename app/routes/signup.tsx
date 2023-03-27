@@ -67,7 +67,9 @@ export const action: ActionFunction = async ({ request }) => {
   return redirect(redirectTo);
 };
 
-export const meta: MetaFunction = () => ({ title: getTitle("Sign Up") });
+export const meta: MetaFunction = () => ({
+  title: getTitle("Complete Signup"),
+});
 
 export default function Signup() {
   const actionData = useActionData() as ActionData;
@@ -78,7 +80,7 @@ export default function Signup() {
           <LogoSmall className="h-10 w-auto" />
         </Link>
         <h2 className="mt-4 text-2xl font-semibold text-gray-900">
-          Get Started with Cashfolio
+          Complete Signup
         </h2>
         <div className="mt-10 flex flex-col gap-4">
           <Input
@@ -90,7 +92,7 @@ export default function Signup() {
           />
         </div>
         <Button type="submit" variant="primary" className="mt-10">
-          Sign Up
+          Start Using Cashfolio
         </Button>
       </Form>
     </div>

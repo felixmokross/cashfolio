@@ -16,7 +16,7 @@ export default function Index() {
       <p>User: {user}</p>
 
       <p>
-        <Link to="signout">&rarr; Sign out</Link>
+        <Link to="logout">&rarr; Log Out</Link>
       </p>
     </>
   );
