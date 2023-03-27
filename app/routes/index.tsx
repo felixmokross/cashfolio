@@ -19,6 +19,10 @@ export default function Index() {
       </p>
 
       <p>
+        <Link to="accounts">&rarr; Accounts</Link>
+      </p>
+
+      <p>
         <Link to="logout">&rarr; Log Out</Link>
       </p>
     </>
