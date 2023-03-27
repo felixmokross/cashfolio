@@ -8,6 +8,7 @@ import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import { Form, Link } from "react-router-dom";
+import { authorize } from "~/auth.server";
 import { Button } from "~/components/button";
 import { Input } from "~/components/forms";
 import { LogoSmall } from "~/components/logo";
@@ -27,7 +28,7 @@ export async function loader({ request }: DataFunctionArgs) {
   const session = await getSession(request);
   const userId = session.get("userId");
   if (!userId) {
-    return redirect(`/signin?redirectTo=${encodeURIComponent(request.url)}`);
+    return authorize(request, "signup");
   }
 
   const user = await getUserByAuth0UserId(userId);

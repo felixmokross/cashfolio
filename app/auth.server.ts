@@ -1,8 +1,57 @@
+import { createId } from "@paralleldrive/cuid2";
+import type { TypedResponse } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { Issuer } from "openid-client";
+import { generators, Issuer } from "openid-client";
 import invariant from "tiny-invariant";
 import { getUserByAuth0UserId } from "./models/users.server";
 import { getSession } from "./session.server";
+import { createSigninSession } from "./signin-session.server";
+import { safeRedirect } from "./utils";
+
+export async function authorize(
+  request: Request,
+  mode: AuthorizeMode = "login"
+): Promise<TypedResponse> {
+  const redirectTo = safeRedirect(
+    new URL(request.url).searchParams.get("redirectTo")
+  );
+
+  // do not execute this loader if we are already signed in
+  const session = await getSession(request);
+  const userId = session.get("userId");
+  if (userId) {
+    return redirect(redirectTo);
+  }
+
+  const codeVerifier = generators.codeVerifier();
+  const codeChallenge = generators.codeChallenge(codeVerifier);
+  const state = createId();
+
+  const oidcClient = await getOidcClient();
+
+  const url = new URL(
+    oidcClient.authorizationUrl({
+      scope: "openid email profile",
+      state,
+      code_challenge: codeChallenge,
+      code_challenge_method: "S256",
+    })
+  );
+
+  if (mode === "signup") {
+    url.searchParams.set("screen_hint", "signup");
+  }
+
+  return await createSigninSession({
+    request,
+    url: url.toString(),
+    redirectTo,
+    codeVerifier,
+    state,
+  });
+}
+
+type AuthorizeMode = "signup" | "login";
 
 export async function getUser(request: Request) {
   const session = await getSession(request);
