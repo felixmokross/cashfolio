@@ -1,12 +1,13 @@
 import { createId } from "@paralleldrive/cuid2";
 import type { TypedResponse } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { generators, Issuer } from "openid-client";
+import { generators, Issuer, TokenSet } from "openid-client";
 import invariant from "tiny-invariant";
 import { getUserByAuth0UserId } from "./models/users.server";
 import { getSession } from "./session.server";
 import { createLoginSession } from "./login-session.server";
 import { safeRedirect } from "./utils";
+import type { User } from "@prisma/client";
 
 export async function authorize(
   request: Request,
@@ -56,6 +57,7 @@ type AuthorizeMode = "signup" | "login";
 export async function getUser(request: Request) {
   const session = await getSession(request);
   const userId = session.get("userId");
+  const claims = new TokenSet({ id_token: session.get("idToken") }).claims();
   if (!userId) {
     throw redirect(`/login?redirectTo=${encodeURIComponent(request.url)}`);
   }
@@ -65,8 +67,17 @@ export async function getUser(request: Request) {
     throw redirect(`/signup?redirectTo=${encodeURIComponent(request.url)}`);
   }
 
-  return user;
+  return {
+    ...user,
+    email: claims.email,
+    pictureUrl: claims.picture,
+  } as ExtendedUser;
 }
+
+export type ExtendedUser = User & {
+  email: string;
+  pictureUrl: string;
+};
 
 export async function getOidcClient() {
   invariant(process.env.OIDC_ISSUER, "OIDC_ISSUER not set");

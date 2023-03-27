@@ -10,19 +10,21 @@ import { useActionData } from "@remix-run/react";
 import { Form, Link } from "react-router-dom";
 import { authorize } from "~/auth.server";
 import { Button } from "~/components/button";
-import { Input } from "~/components/forms";
+import { CurrencyCombobox } from "~/components/forms";
 import { LogoSmall } from "~/components/logo";
+import { getLocales } from "~/locales.server";
 import { createUser, getUserByAuth0UserId } from "~/models/users.server";
 import { getSession } from "~/session.server";
 import type { FormErrors } from "~/utils";
 import { safeRedirect } from "~/utils";
 import { getTitle } from "~/utils";
+import { pick } from "accept-language-parser";
 
 type ActionData = {
   errors: FormErrors<SignupValues>;
 };
 
-type SignupValues = Partial<Pick<User, "preferredLocale">>;
+type SignupValues = Partial<Pick<User, "refCurrency">>;
 
 export async function loader({ request }: DataFunctionArgs) {
   const session = await getSession(request);
@@ -43,18 +45,14 @@ export async function loader({ request }: DataFunctionArgs) {
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const preferredLocale = formData.get("preferredLocale");
+  const refCurrency = formData.get("refCurrency");
   const redirectTo = safeRedirect(
     new URL(request.url).searchParams.get("redirectTo")
   );
 
-  if (typeof preferredLocale !== "string" || preferredLocale.length < 2) {
+  if (typeof refCurrency !== "string" || refCurrency.length === 0) {
     return json<ActionData>(
-      {
-        errors: {
-          preferredLocale: "Preferred locale must have at least 2 characters",
-        },
-      },
+      { errors: { refCurrency: "Main currency is required" } },
       { status: 400 }
     );
   }
@@ -62,10 +60,21 @@ export const action: ActionFunction = async ({ request }) => {
   const session = await getSession(request);
   const userId = session.get("userId");
 
-  await createUser({ auth0UserId: userId, preferredLocale });
+  await createUser({
+    auth0UserId: userId,
+    refCurrency,
+    preferredLocale: getPreferredLocale(request) || "en",
+  });
 
   return redirect(redirectTo);
 };
+
+function getPreferredLocale(request: Request) {
+  const acceptLanguageHeader = request.headers.get("accept-language");
+  if (!acceptLanguageHeader) return undefined;
+
+  return pick(getLocales(), acceptLanguageHeader) || undefined;
+}
 
 export const meta: MetaFunction = () => ({
   title: getTitle("Complete Signup"),
@@ -83,12 +92,11 @@ export default function Signup() {
           Complete Signup
         </h2>
         <div className="mt-10 flex flex-col gap-4">
-          <Input
-            label="Preferred Locale"
-            type="text"
-            name="preferredLocale"
+          <CurrencyCombobox
+            label="Main Currency"
+            name="refCurrency"
             autoFocus={true}
-            error={actionData?.errors?.preferredLocale}
+            error={actionData?.errors?.refCurrency}
           />
         </div>
         <Button type="submit" variant="primary" className="mt-10">

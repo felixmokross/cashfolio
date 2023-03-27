@@ -8,11 +8,13 @@ export async function getUserByAuth0UserId(auth0UserId: User["auth0UserId"]) {
 export async function createUser({
   auth0UserId,
   preferredLocale,
-}: Pick<User, "auth0UserId" | "preferredLocale">) {
+  refCurrency,
+}: Pick<User, "auth0UserId" | "preferredLocale" | "refCurrency">) {
   return prisma.user.create({
     data: {
       auth0UserId,
       preferredLocale,
+      refCurrency,
     },
   });
 }
