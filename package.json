@@ -6,7 +6,8 @@
     "deploy": "fly deploy --remote-only",
     "dev": "remix dev",
     "start": "remix-serve build",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint ."
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
@@ -32,6 +33,7 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.8.0",
     "prettier": "2.8.7",
     "prettier-plugin-tailwindcss": "0.2.5",
     "prisma": "^4.11.0",
