@@ -1,4 +1,4 @@
-name: 🚀 Deploy
+name: Deploy
 on:
   push:
     branches:
@@ -7,83 +7,57 @@ on:
 
 jobs:
   lint:
-    name: ⬣ ESLint
+    name: ESLint
     runs-on: ubuntu-latest
     steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
-
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
-
-      - name: 🔬 Lint
-        run: npm run lint
+      - uses: bahmutov/npm-install@v1
+      - run: npm run lint
 
   typecheck:
-    name: ʦ TypeScript
+    name: TypeScript
     runs-on: ubuntu-latest
     steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
-
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
-
-      - name: 🔎 Type check
-        run: npm run typecheck
+      - uses: bahmutov/npm-install@v1
+      - run: npm run typecheck
 
   vitest:
-    name: ⚡ Vitest
+    name: Vitest
     runs-on: ubuntu-latest
     steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
-
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
-
-      - name: ⚡ Run vitest
-        run: npm run test
+      - uses: bahmutov/npm-install@v1
+      - run: npm run test
 
   playwright:
-    name: ⚫️ Playwright
+    name: Playwright
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
-
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      - name: Run Playwright tests
-        run: npx playwright test
-
-      - name: Upload report
-        uses: actions/upload-artifact@v3
+      - uses: bahmutov/npm-install@v1
+      - run: npm run db
+      - run: npm run build
+      - run: npm start
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          BASE_URL: http://localhost:3000
+      - run: npx playwright install --with-deps
+      - run: npx playwright test
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: playwright-report
