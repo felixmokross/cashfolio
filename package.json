@@ -9,8 +9,7 @@
     "typecheck": "tsc",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "test": "vitest",
-    "e2e": "playwright test --ui",
-    "db": "docker-compose up"
+    "e2e": "playwright test --ui"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
