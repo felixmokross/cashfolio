@@ -52,7 +52,7 @@ jobs:
       - name: Start database
         run: docker-compose up -d && sleep 3
       - run: npm run build
-      - run: npm start
+      - run: npm start &
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
           BASE_URL: http://localhost:3000
