@@ -52,6 +52,8 @@ jobs:
       - name: Start database
         run: docker-compose up -d && sleep 3
       - run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
       - run: npm run build
       - run: npm start &
         env:
