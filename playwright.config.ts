@@ -42,10 +42,11 @@ export default defineConfig({
       use: { ...devices["Desktop Firefox"] },
     },
 
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    },
+    // webkit fails currently on GitHub Actions (related to this? https://github.com/microsoft/playwright/issues/21990)
+    // {
+    //   name: "webkit",
+    //   use: { ...devices["Desktop Safari"] },
+    // },
 
     /* Test against mobile viewports. */
     // {
