@@ -62,6 +62,11 @@ jobs:
           OIDC_CLIENT_SECRET: ${{ secrets.OIDC_CLIENT_SECRET }}
       - run: npx playwright install --with-deps
       - run: npx playwright test
+        env:
+          BASE_URL: http://localhost:3000
+          PLAYWRIGHT_TESTS_AUTH0_DOMAIN: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_DOMAIN }}
+          PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID }}
+          PLAYWRIGHT_TESTS_AUTH0_CLIENT_SECRET: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_CLIENT_SECRET }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
