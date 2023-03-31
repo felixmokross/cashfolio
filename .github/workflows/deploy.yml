@@ -51,6 +51,7 @@ jobs:
       - uses: bahmutov/npm-install@v1
       - name: Start database
         run: docker-compose up -d && sleep 3
+      - run: npx prisma migrate deploy
       - run: npm run build
       - run: npm start &
         env:
