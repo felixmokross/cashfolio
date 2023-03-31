@@ -42,5 +42,4 @@ Check out the [fly docs](https://fly.io/docs/getting-started/node/) for more inf
 
 ## Environment Variables
 
-- `DATABASE_URL`: The Postgres connection string
-- `SESSION_SECRET`: can be generated e.g. using `openssl rand -hex 32`
+See [`.env.example`](./.env.example) file
