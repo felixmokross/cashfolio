@@ -1,4 +1,8 @@
-import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
+import type {
+  DataFunctionArgs,
+  MetaFunction,
+  V2_MetaFunction,
+} from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { redirect } from "react-router";
 import { getSession } from "~/session.server";
@@ -13,7 +17,7 @@ export async function loader({ request }: DataFunctionArgs) {
   return null;
 }
 
-export const meta: MetaFunction = () => ({ title: getTitle("Logged Out") });
+export const meta: V2_MetaFunction = () => [{ title: getTitle("Logged Out") }];
 
 export default function LoggedOut() {
   return (

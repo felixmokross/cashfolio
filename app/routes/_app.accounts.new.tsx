@@ -1,4 +1,4 @@
-import type { DataFunctionArgs } from "@remix-run/node";
+import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import type { MetaFunction } from "@remix-run/react/dist/routeModules";
@@ -30,7 +30,7 @@ export async function action({ request }: DataFunctionArgs) {
   return redirect("/accounts");
 }
 
-export const meta: MetaFunction = () => ({ title: getTitle("New Account") });
+export const meta: V2_MetaFunction = () => [{ title: getTitle("New Account") }];
 
 export default function NewAccountPage() {
   return (

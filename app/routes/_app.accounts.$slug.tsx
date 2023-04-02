@@ -1,4 +1,8 @@
-import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
+import type {
+  DataFunctionArgs,
+  MetaFunction,
+  V2_MetaFunction,
+} from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
@@ -50,9 +54,9 @@ export async function loader({ request, params }: DataFunctionArgs) {
   return json(account);
 }
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => ({
-  title: getTitle(data.name),
-});
+export const meta: V2_MetaFunction<typeof loader> = ({ data }) => [
+  { title: getTitle(data.name) },
+];
 
 export default function EditAccountPage() {
   const account = useLoaderData<typeof loader>();

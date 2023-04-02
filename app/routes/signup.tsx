@@ -3,6 +3,7 @@ import type {
   ActionFunction,
   DataFunctionArgs,
   MetaFunction,
+  V2_MetaFunction,
 } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -76,9 +77,9 @@ function getPreferredLocale(request: Request) {
   return pick(getLocales(), acceptLanguageHeader) || undefined;
 }
 
-export const meta: MetaFunction = () => ({
-  title: getTitle("Complete Signup"),
-});
+export const meta: V2_MetaFunction = () => [
+  { title: getTitle("Complete Signup") },
+];
 
 export default function Signup() {
   const actionData = useActionData() as ActionData;
