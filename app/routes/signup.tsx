@@ -2,7 +2,6 @@ import type { User } from "@prisma/client";
 import type {
   ActionFunction,
   DataFunctionArgs,
-  MetaFunction,
   V2_MetaFunction,
 } from "@remix-run/node";
 import { redirect } from "@remix-run/node";

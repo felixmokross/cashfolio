@@ -1,7 +1,6 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
-import type { MetaFunction } from "@remix-run/react/dist/routeModules";
 import slugify from "slugify";
 import invariant from "tiny-invariant";
 import { getUser } from "~/auth.server";

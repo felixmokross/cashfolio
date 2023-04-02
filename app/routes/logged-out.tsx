@@ -1,8 +1,4 @@
-import type {
-  DataFunctionArgs,
-  MetaFunction,
-  V2_MetaFunction,
-} from "@remix-run/node";
+import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { redirect } from "react-router";
 import { getSession } from "~/session.server";

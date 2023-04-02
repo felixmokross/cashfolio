@@ -1,8 +1,4 @@
-import type {
-  DataFunctionArgs,
-  MetaFunction,
-  V2_MetaFunction,
-} from "@remix-run/node";
+import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { getUser } from "~/auth.server";
 import { getTitle } from "~/utils";
