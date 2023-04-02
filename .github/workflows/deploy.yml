@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 18
       - uses: bahmutov/npm-install@v1
-      - run: npm run lint
+      - run: npm run lint -- --max-warnings=0
 
   typecheck:
     name: Typecheck
