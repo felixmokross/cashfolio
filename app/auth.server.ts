@@ -57,7 +57,6 @@ type AuthorizeMode = "signup" | "login";
 export async function getUser(request: Request) {
   const session = await getSession(request);
   const userId = session.get("userId");
-  const claims = new TokenSet({ id_token: session.get("idToken") }).claims();
   if (!userId) {
     throw redirect(`/login?redirectTo=${encodeURIComponent(request.url)}`);
   }
@@ -67,6 +66,7 @@ export async function getUser(request: Request) {
     throw redirect(`/signup?redirectTo=${encodeURIComponent(request.url)}`);
   }
 
+  const claims = new TokenSet({ id_token: session.get("idToken") }).claims();
   return {
     ...user,
     email: claims.email,
