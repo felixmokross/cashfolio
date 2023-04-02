@@ -1,4 +1,5 @@
 import { ManagementClient } from "auth0";
+import { differenceInHours } from "date-fns";
 import invariant from "tiny-invariant";
 import { prisma } from "~/prisma.server";
 
@@ -28,11 +29,11 @@ const auth0 = new ManagementClient({
 });
 
 export async function cleanPlaywrightUsers() {
-  const users = await getPlaywrightUsers();
+  const users = await getObsoletePlaywrightUsers();
   for (const user of users) {
     invariant(user.user_id, "user must have a user_id");
 
-    console.log(`Deleting user ${user.email}`);
+    console.log(`Deleting obsolete user ${user.email}`);
     await auth0.deleteUser({ id: user.user_id });
   }
 }
@@ -55,8 +56,10 @@ export async function createUser(name: string) {
   return { email, password };
 }
 
-export async function getPlaywrightUsers() {
-  return (await auth0.getUsers()).filter((u) =>
-    u.email?.toLowerCase().startsWith(playwrightUserPrefix.toLowerCase())
+export async function getObsoletePlaywrightUsers() {
+  return (await auth0.getUsers()).filter(
+    (u) =>
+      u.email?.toLowerCase().startsWith(playwrightUserPrefix.toLowerCase()) &&
+      differenceInHours(new Date(), new Date(u.created_at!)) > 3
   );
 }
