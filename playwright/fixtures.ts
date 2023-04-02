@@ -4,10 +4,29 @@ import path from "path";
 import { createUser } from "./common";
 import { createId } from "@paralleldrive/cuid2";
 
+type TestFixtures = {
+  authenticated: boolean;
+};
+
+type WorkerFixtures = {
+  workerStorageState: string;
+};
+
 export * from "@playwright/test";
-export const test = base.extend<{}, { workerStorageState: string }>({
+export const test = base.extend<TestFixtures, WorkerFixtures>({
+  authenticated: [true, { option: true }],
+
   // Use the same storage state for all tests in this worker.
-  storageState: ({ workerStorageState }, use) => use(workerStorageState),
+  storageState: async (
+    { storageState, workerStorageState, authenticated },
+    use
+  ) => {
+    if (authenticated) {
+      await use(workerStorageState);
+    } else {
+      await use(storageState);
+    }
+  },
 
   // Authenticate once per worker with a worker-scoped fixture.
   workerStorageState: [
