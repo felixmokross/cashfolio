@@ -1,6 +1,4 @@
-# fly.toml file generated for cashfolio on 2023-03-25T13:39:26+01:00
-
-app = "cashfolio"
+app = "cashfolio-v2"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "cdg"
