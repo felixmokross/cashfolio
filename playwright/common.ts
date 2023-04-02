@@ -1,6 +1,3 @@
-import { createId } from "@paralleldrive/cuid2";
-import type { Page } from "@playwright/test";
-import { test as base } from "@playwright/test";
 import { ManagementClient } from "auth0";
 import invariant from "tiny-invariant";
 import { prisma } from "~/prisma.server";
@@ -41,16 +38,21 @@ export async function cleanPlaywrightUsers() {
 }
 
 export async function createUser(name: string) {
+  const email = getPlaywrightUserEmail(name);
+  const password = "testPassword_1234";
+
   const user = await auth0.createUser({
     connection: "Username-Password-Authentication",
-    email: getPlaywrightUserEmail(name),
-    password: "testPassword_1234",
+    email,
+    password,
   });
 
   invariant(user.user_id, "User ID must be set!");
   await prisma.user.create({
     data: { auth0UserId: user.user_id },
   });
+
+  return { email, password };
 }
 
 export async function getPlaywrightUsers() {
@@ -58,28 +60,3 @@ export async function getPlaywrightUsers() {
     u.email?.toLowerCase().startsWith(playwrightUserPrefix.toLowerCase())
   );
 }
-
-export const test = base.extend<{ loggedInPage: Page }>({
-  loggedInPage: async ({ page }, use) => {
-    const userName = createId();
-    await createUser(userName);
-
-    await page.goto("/");
-
-    await page
-      .getByLabel("Email address")
-      .type(getPlaywrightUserEmail(userName));
-    await page.getByLabel("Password").type("testPassword_1234");
-
-    await page.getByRole("button", { name: "Continue" }).click();
-
-    // Although we are a first-party application for the IdP
-    // user consent is required by Auth0 since we are running on localhost
-    // and this is the first login with this user
-    await page.getByRole("button", { name: "Accept" }).click();
-
-    await page.waitForURL(/\/$/);
-
-    use(page);
-  },
-});

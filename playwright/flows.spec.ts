@@ -1,13 +1,16 @@
 import { createId } from "@paralleldrive/cuid2";
-import { expect } from "@playwright/test";
-import { createUser, getPlaywrightUserEmail, test } from "./common";
+import { createUser, getPlaywrightUserEmail } from "./common";
+import { test, expect } from "./fixtures";
 
-test("home page", async ({ loggedInPage }) => {
-  await loggedInPage.goto("/");
-  await expect(loggedInPage.getByText("Hello world!")).toBeVisible();
+test("home page", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByText("Hello world!")).toBeVisible();
 });
 
 test("sign up new user", async ({ page }) => {
+  await page.goto("/logout");
+  await page.waitForURL("/logged-out");
+
   await page.goto("/signup");
 
   await expect(page).toHaveTitle(/Sign up | Cashfolio/);
@@ -37,16 +40,18 @@ test("sign up new user", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("login", async ({ page }) => {
-  const userName = createId();
-  await createUser(userName);
+test("login with redirect", async ({ page }) => {
+  await page.goto("/logout");
+  await page.waitForURL("/logged-out");
+
+  const user = await createUser(createId());
 
   await page.goto("/other");
 
   await expect(page).toHaveTitle(/Log in | Cashfolio/);
 
-  await page.getByLabel("Email address").type(getPlaywrightUserEmail(userName));
-  await page.getByLabel("Password").type("testPassword_1234");
+  await page.getByLabel("Email address").type(user.email);
+  await page.getByLabel("Password").type(user.password);
 
   await page.getByRole("button", { name: "Continue" }).click();
 
@@ -58,12 +63,12 @@ test("login", async ({ page }) => {
   await expect(page).toHaveURL(/\/other$/);
 });
 
-test("logout", async ({ loggedInPage }) => {
-  await loggedInPage.goto("/");
-  await loggedInPage.getByRole("link", { name: /Log Out/ }).click();
+test("logout", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: /Log Out/ }).click();
 
-  await expect(loggedInPage).toHaveURL(/\/logged-out$/);
+  await expect(page).toHaveURL(/\/logged-out$/);
 
-  await loggedInPage.goto("/");
-  await expect(loggedInPage).toHaveTitle(/Log in | Cashfolio/);
+  await page.goto("/");
+  await expect(page).toHaveTitle(/Log in | Cashfolio/);
 });
