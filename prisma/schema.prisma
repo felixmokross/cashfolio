@@ -25,6 +25,7 @@ model User {
 model Account {
   id   String      @default(cuid())
   name String
+  slug String
   type AccountType @default(ASSET)
 
   unit AccountUnit @default(CURRENCY)
@@ -47,6 +48,7 @@ model Account {
   userId String
 
   @@id([id, userId])
+  @@unique([slug, userId])
 }
 
 enum AccountUnit {

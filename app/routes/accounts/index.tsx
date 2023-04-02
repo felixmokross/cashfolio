@@ -31,7 +31,7 @@ export default function AccountListPage() {
         {accounts.map((a) => (
           <Account
             key={a.id}
-            id={a.id}
+            slug={a.slug}
             name={a.name}
             balance="EUR 10'000"
             balanceInRefCurrency="CHF 11'000"
@@ -43,16 +43,16 @@ export default function AccountListPage() {
 }
 
 type AccountProps = {
-  id: string;
+  slug: string;
   name: string;
   balance: string;
   balanceInRefCurrency?: string;
 };
 
-function Account({ id, name, balance, balanceInRefCurrency }: AccountProps) {
+function Account({ slug, name, balance, balanceInRefCurrency }: AccountProps) {
   return (
     <li className="mx-2 flex h-20 items-stretch justify-between rounded-md border border-slate-300 bg-white px-4 py-2">
-      <Link to={id}>
+      <Link to={slug}>
         <h3 className="text-sm font-medium text-slate-700">{name}</h3>
         <div className="text-right">
           <div className="text-lg text-slate-700">{balance}</div>
