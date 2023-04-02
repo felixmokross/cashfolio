@@ -66,7 +66,7 @@ jobs:
       - run: npx playwright install --with-deps
       - run: npx playwright test
         env:
-          BASE_URL: http://localhost:3000
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
           PLAYWRIGHT_TESTS_AUTH0_DOMAIN: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_DOMAIN }}
           PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID }}
           PLAYWRIGHT_TESTS_AUTH0_CLIENT_SECRET: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_CLIENT_SECRET }}
