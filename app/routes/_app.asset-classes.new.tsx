@@ -2,14 +2,14 @@ import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import { getUser } from "~/auth.server";
+import { requireUserId } from "~/auth.server";
 import { Button } from "~/components/button";
 import { Input } from "~/components/forms";
-import { prisma } from "~/prisma.server";
+import { createAssetClass } from "~/models/asset-classes.server";
 import { getTitle } from "~/utils";
 
 export async function action({ request }: DataFunctionArgs) {
-  const user = await getUser(request);
+  const userId = await requireUserId(request);
   const form = await request.formData();
   let name = form.get("name");
 
@@ -17,12 +17,7 @@ export async function action({ request }: DataFunctionArgs) {
 
   name = name.trim();
 
-  await prisma.assetClass.create({
-    data: {
-      name,
-      userId: user.id,
-    },
-  });
+  await createAssetClass(userId, { name });
 
   return redirect("/asset-classes");
 }

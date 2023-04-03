@@ -1,17 +1,15 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { getUser } from "~/auth.server";
+import { requireUserId } from "~/auth.server";
 import { Button } from "~/components/button";
-import { prisma } from "~/prisma.server";
+import { getAssetClasses } from "~/models/asset-classes.server";
 import { getTitle } from "~/utils";
 
 export async function loader({ request }: DataFunctionArgs) {
-  const user = await getUser(request);
+  const userId = await requireUserId(request);
   return json({
-    assetClasses: await prisma.assetClass.findMany({
-      where: { userId: user.id },
-    }),
+    assetClasses: await getAssetClasses(userId),
   });
 }
 

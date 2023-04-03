@@ -1,7 +1,7 @@
 import { ManagementClient } from "auth0";
 import { differenceInHours } from "date-fns";
 import invariant from "tiny-invariant";
-import { prisma } from "~/prisma.server";
+import { createUser } from "~/models/users.server";
 
 export const playwrightUserPrefix = "playwright_";
 
@@ -38,7 +38,7 @@ export async function cleanPlaywrightUsers() {
   }
 }
 
-export async function createUser(name: string) {
+export async function registerUser(name: string) {
   const email = getPlaywrightUserEmail(name);
   const password = "testPassword_1234";
 
@@ -49,8 +49,10 @@ export async function createUser(name: string) {
   });
 
   invariant(user.user_id, "User ID must be set!");
-  await prisma.user.create({
-    data: { auth0UserId: user.user_id },
+  await createUser({
+    auth0UserId: user.user_id,
+    preferredLocale: "en",
+    refCurrency: "USD",
   });
 
   return { email, password };

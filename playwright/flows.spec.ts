@@ -1,5 +1,5 @@
 import { createId } from "@paralleldrive/cuid2";
-import { createUser, getPlaywrightUserEmail } from "./common";
+import { registerUser, getPlaywrightUserEmail } from "./common";
 import { test, expect } from "./fixtures";
 
 test("home page", async ({ page }) => {
@@ -51,7 +51,7 @@ test.describe("unauthenticated", () => {
   });
 
   test("login with redirect", async ({ page }) => {
-    const user = await createUser(createId());
+    const user = await registerUser(createId());
 
     await page.goto("/other");
 

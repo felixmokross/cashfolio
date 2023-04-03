@@ -3,7 +3,7 @@ import type { TypedResponse } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { generators, Issuer, TokenSet } from "openid-client";
 import invariant from "tiny-invariant";
-import { getUserByAuth0UserId } from "./models/users.server";
+import { getUserIdByAuth0UserId } from "./models/users.server";
 import { getSession } from "./session.server";
 import { createLoginSession } from "./login-session.server";
 import { safeRedirect } from "./utils";
@@ -54,24 +54,20 @@ export async function authorize(
 
 type AuthorizeMode = "signup" | "login";
 
-export async function getUser(request: Request) {
+export async function requireUserId(request: Request) {
   const session = await getSession(request);
-  const userId = session.get("userId");
-  if (!userId) {
+  const auth0UserId = session.get("userId");
+  if (!auth0UserId) {
     throw redirect(`/login?redirectTo=${encodeURIComponent(request.url)}`);
   }
 
-  const user = await getUserByAuth0UserId(userId);
-  if (!user) {
+  const userId = await getUserIdByAuth0UserId(auth0UserId);
+  if (!userId) {
     throw redirect(`/signup?redirectTo=${encodeURIComponent(request.url)}`);
   }
 
-  const claims = new TokenSet({ id_token: session.get("idToken") }).claims();
-  return {
-    ...user,
-    email: claims.email,
-    pictureUrl: claims.picture,
-  } as ExtendedUser;
+  // const claims = new TokenSet({ id_token: session.get("idToken") }).claims();
+  return userId;
 }
 
 export type ExtendedUser = User & {

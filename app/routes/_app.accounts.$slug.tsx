@@ -2,49 +2,39 @@ import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-import slugify from "slugify";
 import invariant from "tiny-invariant";
-import { getUser } from "~/auth.server";
+import { requireUserId } from "~/auth.server";
 import { Button } from "~/components/button";
 import { Input } from "~/components/forms";
-import { prisma } from "~/prisma.server";
+import {
+  getAccount,
+  getAccountId,
+  updateAccount,
+} from "~/models/accounts.server";
 import { getTitle } from "~/utils";
 
 export async function action({ params, request }: DataFunctionArgs) {
   invariant(params.slug, "slug is required");
-  const user = await getUser(request);
 
-  const account = await prisma.account.findUnique({
-    where: { slug_userId: { slug: params.slug, userId: user.id } },
-  });
-  if (!account) throw new Response("Not found", { status: 404 });
+  const userId = await requireUserId(request);
+  const accountId = await getAccountId(params.slug, userId);
+  if (!accountId) throw new Response("Not found", { status: 404 });
 
   const form = await request.formData();
-  let name = form.get("name");
+  const name = form.get("name");
 
   invariant(typeof name === "string", "name must be a string!");
 
-  name = name.trim();
-
-  await prisma.account.update({
-    where: { id_userId: { userId: user.id, id: account.id } },
-    data: {
-      name,
-      slug: slugify(name, { lower: true }),
-    },
-  });
+  await updateAccount(accountId, userId, { name });
 
   return redirect("/accounts");
 }
 
 export async function loader({ request, params }: DataFunctionArgs) {
   invariant(params.slug, "slug is required");
-  const user = await getUser(request);
+  const userId = await requireUserId(request);
 
-  const account = await prisma.account.findUnique({
-    where: { slug_userId: { slug: params.slug, userId: user.id } },
-  });
-
+  const account = await getAccount(params.slug, userId);
   if (!account) throw new Response("Not found", { status: 404 });
 
   return json(account);

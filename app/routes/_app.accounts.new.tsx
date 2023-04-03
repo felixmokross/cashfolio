@@ -1,30 +1,21 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
-import slugify from "slugify";
 import invariant from "tiny-invariant";
-import { getUser } from "~/auth.server";
+import { requireUserId } from "~/auth.server";
 import { Button } from "~/components/button";
 import { Input } from "~/components/forms";
-import { prisma } from "~/prisma.server";
+import { createAccount } from "~/models/accounts.server";
 import { getTitle } from "~/utils";
 
 export async function action({ request }: DataFunctionArgs) {
-  const user = await getUser(request);
+  const userId = await requireUserId(request);
   const form = await request.formData();
-  let name = form.get("name");
+  const name = form.get("name");
 
   invariant(typeof name === "string", "name must be a string!");
 
-  name = name.trim();
-
-  await prisma.account.create({
-    data: {
-      name,
-      slug: slugify(name, { lower: true }),
-      userId: user.id,
-    },
-  });
+  await createAccount(userId, { name });
 
   return redirect("/accounts");
 }

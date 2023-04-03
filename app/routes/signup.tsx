@@ -13,7 +13,7 @@ import { Button } from "~/components/button";
 import { CurrencyCombobox } from "~/components/forms";
 import { LogoSmall } from "~/components/logo";
 import { getLocales } from "~/locales.server";
-import { createUser, getUserByAuth0UserId } from "~/models/users.server";
+import { createUser, getUserIdByAuth0UserId } from "~/models/users.server";
 import { getSession } from "~/session.server";
 import type { FormErrors } from "~/utils";
 import { safeRedirect } from "~/utils";
@@ -33,7 +33,7 @@ export async function loader({ request }: DataFunctionArgs) {
     return authorize(request, "signup");
   }
 
-  const user = await getUserByAuth0UserId(userId);
+  const user = await getUserIdByAuth0UserId(userId);
   if (user) {
     return redirect(
       safeRedirect(new URL(request.url).searchParams.get("redirectTo"))

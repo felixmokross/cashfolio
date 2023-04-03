@@ -1,7 +1,7 @@
 import { test as base } from "@playwright/test";
 import fs from "fs";
 import path from "path";
-import { createUser } from "./common";
+import { registerUser } from "./common";
 import { createId } from "@paralleldrive/cuid2";
 
 type TestFixtures = {
@@ -51,7 +51,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
       // Alternatively, you can have a list of precreated accounts for testing.
       // Make sure that accounts are unique, so that multiple team members
       // can run tests at the same time without interference.
-      const user = await createUser(`${createId()}_${id}`);
+      const user = await registerUser(`${createId()}_${id}`);
 
       // Perform authentication steps. Replace these actions with your own.
       await page.goto("http://localhost:3000/login");

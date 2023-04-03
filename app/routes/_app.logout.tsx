@@ -5,8 +5,8 @@ import { getSession, sessionStorage } from "~/session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request);
-  const userId = session.get("userId");
-  if (!userId) return redirect("/logged-out");
+  const authUserId = session.get("userId");
+  if (!authUserId) return redirect("/logged-out");
 
   const idToken = session.get("idToken");
 

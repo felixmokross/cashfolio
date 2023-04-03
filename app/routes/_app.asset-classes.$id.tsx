@@ -3,20 +3,23 @@ import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import { getUser } from "~/auth.server";
+import { requireUserId } from "~/auth.server";
 import { Button } from "~/components/button";
 import { Input } from "~/components/forms";
-import { prisma } from "~/prisma.server";
+import {
+  assetClassExists,
+  getAssetClass,
+  updateAssetClass,
+} from "~/models/asset-classes.server";
 import { getTitle } from "~/utils";
 
 export async function action({ params, request }: DataFunctionArgs) {
   invariant(params.id, "id is required");
-  const user = await getUser(request);
+  const userId = await requireUserId(request);
 
-  const assetClass = await prisma.assetClass.findUnique({
-    where: { id_userId: { id: params.id, userId: user.id } },
-  });
-  if (!assetClass) throw new Response("Not found", { status: 404 });
+  if (!(await assetClassExists(params.id, userId))) {
+    throw new Response("Not found", { status: 404 });
+  }
 
   const form = await request.formData();
   let name = form.get("name");
@@ -25,24 +28,16 @@ export async function action({ params, request }: DataFunctionArgs) {
 
   name = name.trim();
 
-  await prisma.assetClass.update({
-    where: { id_userId: { userId: user.id, id: assetClass.id } },
-    data: {
-      name,
-    },
-  });
+  await updateAssetClass(params.id, userId, { name });
 
   return redirect("/asset-classes");
 }
 
 export async function loader({ request, params }: DataFunctionArgs) {
   invariant(params.id, "id is required");
-  const user = await getUser(request);
+  const userId = await requireUserId(request);
 
-  const assetClass = await prisma.assetClass.findUnique({
-    where: { id_userId: { id: params.id, userId: user.id } },
-  });
-
+  const assetClass = await getAssetClass(params.id, userId);
   if (!assetClass) throw new Response("Not found", { status: 404 });
 
   return json(assetClass);
