@@ -36,8 +36,6 @@ COPY --from=deps /app/node_modules /app/node_modules
 # If we're using Prisma, uncomment to cache the prisma schema
 ADD prisma .
 RUN npx prisma generate
-RUN --mount=type=secret,id=DATABASE_URL \
-    DATABASE_URL="$(cat /run/secrets/DATABASE_URL)" npx prisma migrate deploy
 
 ADD . .
 RUN npm run build

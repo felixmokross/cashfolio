@@ -86,6 +86,6 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
         with:
           version: 0.0.462
-      - run: flyctl deploy --remote-only --build-secret DATABASE_URL="${{ secrets.DATABASE_URL }}"
+      - run: npm run deploy
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
