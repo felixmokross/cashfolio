@@ -1,9 +1,12 @@
 import { createId } from "@paralleldrive/cuid2";
 import type { TypedResponse } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { generators, Issuer } from "openid-client";
+import { generators, Issuer, TokenSet } from "openid-client";
 import invariant from "tiny-invariant";
-import { getUserIdByAuth0UserId } from "./models/users.server";
+import {
+  getUserByAuth0UserId,
+  getUserIdByAuth0UserId,
+} from "./models/users.server";
 import { getSession } from "./session.server";
 import { createLoginSession } from "./login-session.server";
 import { safeRedirect } from "./utils";
@@ -55,19 +58,44 @@ export async function authorize(
 type AuthorizeMode = "signup" | "login";
 
 export async function requireUserId(request: Request) {
-  const session = await getSession(request);
-  const auth0UserId = session.get("userId");
-  if (!auth0UserId) {
-    throw redirect(`/login?redirectTo=${encodeURIComponent(request.url)}`);
-  }
+  const auth0UserId = await requireAuth0UserId(request);
 
   const userId = await getUserIdByAuth0UserId(auth0UserId);
-  if (!userId) {
-    throw redirect(`/signup?redirectTo=${encodeURIComponent(request.url)}`);
-  }
+  if (!userId) throw redirectToSignup(request);
 
-  // const claims = new TokenSet({ id_token: session.get("idToken") }).claims();
   return userId;
+}
+
+export async function requireUser(request: Request) {
+  const auth0UserId = await requireAuth0UserId(request);
+
+  const user = await getUserByAuth0UserId(auth0UserId);
+  if (!user) throw redirectToSignup(request);
+
+  const session = await getSession(request);
+  const claims = new TokenSet({ id_token: session.get("idToken") }).claims();
+  return {
+    ...user,
+    email: claims.email,
+    pictureUrl: claims.picture,
+  } as ExtendedUser;
+}
+
+async function requireAuth0UserId(request: Request) {
+  const session = await getSession(request);
+  const auth0UserId = session.get("userId");
+
+  if (!auth0UserId) throw redirectToLogin(request);
+
+  return auth0UserId;
+}
+
+function redirectToLogin(request: Request) {
+  return redirect(`/login?redirectTo=${encodeURIComponent(request.url)}`);
+}
+
+function redirectToSignup(request: Request) {
+  return redirect(`/signup?redirectTo=${encodeURIComponent(request.url)}`);
 }
 
 export type ExtendedUser = User & {

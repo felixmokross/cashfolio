@@ -1,17 +1,10 @@
 import type { DataFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
-import { TokenSet } from "openid-client";
-import { requireUserId } from "~/auth.server";
-import { getSession } from "~/session.server";
+import { requireUser } from "~/auth.server";
 
 export async function loader({ request }: DataFunctionArgs) {
-  const userId = await requireUserId(request);
-
-  const session = await getSession(request);
-  const claims = new TokenSet({ id_token: session.get("idToken") }).claims();
-  const user = { id: userId, email: claims.email, pictureUrl: claims.picture };
-
+  const user = await requireUser(request);
   return json(user);
 }
 

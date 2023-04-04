@@ -1,44 +1,32 @@
-# Welcome to Remix!
-
-- [Remix Docs](https://remix.run/docs)
-
-## Fly Setup
-
-1. [Install `flyctl`](https://fly.io/docs/getting-started/installing-flyctl/)
-
-2. Sign up and log in to Fly
-
-```sh
-flyctl auth signup
-```
-
-3. Setup Fly. It might ask if you want to deploy, say no since you haven't built the app yet.
-
-```sh
-flyctl launch
-```
+# Cashfolio
 
 ## Development
 
-From your terminal:
+Install dependencies:
 
 ```sh
 npm run dev
 ```
 
-This starts your app in development mode, rebuilding assets on file changes.
+Run the database:
+
+```sh
+dockercompose up
+```
+
+Start the app in the dev server:
+
+```sh
+npm run dev
+```
 
 ## Deployment
 
-If you've followed the setup instructions already, all you need to do is run this:
+Trigger Fly deployment from the local machine:
 
 ```sh
 npm run deploy
 ```
-
-You can run `flyctl info` to get the url and ip address of your server.
-
-Check out the [fly docs](https://fly.io/docs/getting-started/node/) for more information.
 
 ## Environment Variables
 

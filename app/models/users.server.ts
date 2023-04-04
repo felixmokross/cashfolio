@@ -10,6 +10,12 @@ export async function getUserIdByAuth0UserId(auth0UserId: User["auth0UserId"]) {
   )?.id;
 }
 
+export async function getUserByAuth0UserId(auth0UserId: User["auth0UserId"]) {
+  return await prisma.user.findUnique({
+    where: { auth0UserId },
+  });
+}
+
 export async function createUser({
   auth0UserId,
   preferredLocale,

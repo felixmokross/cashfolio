@@ -1,8 +1,15 @@
 import type { DetailedHTMLProps, PropsWithChildren } from "react";
 import { useState } from "react";
 import { useId } from "react";
-import { Combobox as HeadlessCombobox } from "@headlessui/react";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import {
+  Combobox as HeadlessCombobox,
+  RadioGroup as HeadlessRadioGroup,
+} from "@headlessui/react";
+import {
+  CheckCircleIcon,
+  CheckIcon,
+  ChevronUpDownIcon,
+} from "@heroicons/react/20/solid";
 import { cn } from "./classnames";
 import { currencyItems } from "~/currencies";
 
@@ -270,3 +277,166 @@ export function CurrencyCombobox({
 }
 
 export type CurrencyComboboxProps = Omit<ComboboxProps, "options">;
+
+export function RadioGroup<TValue extends string | undefined>({
+  groupClassName,
+  label,
+  name,
+  error,
+  onChange,
+  defaultValue,
+  options,
+  disabled = false,
+}: RadioGroupProps<TValue>) {
+  const [value, setValue] = useState(defaultValue);
+  const errorId = `radio-group-error-${useId()}`;
+  return (
+    <HeadlessRadioGroup
+      value={value}
+      onChange={(value) => {
+        setValue(value);
+        onChange && onChange(value as TValue);
+      }}
+      className={groupClassName}
+      name={name}
+      aria-invalid={error ? "true" : undefined}
+      aria-describedby={error ? errorId : undefined}
+      disabled={disabled}
+    >
+      <HeadlessRadioGroup.Label className={labelClassName}>
+        {label}
+      </HeadlessRadioGroup.Label>
+      <div className="mt-1 grid grid-cols-2 gap-x-3">
+        {options.map((option) => (
+          <HeadlessRadioGroup.Option
+            key={option.value}
+            value={option.value}
+            className={({ active, checked }) =>
+              cn(
+                "focus:outline-none",
+                active ? "ring-2 ring-sky-500 ring-offset-2" : "",
+                checked
+                  ? "border-transparent bg-sky-600 text-white"
+                  : "border-slate-200 bg-white text-slate-900",
+                "flex items-center justify-center rounded-md border py-2 px-3 text-sm font-medium sm:flex-1",
+                disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
+                !disabled && checked && "hover:bg-sky-700",
+                !disabled && !checked && "hover:bg-slate-50"
+              )
+            }
+          >
+            <HeadlessRadioGroup.Label as="span">
+              {option.label}
+            </HeadlessRadioGroup.Label>
+          </HeadlessRadioGroup.Option>
+        ))}
+      </div>
+      <ErrorMessage error={error} errorId={errorId} />
+    </HeadlessRadioGroup>
+  );
+}
+
+export type RadioGroupProps<TValue extends string | undefined> = {
+  groupClassName?: string;
+  label: string;
+  name: string;
+  error?: string;
+  defaultValue?: string;
+  onChange?: (value: TValue) => void;
+  options: { label: string; value: TValue }[];
+  disabled?: boolean;
+};
+
+export function DetailedRadioGroup<TValue extends string | undefined>({
+  defaultValue,
+  onChange,
+  groupClassName,
+  label,
+  options,
+  error,
+  name,
+  disabled = false,
+}: DetailedRadioGroupProps<TValue>) {
+  const [value, setValue] = useState(defaultValue);
+  const errorId = `detailed-radio-group-error-${useId()}`;
+  return (
+    <HeadlessRadioGroup
+      value={value}
+      onChange={(value) => {
+        setValue(value);
+        onChange && onChange(value as TValue);
+      }}
+      className={groupClassName}
+      name={name}
+      disabled={disabled}
+    >
+      <HeadlessRadioGroup.Label className={labelClassName}>
+        {label}
+      </HeadlessRadioGroup.Label>
+      <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+        {options.map((option) => (
+          <HeadlessRadioGroup.Option
+            key={option.value}
+            value={option.value}
+            className={({ checked, active }) =>
+              cn(
+                checked ? "border-transparent" : "border-slate-300",
+                active ? "border-sky-500 ring-2 ring-sky-500" : "",
+                "relative flex rounded-lg border bg-white p-4 shadow-sm focus:outline-none",
+                disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+              )
+            }
+          >
+            {({ checked, active }) => (
+              <>
+                <span className="flex flex-1">
+                  <span className="flex flex-col">
+                    <HeadlessRadioGroup.Label
+                      as="span"
+                      className="block text-sm font-medium text-slate-900"
+                    >
+                      {option.label}
+                    </HeadlessRadioGroup.Label>
+                    <HeadlessRadioGroup.Description
+                      as="span"
+                      className="mt-1 flex items-center text-sm text-slate-500"
+                    >
+                      {option.description}
+                    </HeadlessRadioGroup.Description>
+                  </span>
+                </span>
+                <CheckCircleIcon
+                  className={cn(
+                    !checked ? "invisible" : "",
+                    "h-5 w-5 text-sky-600"
+                  )}
+                  aria-hidden="true"
+                />
+                <span
+                  className={cn(
+                    active ? "border" : "border-2",
+                    checked ? "border-sky-500" : "border-transparent",
+                    "pointer-events-none absolute -inset-px rounded-lg"
+                  )}
+                  aria-hidden="true"
+                />
+              </>
+            )}
+          </HeadlessRadioGroup.Option>
+        ))}
+      </div>
+      <ErrorMessage error={error} errorId={errorId} />
+    </HeadlessRadioGroup>
+  );
+}
+
+export type DetailedRadioGroupProps<TValue extends string | undefined> = {
+  groupClassName?: string;
+  label: string;
+  name: string;
+  error?: string;
+  defaultValue?: string;
+  onChange?: (value: TValue) => void;
+  options: { label: string; description: string; value: TValue }[];
+  disabled?: boolean;
+};
