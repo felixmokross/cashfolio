@@ -1,24 +1,35 @@
-import { AccountType, AccountUnit } from "@prisma/client";
-import { DataFunctionArgs, V2_MetaFunction, json } from "@remix-run/node";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
-import invariant from "tiny-invariant";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
+import { AccountFormFields } from "~/components/accounts";
 import { Button } from "~/components/button";
-import { CurrencyCombobox, DetailedRadioGroup } from "~/components/forms";
-import { Input, RadioGroup, Select } from "~/components/forms";
-import { createAccount } from "~/models/accounts.server";
+import type { FormActionData } from "~/components/forms";
+import type { AccountValues } from "~/models/accounts.server";
+import {
+  createAccount,
+  getAccountValues,
+  validateAccountValues,
+} from "~/models/accounts.server";
 import { getAssetClasses } from "~/models/asset-classes.server";
 import { getTitle } from "~/utils";
+import { hasErrors } from "~/utils.server";
 
 export async function action({ request }: DataFunctionArgs) {
   const userId = await requireUserId(request);
-  const form = await request.formData();
-  const name = form.get("name");
+  const values = await getAccountValues(request);
+  const errors = validateAccountValues(values);
 
-  invariant(typeof name === "string", "name must be a string!");
+  if (hasErrors(errors)) {
+    return json<FormActionData<AccountValues>>(
+      { ok: false, errors, values },
+      { status: 400 }
+    );
+  }
 
-  await createAccount(userId, { name });
+  await createAccount(userId, values);
 
   return redirect("/accounts");
 }
@@ -34,55 +45,31 @@ export async function loader({ request }: DataFunctionArgs) {
 export const meta: V2_MetaFunction = () => [{ title: getTitle("New Account") }];
 
 export default function NewAccountPage() {
-  const { assetClasses } = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
   return (
-    <Form method="post">
-      <Input name="name" label="Name" />
-      <RadioGroup
-        name="type"
-        label="Type"
-        options={[
-          { label: "Asset", value: AccountType.ASSET },
-          { label: "Liability", value: AccountType.LIABILITY },
-        ]}
-        defaultValue={AccountType.ASSET}
-      />
-      <Select name="assetClassId" label="Asset Class">
-        <option />
-        {assetClasses.map((ac) => (
-          <option key={ac.id}>{ac.name}</option>
-        ))}
-      </Select>
-      <RadioGroup
-        name="unit"
-        label="Unit"
-        options={[
-          { label: "Currency", value: AccountUnit.CURRENCY },
-          { label: "Stock", value: AccountUnit.STOCK },
-        ]}
-        defaultValue={AccountUnit.CURRENCY}
-      />
-      <CurrencyCombobox name="currency" label="Currency" />
-      <DetailedRadioGroup
-        label="When was the account opened?"
-        name="preExisting"
-        defaultValue="off"
-        options={[
-          {
-            label: "Before accounting start",
-            value: "on",
-            description:
-              "This is a pre-existing account. It has a balance on the day before the accounting start date.",
-          },
-          {
-            label: "After accounting start",
-            value: "off",
-            description:
-              "The account was opened on or after the accounting start date.",
-          },
-        ]}
-      />
-      <Button type="submit">Create</Button>
-    </Form>
+    <div className="flex justify-center">
+      <Form method="post" className="flex max-w-lg flex-col gap-8 p-4">
+        <div className="col-span-6 flex flex-col items-center gap-4">
+          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
+            <PlusIcon className="h-6 w-6 text-emerald-600" />
+          </span>
+          <h2 className="text-lg font-medium text-gray-800">New Account</h2>
+        </div>
+
+        <AccountFormFields
+          data={loaderData}
+          errors={actionData?.errors}
+          values={actionData?.values}
+          disabled={false}
+        />
+
+        <div className="flex justify-end">
+          <Button type="submit" variant="primary">
+            Create
+          </Button>
+        </div>
+      </Form>
+    </div>
   );
 }

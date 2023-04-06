@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { cn } from "./classnames";
 import { currencyItems } from "~/currencies";
+import type { SerializeFrom } from "@remix-run/node";
 
 const labelClassName = "block text-sm font-medium text-slate-700";
 
@@ -125,7 +126,7 @@ export function Combobox({
   options,
   autoFocus,
 }: ComboboxProps) {
-  const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState(defaultValue || "");
   const [query, setQuery] = useState("");
   const filteredOptions =
     query === ""
@@ -318,7 +319,7 @@ export function RadioGroup<TValue extends string | undefined>({
                 checked
                   ? "border-transparent bg-sky-600 text-white"
                   : "border-slate-200 bg-white text-slate-900",
-                "flex items-center justify-center rounded-md border py-2 px-3 text-sm font-medium sm:flex-1",
+                "flex items-center justify-center rounded-md border px-3 py-2 text-sm font-medium sm:flex-1",
                 disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
                 !disabled && checked && "hover:bg-sky-700",
                 !disabled && !checked && "hover:bg-slate-50"
@@ -373,7 +374,7 @@ export function DetailedRadioGroup<TValue extends string | undefined>({
       <HeadlessRadioGroup.Label className={labelClassName}>
         {label}
       </HeadlessRadioGroup.Label>
-      <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+      <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-6">
         {options.map((option) => (
           <HeadlessRadioGroup.Option
             key={option.value}
@@ -440,3 +441,27 @@ export type DetailedRadioGroupProps<TValue extends string | undefined> = {
   options: { label: string; description: string; value: TValue }[];
   disabled?: boolean;
 };
+
+export type FormActionData<TValues> = {
+  ok: boolean;
+  values?: TValues;
+  errors?: FormErrors<TValues>;
+};
+
+export type FormProps<TValues, TFormLoaderData> = {
+  values?: TValues;
+  errors?: FormErrors<TValues>;
+  disabled: boolean;
+  data: SerializeFrom<TFormLoaderData>;
+};
+
+// inspired by Formik
+export type FormErrors<Values> = {
+  [K in keyof Values]?: Values[K] extends unknown[]
+    ? Values[K][number] extends object
+      ? FormErrors<Values[K][number]>[]
+      : string
+    : Values[K] extends object
+    ? FormErrors<Values[K]>
+    : string;
+} & { form?: string };

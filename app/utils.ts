@@ -1,17 +1,6 @@
 import type { ComponentPropsWithoutRef, ElementType } from "react";
 import invariant from "tiny-invariant";
 
-// inspired by Formik
-export type FormErrors<Values> = {
-  [K in keyof Values]?: Values[K] extends unknown[]
-    ? Values[K][number] extends object
-      ? FormErrors<Values[K][number]>[]
-      : string
-    : Values[K] extends object
-    ? FormErrors<Values[K]>
-    : string;
-} & { form?: string };
-
 export type PolymorphicComponentProps<T extends ElementType> = {
   as?: T;
 } & ComponentPropsWithoutRef<T>;
