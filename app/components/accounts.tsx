@@ -23,6 +23,8 @@ export function AccountFormFields({
   values,
   errors,
 }: AccountFormProps) {
+  const [type, setType] = useState(account?.type || AccountType.ASSET);
+  const [unit, setUnit] = useState(account?.unit || AccountUnit.CURRENCY);
   const [preExisting, setPreExisting] = useState(account?.preExisting || false);
 
   return (
@@ -43,24 +45,27 @@ export function AccountFormFields({
         ]}
         defaultValue={values?.type || account?.type || AccountType.ASSET}
         error={errors?.type}
+        onChange={setType}
         groupClassName="col-start-1 col-span-3"
       />
-      <Select
-        name="assetClassId"
-        label="Asset Class"
-        defaultValue={
-          values?.assetClassId || account?.assetClassId || undefined
-        }
-        error={errors?.assetClassId}
-        groupClassName="col-span-3"
-      >
-        <option />
-        {assetClasses.map((ac) => (
-          <option key={ac.id} value={ac.id}>
-            {ac.name}
-          </option>
-        ))}
-      </Select>
+      {type === AccountType.ASSET && (
+        <Select
+          name="assetClassId"
+          label="Asset Class"
+          defaultValue={
+            values?.assetClassId || account?.assetClassId || undefined
+          }
+          error={errors?.assetClassId}
+          groupClassName="col-span-3"
+        >
+          <option />
+          {assetClasses.map((ac) => (
+            <option key={ac.id} value={ac.id}>
+              {ac.name}
+            </option>
+          ))}
+        </Select>
+      )}
       <RadioGroup
         name="unit"
         label="Unit"
@@ -69,16 +74,19 @@ export function AccountFormFields({
           { label: "Stock", value: AccountUnit.STOCK },
         ]}
         defaultValue={values?.unit || account?.unit || AccountUnit.CURRENCY}
+        onChange={setUnit}
         error={errors?.unit}
         groupClassName="col-start-1 col-span-3"
       />
-      <CurrencyCombobox
-        name="currency"
-        label="Currency"
-        defaultValue={values?.currency || account?.currency || undefined}
-        error={errors?.currency}
-        groupClassName="col-span-3"
-      />
+      {unit === AccountUnit.CURRENCY && (
+        <CurrencyCombobox
+          name="currency"
+          label="Currency"
+          defaultValue={values?.currency || account?.currency || undefined}
+          error={errors?.currency}
+          groupClassName="col-span-3"
+        />
+      )}
       <DetailedRadioGroup
         label="When was the account opened?"
         name="preExisting"
