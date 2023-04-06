@@ -20,7 +20,7 @@ import { hasErrors } from "~/utils.server";
 export async function action({ request }: DataFunctionArgs) {
   const userId = await requireUserId(request);
   const values = await getAccountValues(request);
-  const errors = validateAccountValues(values);
+  const errors = await validateAccountValues(userId, undefined, values);
 
   if (hasErrors(errors)) {
     return json<FormActionData<AccountValues>>(

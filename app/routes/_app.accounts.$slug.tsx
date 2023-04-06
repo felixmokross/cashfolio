@@ -28,7 +28,7 @@ export async function action({ params, request }: DataFunctionArgs) {
   if (!accountId) throw new Response("Not found", { status: 404 });
 
   const values = await getAccountValues(request);
-  const errors = validateAccountValues(values);
+  const errors = await validateAccountValues(userId, accountId, values);
   if (hasErrors(errors)) {
     return json<FormActionData<AccountValues>>(
       { ok: false, errors, values },

@@ -144,20 +144,35 @@ export async function getAccountValues(
   };
 }
 
-export function validateAccountValues({
-  name,
-  type,
-  assetClassId,
-  unit,
-  currency,
-  preExisting,
-  balanceAtStart,
-  openingDate,
-}: AccountValues) {
+export async function validateAccountValues(
+  userId: Account["userId"],
+  accountId: Account["id"] | undefined,
+  {
+    name,
+    type,
+    assetClassId,
+    unit,
+    currency,
+    preExisting,
+    balanceAtStart,
+    openingDate,
+  }: AccountValues
+) {
   const errors: FormErrors<AccountValues> = {};
 
-  if (name.length === 0) {
+  const trimmedName = name.trim();
+  if (trimmedName.length === 0) {
     errors.name = "Name is required";
+  }
+
+  const slug = getAccountSlug(trimmedName);
+  const existingAccount = await prisma.account.findUnique({
+    where: { slug_userId: { slug, userId } },
+    select: { id: true },
+  });
+
+  if (existingAccount && (!accountId || accountId !== existingAccount.id)) {
+    errors.name = "There is already an account with this name";
   }
 
   if (type.length === 0) {
