@@ -2,6 +2,7 @@ import type { DataFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { requireUser } from "~/auth.server";
+import { LocaleProvider } from "~/components/locale-context";
 
 export async function loader({ request }: DataFunctionArgs) {
   const user = await requireUser(request);
@@ -11,7 +12,7 @@ export async function loader({ request }: DataFunctionArgs) {
 export default function App() {
   const user = useLoaderData<typeof loader>();
   return (
-    <div>
+    <LocaleProvider locale={user.preferredLocale}>
       <p>
         <Link to=".">Home</Link> | <Link to="accounts">Accounts</Link> |{" "}
         <Link to="asset-classes">Asset Classes</Link> | User: {user.email}
@@ -19,6 +20,6 @@ export default function App() {
         <Link to="logout">Log Out</Link>
       </p>
       <Outlet />
-    </div>
+    </LocaleProvider>
   );
 }

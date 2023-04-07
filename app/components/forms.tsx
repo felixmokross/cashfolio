@@ -1,4 +1,5 @@
 import type { DetailedHTMLProps, PropsWithChildren } from "react";
+import { useMemo } from "react";
 import { useState } from "react";
 import { useId } from "react";
 import {
@@ -15,7 +16,8 @@ import { currencyItems } from "~/currencies";
 import type { SerializeFrom } from "@remix-run/node";
 import type { NumericFormatProps } from "react-number-format";
 import { NumericFormat } from "react-number-format";
-import { decimalSeparator, thousandSeparator } from "~/utils";
+import { getNumberFormatSymbols } from "~/utils";
+import { useLocale } from "./locale-context";
 
 const labelClassName = "block text-sm font-medium text-slate-700";
 
@@ -101,6 +103,13 @@ export function FormattedNumberInput({
   const [value, setValue] = useState<number | undefined>(
     defaultValue != null ? Number(defaultValue) : undefined
   );
+
+  const locale = useLocale();
+  const { thousandSeparator, decimalSeparator } = useMemo(
+    () => getNumberFormatSymbols(locale),
+    [locale]
+  );
+
   return (
     <>
       <NumericFormat

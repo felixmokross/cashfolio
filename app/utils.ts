@@ -1,12 +1,23 @@
 import type { ComponentPropsWithoutRef, ElementType } from "react";
 import invariant from "tiny-invariant";
 
-export const thousandSeparator = new Intl.NumberFormat("en-CH")
-  .formatToParts(1000)
-  .find((x) => x.type === "group")?.value; // TODO determine based on user's preferred locale
-export const decimalSeparator = new Intl.NumberFormat("en-CH")
-  .formatToParts(1.1)
-  .find((x) => x.type === "decimal")?.value; // TODO determine based on user's preferred locale
+export function getNumberFormatSymbols(locale: string) {
+  const numberFormat = new Intl.NumberFormat(locale);
+
+  const thousandSeparator = numberFormat
+    .formatToParts(10_000)
+    .find((x) => x.type === "group")?.value;
+  const decimalSeparator = numberFormat
+    .formatToParts(1.1)
+    .find((x) => x.type === "decimal")?.value;
+
+  invariant(
+    decimalSeparator,
+    `decimalSeparator not found for locale ${locale}`
+  );
+
+  return { thousandSeparator, decimalSeparator };
+}
 
 export type PolymorphicComponentProps<T extends ElementType> = {
   as?: T;
