@@ -25,8 +25,8 @@ export function AccountFormFields({
 }: AccountFormProps) {
   const [type, setType] = useState(account?.type || AccountType.ASSET);
   const [unit, setUnit] = useState(account?.unit || AccountUnit.CURRENCY);
+  const [currency, setCurrency] = useState(account?.currency || undefined);
   const [preExisting, setPreExisting] = useState(account?.preExisting || false);
-
   return (
     <div className="grid grid-cols-6 gap-x-4 gap-y-8">
       <Input
@@ -84,6 +84,7 @@ export function AccountFormFields({
           label="Currency"
           defaultValue={values?.currency || account?.currency || undefined}
           error={errors?.currency}
+          onChange={(v) => setCurrency(v as string)}
           groupClassName="col-span-3"
         />
       )}
@@ -120,6 +121,7 @@ export function AccountFormFields({
           defaultValue={
             values?.balanceAtStart || account?.balanceAtStart || undefined
           }
+          adornment={currency}
           error={errors?.balanceAtStart}
         />
       ) : (

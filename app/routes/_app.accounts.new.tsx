@@ -54,7 +54,7 @@ export default function NewAccountPage() {
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
             <PlusIcon className="h-6 w-6 text-emerald-600" />
           </span>
-          <h2 className="text-lg font-medium text-gray-800">New Account</h2>
+          <h2 className="text-lg font-medium text-slate-800">New Account</h2>
         </div>
 
         <AccountFormFields

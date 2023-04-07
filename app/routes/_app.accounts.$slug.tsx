@@ -69,7 +69,7 @@ export default function EditAccountPage() {
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-100">
             <PencilIcon className="h-6 w-6 text-amber-600" />
           </span>
-          <h2 className="text-lg font-medium text-gray-800">Edit Account</h2>
+          <h2 className="text-lg font-medium text-slate-800">Edit Account</h2>
         </div>
 
         <AccountFormFields

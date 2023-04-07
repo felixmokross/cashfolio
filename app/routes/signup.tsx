@@ -10,12 +10,12 @@ import { useActionData } from "@remix-run/react";
 import { Form, Link } from "react-router-dom";
 import { authorize } from "~/auth.server";
 import { Button } from "~/components/button";
+import type { FormErrors } from "~/components/forms";
 import { CurrencyCombobox } from "~/components/forms";
 import { LogoSmall } from "~/components/logo";
 import { getLocales } from "~/locales.server";
 import { createUser, getUserIdByAuth0UserId } from "~/models/users.server";
 import { getSession } from "~/session.server";
-import type { FormErrors } from "~/utils";
 import { safeRedirect } from "~/utils";
 import { getTitle } from "~/utils";
 import { pick } from "accept-language-parser";
@@ -88,7 +88,7 @@ export default function Signup() {
         <Link to="/" aria-label="Home">
           <LogoSmall className="h-10 w-auto" />
         </Link>
-        <h2 className="mt-4 text-2xl font-semibold text-gray-900">
+        <h2 className="mt-4 text-2xl font-semibold text-slate-900">
           Complete Signup
         </h2>
         <div className="mt-10 flex flex-col gap-4">
