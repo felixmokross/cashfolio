@@ -1,6 +1,13 @@
 import type { ComponentPropsWithoutRef, ElementType } from "react";
 import invariant from "tiny-invariant";
 
+export const thousandSeparator = new Intl.NumberFormat("en-CH")
+  .formatToParts(1000)
+  .find((x) => x.type === "group")?.value; // TODO determine based on user's preferred locale
+export const decimalSeparator = new Intl.NumberFormat("en-CH")
+  .formatToParts(1.1)
+  .find((x) => x.type === "decimal")?.value; // TODO determine based on user's preferred locale
+
 export type PolymorphicComponentProps<T extends ElementType> = {
   as?: T;
 } & ComponentPropsWithoutRef<T>;

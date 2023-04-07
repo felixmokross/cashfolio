@@ -11,7 +11,7 @@ export function parseDecimal(value: string) {
 
 export function isValidDecimal(value: string) {
   try {
-    new Decimal(value);
+    parseDecimal(value);
     return true;
   } catch {
     return false;

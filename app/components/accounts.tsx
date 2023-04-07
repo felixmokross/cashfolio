@@ -1,4 +1,5 @@
 import type { FormProps } from "./forms";
+import { FormattedNumberInput } from "./forms";
 import {
   CurrencyCombobox,
   DetailedRadioGroup,
@@ -113,7 +114,7 @@ export function AccountFormFields({
         groupClassName="col-start-1 col-span-6"
       />
       {preExisting ? (
-        <Input
+        <FormattedNumberInput
           key="balanceAtStart"
           groupClassName="col-start-1 col-span-3"
           label="Balance at Start"

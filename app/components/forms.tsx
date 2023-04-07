@@ -13,6 +13,9 @@ import {
 import { cn } from "./classnames";
 import { currencyItems } from "~/currencies";
 import type { SerializeFrom } from "@remix-run/node";
+import type { NumericFormatProps } from "react-number-format";
+import { NumericFormat } from "react-number-format";
+import { decimalSeparator, thousandSeparator } from "~/utils";
 
 const labelClassName = "block text-sm font-medium text-slate-700";
 
@@ -78,7 +81,7 @@ export const Input = function Input({
 };
 
 export type InputProps = {
-  name: string;
+  name?: string;
   label: string;
   error?: string;
   groupClassName?: string;
@@ -87,6 +90,32 @@ export type InputProps = {
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >;
+
+export type FormattedNumberInputProps = NumericFormatProps<InputProps>;
+
+export function FormattedNumberInput({
+  name,
+  defaultValue,
+  ...props
+}: FormattedNumberInputProps) {
+  const [value, setValue] = useState<number | undefined>(
+    defaultValue != null ? Number(defaultValue) : undefined
+  );
+  return (
+    <>
+      <NumericFormat
+        {...props}
+        valueIsNumericString={true}
+        defaultValue={defaultValue}
+        onValueChange={({ floatValue }) => setValue(floatValue)}
+        thousandSeparator={thousandSeparator}
+        decimalSeparator={decimalSeparator}
+        customInput={Input}
+      />
+      <input name={name} value={value} type="hidden" />
+    </>
+  );
+}
 
 export function Select({
   name,
