@@ -6,14 +6,15 @@ import type {
 } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useActionData } from "@remix-run/react";
+import { useActionData, useLoaderData } from "@remix-run/react";
 import { Form, Link } from "react-router-dom";
 import { authorize } from "~/auth.server";
 import { Button } from "~/components/button";
 import type { FormErrors } from "~/components/forms";
+import { Combobox } from "~/components/forms";
 import { CurrencyCombobox } from "~/components/forms";
 import { LogoSmall } from "~/components/logo";
-import { getLocales } from "~/locales.server";
+import { getLocales, getLocalesWithDisplayName } from "~/locales.server";
 import { createUser, getUserIdByAuth0UserId } from "~/models/users.server";
 import { getSession } from "~/session.server";
 import { safeRedirect } from "~/utils";
@@ -24,13 +25,13 @@ type ActionData = {
   errors: FormErrors<SignupValues>;
 };
 
-type SignupValues = Partial<Pick<User, "refCurrency">>;
+type SignupValues = Partial<Pick<User, "refCurrency" | "preferredLocale">>;
 
 export async function loader({ request }: DataFunctionArgs) {
   const session = await getSession(request);
   const userId = session.get("userId");
   if (!userId) {
-    return authorize(request, "signup");
+    return await authorize(request, "signup");
   }
 
   const user = await getUserIdByAuth0UserId(userId);
@@ -40,15 +41,27 @@ export async function loader({ request }: DataFunctionArgs) {
     );
   }
 
-  return null;
+  return json({
+    locales: getLocalesWithDisplayName(),
+    suggestedLocale: getSuggestedLocale(request) || "en",
+  });
 }
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
+  const preferredLocale = formData.get("preferredLocale");
   const refCurrency = formData.get("refCurrency");
+
   const redirectTo = safeRedirect(
     new URL(request.url).searchParams.get("redirectTo")
   );
+
+  if (typeof preferredLocale !== "string" || preferredLocale.length === 0) {
+    return json<ActionData>(
+      { errors: { preferredLocale: "Preferred locale is required" } },
+      { status: 400 }
+    );
+  }
 
   if (typeof refCurrency !== "string" || refCurrency.length === 0) {
     return json<ActionData>(
@@ -63,25 +76,19 @@ export const action: ActionFunction = async ({ request }) => {
   await createUser({
     auth0UserId: userId,
     refCurrency,
-    preferredLocale: getPreferredLocale(request) || "en",
+    preferredLocale,
   });
 
   return redirect(redirectTo);
 };
-
-function getPreferredLocale(request: Request) {
-  const acceptLanguageHeader = request.headers.get("accept-language");
-  if (!acceptLanguageHeader) return undefined;
-
-  return pick(getLocales(), acceptLanguageHeader) || undefined;
-}
 
 export const meta: V2_MetaFunction = () => [
   { title: getTitle("Complete Signup") },
 ];
 
 export default function Signup() {
-  const actionData = useActionData() as ActionData;
+  const { locales, suggestedLocale } = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
   return (
     <div className=" w-full px-4 py-10">
       <Form method="post" noValidate className="mx-auto flex max-w-sm flex-col">
@@ -92,10 +99,22 @@ export default function Signup() {
           Complete Signup
         </h2>
         <div className="mt-10 flex flex-col gap-4">
+          <Combobox
+            label="Preferred Locale"
+            name="preferredLocale"
+            options={locales.map(([locale, displayName]) => ({
+              value: locale,
+              primaryText: displayName,
+              secondaryText: locale,
+            }))}
+            defaultValue={suggestedLocale}
+            autoFocus={true}
+            error={actionData?.errors?.preferredLocale}
+          />
+
           <CurrencyCombobox
             label="Main Currency"
             name="refCurrency"
-            autoFocus={true}
             error={actionData?.errors?.refCurrency}
           />
         </div>
@@ -105,4 +124,11 @@ export default function Signup() {
       </Form>
     </div>
   );
+}
+
+function getSuggestedLocale(request: Request) {
+  const acceptLanguageHeader = request.headers.get("accept-language");
+  if (!acceptLanguageHeader) return undefined;
+
+  return pick(getLocales(), acceptLanguageHeader) || undefined;
 }

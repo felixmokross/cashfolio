@@ -15,7 +15,7 @@ import type { User } from "@prisma/client";
 export async function authorize(
   request: Request,
   mode: AuthorizeMode = "login"
-): Promise<TypedResponse> {
+) {
   const redirectTo = safeRedirect(
     new URL(request.url).searchParams.get("redirectTo")
   );
