@@ -246,7 +246,7 @@ export function Combobox({
                       {option.secondaryText && (
                         <span
                           className={cn(
-                            "ml-2 truncate text-slate-500",
+                            "ml-2 truncate",
                             active ? "text-sky-100" : "text-slate-500"
                           )}
                         >
