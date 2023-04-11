@@ -1,37 +1,19 @@
-import { defaultContent } from "cldr-core/defaultContent.json";
 import { availableLocales } from "cldr-core/availableLocales.json";
-import { difference } from "./utils.server";
-import languages from "cldr-localenames-modern/main/en/languages.json";
-import territories from "cldr-localenames-modern/main/en/territories.json";
 
 export function getLocales() {
-  const baseLocales = defaultContent.map((l) =>
-    l.split("-").slice(0, -1).join("-")
-  );
-  return difference(availableLocales.modern, baseLocales).concat(
-    defaultContent
-  );
+  // Note that some locales might not be supported in the browser
+  // In case that the user chooses such a locale, there might be differences in rendering between server and client
+  // Consider to improve the user experience
+  return Intl.NumberFormat.supportedLocalesOf(availableLocales.modern);
 }
+
+const displayNames = new Intl.DisplayNames("en", {
+  type: "language",
+  languageDisplay: "standard",
+});
 
 export function getLocalesWithDisplayName() {
   return getLocales()
-    .map((locale) => {
-      const [language, territory] = locale.split("-");
-      const languageName =
-        languages.main.en.localeDisplayNames.languages[
-          language as keyof typeof languages.main.en.localeDisplayNames.languages
-        ];
-
-      const territoryName = territory
-        ? territories.main.en.localeDisplayNames.territories[
-            territory as keyof typeof territories.main.en.localeDisplayNames.territories
-          ]
-        : undefined;
-      return [
-        locale,
-        `${languageName}${territoryName ? ` – ${territoryName}` : ""}`,
-      ] as [string, string];
-    })
-    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map((locale) => [locale, displayNames.of(locale)] as [string, string])
     .sort((a, b) => a[1].localeCompare(b[1]));
 }

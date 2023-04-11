@@ -1,5 +1,4 @@
 import { createId } from "@paralleldrive/cuid2";
-import type { TypedResponse } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { generators, Issuer, TokenSet } from "openid-client";
 import invariant from "tiny-invariant";
