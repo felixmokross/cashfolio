@@ -185,10 +185,18 @@ export function Combobox({
     query === ""
       ? options
       : options.filter((option) => {
-          return (
-            option.primaryText.toLowerCase().includes(query.toLowerCase()) ||
-            (option.secondaryText &&
-              option.secondaryText.toLowerCase().includes(query.toLowerCase()))
+          const queryTokens = query
+            .split(/[^a-zA-Z0-9]/)
+            .map((t) => t.toLowerCase().trim());
+
+          const normalizedTexts = [option.primaryText, option.secondaryText]
+            .flatMap((t) =>
+              t?.split(/[^a-zA-Z0-9]/).map((tk) => tk.toLowerCase().trim())
+            )
+            .filter((t) => !!t) as string[];
+
+          return queryTokens.every((token) =>
+            normalizedTexts.some((text) => text.startsWith(token))
           );
         });
 

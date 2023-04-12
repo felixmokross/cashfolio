@@ -14,12 +14,17 @@ import type { FormErrors } from "~/components/forms";
 import { Combobox } from "~/components/forms";
 import { CurrencyCombobox } from "~/components/forms";
 import { LogoSmall } from "~/components/logo";
-import { getLocales, getLocalesWithDisplayName } from "~/locales.server";
+import {
+  getLocales,
+  getLocalesWithDisplayName,
+  getSuggestedCurrencyForLocale,
+} from "~/locales.server";
 import { createUser, getUserIdByAuth0UserId } from "~/models/users.server";
 import { getSession } from "~/session.server";
 import { safeRedirect } from "~/utils";
 import { getTitle } from "~/utils";
 import { pick } from "accept-language-parser";
+import { useMemo, useState } from "react";
 
 type ActionData = {
   errors: FormErrors<SignupValues>;
@@ -41,9 +46,14 @@ export async function loader({ request }: DataFunctionArgs) {
     );
   }
 
+  const suggestedLocale = getSuggestedLocale(request);
+
   return json({
     locales: getLocalesWithDisplayName(),
-    suggestedLocale: getSuggestedLocale(request) || "en",
+    suggestedLocale: suggestedLocale || "en",
+    suggestedCurrency:
+      (suggestedLocale && getSuggestedCurrencyForLocale(suggestedLocale)) ||
+      "USD",
   });
 }
 
@@ -87,8 +97,26 @@ export const meta: V2_MetaFunction = () => [
 ];
 
 export default function Signup() {
-  const { locales, suggestedLocale } = useLoaderData<typeof loader>();
+  const { locales, suggestedLocale, suggestedCurrency } =
+    useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
+
+  const [currency, setCurrency] = useState(suggestedCurrency);
+  const [locale, setLocale] = useState(suggestedLocale);
+
+  const formattingSamples = useMemo(
+    () => [
+      new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
+        new Date()
+      ),
+      new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency,
+      }).format(45_678.9),
+    ],
+    [locale, currency]
+  );
+
   return (
     <div className=" w-full px-4 py-10">
       <Form method="post" noValidate className="mx-auto flex max-w-sm flex-col">
@@ -100,7 +128,7 @@ export default function Signup() {
         </h2>
         <div className="mt-10 flex flex-col gap-4">
           <Combobox
-            label="Preferred Locale"
+            label="Currency and Date Format"
             name="preferredLocale"
             options={locales.map(([locale, displayName]) => ({
               value: locale,
@@ -110,12 +138,19 @@ export default function Signup() {
             defaultValue={suggestedLocale}
             autoFocus={true}
             error={actionData?.errors?.preferredLocale}
+            onChange={(value) => setLocale(value as string)}
           />
+          <div className="flex justify-center gap-3 text-xs text-slate-500">
+            <div>{formattingSamples[0]}</div>
+            <div>{formattingSamples[1]}</div>
+          </div>
 
           <CurrencyCombobox
             label="Main Currency"
             name="refCurrency"
+            defaultValue={suggestedCurrency}
             error={actionData?.errors?.refCurrency}
+            onChange={(value) => setCurrency(value as string)}
           />
         </div>
         <Button type="submit" variant="primary" className="mt-10">
