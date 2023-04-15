@@ -1,4 +1,4 @@
-import { Decimal } from "@prisma/client/runtime";
+import { Decimal } from "@prisma/client/runtime/library";
 
 export function difference<T>(arrayA: T[], arrayB: T[]): T[] {
   const setB = new Set(arrayB);
