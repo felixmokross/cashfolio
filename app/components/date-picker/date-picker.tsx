@@ -227,7 +227,7 @@ function CalendarGrid({ state, ...props }: CalendarGridProps) {
         </tr>
       </thead>
       <tbody>
-        {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
+        {[...new Array(Math.max(weeksInMonth, 6)).keys()].map((weekIndex) => (
           <tr key={weekIndex}>
             {state
               .getDatesInWeek(weekIndex)
@@ -264,12 +264,14 @@ function CalendarCell({ state, date }: CalendarCellProps) {
       <div
         {...buttonProps}
         ref={ref}
-        hidden={isOutsideVisibleRange}
-        className={`px-2 text-center ${isSelected ? "bg-sky-100" : ""} ${
-          isDisabled ? "disabled" : ""
-        } ${isUnavailable ? "unavailable" : ""}`}
+        className={cn(
+          `px-2 text-center ${isSelected ? "bg-sky-100" : ""} ${
+            isDisabled ? "disabled" : ""
+          } ${isUnavailable ? "unavailable" : ""}`,
+          isOutsideVisibleRange && "cursor-default"
+        )}
       >
-        {formattedDate}
+        {isOutsideVisibleRange ? <>&nbsp;</> : formattedDate}
       </div>
     </td>
   );
