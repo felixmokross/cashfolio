@@ -29,6 +29,7 @@ import { createCalendar, getWeeksInMonth } from "@internationalized/date";
 import { Label } from "../forms";
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
 import { cn } from "../classnames";
+import { ClientOnly } from "../client-only";
 
 type DatePickerProps = DatePickerStateOptions<DateValue>;
 
@@ -119,7 +120,7 @@ function DateFieldSegment({ segment, state }: DateFieldSegmentProps) {
         }
       )}
     >
-      {segment.text}
+      <ClientOnly fallback="">{segment.text}</ClientOnly>
     </div>
   );
 }
