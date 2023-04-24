@@ -1,6 +1,8 @@
 {
   "private": true,
-  "sideEffects": false,
+  "sideEffects": [
+    "./app/tailwind.css"
+  ],
   "scripts": {
     "build": "remix build",
     "deploy": "fly deploy --remote-only",
@@ -45,6 +47,7 @@
     "@storybook/addon-essentials": "^7.0.7",
     "@storybook/addon-interactions": "^7.0.7",
     "@storybook/addon-links": "^7.0.7",
+    "@storybook/addon-styling": "^1.0.1",
     "@storybook/blocks": "^7.0.7",
     "@storybook/react": "^7.0.7",
     "@storybook/react-webpack5": "^7.0.7",
@@ -55,10 +58,13 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "auth0": "^3.3.0",
+    "autoprefixer": "^10.4.14",
     "dotenv": "^16.0.3",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-storybook": "^0.6.11",
+    "postcss": "^8.4.23",
+    "postcss-loader": "^7.2.4",
     "prettier": "2.8.7",
     "prettier-plugin-tailwindcss": "0.2.5",
     "prisma": "^4.11.0",
