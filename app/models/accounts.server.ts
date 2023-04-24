@@ -2,7 +2,7 @@ import type { Account } from "@prisma/client";
 import { AccountType, AccountUnit } from "@prisma/client";
 import slugify from "slugify";
 import invariant from "tiny-invariant";
-import type { FormErrors } from "~/components/forms";
+import type { FormErrors } from "~/components/forms/types";
 import { prisma } from "~/prisma.server";
 import {
   isValidDate,

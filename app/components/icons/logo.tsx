@@ -1,4 +1,4 @@
-import type { IconProps } from "./icons";
+import type { IconProps } from "./types";
 
 export function Logo(props: IconProps) {
   return (
@@ -23,25 +23,6 @@ export function Logo(props: IconProps) {
         d="M13.7142 49.4286L28.2857 29.7143L41.9999 39.5715L57.8571 19.8572"
         stroke="#0284C7"
         strokeWidth="8"
-      />
-    </svg>
-  );
-}
-
-export function LogoSmall(props: IconProps) {
-  return (
-    <svg
-      width="98"
-      height="98"
-      viewBox="0 0 98 98"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path
-        d="M10 75L35.7476 39.6667L59.9806 57.3333L88 22"
-        stroke="#0284C7"
-        strokeWidth="12"
       />
     </svg>
   );

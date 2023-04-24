@@ -1,9 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
 const config: StorybookConfig = {
-  webpackFinal: async (config) => {
-    console.log(config.module?.rules);
-    return config;
-  },
   stories: [
     "../stories/**/*.mdx",
     "../stories/**/*.stories.@(js|jsx|ts|tsx)",

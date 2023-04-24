@@ -7,7 +7,7 @@ import invariant from "tiny-invariant";
 import { requireUserId } from "~/auth.server";
 import { AccountFormFields } from "~/components/accounts";
 import { Button } from "~/components/button";
-import type { FormActionData } from "~/components/forms";
+import type { FormActionData } from "~/components/forms/types";
 import type { AccountValues } from "~/models/accounts.server";
 import {
   getAccount,

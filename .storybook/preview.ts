@@ -11,6 +11,16 @@ const preview: Preview = {
       },
     },
   },
+  globalTypes: {
+    locale: {
+      name: "Locale",
+      defaultValue: "en-CH",
+      toolbar: {
+        icon: "globe",
+        items: ["en", "en-CH", "de-DE", "de-CH"],
+      },
+    },
+  },
 };
 
 export default preview;

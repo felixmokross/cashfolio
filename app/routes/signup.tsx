@@ -10,10 +10,7 @@ import { useActionData, useLoaderData } from "@remix-run/react";
 import { Form, Link } from "react-router-dom";
 import { authorize } from "~/auth.server";
 import { Button } from "~/components/button";
-import type { FormErrors } from "~/components/forms";
-import { Combobox } from "~/components/forms";
-import { CurrencyCombobox } from "~/components/forms";
-import { LogoSmall } from "~/components/logo";
+import { LogoSmall } from "~/components/icons/logo-small";
 import {
   getLocales,
   getLocalesWithDisplayName,
@@ -25,6 +22,9 @@ import { safeRedirect } from "~/utils";
 import { getTitle } from "~/utils";
 import { pick } from "accept-language-parser";
 import { useMemo, useState } from "react";
+import { CurrencyCombobox } from "~/components/forms/currency-combobox";
+import { Combobox } from "~/components/forms/combobox";
+import type { FormErrors } from "~/components/forms/types";
 
 type ActionData = {
   errors: FormErrors<SignupValues>;

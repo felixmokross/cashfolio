@@ -5,7 +5,7 @@ import { Form, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/auth.server";
 import { Button } from "~/components/button";
-import { Input } from "~/components/forms";
+import { Input } from "~/components/forms/input";
 import {
   assetClassExists,
   getAssetClass,

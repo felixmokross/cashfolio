@@ -26,10 +26,10 @@ import { useDateFieldState } from "react-stately";
 import { useDatePickerState } from "react-stately";
 import type { CalendarDate } from "@internationalized/date";
 import { createCalendar, getWeeksInMonth } from "@internationalized/date";
-import { Label } from "../forms";
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
 import { cn } from "../classnames";
 import { ClientOnly } from "../client-only";
+import { Label } from "../forms/label";
 
 type DatePickerProps = DatePickerStateOptions<DateValue>;
 

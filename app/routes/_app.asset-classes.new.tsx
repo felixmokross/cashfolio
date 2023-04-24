@@ -4,7 +4,7 @@ import { Form } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/auth.server";
 import { Button } from "~/components/button";
-import { Input } from "~/components/forms";
+import { Input } from "~/components/forms/input";
 import { createAssetClass } from "~/models/asset-classes.server";
 import { getTitle } from "~/utils";
 
