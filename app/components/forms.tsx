@@ -1,4 +1,4 @@
-import type { DetailedHTMLProps, PropsWithChildren } from "react";
+import type { DetailedHTMLProps, LabelHTMLAttributes } from "react";
 import { useMemo } from "react";
 import { useState } from "react";
 import { useId } from "react";
@@ -21,17 +21,18 @@ import { useLocale } from "./locale-context";
 
 const labelClassName = "block text-sm font-medium text-slate-700";
 
-function Label({ htmlFor, children }: PropsWithChildren<LabelProps>) {
+export function Label({ className, children, ...props }: LabelProps) {
   return (
-    <label htmlFor={htmlFor} className={labelClassName}>
+    <label {...props} className={cn(labelClassName, className)}>
       {children}
     </label>
   );
 }
 
-type LabelProps = {
-  htmlFor: string;
-};
+type LabelProps = DetailedHTMLProps<
+  LabelHTMLAttributes<HTMLLabelElement>,
+  HTMLLabelElement
+>;
 
 function ErrorMessage({ error, errorId }: ErrorMessageProps) {
   if (!error) return null;

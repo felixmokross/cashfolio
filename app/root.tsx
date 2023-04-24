@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import styles from "./tailwind.css";
+import { SSRProvider } from "react-aria";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
@@ -35,7 +36,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <SSRProvider>
+          <Outlet />
+        </SSRProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
