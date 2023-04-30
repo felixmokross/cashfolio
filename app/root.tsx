@@ -33,13 +33,15 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="antialiased">
-        <SSRProvider>
-          <Outlet />
-        </SSRProvider>
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+      <body className="bg-slate-50 antialiased">
+        <div className="mx-auto min-h-screen max-w-screen-sm bg-white sm:border-x sm:border-slate-200 sm:shadow-xl">
+          <SSRProvider>
+            <Outlet />
+          </SSRProvider>
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </div>
       </body>
     </html>
   );
