@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: [
-          '"Inter var"',
+          ['"Inter var"', ...defaultTheme.fontFamily.sans],
           { fontFeatureSettings: '"cv11", "cv03", "cv04"' },
         ],
       },
