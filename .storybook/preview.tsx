@@ -24,11 +24,6 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => (
-      <div className="antialiased">
-        <Story />
-      </div>
-    ),
     (Story) => {
       const RemixStub = unstable_createRemixStub([
         { path: "/*", element: <Story /> },
