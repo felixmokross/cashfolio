@@ -9,6 +9,7 @@ test("home page", async ({ page }) => {
 
 test("logout", async ({ page }) => {
   await page.goto("/");
+  await page.getByRole("button", { name: "Open Main Menu" }).click();
   await page.getByRole("link", { name: /Log Out/ }).click();
 
   await expect(page).toHaveURL(/\/logged-out$/);
