@@ -2,7 +2,8 @@ import type { CalendarDate } from "@internationalized/date";
 import { isToday } from "@internationalized/date";
 import { createCalendar, getWeeksInMonth } from "@internationalized/date";
 import { useRef } from "react";
-import type { CalendarProps, DateValue } from "react-aria";
+import type { AriaButtonProps, CalendarProps, DateValue } from "react-aria";
+import { useButton } from "react-aria";
 import {
   useCalendar,
   useCalendarCell,
@@ -11,7 +12,6 @@ import {
 } from "react-aria";
 import type { CalendarState } from "react-stately";
 import { useCalendarState } from "react-stately";
-import { DatePickerButton } from "./common";
 import { cn } from "../../classnames";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
@@ -31,14 +31,14 @@ export function Calendar(props: CalendarProps<DateValue>) {
   return (
     <div {...calendarProps}>
       <div className="flex items-center justify-between">
-        <DatePickerButton {...prevButtonProps}>
+        <CalendarButton {...prevButtonProps}>
           <span className="sr-only">Previous month</span>
           <ChevronLeftIcon className="h-5 w-5" />
-        </DatePickerButton>
+        </CalendarButton>
         <h2 className="text-sm font-semibold text-slate-800">{title}</h2>
-        <DatePickerButton {...nextButtonProps}>
+        <CalendarButton {...nextButtonProps}>
           <ChevronRightIcon className="h-5 w-5" />
-        </DatePickerButton>
+        </CalendarButton>
       </div>
       <CalendarGrid state={state} />
     </div>
@@ -141,5 +141,28 @@ function CalendarCell({ state, date, className }: CalendarCellProps) {
         {formattedDate}
       </div>
     </div>
+  );
+}
+
+type CalendarButtonProps = AriaButtonProps<"button"> & {
+  className?: string;
+};
+
+function CalendarButton({ className, ...props }: CalendarButtonProps) {
+  let ref = useRef(null);
+  let { buttonProps } = useButton(props, ref);
+  let { children } = props;
+
+  return (
+    <button
+      {...buttonProps}
+      ref={ref}
+      className={cn(
+        "-m1.5 cursor-pointer p-1.5 text-slate-400 hover:text-slate-500",
+        className
+      )}
+    >
+      {children}
+    </button>
   );
 }

@@ -1,34 +1,56 @@
 import type { ReactNode } from "react";
+import { useId } from "react";
 import { useRef } from "react";
 import type {
+  AriaButtonProps,
   AriaDatePickerProps,
   AriaDialogProps,
   AriaPopoverProps,
   DateValue,
 } from "react-aria";
+import { useButton } from "react-aria";
 import { DismissButton, useDialog } from "react-aria";
 import { Overlay, useDateField, useDateSegment, usePopover } from "react-aria";
 import { useLocale } from "react-aria";
 import { useDatePicker } from "react-aria";
 import type {
   DateFieldState,
-  DatePickerStateOptions,
   DateSegment,
   OverlayTriggerState,
 } from "react-stately";
 import { useDateFieldState } from "react-stately";
 import { useDatePickerState } from "react-stately";
-import { createCalendar } from "@internationalized/date";
+import { createCalendar, parseDate } from "@internationalized/date";
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
 import { cn } from "../../classnames";
 import { ClientOnly } from "../../client-only";
 import { Label } from "../label";
-import { DatePickerButton } from "./common";
 import { Calendar } from "./calendar";
+import { ErrorMessage } from "../error-message";
 
-type DatePickerProps = DatePickerStateOptions<DateValue>;
+type DateInputProps = {
+  label?: string;
+  name: string;
+  defaultValue?: string;
+  groupClassName?: string;
+  error?: string;
+  disabled?: boolean;
+};
 
-export function DatePicker(props: DatePickerProps) {
+export function DateInput({
+  label,
+  name,
+  defaultValue,
+  groupClassName,
+  error,
+  disabled = false,
+}: DateInputProps) {
+  const props = {
+    label,
+    defaultValue: defaultValue ? parseDate(defaultValue) : undefined,
+    isDisabled: disabled,
+  };
+
   let state = useDatePickerState(props);
   let ref = useRef(null);
   let {
@@ -40,22 +62,26 @@ export function DatePicker(props: DatePickerProps) {
     calendarProps,
   } = useDatePicker(props, state, ref);
 
+  const errorId = `datepicker-error-${useId()}`;
+
   return (
-    <div>
-      <Label {...labelProps}>{props.label}</Label>
+    <div className={groupClassName}>
+      <Label {...labelProps}>{label}</Label>
       <div
         {...groupProps}
         ref={ref}
-        className="flex w-full justify-between rounded-md border border-slate-300 px-3 py-2 shadow-sm sm:text-sm"
+        className={cn(
+          "mt-1 flex w-full justify-between rounded-md border border-slate-300 px-3 py-2 shadow-sm sm:text-sm",
+          disabled && "cursor-not-allowed bg-slate-50 opacity-50"
+        )}
       >
+        <input type="hidden" name={name} value={state.value?.toString()} />
         <DateField {...fieldProps} />
-        <DatePickerButton
-          {...buttonProps}
-          className="rounded-sm text-slate-500 hover:text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-        >
+        <DatePickerButton {...buttonProps} isDisabled={disabled}>
           <CalendarDaysIcon className="h-5 w-5" />
         </DatePickerButton>
       </div>
+      <ErrorMessage error={error} errorId={errorId} />
       {state.isOpen && (
         <Popover state={state} triggerRef={ref} placement="bottom start">
           <Dialog {...dialogProps}>
@@ -127,7 +153,7 @@ interface PopoverProps extends Omit<AriaPopoverProps, "popoverRef"> {
 
 function Popover({ children, state, offset = 8, ...props }: PopoverProps) {
   let popoverRef = useRef(null);
-  let { popoverProps, underlayProps, arrowProps, placement } = usePopover(
+  let { popoverProps, underlayProps } = usePopover(
     {
       ...props,
       offset,
@@ -138,11 +164,8 @@ function Popover({ children, state, offset = 8, ...props }: PopoverProps) {
 
   return (
     <Overlay>
-      <div {...underlayProps} className="underlay" />
-      <div {...popoverProps} ref={popoverRef} className="popover">
-        <svg {...arrowProps} className="arrow" data-placement={placement}>
-          <path d="M0 0,L6 6,L12 0" />
-        </svg>
+      <div {...underlayProps} />
+      <div {...popoverProps} ref={popoverRef}>
         <DismissButton onDismiss={state.close} />
         {children}
         <DismissButton onDismiss={state.close} />
@@ -169,5 +192,25 @@ function Dialog({ title, children, ...props }: DialogProps) {
       {title && <h3 {...titleProps}>{title}</h3>}
       {children}
     </div>
+  );
+}
+
+type DatePickerButtonProps = AriaButtonProps<"button"> & {
+  className?: string;
+};
+
+function DatePickerButton({ className, ...props }: DatePickerButtonProps) {
+  let ref = useRef(null);
+  let { buttonProps } = useButton(props, ref);
+  let { children } = props;
+
+  return (
+    <button
+      {...buttonProps}
+      ref={ref}
+      className="rounded-sm text-slate-500 hover:text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      {children}
+    </button>
   );
 }

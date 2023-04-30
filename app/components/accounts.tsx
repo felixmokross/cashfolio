@@ -2,7 +2,6 @@ import type { getAssetClasses } from "~/models/asset-classes.server";
 import { AccountType, AccountUnit } from "@prisma/client";
 import type { AccountValues, getAccount } from "~/models/accounts.server";
 import { useState } from "react";
-// import { DatePicker } from "./date-picker/date-picker";
 import type { FormProps } from "./forms/types";
 import { RadioGroup } from "./forms/radio-group";
 import { Input } from "./forms/input";
@@ -10,6 +9,7 @@ import { Select } from "./forms/select";
 import { FormattedNumberInput } from "./forms/formatted-number-input";
 import { DetailedRadioGroup } from "./forms/detailed-radio-group";
 import { CurrencyCombobox } from "./forms/currency-combobox";
+import { DateInput } from "./forms/date-input";
 
 export type AccountFormLoaderData = {
   assetClasses: Awaited<ReturnType<typeof getAssetClasses>>;
@@ -125,12 +125,11 @@ export function AccountFormFields({
           error={errors?.balanceAtStart}
         />
       ) : (
-        <Input
+        <DateInput
           key="openingDate"
           groupClassName="col-start-1 col-span-3"
           label="Opening Date"
           name="openingDate"
-          type="date"
           defaultValue={
             values?.openingDate ||
             account?.openingDate?.split("T")[0] ||
@@ -139,9 +138,6 @@ export function AccountFormFields({
           error={errors?.openingDate}
         />
       )}
-      {/* <div className="col-span-3 col-start-1">
-        <DatePicker label="Date" />
-      </div> */}
     </div>
   );
 }
