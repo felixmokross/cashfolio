@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Calendar } from "./calendar";
 import { I18nProvider } from "react-aria";
+import { CalendarDate } from "@internationalized/date";
 
 const meta: Meta<typeof Calendar> = {
   title: "forms/datepicker/Calendar",
@@ -12,7 +13,7 @@ const meta: Meta<typeof Calendar> = {
         <Story />
       </I18nProvider>
     ),
-    (Story, context) => (
+    (Story) => (
       <div className="flex h-screen items-center justify-center">
         <Story />
       </div>
@@ -25,5 +26,7 @@ export default meta;
 type Story = StoryObj<typeof Calendar>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    value: new CalendarDate(2023, 3, 1),
+  },
 };

@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
 import "../app/tailwind.css";
+import React from "react";
 
 const preview: Preview = {
   parameters: {
@@ -21,6 +22,13 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <div className="antialiased">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default preview;

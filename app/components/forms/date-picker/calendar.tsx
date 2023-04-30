@@ -1,4 +1,5 @@
 import type { CalendarDate } from "@internationalized/date";
+import { isToday } from "@internationalized/date";
 import { createCalendar, getWeeksInMonth } from "@internationalized/date";
 import { useRef } from "react";
 import type { CalendarProps, DateValue } from "react-aria";
@@ -12,6 +13,7 @@ import type { CalendarState } from "react-stately";
 import { useCalendarState } from "react-stately";
 import { DatePickerButton } from "./common";
 import { cn } from "../../classnames";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 export function Calendar(props: CalendarProps<DateValue>) {
   let { locale } = useLocale();
@@ -28,13 +30,14 @@ export function Calendar(props: CalendarProps<DateValue>) {
 
   return (
     <div {...calendarProps}>
-      <div className="flex items-baseline justify-between">
-        <DatePickerButton {...prevButtonProps} className="px-4">
-          &lt;
+      <div className="flex items-center justify-between">
+        <DatePickerButton {...prevButtonProps}>
+          <span className="sr-only">Previous month</span>
+          <ChevronLeftIcon className="h-5 w-5" />
         </DatePickerButton>
-        <h2 className="text-sm font-medium text-slate-700">{title}</h2>
-        <DatePickerButton {...nextButtonProps} className="px-4">
-          &gt;
+        <h2 className="text-sm font-semibold text-slate-800">{title}</h2>
+        <DatePickerButton {...nextButtonProps}>
+          <ChevronRightIcon className="h-5 w-5" />
         </DatePickerButton>
       </div>
       <CalendarGrid state={state} />
@@ -52,38 +55,53 @@ function CalendarGrid({ state, ...props }: CalendarGridProps) {
   let weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
 
   return (
-    <table {...gridProps} className="mt-3 w-full">
-      <thead {...headerProps}>
-        <tr>
-          {weekDays.map((day, index) => (
-            <th key={index} className="text-center">
-              {day}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
+    <div {...gridProps} className="mt-6  w-full grid-cols-7">
+      <div {...headerProps} className="grid grid-cols-7">
+        {weekDays.map((day, index) => (
+          <div
+            key={index}
+            className="text-center text-xs font-normal text-slate-500"
+          >
+            {day}
+          </div>
+        ))}
+      </div>
+      <div className="mt-2 grid grid-cols-7 gap-px rounded-lg border bg-slate-200">
         {[...new Array(Math.max(weeksInMonth, 6)).keys()].map((weekIndex) => (
-          <tr key={weekIndex}>
+          <div key={weekIndex} className="contents ring-1 ring-slate-200">
             {state
               .getDatesInWeek(weekIndex)
               .map((date, i) =>
                 date ? (
-                  <CalendarCell key={i} state={state} date={date} />
+                  <CalendarCell
+                    key={i}
+                    state={state}
+                    date={date}
+                    className={cn(
+                      weekIndex === 0 && i === 0 && "rounded-tl-lg",
+                      weekIndex === 0 && i === 6 && "rounded-tr-lg",
+                      weekIndex === 5 && i === 0 && "rounded-bl-lg",
+                      weekIndex === 5 && i === 6 && "rounded-br-lg"
+                    )}
+                  />
                 ) : (
                   <td key={i} />
                 )
               )}
-          </tr>
+          </div>
         ))}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 }
 
-type CalendarCellProps = { state: CalendarState; date: CalendarDate };
+type CalendarCellProps = {
+  state: CalendarState;
+  date: CalendarDate;
+  className?: string;
+};
 
-function CalendarCell({ state, date }: CalendarCellProps) {
+function CalendarCell({ state, date, className }: CalendarCellProps) {
   let ref = useRef(null);
   let {
     cellProps,
@@ -96,19 +114,32 @@ function CalendarCell({ state, date }: CalendarCellProps) {
   } = useCalendarCell({ date }, state, ref);
 
   return (
-    <td {...cellProps}>
+    <div
+      {...cellProps}
+      {...buttonProps}
+      ref={ref}
+      className={cn(
+        className,
+        "h-10 w-10 px-2.5 py-2.5 text-center text-sm",
+        isOutsideVisibleRange || isUnavailable || isDisabled
+          ? "cursor-default bg-slate-50 text-slate-400"
+          : cn(
+              "bg-white hover:bg-slate-100",
+              isToday(date, state.timeZone)
+                ? "font-semibold text-sky-600"
+                : "text-slate-900"
+            )
+      )}
+    >
       <div
-        {...buttonProps}
-        ref={ref}
         className={cn(
-          `px-2 text-center ${isSelected ? "bg-sky-100" : ""} ${
-            isDisabled ? "disabled" : ""
-          } ${isUnavailable ? "unavailable" : ""}`,
-          isOutsideVisibleRange && "cursor-default"
+          isSelected
+            ? "-m-1 rounded-full bg-slate-900 p-1 font-semibold text-white"
+            : cn("contents")
         )}
       >
-        {isOutsideVisibleRange ? <>&nbsp;</> : formattedDate}
+        {formattedDate}
       </div>
-    </td>
+    </div>
   );
 }

@@ -6,8 +6,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
-        display: ["Lexend", ...defaultTheme.fontFamily.sans],
+        sans: [
+          '"Inter var"',
+          { fontFeatureSettings: '"cv11", "cv03", "cv04"' },
+        ],
       },
     },
   },
