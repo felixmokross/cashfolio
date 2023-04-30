@@ -8,6 +8,8 @@ export function LogoSmall(props: IconProps) {
       viewBox="0 0 98 98"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-label="Cashfolio Logo"
+      role="img"
       {...props}
     >
       <path

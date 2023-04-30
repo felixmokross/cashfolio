@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react";
 import "../app/tailwind.css";
 import React from "react";
+import { unstable_createRemixStub } from "@remix-run/testing";
 
 const preview: Preview = {
   parameters: {
@@ -28,6 +29,12 @@ const preview: Preview = {
         <Story />
       </div>
     ),
+    (Story) => {
+      const RemixStub = unstable_createRemixStub([
+        { path: "/*", element: <Story /> },
+      ]);
+      return <RemixStub />;
+    },
   ],
 };
 
