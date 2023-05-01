@@ -33,7 +33,6 @@ export default function AccountListPage() {
 
       <AccountList
         className="mt-4"
-        refCurrency="CHF"
         accounts={accounts.map((a) => ({
           account: a,
           balance: "10000",
