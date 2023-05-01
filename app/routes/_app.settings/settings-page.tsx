@@ -14,7 +14,7 @@ type SettingsValues = Partial<Pick<User, "refCurrency" | "preferredLocale">>;
 
 export type SettingsPageProps = {
   locales: [string, string][];
-  actionData: ActionData;
+  actionData?: ActionData;
 };
 
 export function SettingsPage({ locales, actionData }: SettingsPageProps) {

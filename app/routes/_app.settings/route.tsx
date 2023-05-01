@@ -4,7 +4,7 @@ import { json } from "@remix-run/node";
 import type { ActionData } from "./settings-page";
 import { SettingsPage } from "./settings-page";
 import { getLocalesWithDisplayName } from "~/locales.server";
-import { useLoaderData } from "@remix-run/react";
+import { useActionData, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
 import { updateUser } from "~/models/users.server";
 
@@ -41,6 +41,6 @@ export async function action({ request }: DataFunctionArgs) {
 
 export default function Route() {
   const { locales } = useLoaderData<typeof loader>();
-  const actionData = useLoaderData<ActionData>();
+  const actionData = useActionData<typeof action>();
   return <SettingsPage locales={locales} actionData={actionData} />;
 }
