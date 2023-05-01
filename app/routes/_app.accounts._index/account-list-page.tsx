@@ -15,9 +15,7 @@ export function AccountListPage({ accounts }: AccountListPageProps) {
       <div className="mt-4 flex items-baseline justify-between ">
         <h2 className="text-lg font-medium text-slate-800">Accounts</h2>
 
-        {/* TODO Introduce Icon button */}
-        <Button as={Link} to="new" className="inline-flex items-center gap-1.5">
-          <PlusIcon className="-ml-1.5 h-4 w-4" />
+        <Button as={Link} to="new" icon={PlusIcon}>
           New
         </Button>
       </div>
