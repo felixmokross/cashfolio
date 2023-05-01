@@ -1,8 +1,8 @@
 import type { Account } from "@prisma/client";
 import { AccountUnit } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
-import { useUser } from "../user-context";
 import { Link } from "@remix-run/react";
+import { useUser } from "~/components/user-context";
 import { currenciesByCode } from "~/currencies";
 
 export type AccountCardProps = {

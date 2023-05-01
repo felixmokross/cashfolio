@@ -3,7 +3,7 @@ import { AccountCard } from "./account-card";
 import { AccountUnit } from "@prisma/client";
 
 const meta: Meta<typeof AccountCard> = {
-  title: "AccountCard",
+  title: "accounts/AccountCard",
   component: AccountCard,
   tags: ["autodocs"],
   decorators: [

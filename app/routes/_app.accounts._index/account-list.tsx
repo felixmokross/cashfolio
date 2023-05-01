@@ -1,4 +1,4 @@
-import { cn } from "../classnames";
+import { cn } from "~/components/classnames";
 import type { AccountCardProps } from "./account-card";
 import { AccountCard } from "./account-card";
 
