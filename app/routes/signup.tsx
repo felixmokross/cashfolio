@@ -21,10 +21,9 @@ import { getSession } from "~/session.server";
 import { safeRedirect } from "~/utils";
 import { getTitle } from "~/utils";
 import { pick } from "accept-language-parser";
-import { useMemo, useState } from "react";
 import { CurrencyCombobox } from "~/components/forms/currency-combobox";
-import { Combobox } from "~/components/forms/combobox";
 import type { FormErrors } from "~/components/forms/types";
+import { LocaleCombobox } from "~/components/forms/locale-combobox";
 
 type ActionData = {
   errors: FormErrors<SignupValues>;
@@ -101,22 +100,6 @@ export default function Signup() {
     useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
 
-  const [currency, setCurrency] = useState(suggestedCurrency);
-  const [locale, setLocale] = useState(suggestedLocale);
-
-  const formattingSamples = useMemo(
-    () => [
-      new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
-        new Date()
-      ),
-      new Intl.NumberFormat(locale, {
-        style: "currency",
-        currency,
-      }).format(45_678.9),
-    ],
-    [locale, currency]
-  );
-
   return (
     <div className=" w-full px-4 py-10">
       <Form method="post" noValidate className="mx-auto flex max-w-sm flex-col">
@@ -127,30 +110,20 @@ export default function Signup() {
           Complete Signup
         </h2>
         <div className="mt-10 flex flex-col gap-4">
-          <Combobox
+          <LocaleCombobox
             label="Currency and Date Format"
             name="preferredLocale"
-            options={locales.map(([locale, displayName]) => ({
-              value: locale,
-              primaryText: displayName,
-              secondaryText: locale,
-            }))}
             defaultValue={suggestedLocale}
             autoFocus={true}
             error={actionData?.errors?.preferredLocale}
-            onChange={(value) => setLocale(value as string)}
+            locales={locales}
           />
-          <div className="flex justify-center gap-3 text-xs text-slate-500">
-            <div>{formattingSamples[0]}</div>
-            <div>{formattingSamples[1]}</div>
-          </div>
 
           <CurrencyCombobox
             label="Main Currency"
             name="refCurrency"
             defaultValue={suggestedCurrency}
             error={actionData?.errors?.refCurrency}
-            onChange={(value) => setCurrency(value as string)}
           />
         </div>
         <Button type="submit" variant="primary" className="mt-10">
