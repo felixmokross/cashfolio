@@ -29,3 +29,19 @@ export async function createUser({
     },
   });
 }
+
+export async function updateUser(
+  userId: User["id"],
+  {
+    preferredLocale,
+    refCurrency,
+  }: Pick<User, "preferredLocale" | "refCurrency">
+) {
+  return prisma.user.update({
+    where: { id: userId },
+    data: {
+      preferredLocale,
+      refCurrency,
+    },
+  });
+}
