@@ -1,18 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { FormattedNumberInput } from "./formatted-number-input";
-import { LocaleProvider } from "../locale-context";
 
 const meta: Meta<typeof FormattedNumberInput> = {
   title: "forms/FormattedNumberInput",
   component: FormattedNumberInput,
   tags: ["autodocs"],
-  decorators: [
-    (Story, context) => (
-      <LocaleProvider locale={context.globals.locale}>
-        <Story />
-      </LocaleProvider>
-    ),
-  ],
 };
 
 export default meta;

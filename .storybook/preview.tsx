@@ -2,6 +2,20 @@ import type { Preview } from "@storybook/react";
 import "../app/tailwind.css";
 import React from "react";
 import { unstable_createRemixStub } from "@remix-run/testing";
+import { LocaleProvider } from "../app/components/locale-context";
+import { getLocalesWithDisplayName } from "../app/locales.server";
+
+const availableLocales = [
+  "en-US",
+  "en-CH",
+  "fr-FR",
+  "it-IT",
+  "de-DE",
+  "de-CH",
+  "de-AT",
+  "es-ES",
+  "es-CO",
+];
 
 const preview: Preview = {
   parameters: {
@@ -19,7 +33,15 @@ const preview: Preview = {
       defaultValue: "en-CH",
       toolbar: {
         icon: "globe",
-        items: ["en", "en-CH", "de-DE", "de-CH"],
+        items: getLocalesWithDisplayName()
+          .filter(([l]) => availableLocales.includes(l))
+          .map(([locale, displayName]) => ({
+            title: displayName,
+            value: locale,
+            right: locale,
+          })),
+        dynamicTitle: true,
+        control: { type: "radio" },
       },
     },
   },
@@ -30,6 +52,11 @@ const preview: Preview = {
       ]);
       return <RemixStub />;
     },
+    (Story, context) => (
+      <LocaleProvider locale={context.globals.locale}>
+        <Story />
+      </LocaleProvider>
+    ),
   ],
 };
 
