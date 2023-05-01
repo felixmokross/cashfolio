@@ -1,6 +1,15 @@
 import type { ComponentPropsWithoutRef, ElementType } from "react";
 import invariant from "tiny-invariant";
 
+const localeDisplayNames = new Intl.DisplayNames("en", {
+  type: "language",
+  languageDisplay: "standard",
+});
+
+export function getDisplayNameOfLocale(locale: string) {
+  return localeDisplayNames.of(locale);
+}
+
 export function getNumberFormatSymbols(locale: string) {
   const numberFormat = new Intl.NumberFormat(locale);
 

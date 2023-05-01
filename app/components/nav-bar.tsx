@@ -2,14 +2,9 @@ import { Disclosure } from "@headlessui/react";
 import { Link } from "@remix-run/react";
 import { LogoSmall } from "./icons/logo-small";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
-import type { MainMenuProps } from "./main-menu";
 import { MainMenu } from "./main-menu";
 
-export type NavBarProps = {
-  user: MainMenuProps["user"];
-};
-
-export function NavBar({ user }: NavBarProps) {
+export function NavBar() {
   return (
     <Disclosure as="nav">
       {({ open }) => (
@@ -33,7 +28,7 @@ export function NavBar({ user }: NavBarProps) {
             </div>
           </div>
           <Disclosure.Panel>
-            <MainMenu user={user} />
+            <MainMenu />
           </Disclosure.Panel>
         </>
       )}

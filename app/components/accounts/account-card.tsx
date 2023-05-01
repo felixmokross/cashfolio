@@ -1,7 +1,7 @@
 import type { Account } from "@prisma/client";
 import { AccountUnit } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
-import { useLocale } from "../locale-context";
+import { useUser } from "../user-context";
 import { Link } from "@remix-run/react";
 import { currenciesByCode } from "~/currencies";
 
@@ -9,22 +9,20 @@ export type AccountCardProps = {
   account: Pick<SerializeFrom<Account>, "name" | "slug" | "unit" | "currency">;
   balance: string;
   balanceInRefCurrency: string;
-  refCurrency: string;
 };
 
 export function AccountCard({
   account,
   balance,
   balanceInRefCurrency,
-  refCurrency,
 }: AccountCardProps) {
-  const locale = useLocale();
-  const numberFormat = new Intl.NumberFormat(locale, {
+  const { preferredLocale, refCurrency } = useUser();
+  const numberFormat = new Intl.NumberFormat(preferredLocale, {
     maximumFractionDigits: 0,
   });
 
   const currencySymbol = account.currency
-    ? new Intl.NumberFormat(locale, {
+    ? new Intl.NumberFormat(preferredLocale, {
         style: "currency",
         currency: account.currency,
       })
@@ -32,7 +30,7 @@ export function AccountCard({
         .find(({ type }) => type === "currency")!.value
     : undefined;
 
-  const refCurrencySymbol = new Intl.NumberFormat(locale, {
+  const refCurrencySymbol = new Intl.NumberFormat(preferredLocale, {
     style: "currency",
     currency: refCurrency,
   })

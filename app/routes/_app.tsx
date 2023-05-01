@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { I18nProvider } from "react-aria";
 import { requireUser } from "~/auth.server";
-import { LocaleProvider } from "~/components/locale-context";
+import { UserProvider } from "~/components/user-context";
 import { NavBar } from "~/components/nav-bar";
 
 export async function loader({ request }: DataFunctionArgs) {
@@ -15,10 +15,10 @@ export default function App() {
   const user = useLoaderData<typeof loader>();
   return (
     <I18nProvider locale={user.preferredLocale}>
-      <LocaleProvider locale={user.preferredLocale}>
-        <NavBar user={user} />
+      <UserProvider user={user}>
+        <NavBar />
         <Outlet />
-      </LocaleProvider>
+      </UserProvider>
     </I18nProvider>
   );
 }

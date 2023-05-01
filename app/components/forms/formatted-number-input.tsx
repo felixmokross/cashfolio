@@ -3,7 +3,7 @@ import { NumericFormat } from "react-number-format";
 import type { InputProps } from "./input";
 import { Input } from "./input";
 import { useMemo, useState } from "react";
-import { useLocale } from "../locale-context";
+import { useUser } from "../user-context";
 import { getNumberFormatSymbols } from "../../utils";
 
 export type FormattedNumberInputProps = NumericFormatProps<InputProps>;
@@ -17,10 +17,10 @@ export function FormattedNumberInput({
     defaultValue != null ? Number(defaultValue) : undefined
   );
 
-  const locale = useLocale();
+  const { preferredLocale } = useUser();
   const { thousandSeparator, decimalSeparator } = useMemo(
-    () => getNumberFormatSymbols(locale),
-    [locale]
+    () => getNumberFormatSymbols(preferredLocale),
+    [preferredLocale]
   );
 
   return (

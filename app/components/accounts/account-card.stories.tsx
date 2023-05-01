@@ -31,7 +31,6 @@ export const Default: Story = {
     },
     balance: "10000",
     balanceInRefCurrency: "10000",
-    refCurrency: "CHF",
   },
 };
 
@@ -45,7 +44,6 @@ export const ForeignCurrency: Story = {
     },
     balance: "10000",
     balanceInRefCurrency: "11000",
-    refCurrency: "CHF",
   },
 };
 
@@ -59,7 +57,6 @@ export const Stock: Story = {
     },
     balance: "1240",
     balanceInRefCurrency: "14000",
-    refCurrency: "CHF",
   },
 };
 
@@ -73,6 +70,5 @@ export const LongContent: Story = {
     },
     balance: "10000",
     balanceInRefCurrency: "11000",
-    refCurrency: "CHF",
   },
 };

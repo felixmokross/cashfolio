@@ -2,8 +2,9 @@ import type { Preview } from "@storybook/react";
 import "../app/tailwind.css";
 import React from "react";
 import { unstable_createRemixStub } from "@remix-run/testing";
-import { LocaleProvider } from "../app/components/locale-context";
 import { getLocalesWithDisplayName } from "../app/locales.server";
+import { UserProvider } from "../app/components/user-context";
+import { currenciesByCode } from "../app/currencies";
 
 const availableLocales = [
   "en-US",
@@ -41,7 +42,18 @@ const preview: Preview = {
             right: locale,
           })),
         dynamicTitle: true,
-        control: { type: "radio" },
+      },
+    },
+    refCurrency: {
+      name: "Ref. Currency",
+      defaultValue: "CHF",
+      toolbar: {
+        items: ["CHF", "EUR", "USD"].map((currency) => ({
+          title: currenciesByCode[currency],
+          value: currency,
+          right: currency,
+        })),
+        dynamicTitle: true,
       },
     },
   },
@@ -53,9 +65,17 @@ const preview: Preview = {
       return <RemixStub />;
     },
     (Story, context) => (
-      <LocaleProvider locale={context.globals.locale}>
+      <UserProvider
+        user={{
+          email: "user@example.com",
+          pictureUrl:
+            "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+          refCurrency: context.globals.refCurrency,
+          preferredLocale: context.globals.locale,
+        }}
+      >
         <Story />
-      </LocaleProvider>
+      </UserProvider>
     ),
   ],
 };

@@ -23,7 +23,6 @@ type Story = StoryObj<typeof AccountList>;
 
 export const Default: Story = {
   args: {
-    refCurrency: "CHF",
     accounts: [
       {
         account: {

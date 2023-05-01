@@ -2,18 +2,13 @@ import { Disclosure } from "@headlessui/react";
 import type { PropsWithChildren } from "react";
 import type { NavLinkProps as RemixNavLinkProps } from "@remix-run/react";
 import { NavLink as RemixNavLink } from "@remix-run/react";
-import type { SerializeFrom } from "@remix-run/node";
-import type { ExtendedUser } from "~/auth.server";
 import { cn } from "./classnames";
+import { currenciesByCode } from "~/currencies";
+import { getDisplayNameOfLocale } from "~/utils";
+import { useUser } from "./user-context";
 
-export type MainMenuProps = {
-  user: Pick<
-    SerializeFrom<ExtendedUser>,
-    "email" | "refCurrency" | "pictureUrl" | "preferredLocale"
-  >;
-};
-
-export function MainMenu({ user }: MainMenuProps) {
+export function MainMenu() {
+  const user = useUser();
   return (
     <>
       <div className="space-y-1 pb-3 pt-2">
@@ -35,7 +30,8 @@ export function MainMenu({ user }: MainMenuProps) {
               {user.email}
             </div>
             <div className="text-sm font-medium text-gray-500">
-              {user.preferredLocale} &middot; {user.refCurrency}
+              {getDisplayNameOfLocale(user.preferredLocale)} &middot;{" "}
+              {currenciesByCode[user.refCurrency]}
             </div>
           </div>
         </div>
