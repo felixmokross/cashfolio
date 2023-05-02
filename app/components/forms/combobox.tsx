@@ -147,7 +147,7 @@ export type ComboboxProps = {
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >,
-  "defaultValue" | "ref" | "autoFocus" | "disabled"
+  "defaultValue" | "autoFocus" | "disabled"
 >;
 
 export type ComboboxOption = {
