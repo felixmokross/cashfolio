@@ -13,7 +13,8 @@
     "test": "vitest",
     "e2e": "playwright test --ui",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "db": "docker-compose up"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",

@@ -5,19 +5,35 @@
 Install dependencies:
 
 ```sh
-npm run dev
+npm install
 ```
 
 Run the database:
 
 ```sh
-dockercompose up
+npm run db
 ```
 
 Start the app in the dev server:
 
 ```sh
 npm run dev
+```
+
+### Playwright Tests
+
+Start Playwright in UI Mode:
+
+```sh
+npm run e2e
+```
+
+### Storybook
+
+Start Storybook by
+
+```sh
+npm run storybook
 ```
 
 ## Deployment
