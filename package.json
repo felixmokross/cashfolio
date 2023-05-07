@@ -70,6 +70,7 @@
     "postcss": "^8.4.23",
     "postcss-loader": "^7.2.4",
     "prettier": "2.8.7",
+    "prettier-plugin-jsdoc": "^0.4.2",
     "prettier-plugin-tailwindcss": "0.2.5",
     "prisma": "^4.11.0",
     "prop-types": "^15.8.1",
