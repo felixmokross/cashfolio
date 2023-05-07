@@ -8,32 +8,34 @@ Install dependencies:
 npm install
 ```
 
-Run the database:
+Run the **database**:
 
 ```sh
-npm run db
+npm run dev:db
 ```
 
-Start the app in the dev server:
+Start the **Remix** app in the dev server:
 
 ```sh
+npm run dev:remix
+```
+
+Start **Storybook** by
+
+```sh
+npm run dev:storybook
+```
+
+Run DB, dev server, and Storybook in one command:
+
+```
 npm run dev
 ```
-
-### Playwright Tests
 
 Start Playwright in UI Mode:
 
 ```sh
 npm run e2e
-```
-
-### Storybook
-
-Start Storybook by
-
-```sh
-npm run storybook
 ```
 
 ## Deployment
