@@ -120,7 +120,7 @@ function CalendarCell({ state, date, className }: CalendarCellProps) {
       ref={ref}
       className={cn(
         className,
-        "h-10 w-10 px-2.5 py-2.5 text-center text-sm",
+        "h-10 w-10 px-2.5 py-2.5 text-center text-sm focus:z-20 focus:outline-none focus:ring-2 focus:ring-sky-500",
         isOutsideVisibleRange || isUnavailable || isDisabled
           ? "cursor-default bg-slate-50 text-slate-400"
           : cn(
