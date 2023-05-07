@@ -120,7 +120,7 @@ function CalendarCell({ state, date, className }: CalendarCellProps) {
       ref={ref}
       className={cn(
         className,
-        "h-10 w-10 px-2.5 py-2.5 text-center text-sm focus:z-20 focus:outline-none focus:ring-2 focus:ring-sky-500",
+        "h-10 w-10 px-2.5 py-2.5 text-center text-sm focus:z-20 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500",
         isOutsideVisibleRange || isUnavailable || isDisabled
           ? "cursor-default bg-slate-50 text-slate-400"
           : cn(
@@ -158,7 +158,7 @@ function CalendarButton({ className, ...props }: CalendarButtonProps) {
       {...buttonProps}
       ref={ref}
       className={cn(
-        "-m1.5 cursor-pointer p-1.5 text-slate-400 hover:text-slate-500",
+        "-m1.5 cursor-pointer rounded-md p-1.5 text-slate-400 hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500",
         className
       )}
     >
