@@ -26,3 +26,10 @@ export const Default: Story = {
     locales: getLocalesWithDisplayName(),
   },
 };
+
+export const WithAlert: Story = {
+  args: {
+    ...Default.args,
+    message: "Settings updated successfully",
+  },
+};

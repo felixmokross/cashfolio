@@ -20,11 +20,6 @@ const meta: Meta<typeof Button> = {
   title: "Button",
   component: Button,
   tags: ["autodocs"],
-  parameters: {
-    docs: {
-      description: "hello",
-    },
-  },
   argTypes: {
     variant: {
       description: "The variant of the button.",
