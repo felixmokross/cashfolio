@@ -15,7 +15,8 @@
     "e2e": "playwright test --ui",
     "dev:storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "dev:db": "docker-compose up"
+    "dev:db": "docker-compose up",
+    "e2e:clean": "ts-node -r tsconfig-paths/register playwright/clean.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
@@ -76,6 +77,8 @@
     "prop-types": "^15.8.1",
     "storybook": "^7.0.9",
     "tailwindcss": "^3.2.7",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "~4.8.4",
     "vitest": "^0.29.8"
   },

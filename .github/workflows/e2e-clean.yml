@@ -1,0 +1,16 @@
+name: E2E Clean
+on:
+  schedule:
+    - cron: "0 2 * * *"
+
+jobs:
+  clean:
+    name: Clean Playwright Users
+    runs-on: ubunutu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - uses: bahmutov/npm-install@v1
+      - run: npm run e2e:clean
