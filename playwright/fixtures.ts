@@ -1,7 +1,7 @@
 import { test as base } from "@playwright/test";
 import fs from "fs";
 import path from "path";
-import { registerUser } from "./common";
+import { registerUser } from "./register-user";
 import { createId } from "@paralleldrive/cuid2";
 
 type TestFixtures = {

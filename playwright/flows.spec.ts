@@ -1,6 +1,7 @@
 import { createId } from "@paralleldrive/cuid2";
-import { registerUser, getPlaywrightUserEmail } from "./common";
+import { getPlaywrightUserEmail } from "./common";
 import { test, expect } from "./fixtures";
+import { registerUser } from "./register-user";
 
 test("home page", async ({ page }) => {
   await page.goto("/");
