@@ -47,11 +47,11 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => [
   { title: getTitle(data.name) },
 ];
 
-export default function EditAccountPage() {
-  const account = useLoaderData<typeof loader>();
+export default function EditAssetClassPage() {
+  const assetClass = useLoaderData<typeof loader>();
   return (
     <Form method="post">
-      <Input name="name" label="Name" defaultValue={account.name} />
+      <Input name="name" label="Name" defaultValue={assetClass.name} />
       <Button type="submit">Update</Button>
     </Form>
   );

@@ -30,7 +30,7 @@ export function getNumberFormatSymbols(locale: string) {
 
 export type PolymorphicComponentProps<T extends ElementType> = {
   as?: T;
-} & ComponentPropsWithoutRef<T>;
+} & Omit<ComponentPropsWithoutRef<T>, "as">;
 
 export function getTitle(pageTitle: string) {
   return `${pageTitle} · Cashfolio`;
@@ -43,9 +43,10 @@ export function validateEmail(email: unknown): email is string {
 const DEFAULT_REDIRECT = "/";
 
 /**
- * This should be used any time the redirect path is user-provided
- * (Like the query string on our login/signup pages). This avoids
- * open-redirect vulnerabilities.
+ * This should be used any time the redirect path is user-provided (Like the
+ * query string on our login/signup pages). This avoids open-redirect
+ * vulnerabilities.
+ *
  * @param {string} to The redirect destination
  * @param {string} defaultRedirect The redirect to use if the to is unsafe.
  */
