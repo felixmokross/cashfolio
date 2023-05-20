@@ -15,7 +15,6 @@ import { hasErrors } from "~/utils.server";
 export async function loader({ request }: DataFunctionArgs) {
   const session = await getSession(request);
   const message = session.get("message") as string | undefined;
-  console.log("hello ");
 
   return json(
     {
