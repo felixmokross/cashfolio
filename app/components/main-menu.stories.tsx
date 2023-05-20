@@ -3,7 +3,7 @@ import { MainMenu } from "./main-menu";
 import { Disclosure } from "@headlessui/react";
 
 const meta: Meta<typeof MainMenu> = {
-  title: "MainMenu",
+  title: "components/MainMenu",
   component: MainMenu,
   tags: ["autodocs"],
   decorators: [

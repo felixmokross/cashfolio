@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { FormattedNumberInput } from "./formatted-number-input";
 
 const meta: Meta<typeof FormattedNumberInput> = {
-  title: "forms/FormattedNumberInput",
+  title: "components/forms/FormattedNumberInput",
   component: FormattedNumberInput,
   tags: ["autodocs"],
 };

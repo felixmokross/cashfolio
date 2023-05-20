@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CurrencyCombobox } from "./currency-combobox";
 
 const meta: Meta<typeof CurrencyCombobox> = {
-  title: "forms/CurrencyCombobox",
+  title: "components/forms/CurrencyCombobox",
   component: CurrencyCombobox,
   tags: ["autodocs"],
 };

@@ -3,7 +3,7 @@ import { AccountList } from "./account-list";
 import { AccountUnit } from "@prisma/client";
 
 const meta: Meta<typeof AccountList> = {
-  title: "accounts/AccountList",
+  title: "routes/accounts/AccountList",
   component: AccountList,
   tags: ["autodocs"],
   decorators: [

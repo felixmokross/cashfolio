@@ -3,7 +3,7 @@ import { DateInput } from "./date-input";
 import { I18nProvider } from "react-aria";
 
 const meta: Meta<typeof DateInput> = {
-  title: "forms/DateInput",
+  title: "components/forms/DateInput",
   component: DateInput,
   tags: ["autodocs"],
   decorators: [

@@ -4,7 +4,7 @@ import { I18nProvider } from "react-aria";
 import { CalendarDate } from "@internationalized/date";
 
 const meta: Meta<typeof Calendar> = {
-  title: "forms/Calendar",
+  title: "components/forms/Calendar",
   component: Calendar,
   tags: ["autodocs"],
   decorators: [

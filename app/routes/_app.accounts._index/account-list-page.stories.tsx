@@ -5,7 +5,7 @@ import type { Account } from "@prisma/client";
 import { AccountUnit } from "@prisma/client";
 
 const meta: Meta<typeof AccountListPage> = {
-  title: "accounts/AccountListPage",
+  title: "routes/accounts/AccountListPage",
   component: AccountListPage,
   tags: ["autodocs"],
   decorators: [

@@ -3,7 +3,7 @@ import { LocaleCombobox } from "./locale-combobox";
 import { getLocalesWithDisplayName } from "~/locales.server";
 
 const meta: Meta<typeof LocaleCombobox> = {
-  title: "forms/LocaleCombobox",
+  title: "components/forms/LocaleCombobox",
   component: LocaleCombobox,
   tags: ["autodocs"],
 };

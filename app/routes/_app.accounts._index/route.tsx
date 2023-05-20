@@ -8,9 +8,7 @@ import { AccountListPage } from "./account-list-page";
 
 export async function loader({ request }: DataFunctionArgs) {
   const userId = await requireUserId(request);
-  return json({
-    accounts: await getAccounts(userId),
-  });
+  return json({ accounts: await getAccounts(userId) });
 }
 
 export const meta: V2_MetaFunction = () => [{ title: getTitle("Accounts") }];

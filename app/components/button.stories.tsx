@@ -17,7 +17,7 @@ import { Link } from "@remix-run/react";
  * ```
  */
 const meta: Meta<typeof Button> = {
-  title: "Button",
+  title: "components/Button",
   component: Button,
   tags: ["autodocs"],
   argTypes: {

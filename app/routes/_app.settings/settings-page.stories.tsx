@@ -3,7 +3,7 @@ import { SettingsPage } from "./settings-page";
 import { getLocalesWithDisplayName } from "~/locales.server";
 
 const meta: Meta<typeof SettingsPage> = {
-  title: "SettingsPage",
+  title: "routes/settings/SettingsPage",
   component: SettingsPage,
   tags: ["autodocs"],
   decorators: [
