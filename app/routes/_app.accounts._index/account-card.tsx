@@ -3,7 +3,6 @@ import { AccountUnit } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { useUser } from "~/components/user-context";
-import { currenciesByCode } from "~/currencies";
 
 export type AccountCardProps = {
   account: Pick<SerializeFrom<Account>, "name" | "slug" | "unit" | "currency">;
@@ -44,15 +43,8 @@ export function AccountCard({
       to={account.slug}
       className="group flex h-24 justify-between rounded-lg border border-slate-200 px-4 py-2 shadow-md hover:bg-slate-50 hover:shadow-sm"
     >
-      <div className="flex flex-col-reverse gap-1 self-end overflow-hidden">
-        <div className="truncate text-sm font-semibold text-sky-600 group-hover:text-sky-800">
-          {account.name}
-        </div>
-        {isForeignCurrency && (
-          <div className="truncate text-sm text-slate-500">
-            {currenciesByCode[account.currency!]}
-          </div>
-        )}
+      <div className="self-end overflow-hidden truncate text-sm font-semibold text-sky-600 group-hover:text-sky-800">
+        {account.name}
       </div>
       <div className="flex flex-shrink-0 flex-col items-end gap-1">
         <div className="text-slate-700">
