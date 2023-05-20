@@ -49,3 +49,28 @@ npm run deploy
 ## Environment Variables
 
 See [`.env.example`](./.env.example) file
+
+# Tech Stack
+
+- App
+
+  - Remix
+  - Prisma
+  - Headless UI
+  - openid-client
+  - React Aria
+  - Heroicons
+  - React Number Format
+  - date-fns
+  - slugify
+  - tiny-invariant
+
+- Dev
+
+  - TypeScript
+  - Tailwind CSS
+  - Vitest
+  - Playwright
+  - Auth0 (managing users in Playwright tests)
+  - Storybook
+  - ts-node
