@@ -9,9 +9,12 @@ import { useUser } from "~/components/user-context";
 
 export type ActionData = {
   errors: FormErrors<SettingsValues>;
+  values: SettingsValues;
 };
 
-type SettingsValues = Partial<Pick<User, "refCurrency" | "preferredLocale">>;
+export type SettingsValues = Partial<
+  Pick<User, "refCurrency" | "preferredLocale">
+>;
 
 export type SettingsPageProps = {
   message?: string;
@@ -36,7 +39,7 @@ export function SettingsPage({
           <LocaleCombobox
             label="Currency and Date Format"
             name="preferredLocale"
-            defaultValue={preferredLocale}
+            defaultValue={actionData?.values.preferredLocale || preferredLocale}
             error={actionData?.errors?.preferredLocale}
             locales={locales}
           />
@@ -44,7 +47,7 @@ export function SettingsPage({
           <CurrencyCombobox
             label="Main Currency"
             name="refCurrency"
-            defaultValue={refCurrency}
+            defaultValue={actionData?.values.refCurrency || refCurrency}
             error={actionData?.errors?.refCurrency}
           />
         </div>

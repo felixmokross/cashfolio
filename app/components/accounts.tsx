@@ -33,7 +33,6 @@ export function AccountFormFields({
         name="name"
         label="Name"
         groupClassName="col-start-1 col-span-3"
-        // TODO do we need the values really? browser/Remix should maintain the values in case of an error
         defaultValue={values?.name || account?.name}
         error={errors?.name}
       />
