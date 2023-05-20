@@ -73,7 +73,6 @@ export default function EditAccountPage() {
         </div>
 
         <AccountFormFields
-          disabled={false}
           data={loaderData}
           values={actionData?.values}
           errors={actionData?.errors}

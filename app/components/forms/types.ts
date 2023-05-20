@@ -9,7 +9,6 @@ export type FormActionData<TValues> = {
 export type FormProps<TValues, TFormLoaderData> = {
   values?: TValues;
   errors?: FormErrors<TValues>;
-  disabled: boolean;
   data: SerializeFrom<TFormLoaderData>;
 };
 
