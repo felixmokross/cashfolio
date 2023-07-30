@@ -1,10 +1,13 @@
 import type { CalendarDate } from "@internationalized/date";
-import { isToday } from "@internationalized/date";
-import { createCalendar, getWeeksInMonth } from "@internationalized/date";
+import {
+  isToday,
+  createCalendar,
+  getWeeksInMonth,
+} from "@internationalized/date";
 import { useRef } from "react";
 import type { AriaButtonProps, CalendarProps, DateValue } from "react-aria";
-import { useButton } from "react-aria";
 import {
+  useButton,
   useCalendar,
   useCalendarCell,
   useCalendarGrid,
@@ -47,9 +50,9 @@ export function Calendar(props: CalendarProps<DateValue>) {
 
 type CalendarGridProps = { state: CalendarState };
 
-function CalendarGrid({ state, ...props }: CalendarGridProps) {
+function CalendarGrid({ state }: CalendarGridProps) {
   let { locale } = useLocale();
-  let { gridProps, headerProps, weekDays } = useCalendarGrid(props, state);
+  let { gridProps, headerProps, weekDays } = useCalendarGrid({}, state);
 
   // Get the number of weeks in the month so we can render the proper number of rows.
   let weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);

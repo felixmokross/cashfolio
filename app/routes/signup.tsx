@@ -1,7 +1,6 @@
 import type { User } from "@prisma/client";
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { redirect , json } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { Form, Link } from "react-router-dom";
 import { authorize } from "~/auth.server";
@@ -14,8 +13,7 @@ import {
 } from "~/locales.server";
 import { createUser, getUserIdByAuth0UserId } from "~/models/users.server";
 import { getSession } from "~/session.server";
-import { safeRedirect } from "~/utils";
-import { getTitle } from "~/utils";
+import { safeRedirect , getTitle } from "~/utils";
 import { pick } from "accept-language-parser";
 import { CurrencyCombobox } from "~/components/forms/currency-combobox";
 import type { FormErrors } from "~/components/forms/types";

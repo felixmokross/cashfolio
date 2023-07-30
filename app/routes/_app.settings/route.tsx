@@ -1,14 +1,12 @@
 import type { DataFunctionArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { redirect , json } from "@remix-run/node";
 import type { ActionData, SettingsValues } from "./settings-page";
 import { SettingsPage } from "./settings-page";
 import { getLocalesWithDisplayName } from "~/locales.server";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
 import { updateUser } from "~/models/users.server";
-import { getSession } from "~/session.server";
-import { sessionStorage } from "~/session.server";
+import { getSession , sessionStorage } from "~/session.server";
 import type { FormErrors } from "~/components/forms/types";
 import { hasErrors } from "~/utils.server";
 

@@ -14,6 +14,12 @@ Run the **database**:
 npm run dev:db
 ```
 
+Migrate the database:
+
+```sh
+npx prisma migrate dev
+```
+
 Start the **Remix** app in the dev server:
 
 ```sh

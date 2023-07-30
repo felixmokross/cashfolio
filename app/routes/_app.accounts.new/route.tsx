@@ -1,6 +1,5 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
+import { json , redirect } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
 import type { FormActionData } from "~/components/forms/types";
