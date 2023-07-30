@@ -1,5 +1,5 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
-import { redirect , json } from "@remix-run/node";
+import { redirect, json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/auth.server";
@@ -43,7 +43,7 @@ export async function loader({ request, params }: DataFunctionArgs) {
 }
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => [
-  { title: getTitle(data.name) },
+  { title: getTitle(data!.name) },
 ];
 
 export default function EditAssetClassPage() {
