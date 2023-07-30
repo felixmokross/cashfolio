@@ -1,12 +1,17 @@
 import type { DataFunctionArgs } from "@remix-run/node";
-import { redirect , json } from "@remix-run/node";
+import { redirect, json } from "@remix-run/node";
 import type { ActionData, SettingsValues } from "./settings-page";
 import { SettingsPage } from "./settings-page";
 import { getLocalesWithDisplayName } from "~/locales.server";
-import { useActionData, useLoaderData } from "@remix-run/react";
+import {
+  useActionData,
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+} from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
 import { updateUser } from "~/models/users.server";
-import { getSession , sessionStorage } from "~/session.server";
+import { getSession, sessionStorage } from "~/session.server";
 import type { FormErrors } from "~/components/forms/types";
 import { hasErrors } from "~/utils.server";
 
@@ -83,7 +88,15 @@ function validateSettingsValues({
 export default function Route() {
   const { message, locales } = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
+  const navigate = useNavigate();
+  const { state } = useNavigation();
   return (
-    <SettingsPage message={message} locales={locales} actionData={actionData} />
+    <SettingsPage
+      message={message}
+      locales={locales}
+      actionData={actionData}
+      onAlertDismiss={() => navigate(".", { replace: true })}
+      state={state}
+    />
   );
 }

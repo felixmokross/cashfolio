@@ -24,6 +24,7 @@ type Story = StoryObj<typeof SettingsPage>;
 export const Default: Story = {
   args: {
     locales: getLocalesWithDisplayName(),
+    state: "idle",
   },
 };
 
