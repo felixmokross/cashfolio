@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useId , useRef } from "react";
+import { useId, useRef } from "react";
 import type {
   AriaButtonProps,
   AriaDatePickerProps,
@@ -7,13 +7,23 @@ import type {
   AriaPopoverProps,
   DateValue,
 } from "react-aria";
-import { useButton , DismissButton, useDialog , Overlay, useDateField, useDateSegment, usePopover , useLocale , useDatePicker } from "react-aria";
+import {
+  useButton,
+  DismissButton,
+  useDialog,
+  Overlay,
+  useDateField,
+  useDateSegment,
+  usePopover,
+  useLocale,
+  useDatePicker,
+} from "react-aria";
 import type {
   DateFieldState,
   DateSegment,
   OverlayTriggerState,
 } from "react-stately";
-import { useDateFieldState , useDatePickerState } from "react-stately";
+import { useDateFieldState, useDatePickerState } from "react-stately";
 import { createCalendar, parseDate } from "@internationalized/date";
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
 import { cn } from "../../classnames";
@@ -69,7 +79,11 @@ export function DateInput({
           disabled && "cursor-not-allowed bg-slate-50 opacity-50"
         )}
       >
-        <input type="hidden" name={name} value={state.value?.toString()} />
+        <input
+          type="hidden"
+          name={name}
+          value={state.value?.toString() || ""}
+        />
         <DateField {...fieldProps} />
         <DatePickerButton {...buttonProps} isDisabled={disabled}>
           <CalendarDaysIcon className="h-5 w-5" />
