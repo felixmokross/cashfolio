@@ -33,9 +33,9 @@ export async function action({ params, request }: DataFunctionArgs) {
     );
   }
 
-  await updateAccount(accountId, userId, values);
+  const updatedAccount = await updateAccount(accountId, userId, values);
 
-  return redirect("/accounts");
+  return redirect(`/accounts/${updatedAccount.slug}`);
 }
 
 export async function loader({ request, params }: DataFunctionArgs) {
