@@ -1,5 +1,8 @@
-import type { ElementType, PropsWithChildren } from "react";
-import type { PolymorphicComponentProps } from "~/utils";
+import type {
+  ComponentPropsWithoutRef,
+  ElementType,
+  PropsWithChildren,
+} from "react";
 import { cn } from "./classnames";
 import type { IconComponentType } from "./icons/types";
 
@@ -21,6 +24,13 @@ function buttonClassName(variant: ButtonVariant = "secondary") {
   };
 }
 
+/**
+ * Renders as a native `button` element by default. To render the button as a
+ * different element, use the `as` prop. Additional props are passed to the
+ * rendered element.
+ *
+ * For a link button use the `LinkButton` component instead.
+ */
 export function Button<T extends ElementType>({
   as,
   variant = "secondary",
@@ -46,10 +56,20 @@ export function Button<T extends ElementType>({
 }
 
 export type ButtonProps<T extends ElementType> = PropsWithChildren<
-  PolymorphicComponentProps<T> & {
+  {
+    /**
+     * React Element Type as which the button should be rendered. Additional
+     * props are passed to the rendered element.
+     */
+    as?: T;
+    /** The variant of the button. */
     variant?: ButtonVariant;
+    /**
+     * Component Type of the icon to be rendered in front of the button content.
+     * If not specified, the button is rendered without an icon.
+     */
     icon?: IconComponentType;
-  }
+  } & Omit<ComponentPropsWithoutRef<T>, "as">
 >;
 
 type ButtonVariant = "primary" | "secondary";

@@ -1,9 +1,8 @@
 import { PlusIcon } from "@heroicons/react/20/solid";
 import type { Account } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
-import { Link } from "@remix-run/react";
-import { Button } from "~/components/button";
 import { AccountList } from "./account-list";
+import { LinkButton } from "~/components/link-button";
 
 export type AccountListPageProps = {
   accounts: SerializeFrom<Account>[];
@@ -15,9 +14,9 @@ export function AccountListPage({ accounts }: AccountListPageProps) {
       <div className="mt-4 flex items-baseline justify-between ">
         <h2 className="text-lg font-medium text-slate-800">Accounts</h2>
 
-        <Button as={Link} to="new" icon={PlusIcon}>
+        <LinkButton to="new" icon={PlusIcon}>
           New
-        </Button>
+        </LinkButton>
       </div>
 
       <AccountList

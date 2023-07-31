@@ -5,7 +5,7 @@ import type { SerializeFrom } from "@remix-run/node";
 import type { AssetClass } from "@prisma/client";
 
 const meta: Meta<typeof EditAccountPage> = {
-  title: "routes/accounts/$slug/EditAccountPage",
+  title: "routes/accounts/$slug/edit/EditAccountPage",
   component: EditAccountPage,
   tags: ["autodocs"],
   decorators: [

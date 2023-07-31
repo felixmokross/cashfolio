@@ -2,7 +2,7 @@ import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
-import { Button } from "~/components/button";
+import { LinkButton } from "~/components/link-button";
 import { getAssetClasses } from "~/models/asset-classes.server";
 import { getTitle } from "~/utils";
 
@@ -25,9 +25,7 @@ export default function AssetClassListPage() {
         Asset Classes
       </h2>
 
-      <Button as={Link} to="new">
-        New Asset Class
-      </Button>
+      <LinkButton to="new">New Asset Class</LinkButton>
 
       <ul className="mt-4 space-y-4">
         {assetClasses.map((a) => (

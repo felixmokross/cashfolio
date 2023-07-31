@@ -1,23 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./button";
+import { LinkButton } from "./link-button";
 import { HomeIcon } from "@heroicons/react/20/solid";
 
-const meta: Meta<typeof Button> = {
-  title: "components/Button",
-  component: Button,
+const meta: Meta<typeof LinkButton> = {
+  title: "components/LinkButton",
+  component: LinkButton,
   tags: ["autodocs"],
   argTypes: {
     children: {
       description: "The content of the button.",
       table: { type: { summary: "React.ReactNode" } },
-    },
-    as: {
-      control: false,
-      defaultValue: "button",
-      table: {
-        type: { summary: "React.ElementType" },
-        defaultValue: { summary: '"button"' },
-      },
     },
     icon: {
       control: false,
@@ -27,10 +19,14 @@ const meta: Meta<typeof Button> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof LinkButton>;
 
 export const Primary: Story = {
-  args: { variant: "primary", children: "Example" },
+  args: {
+    variant: "primary",
+    children: "Example",
+    to: "/example",
+  },
 };
 
 export const PrimaryWithIcon: Story = {
@@ -40,33 +36,29 @@ export const PrimaryWithIcon: Story = {
       source: {
         code: `import { HomeIcon } from "@heroicons/react/20/solid";
 
-<Button variant="primary" icon={HomeIcon}>
+<LinkButton variant="primary" icon={HomeIcon} to="/example">
   Example
-</Button>`,
+</LinkButton>`,
       },
     },
   },
 };
 
 export const Secondary: Story = {
-  args: { ...Primary.args, variant: "secondary" },
+  args: { ...Primary.args, variant: "secondary", to: "/example" },
 };
 
 export const SecondaryWithIcon: Story = {
-  args: { ...Secondary.args, icon: HomeIcon },
+  args: { ...Secondary.args, icon: HomeIcon, to: "/example" },
   parameters: {
     docs: {
       source: {
         code: `import { HomeIcon } from "@heroicons/react/20/solid";
 
-<Button variant="secondary" icon={HomeIcon}>
+<LinkButton variant="secondary" icon={HomeIcon} to="/example">
   Example
-</Button>`,
+</LinkButton>`,
       },
     },
   },
-};
-
-export const SubmitButton: Story = {
-  args: { ...Primary.args, type: "submit" },
 };

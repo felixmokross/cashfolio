@@ -1,4 +1,3 @@
-import type { ComponentPropsWithoutRef, ElementType } from "react";
 import invariant from "tiny-invariant";
 
 const localeDisplayNames = new Intl.DisplayNames("en", {
@@ -27,10 +26,6 @@ export function getNumberFormatSymbols(locale: string) {
 
   return { thousandSeparator, decimalSeparator };
 }
-
-export type PolymorphicComponentProps<T extends ElementType> = {
-  as?: T;
-} & Omit<ComponentPropsWithoutRef<T>, "as">;
 
 export function getTitle(pageTitle: string) {
   return `${pageTitle} · Cashfolio`;
