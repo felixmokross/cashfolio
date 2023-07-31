@@ -19,8 +19,11 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  accounts     Account[]
-  assetClasses AssetClass[]
+  accounts                Account[]
+  assetClasses            AssetClass[]
+  incomeExpenseCategories IncomeExpenseCategory[]
+  transactions            Transaction[]
+  bookings                Booking[]
 }
 
 model Account {
@@ -51,6 +54,8 @@ model Account {
   user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
   userId String
 
+  bookings Booking[]
+
   @@id([id, userId])
   @@unique([slug, userId])
 }
@@ -78,4 +83,76 @@ enum AccountUnit {
 enum AccountType {
   ASSET
   LIABILITY
+}
+
+model IncomeExpenseCategory {
+  id   String                    @default(cuid())
+  name String
+  type IncomeExpenseCategoryType
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Restrict)
+  userId   String
+  bookings Booking[]
+
+  @@id([id, userId])
+}
+
+enum IncomeExpenseCategoryType {
+  INCOME
+  EXPENSE
+}
+
+model Transaction {
+  id   String   @default(cuid())
+  date DateTime @db.Date
+  note String?
+
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  userId String
+
+  @@id([id, userId])
+}
+
+model Booking {
+  id   String      @default(cuid())
+  type BookingType
+
+  note String?
+
+  account   Account? @relation(fields: [accountId, userId], references: [id, userId], onDelete: Restrict)
+  accountId String?
+
+  transaction   Transaction @relation(fields: [transactionId, userId], references: [id, userId], onDelete: Cascade)
+  transactionId String
+
+  incomeExpenseCategory   IncomeExpenseCategory? @relation(fields: [incomeExpenseCategoryId, userId], references: [id, userId], onDelete: Restrict)
+  incomeExpenseCategoryId String?
+
+  currency String?
+
+  amount Decimal
+
+  sortOrder Int @default(0)
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  userId String
+
+  @@id([id, userId])
+}
+
+enum BookingType {
+  CHARGE
+  DEPOSIT
+  INCOME
+  EXPENSE
+  APPRECIATION
+  DEPRECIATION
 }

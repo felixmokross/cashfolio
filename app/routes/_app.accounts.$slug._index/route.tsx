@@ -5,6 +5,7 @@ import { requireUserId } from "~/auth.server";
 import { getAccount } from "~/models/accounts.server";
 import { AccountPage } from "./account-page";
 import { useLoaderData } from "@remix-run/react";
+import { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
 
 export async function loader({ request, params }: DataFunctionArgs) {
   invariant(params.slug, "slug is required");
@@ -13,10 +14,16 @@ export async function loader({ request, params }: DataFunctionArgs) {
   const account = await getAccount(params.slug, userId);
   if (!account) throw new Response("Not found", { status: 404 });
 
-  return json({ account });
+  const ledgerDateGroups = await getReverseLedgerDateGroups({
+    account,
+    page: 0, // TODO support pagination
+    userId,
+  });
+
+  return json({ account, ledgerDateGroups });
 }
 
 export default function Route() {
-  const { account } = useLoaderData<typeof loader>();
-  return <AccountPage account={account} />;
+  const { account, ledgerDateGroups } = useLoaderData<typeof loader>();
+  return <AccountPage account={account} ledgerDateGroups={ledgerDateGroups} />;
 }
