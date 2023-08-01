@@ -134,7 +134,7 @@ async function getBookings({
 }) {
   return await prisma.booking.findMany({
     where: {
-      type: BookingType.TRANSFER,
+      type: BookingType.ACCOUNT_CHANGE,
       accountId,
       userId,
     },
@@ -150,7 +150,7 @@ async function getBookings({
             select: {
               id: true,
               type: true,
-              account: { select: { id: true, name: true } },
+              account: { select: { id: true, name: true, slug: true } },
               balanceChangeCategory: { select: { id: true, name: true } },
               note: true,
             },

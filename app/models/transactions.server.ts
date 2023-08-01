@@ -19,6 +19,7 @@ export async function createTransaction(form: FormData, userId: User["id"]) {
   await prisma.transaction.create({
     data: {
       date: new Date(form.get("date") as string),
+      note: form.get("note") as string,
       bookings: {
         create: [
           {
@@ -66,7 +67,6 @@ export async function createTransaction(form: FormData, userId: User["id"]) {
               },
         ],
       },
-      note: form.get("note") as string,
       userId,
     },
   });

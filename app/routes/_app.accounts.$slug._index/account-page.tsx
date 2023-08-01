@@ -1,10 +1,11 @@
 import { PencilIcon } from "@heroicons/react/20/solid";
-import { type Account } from "@prisma/client";
+import { BookingType, type Account } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Fragment } from "react";
 import { LinkButton } from "~/components/link-button";
 import type { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
 import { NewTransactionForm } from "./new-transaction-form";
+import { Link } from "@remix-run/react";
 
 export type AccountPageProps = {
   account: SerializeFrom<Account>;
@@ -46,8 +47,30 @@ export function AccountPage({
               </tr>
               {group.lines.map((line) => (
                 <tr key={line.id} className="border-t border-slate-300">
-                  <td className="py-4 pl-4 pr-3 text-sm text-slate-500 sm:pl-6">
-                    {line.note}
+                  <td className="py-4 pl-4 pr-3 text-sm  sm:pl-6">
+                    <div className="text-slate-800">
+                      {line.transaction.bookings
+                        .filter((b) => b.id !== line.id)
+                        .map((b) => {
+                          switch (b.type) {
+                            case BookingType.ACCOUNT_CHANGE:
+                              return (
+                                <Link
+                                  className="text-sky-600 hover:text-sky-700 hover:underline" // TODO create Link component
+                                  key={b.id}
+                                  to={`../accounts/${b.account!.slug}`}
+                                >
+                                  {b.account!.name}
+                                </Link>
+                              );
+                            default:
+                              return ""; // TODO support all booking types
+                          }
+                        })}
+                    </div>
+                    <div className="text-slate-500">
+                      {line.transaction.note}
+                    </div>
                   </td>
                   <td className="whitespace-nowrap py-4 pl-3 pr-1 text-right text-sm font-medium text-emerald-600">
                     {line.amountFormatted}
