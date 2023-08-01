@@ -1,7 +1,5 @@
-export default function Index() {
-  return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </>
-  );
+import { redirect } from "@remix-run/node";
+
+export async function loader() {
+  return redirect("/accounts");
 }

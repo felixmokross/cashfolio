@@ -61,7 +61,7 @@ export function DateInput({
   disabled = false,
 }: DateInputProps) {
   const props = {
-    label,
+    label: label || "Date",
     defaultValue: defaultValue ? parseDate(defaultValue) : undefined,
     isDisabled: disabled,
   };

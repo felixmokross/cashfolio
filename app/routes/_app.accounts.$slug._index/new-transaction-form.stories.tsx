@@ -26,6 +26,7 @@ const cashAssetClassId = createId();
 
 export const Default: Story = {
   args: {
+    accountId: createId(),
     targetAccounts: [
       {
         id: createId(),
