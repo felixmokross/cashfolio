@@ -70,3 +70,7 @@ export const SecondaryWithIcon: Story = {
 export const SubmitButton: Story = {
   args: { ...Primary.args, type: "submit" },
 };
+
+export const Compact: Story = {
+  args: { ...Primary.args, size: "compact" },
+};

@@ -8,7 +8,10 @@ import { ErrorMessage } from "./error-message";
 
 export function Combobox({
   groupClassName,
+  className,
   label,
+  size = "default",
+  placeholder,
   name,
   error,
   defaultValue,
@@ -51,17 +54,27 @@ export function Combobox({
       className={groupClassName}
       disabled={disabled}
     >
-      <HeadlessCombobox.Label className={labelClassName}>
-        {label}
-      </HeadlessCombobox.Label>
-      <div className="relative mt-1">
+      {label && (
+        <HeadlessCombobox.Label className={labelClassName}>
+          {label}
+        </HeadlessCombobox.Label>
+      )}
+      <div className={cn("relative", label && "mt-1")}>
         <HeadlessCombobox.Input
           onChange={(event) => setQuery(event.target.value)}
-          className="w-full rounded-md border border-slate-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:opacity-50 sm:text-sm"
+          className={cn(
+            "w-full border bg-white py-2 pl-3 pr-10 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:opacity-50 sm:text-sm",
+            {
+              "rounded-md border-slate-300 shadow-sm ": size === "default",
+              "border-transparent": size === "compact",
+            },
+            className
+          )}
           displayValue={getDisplayName}
           aria-invalid={error ? "true" : undefined}
           aria-describedby={error ? errorId : undefined}
           autoFocus={autoFocus}
+          placeholder={placeholder}
         />
         <HeadlessCombobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50">
           <ChevronUpDownIcon
@@ -137,18 +150,29 @@ export function Combobox({
 
 export type ComboboxProps = {
   groupClassName?: string;
-  label: string;
-  name: string;
+  className?: string;
+  placeholder?: string;
+  name?: string;
   error?: string;
   options: ComboboxOption[];
   onChange?: (value: string | number | readonly string[]) => void;
-} & Pick<
-  DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >,
-  "defaultValue" | "autoFocus" | "disabled"
->;
+} & (
+  | {
+      size?: "default";
+      label?: string;
+    }
+  | {
+      size: "compact";
+      label?: undefined;
+    }
+) &
+  Pick<
+    DetailedHTMLProps<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      HTMLInputElement
+    >,
+    "defaultValue" | "autoFocus" | "disabled"
+  >;
 
 export type ComboboxOption = {
   primaryText: string;

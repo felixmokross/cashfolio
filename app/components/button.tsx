@@ -6,15 +6,21 @@ import type {
 import { cn } from "./classnames";
 import type { IconComponentType } from "./icons/types";
 
-function buttonClassName(variant: ButtonVariant = "secondary") {
+function buttonClassName(size: ButtonSize, variant: ButtonVariant) {
   return {
     button: cn(
-      "inline-flex items-center gap-1.5 justify-center rounded-md border px-4 py-2 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto",
+      "inline-flex items-center gap-1.5 justify-center border px-4 py-2 text-sm font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto",
       {
-        "border-transparent bg-sky-600 text-white hover:bg-sky-700 disabled:bg-sky-600":
+        " bg-sky-600 text-white hover:bg-sky-700 disabled:bg-sky-600":
           variant === "primary",
-        "border-slate-300 bg-white text-slate-700 hover:bg-slate-50 disabled:bg-white":
+        "border-transparent": variant === "primary" && size === "default",
+        "bg-white text-slate-700 hover:bg-slate-50 disabled:bg-white":
           variant === "secondary",
+        "border-slate-300": variant === "secondary" && size === "default",
+        "rounded-md focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 shadow-sm":
+          size === "default",
+        "border-white focus:border-sky-500 focus:ring-1 focus:ring-sky-500":
+          size === "compact",
       }
     ),
     icon: cn("-ml-1.5 h-4 w-4", {
@@ -34,6 +40,7 @@ function buttonClassName(variant: ButtonVariant = "secondary") {
 export function Button<T extends ElementType>({
   as,
   variant = "secondary",
+  size = "default",
   children,
   className,
   icon,
@@ -42,7 +49,7 @@ export function Button<T extends ElementType>({
   const Component = as || "button";
   const Icon = icon;
 
-  const classNames = buttonClassName(variant);
+  const classNames = buttonClassName(size, variant);
   return (
     <Component
       className={cn(classNames.button, className)}
@@ -69,7 +76,10 @@ export type ButtonProps<T extends ElementType> = PropsWithChildren<
      * If not specified, the button is rendered without an icon.
      */
     icon?: IconComponentType;
+    /** The size of the button. */
+    size?: "default" | "compact";
   } & Omit<ComponentPropsWithoutRef<T>, "as">
 >;
 
 type ButtonVariant = "primary" | "secondary";
+type ButtonSize = "default" | "compact";

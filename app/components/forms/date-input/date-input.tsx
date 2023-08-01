@@ -33,19 +33,30 @@ import { Calendar } from "./calendar";
 import { ErrorMessage } from "../error-message";
 
 type DateInputProps = {
-  label?: string;
-  name: string;
+  name?: string;
   defaultValue?: string;
   groupClassName?: string;
+  className?: string;
   error?: string;
   disabled?: boolean;
-};
+} & (
+  | {
+      size?: "default";
+      label?: string;
+    }
+  | {
+      size: "compact";
+      label?: undefined;
+    }
+);
 
 export function DateInput({
   label,
+  size = "default",
   name,
   defaultValue,
   groupClassName,
+  className,
   error,
   disabled = false,
 }: DateInputProps) {
@@ -70,13 +81,19 @@ export function DateInput({
 
   return (
     <div className={groupClassName}>
-      <Label {...labelProps}>{label}</Label>
+      {label && <Label {...labelProps}>{label}</Label>}
       <div
         {...groupProps}
         ref={ref}
         className={cn(
-          "mt-1 flex w-full justify-between rounded-md border border-slate-300 px-3 py-2 shadow-sm sm:text-sm",
-          disabled && "cursor-not-allowed bg-slate-50 opacity-50"
+          label && "mt-1",
+          "flex w-full justify-between border px-3 py-2 sm:text-sm",
+          {
+            "rounded-md border-slate-300 shadow-sm": size === "default",
+            "border-transparent": size === "compact",
+          },
+          disabled && "cursor-not-allowed bg-slate-50 opacity-50",
+          className
         )}
       >
         <input
@@ -86,7 +103,7 @@ export function DateInput({
         />
         <DateField {...fieldProps} />
         <DatePickerButton {...buttonProps} isDisabled={disabled}>
-          <CalendarDaysIcon className="h-5 w-5" />
+          <CalendarDaysIcon className="h-5 w-5 text-slate-400" />
         </DatePickerButton>
       </div>
       <ErrorMessage error={error} errorId={errorId} />

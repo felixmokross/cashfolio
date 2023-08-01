@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import type { AccountPageProps } from "./account-page";
 import { AccountPage } from "./account-page";
 import { createId } from "@paralleldrive/cuid2";
 import { BookingType } from "@prisma/client";
@@ -60,7 +61,7 @@ export const Default: Story = {
               note: "Initial balance",
               balance: "11_000",
               transaction: {} as any,
-              type: BookingType.DEPOSIT,
+              type: BookingType.TRANSFER,
             },
           ],
         },
@@ -68,5 +69,16 @@ export const Default: Story = {
       page: 0,
       pageCount: 1,
     },
+    targetAccounts: [
+      {
+        id: createId(),
+        name: "Savings",
+      } as AccountPageProps["targetAccounts"][number],
+      {
+        id: createId(),
+        name: "Checking",
+        assetClassId: cashAssetClassId,
+      } as AccountPageProps["targetAccounts"][number],
+    ],
   },
 };

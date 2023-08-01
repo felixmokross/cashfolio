@@ -1,26 +1,36 @@
 import { PencilIcon } from "@heroicons/react/20/solid";
-import type { Account } from "@prisma/client";
+import { type Account } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Fragment } from "react";
 import { LinkButton } from "~/components/link-button";
 import type { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
+import { NewTransactionForm } from "./new-transaction-form";
 
 export type AccountPageProps = {
   account: SerializeFrom<Account>;
   ledgerDateGroups: SerializeFrom<
     Awaited<ReturnType<typeof getReverseLedgerDateGroups>>
   >;
+  targetAccounts: SerializeFrom<Account>[];
 };
 
-export function AccountPage({ account, ledgerDateGroups }: AccountPageProps) {
+export function AccountPage({
+  account,
+  targetAccounts,
+  ledgerDateGroups,
+}: AccountPageProps) {
   return (
-    <div className="px-4">
-      <div className="mt-4 flex items-baseline justify-between ">
-        <h2 className="text-lg font-medium text-slate-800">{account.name}</h2>
+    <>
+      <div className="px-4 sm:px-6">
+        <div className="mt-4 flex items-baseline justify-between ">
+          <h2 className="text-lg font-medium text-slate-800">{account.name}</h2>
 
-        <LinkButton to="edit" icon={PencilIcon}>
-          Edit
-        </LinkButton>
+          <LinkButton to="edit" icon={PencilIcon}>
+            Edit
+          </LinkButton>
+        </div>
+
+        <NewTransactionForm targetAccounts={targetAccounts} />
       </div>
       <table className="mt-8 w-full">
         <tbody>
@@ -54,6 +64,6 @@ export function AccountPage({ account, ledgerDateGroups }: AccountPageProps) {
           </tr>
         </tbody>
       </table>
-    </div>
+    </>
   );
 }

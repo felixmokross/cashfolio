@@ -21,7 +21,7 @@ model User {
 
   accounts                Account[]
   assetClasses            AssetClass[]
-  incomeExpenseCategories IncomeExpenseCategory[]
+  balanceChangeCategories BalanceChangeCategory[]
   transactions            Transaction[]
   bookings                Booking[]
 }
@@ -85,10 +85,10 @@ enum AccountType {
   LIABILITY
 }
 
-model IncomeExpenseCategory {
-  id   String                    @default(cuid())
+model BalanceChangeCategory {
+  id   String            @default(cuid())
   name String
-  type IncomeExpenseCategoryType
+  type BalanceChangeType
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -100,7 +100,7 @@ model IncomeExpenseCategory {
   @@id([id, userId])
 }
 
-enum IncomeExpenseCategoryType {
+enum BalanceChangeType {
   INCOME
   EXPENSE
 }
@@ -133,8 +133,8 @@ model Booking {
   transaction   Transaction @relation(fields: [transactionId, userId], references: [id, userId], onDelete: Cascade)
   transactionId String
 
-  incomeExpenseCategory   IncomeExpenseCategory? @relation(fields: [incomeExpenseCategoryId, userId], references: [id, userId], onDelete: Restrict)
-  incomeExpenseCategoryId String?
+  balanceChangeCategory   BalanceChangeCategory? @relation(fields: [balanceChangeCategoryId, userId], references: [id, userId], onDelete: Restrict)
+  balanceChangeCategoryId String?
 
   currency String?
 
@@ -149,10 +149,7 @@ model Booking {
 }
 
 enum BookingType {
-  CHARGE
-  DEPOSIT
-  INCOME
-  EXPENSE
-  APPRECIATION
-  DEPRECIATION
+  TRANSFER // TODO should we rename this to ACCOUNT_CHANGE?
+  BALANCE_CHANGE
+  VALUE_CHANGE
 }

@@ -15,7 +15,7 @@ export const Default: Story = {
   args: {
     label: "Example",
     name: "my-combobox",
-    defaultValue: "1",
+    placeholder: "Select an option",
     options: [
       { value: "1", primaryText: "Option 1", secondaryText: "one" },
       { value: "2", primaryText: "Option 2", secondaryText: "two" },
@@ -35,5 +35,13 @@ export const Disabled: Story = {
   args: {
     ...Default.args,
     disabled: true,
+  },
+};
+
+export const Compact: Story = {
+  args: {
+    ...Default.args,
+    label: undefined,
+    size: "compact",
   },
 };

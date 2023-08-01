@@ -33,6 +33,7 @@ export function FormattedNumberInput({
         thousandSeparator={thousandSeparator}
         decimalSeparator={decimalSeparator}
         customInput={Input}
+        inputMode="decimal"
       />
       <input name={name} value={value || ""} type="hidden" />
     </>

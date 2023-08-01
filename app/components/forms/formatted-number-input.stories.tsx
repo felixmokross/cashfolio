@@ -25,3 +25,11 @@ export const WithCurrencyAdornment: Story = {
     adornment: "CHF",
   },
 };
+
+export const Compact: Story = {
+  args: {
+    ...Default.args,
+    label: undefined,
+    size: "compact",
+  },
+};

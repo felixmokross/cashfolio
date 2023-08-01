@@ -47,3 +47,11 @@ export const Disabled: Story = {
     disabled: true,
   },
 };
+
+export const Compact: Story = {
+  args: {
+    ...Default.args,
+    label: undefined,
+    size: "compact",
+  },
+};

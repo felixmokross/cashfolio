@@ -76,11 +76,7 @@ export async function getReverseLedgerDateGroups({
       lines: group.lines.map((line) => ({
         ...line,
         amountFormatted: formatMoney(
-          line.type === BookingType.DEPOSIT ||
-            line.type === BookingType.INCOME ||
-            line.type === BookingType.APPRECIATION
-            ? line.amount
-            : line.amount.negated(),
+          line.amount,
           account.currency,
           preferredLocale,
           "sign-always"
@@ -116,22 +112,11 @@ export async function getLedgerLines({
   const lines = [];
 
   for (const booking of bookings) {
-    balance = balance.plus(getBookingValue(booking));
+    balance = balance.plus(booking.amount);
     lines.push({ ...booking, balance });
   }
 
   return lines;
-}
-
-function getBookingValue(booking: Booking) {
-  switch (booking.type) {
-    case BookingType.CHARGE:
-      return booking.amount.negated();
-    case BookingType.DEPOSIT:
-      return booking.amount;
-    default:
-      throw new Error("Unexpected");
-  }
 }
 
 export type LedgerLine = Booking & {
@@ -149,7 +134,7 @@ async function getBookings({
 }) {
   return await prisma.booking.findMany({
     where: {
-      type: { in: [BookingType.DEPOSIT, BookingType.CHARGE] },
+      type: BookingType.TRANSFER,
       accountId,
       userId,
     },
@@ -166,7 +151,7 @@ async function getBookings({
               id: true,
               type: true,
               account: { select: { id: true, name: true } },
-              incomeExpenseCategory: { select: { id: true, name: true } },
+              balanceChangeCategory: { select: { id: true, name: true } },
               note: true,
             },
           },

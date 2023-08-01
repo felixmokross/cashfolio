@@ -36,3 +36,29 @@ export const Disabled: Story = {
     disabled: true,
   },
 };
+
+export const ManyOptions: Story = {
+  args: {
+    label: "Booking Type",
+    name: "my-radio-group",
+    defaultValue: "1",
+    options: [
+      { value: "1", label: "Transfer" },
+      { value: "2", label: "Balance Change" },
+      { value: "3", label: "Value Change" },
+    ],
+  },
+};
+
+export const Compact: Story = {
+  args: {
+    size: "compact",
+    name: "my-radio-group",
+    defaultValue: "1",
+    options: [
+      { value: "1", label: "Transfer" },
+      { value: "2", label: "Balance Change" },
+      { value: "3", label: "Value Change" },
+    ],
+  },
+};
