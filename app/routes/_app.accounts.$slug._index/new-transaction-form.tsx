@@ -108,7 +108,7 @@ export function NewTransactionForm({
             />
             <Combobox
               key={transactionDirection}
-              name="categoryId"
+              name="balanceChangeCategoryId"
               placeholder="Category"
               groupClassName="flex-grow"
               options={balanceChangeCategories

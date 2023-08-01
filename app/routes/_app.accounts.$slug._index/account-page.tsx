@@ -1,15 +1,14 @@
 import { PencilIcon } from "@heroicons/react/20/solid";
-import {
-  BookingType,
-  type Account,
-  BalanceChangeCategory,
-} from "@prisma/client";
+import { BookingType } from "@prisma/client";
+import type { BalanceChangeCategory, Account } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Fragment } from "react";
 import { LinkButton } from "~/components/link-button";
 import type { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
 import { NewTransactionForm } from "./new-transaction-form";
 import { Link } from "~/components/link";
+import { Button } from "~/components/button";
+import { useDeleteTransactionModal } from "./delete-transaction-modal";
 
 export type AccountPageProps = {
   account: SerializeFrom<Account>;
@@ -26,6 +25,9 @@ export function AccountPage({
   ledgerDateGroups,
   balanceChangeCategories,
 }: AccountPageProps) {
+  const { deleteTransactionModal, deleteTransaction } =
+    useDeleteTransactionModal();
+
   return (
     <>
       <div className="px-4 sm:px-6">
@@ -54,6 +56,7 @@ export function AccountPage({
                 <td className="bg-gray-50 py-2 pl-3 pr-1 text-right text-sm font-medium text-gray-500">
                   {group.balanceFormatted}
                 </td>
+                <td> </td>
               </tr>
               {group.lines.map((line) => (
                 <tr key={line.id} className="border-t border-gray-300">
@@ -82,6 +85,15 @@ export function AccountPage({
                   <td className="whitespace-nowrap py-4 pl-3 pr-1 text-right text-sm font-medium text-positive-600">
                     {line.amountFormatted}
                   </td>
+                  <td className="w-20">
+                    <Button
+                      variant="secondary"
+                      size="compact"
+                      onClick={() => deleteTransaction(line.transaction.id)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </Fragment>
@@ -91,9 +103,11 @@ export function AccountPage({
             <td className="bg-gray-50 py-2 pl-3 pr-1 text-right text-sm font-medium text-gray-500">
               {ledgerDateGroups.initialPageBalanceFormatted}
             </td>
+            <td></td>
           </tr>
         </tbody>
       </table>
+      {deleteTransactionModal}
     </>
   );
 }

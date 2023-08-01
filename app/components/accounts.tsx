@@ -40,8 +40,12 @@ export function AccountFormFields({
         name="type"
         label="Type"
         options={[
-          { label: "Asset", value: AccountType.ASSET },
-          { label: "Liability", value: AccountType.LIABILITY },
+          { label: "Asset", value: AccountType.ASSET, variant: "positive" },
+          {
+            label: "Liability",
+            value: AccountType.LIABILITY,
+            variant: "negative",
+          },
         ]}
         defaultValue={values?.type || account?.type || AccountType.ASSET}
         error={errors?.type}

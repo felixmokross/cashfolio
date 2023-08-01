@@ -48,6 +48,25 @@ export const PrimaryWithIcon: Story = {
   },
 };
 
+export const Negative: Story = {
+  args: { ...Primary.args, variant: "negative" },
+};
+
+export const NegativeWithIcon: Story = {
+  args: { ...Negative.args, icon: HomeIcon },
+  parameters: {
+    docs: {
+      source: {
+        code: `import { HomeIcon } from "@heroicons/react/20/solid";
+
+<Button variant="negative" icon={HomeIcon}>
+  Example
+</Button>`,
+      },
+    },
+  },
+};
+
 export const Secondary: Story = {
   args: { ...Primary.args, variant: "secondary" },
 };

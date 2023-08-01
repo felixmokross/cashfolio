@@ -1,4 +1,4 @@
-import type { User } from "@prisma/client";
+import type { Transaction, User } from "@prisma/client";
 import { BookingType } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime";
 import { prisma } from "~/prisma.server";
@@ -69,5 +69,14 @@ export async function createTransaction(form: FormData, userId: User["id"]) {
       },
       userId,
     },
+  });
+}
+
+export async function deleteTransaction(
+  id: Transaction["id"],
+  userId: User["id"]
+) {
+  await prisma.transaction.delete({
+    where: { id_userId: { id, userId } },
   });
 }

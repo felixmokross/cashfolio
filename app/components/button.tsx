@@ -1,5 +1,7 @@
+import { forwardRef } from "react";
 import type {
-  ComponentPropsWithoutRef,
+  Ref,
+  ComponentPropsWithRef,
   ElementType,
   PropsWithChildren,
 } from "react";
@@ -13,7 +15,11 @@ function buttonClassName(size: ButtonSize, variant: ButtonVariant) {
       {
         " bg-brand-600 text-white hover:bg-brand-700 disabled:bg-brand-600":
           variant === "primary",
-        "border-transparent": variant === "primary" && size === "default",
+        "border-transparent":
+          (variant === "primary" || variant === "negative") &&
+          size === "default",
+        " bg-negative-600 text-white hover:bg-negative-700 disabled:bg-negative-600":
+          variant === "negative",
         "bg-white text-gray-700 hover:bg-gray-50 disabled:bg-white":
           variant === "secondary",
         "border-gray-300": variant === "secondary" && size === "default",
@@ -24,7 +30,7 @@ function buttonClassName(size: ButtonSize, variant: ButtonVariant) {
       }
     ),
     icon: cn("-ml-1.5 h-4 w-4", {
-      "text-white": variant === "primary",
+      "text-white": variant === "primary" || variant === "negative",
       "text-gray-600": variant === "secondary",
     }),
   };
@@ -37,15 +43,18 @@ function buttonClassName(size: ButtonSize, variant: ButtonVariant) {
  *
  * For a link button use the `LinkButton` component instead.
  */
-export function Button<T extends ElementType>({
-  as,
-  variant = "secondary",
-  size = "default",
-  children,
-  className,
-  icon,
-  ...props
-}: ButtonProps<T>) {
+export const Button = forwardRef(function Button<T extends ElementType>(
+  {
+    as,
+    variant = "secondary",
+    size = "default",
+    children,
+    className,
+    icon,
+    ...props
+  }: ButtonProps<T>,
+  ref: Ref<HTMLButtonElement>
+) {
   const Component = as || "button";
   const Icon = icon;
 
@@ -55,12 +64,13 @@ export function Button<T extends ElementType>({
       className={cn(classNames.button, className)}
       {...(Component === "button" ? { type: "button" } : {})}
       {...props}
+      ref={ref}
     >
       {Icon && <Icon className={classNames.icon} />}
       {children}
     </Component>
   );
-}
+});
 
 export type ButtonProps<T extends ElementType> = PropsWithChildren<
   {
@@ -78,8 +88,8 @@ export type ButtonProps<T extends ElementType> = PropsWithChildren<
     icon?: IconComponentType;
     /** The size of the button. */
     size?: "default" | "compact";
-  } & Omit<ComponentPropsWithoutRef<T>, "as">
+  } & Omit<ComponentPropsWithRef<T>, "as">
 >;
 
-type ButtonVariant = "primary" | "secondary";
+type ButtonVariant = "primary" | "secondary" | "negative";
 type ButtonSize = "default" | "compact";

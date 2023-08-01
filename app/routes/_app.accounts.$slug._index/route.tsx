@@ -49,12 +49,15 @@ export async function loader({ request, params }: DataFunctionArgs) {
 export default function Route() {
   const { account, ledgerDateGroups, targetAccounts, balanceChangeCategories } =
     useLoaderData<typeof loader>();
+
   return (
-    <AccountPage
-      account={account}
-      ledgerDateGroups={ledgerDateGroups}
-      targetAccounts={targetAccounts}
-      balanceChangeCategories={balanceChangeCategories}
-    />
+    <>
+      <AccountPage
+        account={account}
+        ledgerDateGroups={ledgerDateGroups}
+        targetAccounts={targetAccounts}
+        balanceChangeCategories={balanceChangeCategories}
+      />
+    </>
   );
 }
