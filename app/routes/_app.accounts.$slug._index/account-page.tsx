@@ -30,10 +30,7 @@ export function AccountPage({
           </LinkButton>
         </div>
 
-        <NewTransactionForm
-          accountId={account.id}
-          targetAccounts={targetAccounts}
-        />
+        <NewTransactionForm account={account} targetAccounts={targetAccounts} />
       </div>
       <table className="mt-8 w-full">
         <tbody>

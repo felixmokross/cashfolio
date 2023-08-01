@@ -15,14 +15,14 @@ import type {
 } from "~/models/transactions.server";
 
 export type NewTransactionFormProps = {
-  accountId: SerializeFrom<Account>["id"];
+  account: SerializeFrom<Account>;
   targetAccounts: SerializeFrom<Account>[];
 };
 
 const defaultTransactionType: TransactionType = "balanceChange";
 
 export function NewTransactionForm({
-  accountId,
+  account,
   targetAccounts,
 }: NewTransactionFormProps) {
   const [transactionType, setTransactionType] = useState<TransactionType>(
@@ -33,15 +33,16 @@ export function NewTransactionForm({
       method="post"
       className="mt-8 rounded-md border border-slate-300 shadow-sm"
     >
-      <input type="hidden" name="accountId" value={accountId} />
-      {/* <h3 className="border-b border-slate-300 py-2 text-center text-sm font-medium text-slate-500">
+      <input type="hidden" name="accountId" value={account.id} />
+      <h3 className="border-b border-slate-300 py-2 text-center text-sm font-medium text-slate-500">
         New Transaction
-      </h3> */}
-      <div className="border-b border-slate-300">
+      </h3>
+      <div className="flex gap-px border-b border-slate-300">
+        <DateInput size="compact" groupClassName="w-40" name="date" />
         <RadioGroup<TransactionType>
           name="transactionType"
           size="compact"
-          className="rounded-t-md"
+          groupClassName="flex-grow"
           defaultValue={defaultTransactionType}
           options={[
             { label: "Transfer", value: "transfer" },
@@ -52,7 +53,6 @@ export function NewTransactionForm({
         />
       </div>
       <div className="flex gap-px border-b border-slate-300">
-        <DateInput size="compact" groupClassName="w-40" name="date" />
         {transactionType === "transfer" && (
           <>
             <RadioGroup<TransactionDirection>
@@ -118,8 +118,15 @@ export function NewTransactionForm({
             ]}
           />
         )}
+        <FormattedNumberInput
+          name="amount"
+          groupClassName="w-36"
+          placeholder="Amount"
+          size="compact"
+          adornment={account.currency || undefined}
+        />
       </div>
-      <div className="flex gap-px border-b border-slate-300">
+      <div className="flex gap-px">
         <Input
           name="note"
           placeholder="Note (optional)"
@@ -127,23 +134,17 @@ export function NewTransactionForm({
           groupClassName="flex-grow"
           className="rounded-bl-md"
         />
-        <FormattedNumberInput
-          name="amount"
-          groupClassName="w-28"
-          placeholder="Amount"
-          size="compact"
-        />
-      </div>
-      <div className="flex">
-        <Button
-          size="compact"
-          type="submit"
-          variant="primary"
-          className="flex-grow rounded-b-md"
-          icon={PlusIcon}
-        >
-          Create Transaction
-        </Button>
+        <div className="flex w-36">
+          <Button
+            size="compact"
+            type="submit"
+            variant="primary"
+            className="flex-grow rounded-br-md"
+            icon={PlusIcon}
+          >
+            Create
+          </Button>
+        </div>
       </div>
     </Form>
   );

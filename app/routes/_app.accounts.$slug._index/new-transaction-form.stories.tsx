@@ -26,7 +26,10 @@ const cashAssetClassId = createId();
 
 export const Default: Story = {
   args: {
-    accountId: createId(),
+    account: {
+      id: createId(),
+      currency: "CHF",
+    } as NewTransactionFormProps["account"],
     targetAccounts: [
       {
         id: createId(),
