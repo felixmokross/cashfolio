@@ -62,3 +62,14 @@ export const Compact: Story = {
     ],
   },
 };
+
+export const OptionColors: Story = {
+  args: {
+    name: "my-radio-group",
+    defaultValue: "1",
+    options: [
+      { value: "1", label: "Income", variant: "positive" },
+      { value: "2", label: "Expense", variant: "negative" },
+    ],
+  },
+};

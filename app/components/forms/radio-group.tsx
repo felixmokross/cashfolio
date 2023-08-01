@@ -6,6 +6,7 @@ import { cn } from "../classnames";
 
 export function RadioGroup<TValue extends string | undefined>({
   groupClassName,
+  className,
   size = "default",
   label,
   name,
@@ -42,12 +43,14 @@ export function RadioGroup<TValue extends string | undefined>({
         className={cn(
           "grid auto-cols-fr grid-flow-col",
           {
-            "border-sky-500 ring-1 ring-sky-500": isFocused,
-            "border-transparent": !isFocused,
+            "border-sky-500 ring-1 ring-sky-500":
+              isFocused && size === "compact",
+            "border-transparent": !isFocused && size === "compact",
             "gap-x-3": size === "default",
-            border: size === "compact",
+            "overflow-hidden border": size === "compact",
           },
-          label && "mt-1"
+          label && "mt-1",
+          className
         )}
       >
         {options.map((option) => (
@@ -61,14 +64,27 @@ export function RadioGroup<TValue extends string | undefined>({
                   "rounded-md border": size === "default",
                 },
                 active && {
-                  "ring-1 ring-sky-500 ring-offset-2": size === "default",
+                  "ring-2 ring-sky-500 ring-offset-2": size === "default",
                 },
                 checked
-                  ? "border-transparent bg-sky-600 text-white"
-                  : "border-slate-200 bg-white text-slate-900",
-                disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
-                !disabled && checked && "hover:bg-sky-700",
-                !disabled && !checked && "hover:bg-slate-50"
+                  ? cn(
+                      "border-transparent text-white",
+                      {
+                        "bg-sky-600": !option.variant,
+                        "bg-emerald-600": option.variant === "positive",
+                        "bg-rose-600": option.variant === "negative",
+                      },
+                      !disabled && {
+                        "hover:bg-sky-700": !option.variant,
+                        "hover:bg-emerald-700": option.variant === "positive",
+                        "hover:bg-rose-700": option.variant === "negative",
+                      }
+                    )
+                  : cn(
+                      "border-slate-200 bg-white text-slate-900",
+                      !disabled && "hover:bg-slate-50"
+                    ),
+                disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
               )
             }
           >
@@ -85,11 +101,16 @@ export function RadioGroup<TValue extends string | undefined>({
 
 export type RadioGroupProps<TValue extends string | undefined> = {
   groupClassName?: string;
+  className?: string;
   name?: string;
   error?: string;
-  defaultValue?: string;
+  defaultValue?: TValue;
   onChange?: (value: TValue) => void;
-  options: { label: string; value: TValue }[];
+  options: {
+    label: string;
+    value: TValue;
+    variant?: "positive" | "negative";
+  }[];
   disabled?: boolean;
 } & (
   | { size?: "default"; label?: string }

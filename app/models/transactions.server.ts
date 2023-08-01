@@ -3,9 +3,18 @@ import { BookingType } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime";
 import { prisma } from "~/prisma.server";
 
+export type TransactionType = "transfer" | "balanceChange" | "valueChange";
+export type TransactionDirection = "increase" | "decrease";
+
 export async function createTransaction(form: FormData, userId: User["id"]) {
-  const bookingType = form.get("bookingType") as BookingType;
-  const amount = new Decimal(form.get("amount") as string);
+  const transactionType = form.get("transactionType") as TransactionType;
+  const transactionDirection = form.get(
+    "transactionDirection"
+  ) as TransactionDirection;
+  const inputAmount = new Decimal(form.get("amount") as string);
+  const amount =
+    transactionDirection === "increase" ? inputAmount : inputAmount.negated();
+  const counterAmount = amount.negated();
 
   await prisma.transaction.create({
     data: {
@@ -13,8 +22,8 @@ export async function createTransaction(form: FormData, userId: User["id"]) {
       bookings: {
         create: [
           {
-            type: BookingType.TRANSFER,
-            amount: amount.negated(),
+            type: BookingType.ACCOUNT_CHANGE,
+            amount,
             account: {
               connect: {
                 id_userId: { id: form.get("accountId") as string, userId },
@@ -22,33 +31,39 @@ export async function createTransaction(form: FormData, userId: User["id"]) {
             },
             user: { connect: { id: userId } },
           },
-          {
-            type: bookingType,
-            amount,
-            account:
-              bookingType === BookingType.TRANSFER
-                ? {
-                    connect: {
-                      id_userId: {
-                        id: form.get("targetAccountId") as string,
-                        userId,
-                      },
+          transactionType === "transfer"
+            ? {
+                type: BookingType.ACCOUNT_CHANGE,
+                amount: counterAmount,
+                account: {
+                  connect: {
+                    id_userId: {
+                      id: form.get("targetAccountId") as string,
+                      userId,
                     },
-                  }
-                : undefined,
-            balanceChangeCategory:
-              bookingType === BookingType.BALANCE_CHANGE
-                ? {
-                    connect: {
-                      id_userId: {
-                        id: form.get("balanceChangeCategoryId") as string,
-                        userId,
-                      },
+                  },
+                },
+                user: { connect: { id: userId } },
+              }
+            : transactionType === "balanceChange"
+            ? {
+                type: BookingType.BALANCE_CHANGE,
+                amount: counterAmount,
+                balanceChangeCategory: {
+                  connect: {
+                    id_userId: {
+                      id: form.get("balanceChangeCategoryId") as string,
+                      userId,
                     },
-                  }
-                : undefined,
-            user: { connect: { id: userId } },
-          },
+                  },
+                },
+                user: { connect: { id: userId } },
+              }
+            : {
+                type: BookingType.VALUE_CHANGE,
+                amount: counterAmount,
+                user: { connect: { id: userId } },
+              },
         ],
       },
       note: form.get("note") as string,

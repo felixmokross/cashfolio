@@ -149,7 +149,7 @@ model Booking {
 }
 
 enum BookingType {
-  TRANSFER // TODO should we rename this to ACCOUNT_CHANGE?
+  ACCOUNT_CHANGE
   BALANCE_CHANGE
   VALUE_CHANGE
 }
