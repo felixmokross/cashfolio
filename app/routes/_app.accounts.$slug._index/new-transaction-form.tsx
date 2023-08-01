@@ -31,13 +31,13 @@ export function NewTransactionForm({
   return (
     <Form
       method="post"
-      className="mt-8 rounded-md border border-slate-300 shadow-sm"
+      className="mt-8 rounded-md border border-gray-300 shadow-sm"
     >
       <input type="hidden" name="accountId" value={account.id} />
-      <h3 className="border-b border-slate-300 py-2 text-center text-sm font-medium text-slate-500">
+      <h3 className="border-b border-gray-300 py-2 text-center text-sm font-medium text-gray-500">
         New Transaction
       </h3>
-      <div className="flex gap-px border-b border-slate-300">
+      <div className="flex gap-px border-b border-gray-300">
         <DateInput size="compact" groupClassName="w-40" name="date" />
         <RadioGroup<TransactionType>
           name="transactionType"
@@ -52,7 +52,7 @@ export function NewTransactionForm({
           onChange={setTransactionType}
         />
       </div>
-      <div className="flex gap-px border-b border-slate-300">
+      <div className="flex gap-px border-b border-gray-300">
         {transactionType === "transfer" && (
           <>
             <RadioGroup<TransactionDirection>

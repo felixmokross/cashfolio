@@ -41,7 +41,7 @@ export function LocaleCombobox({
         }))}
         onChange={(value) => setLocale(value as string)}
       />
-      <div className="mt-4 flex justify-center gap-3 text-xs text-slate-500">
+      <div className="mt-4 flex justify-center gap-3 text-xs text-gray-500">
         <div>{formattingSamples[0]}</div>
         <div>$ {formattingSamples[1]}</div>
       </div>

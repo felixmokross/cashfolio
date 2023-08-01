@@ -1,7 +1,7 @@
 export function ErrorMessage({ error, errorId }: ErrorMessageProps) {
   if (!error) return null;
   return (
-    <p className="mt-2 text-sm text-rose-600" id={errorId}>
+    <p className="mt-2 text-sm text-negative-600" id={errorId}>
       {error}
     </p>
   );

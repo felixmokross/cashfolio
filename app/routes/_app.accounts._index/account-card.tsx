@@ -41,14 +41,14 @@ export function AccountCard({
   return (
     <Link
       to={account.slug}
-      className="group flex h-24 justify-between rounded-lg border border-slate-200 px-4 py-2 shadow-md hover:bg-slate-50 hover:shadow-sm"
+      className="group flex h-24 justify-between rounded-lg border border-gray-200 px-4 py-2 shadow-md hover:bg-gray-50 hover:shadow-sm"
     >
-      <div className="self-end overflow-hidden truncate text-sm font-semibold text-sky-600 group-hover:text-sky-800">
+      <div className="self-end overflow-hidden truncate text-sm font-semibold text-brand-600 group-hover:text-brand-800">
         {account.name}
       </div>
       <div className="flex flex-shrink-0 flex-col items-end gap-1">
-        <div className="text-slate-700">
-          <span className="text-sm text-slate-500">
+        <div className="text-gray-700">
+          <span className="text-sm text-gray-500">
             {account.unit === AccountUnit.CURRENCY ? currencySymbol : "pc."}
           </span>
           <span className="text-2xl">
@@ -57,7 +57,7 @@ export function AccountCard({
           </span>
         </div>
         {(isForeignCurrency || account.unit === AccountUnit.STOCK) && (
-          <div className="text-sm text-slate-500">
+          <div className="text-sm text-gray-500">
             {refCurrencySymbol}{" "}
             {numberFormat.format(Number(balanceInRefCurrency))}
           </div>

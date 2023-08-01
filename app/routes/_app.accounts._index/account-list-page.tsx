@@ -12,7 +12,7 @@ export function AccountListPage({ accounts }: AccountListPageProps) {
   return (
     <div className="px-4 sm:px-6">
       <div className="mt-4 flex items-baseline justify-between ">
-        <h2 className="text-lg font-medium text-slate-800">Accounts</h2>
+        <h2 className="text-lg font-medium text-gray-800">Accounts</h2>
 
         <LinkButton to="new" icon={PlusIcon}>
           New

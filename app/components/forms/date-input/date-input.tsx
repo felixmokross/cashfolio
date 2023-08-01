@@ -89,10 +89,10 @@ export function DateInput({
           label && "mt-1",
           "flex w-full justify-between border px-3 py-2 sm:text-sm",
           {
-            "rounded-md border-slate-300 shadow-sm": size === "default",
+            "rounded-md border-gray-300 shadow-sm": size === "default",
             "border-transparent": size === "compact",
           },
-          disabled && "cursor-not-allowed bg-slate-50 opacity-50",
+          disabled && "cursor-not-allowed bg-gray-50 opacity-50",
           className
         )}
       >
@@ -103,7 +103,7 @@ export function DateInput({
         />
         <DateField {...fieldProps} />
         <DatePickerButton {...buttonProps} isDisabled={disabled}>
-          <CalendarDaysIcon className="h-5 w-5 text-slate-400" />
+          <CalendarDaysIcon className="h-5 w-5 text-gray-400" />
         </DatePickerButton>
       </div>
       <ErrorMessage error={error} errorId={errorId} />
@@ -160,9 +160,9 @@ function DateFieldSegment({ segment, state }: DateFieldSegmentProps) {
       {...segmentProps}
       ref={ref}
       className={cn(
-        "rounded-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1",
+        "rounded-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1",
         {
-          "text-slate-500": segment.isPlaceholder || segment.type === "literal",
+          "text-gray-500": segment.isPlaceholder || segment.type === "literal",
         }
       )}
     >
@@ -233,7 +233,7 @@ function DatePickerButton({ className, ...props }: DatePickerButtonProps) {
     <button
       {...buttonProps}
       ref={ref}
-      className="rounded-sm text-slate-500 hover:text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+      className="rounded-sm text-gray-500 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {children}
     </button>

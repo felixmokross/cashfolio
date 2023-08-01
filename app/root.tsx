@@ -32,8 +32,8 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-slate-50 antialiased">
-        <div className="mx-auto min-h-screen max-w-screen-sm bg-white sm:border-x sm:border-slate-200 sm:shadow-xl">
+      <body className="bg-gray-50 antialiased">
+        <div className="mx-auto min-h-screen max-w-screen-sm bg-white sm:border-x sm:border-gray-200 sm:shadow-xl">
           <Outlet />
           <ScrollRestoration />
           <Scripts />

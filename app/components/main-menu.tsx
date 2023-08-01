@@ -2,7 +2,7 @@ import { Disclosure } from "@headlessui/react";
 import type { PropsWithChildren, Ref } from "react";
 import { forwardRef } from "react";
 import type { NavLinkProps as RemixNavLinkProps } from "@remix-run/react";
-import { Link , NavLink as RemixNavLink } from "@remix-run/react";
+import { Link, NavLink as RemixNavLink } from "@remix-run/react";
 import { cn } from "./classnames";
 import { currenciesByCode } from "~/currencies";
 import { getDisplayNameOfLocale } from "~/utils";
@@ -18,7 +18,7 @@ export function MainMenu() {
         <MainMenuLink to="accounts">Accounts</MainMenuLink>
         <MainMenuLink to="asset-classes">Asset Classes</MainMenuLink>
       </div>
-      <div className="border-t border-slate-200 pb-3 pt-4">
+      <div className="border-t border-gray-200 pb-3 pt-4">
         <div className="flex items-center px-4">
           <div className="flex-shrink-0">
             <img
@@ -39,7 +39,7 @@ export function MainMenu() {
           <div className="flex-shrink-0">
             <Disclosure.Button
               as={Link}
-              className="text-slate-400 hover:text-slate-500"
+              className="text-gray-400 hover:text-gray-500"
               to="settings"
             >
               <span className="sr-only">Settings</span>
@@ -77,8 +77,8 @@ const NavLink = forwardRef(function NavLink(
       className={({ isActive }: { isActive: boolean }) =>
         cn(
           isActive
-            ? "border-sky-500 bg-sky-50 text-sky-700"
-            : "border-transparent text-slate-600 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-800",
+            ? "border-brand-500 bg-brand-50 text-brand-700"
+            : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800",
           "block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
         )
       }

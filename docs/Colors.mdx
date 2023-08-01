@@ -1,0 +1,18 @@
+import { Meta, ColorPalette, ColorItem } from "@storybook/blocks";
+import themeConfig from "../tailwind.config.js";
+
+<Meta title="Colors" />
+
+<ColorPalette>
+  {Object.entries(themeConfig.theme.colors)
+    .filter(
+      ([title]) => !["transparent", "current", "black", "white"].includes(title)
+    )
+    .map(([title, colors]) => (
+      <ColorItem
+        key={title}
+        title={title}
+        colors={typeof colors === "object" ? colors : { [title]: colors }}
+      />
+    ))}
+</ColorPalette>

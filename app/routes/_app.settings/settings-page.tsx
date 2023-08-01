@@ -35,7 +35,7 @@ export function SettingsPage({
   return (
     <Form method="post" noValidate className="mx-auto flex max-w-sm flex-col">
       <fieldset disabled={state !== "idle"} className="contents">
-        <h2 className="mt-4 text-2xl font-semibold text-slate-900">Settings</h2>
+        <h2 className="mt-4 text-2xl font-semibold text-gray-900">Settings</h2>
 
         <div className="mt-10 flex flex-col gap-4">
           {message && state !== "submitting" && (

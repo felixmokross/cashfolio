@@ -38,7 +38,7 @@ export function Calendar(props: CalendarProps<DateValue>) {
           <span className="sr-only">Previous month</span>
           <ChevronLeftIcon className="h-5 w-5" />
         </CalendarButton>
-        <h2 className="text-sm font-semibold text-slate-800">{title}</h2>
+        <h2 className="text-sm font-semibold text-gray-800">{title}</h2>
         <CalendarButton {...nextButtonProps}>
           <ChevronRightIcon className="h-5 w-5" />
         </CalendarButton>
@@ -63,15 +63,15 @@ function CalendarGrid({ state }: CalendarGridProps) {
         {weekDays.map((day, index) => (
           <div
             key={index}
-            className="text-center text-xs font-normal text-slate-500"
+            className="text-center text-xs font-normal text-gray-500"
           >
             {day}
           </div>
         ))}
       </div>
-      <div className="mt-2 grid grid-cols-7 gap-px rounded-lg border bg-slate-200">
+      <div className="mt-2 grid grid-cols-7 gap-px rounded-lg border bg-gray-200">
         {[...new Array(Math.max(weeksInMonth, 6)).keys()].map((weekIndex) => (
-          <div key={weekIndex} className="contents ring-1 ring-slate-200">
+          <div key={weekIndex} className="contents ring-1 ring-gray-200">
             {state
               .getDatesInWeek(weekIndex)
               .map((date, i) =>
@@ -123,21 +123,21 @@ function CalendarCell({ state, date, className }: CalendarCellProps) {
       ref={ref}
       className={cn(
         className,
-        "h-10 w-10 px-2.5 py-2.5 text-center text-sm focus:z-20 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500",
+        "h-10 w-10 px-2.5 py-2.5 text-center text-sm focus:z-20 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500",
         isOutsideVisibleRange || isUnavailable || isDisabled
-          ? "cursor-default bg-slate-50 text-slate-400"
+          ? "cursor-default bg-gray-50 text-gray-400"
           : cn(
-              "bg-white hover:bg-slate-100",
+              "bg-white hover:bg-gray-100",
               isToday(date, state.timeZone)
-                ? "font-semibold text-sky-600"
-                : "text-slate-900"
+                ? "font-semibold text-brand-600"
+                : "text-gray-900"
             )
       )}
     >
       <div
         className={cn(
           isSelected
-            ? "-m-1 rounded-full bg-slate-900 p-1 font-semibold text-white"
+            ? "-m-1 rounded-full bg-gray-900 p-1 font-semibold text-white"
             : cn("contents")
         )}
       >
@@ -161,7 +161,7 @@ function CalendarButton({ className, ...props }: CalendarButtonProps) {
       {...buttonProps}
       ref={ref}
       className={cn(
-        "-m1.5 cursor-pointer rounded-md p-1.5 text-slate-400 hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500",
+        "-m1.5 cursor-pointer rounded-md p-1.5 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500",
         className
       )}
     >

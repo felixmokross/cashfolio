@@ -11,21 +11,21 @@ function buttonClassName(size: ButtonSize, variant: ButtonVariant) {
     button: cn(
       "inline-flex items-center gap-1.5 justify-center border px-4 py-2 text-sm font-medium focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto",
       {
-        " bg-sky-600 text-white hover:bg-sky-700 disabled:bg-sky-600":
+        " bg-brand-600 text-white hover:bg-brand-700 disabled:bg-brand-600":
           variant === "primary",
         "border-transparent": variant === "primary" && size === "default",
-        "bg-white text-slate-700 hover:bg-slate-50 disabled:bg-white":
+        "bg-white text-gray-700 hover:bg-gray-50 disabled:bg-white":
           variant === "secondary",
-        "border-slate-300": variant === "secondary" && size === "default",
-        "rounded-md focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 shadow-sm":
+        "border-gray-300": variant === "secondary" && size === "default",
+        "rounded-md focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 shadow-sm":
           size === "default",
-        "border-white focus:border-sky-500 focus:ring-1 focus:ring-sky-500":
+        "border-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500":
           size === "compact",
       }
     ),
     icon: cn("-ml-1.5 h-4 w-4", {
       "text-white": variant === "primary",
-      "text-slate-600": variant === "secondary",
+      "text-gray-600": variant === "secondary",
     }),
   };
 }

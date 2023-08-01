@@ -1,7 +1,7 @@
 import type { DetailedHTMLProps, LabelHTMLAttributes } from "react";
 import { cn } from "../classnames";
 
-export const labelClassName = "block text-sm font-medium text-slate-700";
+export const labelClassName = "block text-sm font-medium text-gray-700";
 
 export function Label({ className, children, ...props }: LabelProps) {
   return (

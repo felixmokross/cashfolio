@@ -43,7 +43,7 @@ export function RadioGroup<TValue extends string | undefined>({
         className={cn(
           "grid auto-cols-fr grid-flow-col",
           {
-            "border-sky-500 ring-1 ring-sky-500":
+            "border-brand-500 ring-1 ring-brand-500":
               isFocused && size === "compact",
             "border-transparent": !isFocused && size === "compact",
             "gap-x-3": size === "default",
@@ -64,25 +64,25 @@ export function RadioGroup<TValue extends string | undefined>({
                   "rounded-md border": size === "default",
                 },
                 active && {
-                  "ring-2 ring-sky-500 ring-offset-2": size === "default",
+                  "ring-2 ring-brand-500 ring-offset-2": size === "default",
                 },
                 checked
                   ? cn(
                       "border-transparent text-white",
                       {
-                        "bg-sky-600": !option.variant,
-                        "bg-emerald-600": option.variant === "positive",
-                        "bg-rose-600": option.variant === "negative",
+                        "bg-brand-600": !option.variant,
+                        "bg-positive-600": option.variant === "positive",
+                        "bg-negative-600": option.variant === "negative",
                       },
                       !disabled && {
-                        "hover:bg-sky-700": !option.variant,
-                        "hover:bg-emerald-700": option.variant === "positive",
-                        "hover:bg-rose-700": option.variant === "negative",
+                        "hover:bg-brand-700": !option.variant,
+                        "hover:bg-positive-700": option.variant === "positive",
+                        "hover:bg-negative-700": option.variant === "negative",
                       }
                     )
                   : cn(
-                      "border-slate-200 bg-white text-slate-900",
-                      !disabled && "hover:bg-slate-50"
+                      "border-gray-200 bg-white text-gray-900",
+                      !disabled && "hover:bg-gray-50"
                     ),
                 disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
               )

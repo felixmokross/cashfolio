@@ -63,9 +63,9 @@ export function Combobox({
         <HeadlessCombobox.Input
           onChange={(event) => setQuery(event.target.value)}
           className={cn(
-            "w-full border bg-white py-2 pl-3 pr-10 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:opacity-50 sm:text-sm",
+            "w-full border bg-white py-2 pl-3 pr-10 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50 sm:text-sm",
             {
-              "rounded-md border-slate-300 shadow-sm ": size === "default",
+              "rounded-md border-gray-300 shadow-sm ": size === "default",
               "border-transparent": size === "compact",
             },
             className
@@ -78,7 +78,7 @@ export function Combobox({
         />
         <HeadlessCombobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50">
           <ChevronUpDownIcon
-            className="h-5 w-5 text-slate-400"
+            className="h-5 w-5 text-gray-400"
             aria-hidden="true"
           />
         </HeadlessCombobox.Button>
@@ -91,7 +91,7 @@ export function Combobox({
                 className={({ active }) =>
                   cn(
                     "relative cursor-default select-none py-2 pl-3 pr-9",
-                    active ? "bg-sky-600 text-white" : "text-slate-900"
+                    active ? "bg-brand-600 text-white" : "text-gray-900"
                   )
                 }
               >
@@ -107,7 +107,7 @@ export function Combobox({
                         <span
                           className={cn(
                             "ml-2 truncate",
-                            active ? "text-sky-100" : "text-slate-500"
+                            active ? "text-brand-100" : "text-gray-500"
                           )}
                         >
                           {option.secondaryText}
@@ -119,7 +119,7 @@ export function Combobox({
                       <span
                         className={cn(
                           "absolute inset-y-0 right-0 flex items-center pr-4",
-                          active ? "text-white" : "text-sky-600"
+                          active ? "text-white" : "text-brand-600"
                         )}
                       >
                         <CheckIcon className="h-5 w-5" aria-hidden="true" />

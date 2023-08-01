@@ -12,7 +12,7 @@ const config: StorybookConfig = {
       },
     },
   }),
-  stories: ["../app/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ["../docs/**/*.mdx", "../app/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",

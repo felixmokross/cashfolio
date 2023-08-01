@@ -20,8 +20,8 @@ export const meta: V2_MetaFunction = () => [
 export default function AssetClassListPage() {
   const { assetClasses } = useLoaderData<typeof loader>();
   return (
-    <div className="h-screen bg-slate-50">
-      <h2 className="mt-4 text-center text-lg font-medium text-slate-700">
+    <div className="h-screen bg-gray-50">
+      <h2 className="mt-4 text-center text-lg font-medium text-gray-700">
         Asset Classes
       </h2>
 

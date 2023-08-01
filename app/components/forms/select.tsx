@@ -24,7 +24,7 @@ export function Select({
         <select
           id={id}
           name={name}
-          className="block w-full rounded-md border-slate-300 bg-none py-2 pl-3 pr-10 text-base focus:border-sky-500 focus:outline-none focus:ring-sky-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:opacity-50 sm:text-sm"
+          className="block w-full rounded-md border-gray-300 bg-none py-2 pl-3 pr-10 text-base focus:border-brand-500 focus:outline-none focus:ring-brand-500 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50 sm:text-sm"
           defaultValue={defaultValue}
           disabled={disabled}
           aria-invalid={error ? "true" : undefined}
@@ -40,7 +40,7 @@ export function Select({
             disabled && "opacity-50"
           )}
         >
-          <ChevronUpDownIcon className="h-5 w-5 text-slate-400" />
+          <ChevronUpDownIcon className="h-5 w-5 text-gray-400" />
         </div>
       </div>
       <ErrorMessage error={error} errorId={errorId} />

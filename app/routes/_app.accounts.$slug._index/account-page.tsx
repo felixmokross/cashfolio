@@ -24,7 +24,7 @@ export function AccountPage({
     <>
       <div className="px-4 sm:px-6">
         <div className="mt-4 flex items-baseline justify-between ">
-          <h2 className="text-lg font-medium text-slate-800">{account.name}</h2>
+          <h2 className="text-lg font-medium text-gray-800">{account.name}</h2>
 
           <LinkButton to="edit" icon={PencilIcon}>
             Edit
@@ -37,18 +37,18 @@ export function AccountPage({
         <tbody>
           {ledgerDateGroups.groups.map((group) => (
             <Fragment key={group.date}>
-              <tr className="border-t border-slate-200">
-                <th className="bg-slate-50 px-4 py-2 text-left text-sm font-semibold text-slate-900 sm:px-6">
+              <tr className="border-t border-gray-200">
+                <th className="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-gray-900 sm:px-6">
                   {group.dateFormatted}
                 </th>
-                <td className="bg-slate-50 py-2 pl-3 pr-1 text-right text-sm font-medium text-slate-500">
+                <td className="bg-gray-50 py-2 pl-3 pr-1 text-right text-sm font-medium text-gray-500">
                   {group.balanceFormatted}
                 </td>
               </tr>
               {group.lines.map((line) => (
-                <tr key={line.id} className="border-t border-slate-300">
+                <tr key={line.id} className="border-t border-gray-300">
                   <td className="py-4 pl-4 pr-3 text-sm  sm:pl-6">
-                    <div className="text-slate-800">
+                    <div className="text-gray-800">
                       {line.transaction.bookings
                         .filter((b) => b.id !== line.id)
                         .map((b) => {
@@ -56,7 +56,7 @@ export function AccountPage({
                             case BookingType.ACCOUNT_CHANGE:
                               return (
                                 <Link
-                                  className="text-sky-600 hover:text-sky-700 hover:underline" // TODO create Link component
+                                  className="text-brand-600 hover:text-brand-700 hover:underline" // TODO create Link component
                                   key={b.id}
                                   to={`../accounts/${b.account!.slug}`}
                                 >
@@ -68,20 +68,18 @@ export function AccountPage({
                           }
                         })}
                     </div>
-                    <div className="text-slate-500">
-                      {line.transaction.note}
-                    </div>
+                    <div className="text-gray-500">{line.transaction.note}</div>
                   </td>
-                  <td className="whitespace-nowrap py-4 pl-3 pr-1 text-right text-sm font-medium text-emerald-600">
+                  <td className="whitespace-nowrap py-4 pl-3 pr-1 text-right text-sm font-medium text-positive-600">
                     {line.amountFormatted}
                   </td>
                 </tr>
               ))}
             </Fragment>
           ))}
-          <tr className="border-t border-slate-200">
-            <th className="bg-slate-50 px-4 py-2 text-left text-sm font-semibold text-slate-900 sm:px-6"></th>
-            <td className="bg-slate-50 py-2 pl-3 pr-1 text-right text-sm font-medium text-slate-500">
+          <tr className="border-t border-gray-200">
+            <th className="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-gray-900 sm:px-6"></th>
+            <td className="bg-gray-50 py-2 pl-3 pr-1 text-right text-sm font-medium text-gray-500">
               {ledgerDateGroups.initialPageBalanceFormatted}
             </td>
           </tr>

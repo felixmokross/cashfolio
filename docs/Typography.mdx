@@ -1,0 +1,18 @@
+import { Meta, Typeset } from "@storybook/blocks";
+import defaultTheme from "tailwindcss/defaultTheme";
+
+<Meta title="Typography" />
+
+export const SampleText =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+# Typography
+
+**Font:** Inter var
+
+<Typeset
+  fontSizes={Object.values(defaultTheme.fontSize).map((size) => size[0])}
+  fontWeight={400}
+  sampleText={SampleText}
+  fontFamily="Inter var"
+/>

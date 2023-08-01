@@ -13,6 +13,6 @@ type Story = StoryObj<typeof SpinnerIcon>;
 
 export const Default: Story = {
   args: {
-    className: "w-5 h-5 text-slate-700 animate-spin",
+    className: "w-5 h-5 text-gray-700 animate-spin",
   },
 };

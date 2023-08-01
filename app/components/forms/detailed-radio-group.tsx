@@ -38,8 +38,8 @@ export function DetailedRadioGroup<TValue extends string | undefined>({
             value={option.value}
             className={({ checked, active }) =>
               cn(
-                checked ? "border-transparent" : "border-slate-300",
-                active ? "border-sky-500 ring-2 ring-sky-500" : "",
+                checked ? "border-transparent" : "border-gray-300",
+                active ? "border-brand-500 ring-2 ring-brand-500" : "",
                 "relative flex rounded-lg border bg-white p-4 shadow-sm focus:outline-none",
                 disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
               )
@@ -51,13 +51,13 @@ export function DetailedRadioGroup<TValue extends string | undefined>({
                   <span className="flex flex-col">
                     <HeadlessRadioGroup.Label
                       as="span"
-                      className="block text-sm font-medium text-slate-900"
+                      className="block text-sm font-medium text-gray-900"
                     >
                       {option.label}
                     </HeadlessRadioGroup.Label>
                     <HeadlessRadioGroup.Description
                       as="span"
-                      className="mt-1 flex items-center text-sm text-slate-500"
+                      className="mt-1 flex items-center text-sm text-gray-500"
                     >
                       {option.description}
                     </HeadlessRadioGroup.Description>
@@ -66,14 +66,14 @@ export function DetailedRadioGroup<TValue extends string | undefined>({
                 <CheckCircleIcon
                   className={cn(
                     !checked ? "invisible" : "",
-                    "h-5 w-5 text-sky-600"
+                    "h-5 w-5 text-brand-600"
                   )}
                   aria-hidden="true"
                 />
                 <span
                   className={cn(
                     active ? "border" : "border-2",
-                    checked ? "border-sky-500" : "border-transparent",
+                    checked ? "border-brand-500" : "border-transparent",
                     "pointer-events-none absolute -inset-px rounded-lg"
                   )}
                   aria-hidden="true"
