@@ -61,7 +61,7 @@ export const Default: Story = {
               note: "Initial balance",
               balance: "11_000",
               transaction: {} as any,
-              type: BookingType.TRANSFER,
+              type: BookingType.ACCOUNT_CHANGE,
             },
           ],
         },
@@ -80,5 +80,6 @@ export const Default: Story = {
         assetClassId: cashAssetClassId,
       } as AccountPageProps["targetAccounts"][number],
     ],
+    balanceChangeCategories: [],
   },
 };

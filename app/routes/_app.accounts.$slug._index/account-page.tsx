@@ -1,5 +1,9 @@
 import { PencilIcon } from "@heroicons/react/20/solid";
-import { BookingType, type Account } from "@prisma/client";
+import {
+  BookingType,
+  type Account,
+  BalanceChangeCategory,
+} from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Fragment } from "react";
 import { LinkButton } from "~/components/link-button";
@@ -13,12 +17,14 @@ export type AccountPageProps = {
     Awaited<ReturnType<typeof getReverseLedgerDateGroups>>
   >;
   targetAccounts: SerializeFrom<Account>[];
+  balanceChangeCategories: SerializeFrom<BalanceChangeCategory>[];
 };
 
 export function AccountPage({
   account,
   targetAccounts,
   ledgerDateGroups,
+  balanceChangeCategories,
 }: AccountPageProps) {
   return (
     <>
@@ -31,7 +37,11 @@ export function AccountPage({
           </LinkButton>
         </div>
 
-        <NewTransactionForm account={account} targetAccounts={targetAccounts} />
+        <NewTransactionForm
+          account={account}
+          targetAccounts={targetAccounts}
+          balanceChangeCategories={balanceChangeCategories}
+        />
       </div>
       <table className="mt-8 w-full">
         <tbody>

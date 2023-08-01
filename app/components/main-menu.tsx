@@ -17,6 +17,9 @@ export function MainMenu() {
         <MainMenuLink to=".">Home</MainMenuLink>
         <MainMenuLink to="accounts">Accounts</MainMenuLink>
         <MainMenuLink to="asset-classes">Asset Classes</MainMenuLink>
+        <MainMenuLink to="balance-change-categories">
+          Balance Change Categories
+        </MainMenuLink>
       </div>
       <div className="border-t border-gray-200 pb-3 pt-4">
         <div className="flex items-center px-4">

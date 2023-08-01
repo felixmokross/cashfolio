@@ -41,5 +41,6 @@ export const Default: Story = {
         assetClassId: cashAssetClassId,
       } as NewTransactionFormProps["targetAccounts"][number],
     ],
+    balanceChangeCategories: [],
   },
 };

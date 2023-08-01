@@ -1,5 +1,9 @@
 import { PlusIcon } from "@heroicons/react/20/solid";
-import type { Account } from "@prisma/client";
+import {
+  BalanceChangeType,
+  type Account,
+  type BalanceChangeCategory,
+} from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import { useState } from "react";
@@ -17,6 +21,7 @@ import type {
 export type NewTransactionFormProps = {
   account: SerializeFrom<Account>;
   targetAccounts: SerializeFrom<Account>[];
+  balanceChangeCategories: SerializeFrom<BalanceChangeCategory>[];
 };
 
 const defaultTransactionType: TransactionType = "balanceChange";
@@ -24,10 +29,20 @@ const defaultTransactionType: TransactionType = "balanceChange";
 export function NewTransactionForm({
   account,
   targetAccounts,
+  balanceChangeCategories,
 }: NewTransactionFormProps) {
   const [transactionType, setTransactionType] = useState<TransactionType>(
     defaultTransactionType
   );
+  const defaultTransactionDirection: TransactionDirection =
+    transactionType === "valueChange" ? "increase" : "decrease";
+  const [transactionDirection, setTransactionDirection] =
+    useState<TransactionDirection>(defaultTransactionDirection);
+
+  const balanceChangeType =
+    transactionDirection === "increase"
+      ? BalanceChangeType.INCOME
+      : BalanceChangeType.EXPENSE;
   return (
     <Form
       method="post"
@@ -58,7 +73,8 @@ export function NewTransactionForm({
             <RadioGroup<TransactionDirection>
               name="transactionDirection"
               size="compact"
-              defaultValue="decrease"
+              defaultValue={defaultTransactionDirection}
+              onChange={setTransactionDirection}
               groupClassName="w-48"
               options={[
                 { label: "From", value: "increase", variant: "positive" },
@@ -83,17 +99,24 @@ export function NewTransactionForm({
               name="transactionDirection"
               size="compact"
               groupClassName="w-48"
-              defaultValue="decrease"
+              defaultValue={defaultTransactionDirection}
+              onChange={setTransactionDirection}
               options={[
                 { label: "Income", value: "increase", variant: "positive" },
                 { label: "Expense", value: "decrease", variant: "negative" },
               ]}
             />
             <Combobox
+              key={transactionDirection}
               name="categoryId"
               placeholder="Category"
               groupClassName="flex-grow"
-              options={[]}
+              options={balanceChangeCategories
+                .filter((c) => c.type === balanceChangeType)
+                .map((c) => ({
+                  value: c.id,
+                  primaryText: c.name,
+                }))}
               size="compact"
             />
           </>
@@ -103,7 +126,8 @@ export function NewTransactionForm({
             name="transactionDirection"
             size="compact"
             groupClassName="flex-grow"
-            defaultValue="increase"
+            defaultValue={defaultTransactionDirection}
+            onChange={setTransactionDirection}
             options={[
               {
                 label: "Appreciation",
