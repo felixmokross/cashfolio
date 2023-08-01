@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { LinkButton } from "~/components/link-button";
 import type { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
 import { NewTransactionForm } from "./new-transaction-form";
-import { Link } from "@remix-run/react";
+import { Link } from "~/components/link";
 
 export type AccountPageProps = {
   account: SerializeFrom<Account>;
@@ -56,7 +56,6 @@ export function AccountPage({
                             case BookingType.ACCOUNT_CHANGE:
                               return (
                                 <Link
-                                  className="text-brand-600 hover:text-brand-700 hover:underline" // TODO create Link component
                                   key={b.id}
                                   to={`../accounts/${b.account!.slug}`}
                                 >
