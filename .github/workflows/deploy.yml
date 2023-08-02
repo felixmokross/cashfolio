@@ -88,7 +88,7 @@ jobs:
         with:
           node-version: 18
       - uses: bahmutov/npm-install@v1
-      - run: npm run chromatic
+      - run: npm run chromatic -- --exit-once-uploaded
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
