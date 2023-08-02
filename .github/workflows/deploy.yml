@@ -87,6 +87,8 @@ jobs:
           node-version: 18
       - uses: bahmutov/npm-install@v1
       - run: npm run chromatic
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
   deploy:
     name: Deploy

@@ -52,9 +52,19 @@ Trigger Fly deployment from the local machine:
 npm run deploy
 ```
 
+## Chromatic/Storybook
+
+To deploy Storybook to Chromatic, use:
+
+```sh
+npm run chromatic
+```
+
 ## Environment Variables
 
-See [`.env.example`](./.env.example) file
+See [`.env.example`](./.env.example) file.
+
+Additionally, to deploy to Chromatic, the environment variable `CHROMATIC_PROJECT_TOKEN` must be set.
 
 # Tech Stack
 
