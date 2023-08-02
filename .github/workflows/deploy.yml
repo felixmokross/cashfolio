@@ -77,6 +77,17 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
+  storybook:
+    name: Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - uses: bahmutov/npm-install@v1
+      - run: npm run chromatic
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
