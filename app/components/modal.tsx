@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import type { PropsWithChildren } from "react";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import { Button } from "./button";
 
 export type ModalProps = PropsWithChildren<{
