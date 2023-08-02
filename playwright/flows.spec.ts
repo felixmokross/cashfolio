@@ -5,7 +5,8 @@ import { registerUser } from "./register-user";
 
 test("home page", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText("Hello world!")).toBeVisible();
+  await expect(page).toHaveURL(/\/accounts$/);
+  await expect(page.getByRole("heading", { name: "Accounts" })).toBeVisible();
 });
 
 test("logout", async ({ page }) => {
@@ -47,9 +48,7 @@ test.describe("unauthenticated", () => {
 
     await page.getByRole("button", { name: "Start Using Cashfolio" }).click();
 
-    await expect(
-      page.getByRole("heading", { name: "Hello world!" })
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Accounts" })).toBeVisible();
   });
 
   test("login with redirect", async ({ page }) => {

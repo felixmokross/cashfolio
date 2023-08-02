@@ -64,7 +64,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
       // and this is the first login with this user
       await page.getByRole("button", { name: "Accept" }).click();
 
-      await page.waitForURL(/\/$/);
+      await page.waitForURL(/\/accounts$/);
 
       await page.context().storageState({ path: fileName });
       await page.close();
