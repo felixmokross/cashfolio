@@ -60,7 +60,12 @@ export const Default: Story = {
               amountFormatted: "$+1,000.00",
               note: "Initial balance",
               balance: "11_000",
-              transaction: {} as any,
+              transaction: {
+                id: createId(),
+                date: "2021-01-01",
+                note: "Initial balance",
+                bookings: [],
+              },
               type: BookingType.ACCOUNT_CHANGE,
             },
           ],
