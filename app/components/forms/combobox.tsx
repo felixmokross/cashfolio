@@ -42,6 +42,7 @@ export function Combobox({
         });
 
   const errorId = `combobox-error-${useId()}`;
+  const showLabel = !!label && size === "default";
   return (
     <HeadlessCombobox
       as="div"
@@ -54,12 +55,12 @@ export function Combobox({
       className={groupClassName}
       disabled={disabled}
     >
-      {label && (
+      {showLabel && (
         <HeadlessCombobox.Label className={labelClassName}>
           {label}
         </HeadlessCombobox.Label>
       )}
-      <div className={cn("relative", label && "mt-1")}>
+      <div className={cn("relative", showLabel && "mt-1")}>
         <HeadlessCombobox.Input
           onChange={(event) => setQuery(event.target.value)}
           className={cn(
@@ -150,29 +151,21 @@ export function Combobox({
 
 export type ComboboxProps = {
   groupClassName?: string;
+  size?: "default" | "compact";
+  label?: string;
   className?: string;
   placeholder?: string;
   name?: string;
   error?: string;
   options: ComboboxOption[];
   onChange?: (value: string | number | readonly string[]) => void;
-} & (
-  | {
-      size?: "default";
-      label?: string;
-    }
-  | {
-      size: "compact";
-      label?: undefined;
-    }
-) &
-  Pick<
-    DetailedHTMLProps<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      HTMLInputElement
-    >,
-    "defaultValue" | "autoFocus" | "disabled"
-  >;
+} & Pick<
+  DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >,
+  "defaultValue" | "autoFocus" | "disabled"
+>;
 
 export type ComboboxOption = {
   primaryText: string;
