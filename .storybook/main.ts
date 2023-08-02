@@ -21,6 +21,7 @@ const config: StorybookConfig = {
       name: "@storybook/addon-styling",
       options: { postCss: { implementation: require("postcss") } },
     },
+    "@storybook/addon-mdx-gfm",
   ],
   framework: {
     name: "@storybook/react-webpack5",
