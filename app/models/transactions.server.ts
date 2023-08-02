@@ -1,6 +1,5 @@
 import type { Transaction, User } from "@prisma/client";
-import { BookingType } from "@prisma/client";
-import { Decimal } from "@prisma/client/runtime";
+import { BookingType, Prisma } from "@prisma/client";
 import { prisma } from "~/prisma.server";
 
 export type TransactionType = "transfer" | "balanceChange" | "valueChange";
@@ -11,7 +10,7 @@ export async function createTransaction(form: FormData, userId: User["id"]) {
   const transactionDirection = form.get(
     "transactionDirection"
   ) as TransactionDirection;
-  const inputAmount = new Decimal(form.get("amount") as string);
+  const inputAmount = new Prisma.Decimal(form.get("amount") as string);
   const amount =
     transactionDirection === "increase" ? inputAmount : inputAmount.negated();
   const counterAmount = amount.negated();

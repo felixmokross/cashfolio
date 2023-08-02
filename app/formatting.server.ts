@@ -1,4 +1,4 @@
-import type { Decimal } from "@prisma/client/runtime";
+import type { Prisma } from "@prisma/client";
 import { isToday, isTomorrow, isYesterday } from "date-fns";
 
 export function formatDate(value: Date, locale: string) {
@@ -21,7 +21,7 @@ function getDateFormat(locale: string) {
 }
 
 export function formatMoney(
-  value: Decimal,
+  value: Prisma.Decimal,
   currency: string | null,
   locale: string,
   style: CurrencyFormatStyle = "normal"

@@ -1,6 +1,5 @@
 import type { Account, User } from "@prisma/client";
-import { BookingType } from "@prisma/client";
-import { Decimal } from "@prisma/client/runtime";
+import { BookingType, Prisma } from "@prisma/client";
 // import { cache } from "~/cache.server";
 // import { prisma } from "~/db.server";
 // import { formatDate, formatMoney } from "~/formatting.server";
@@ -37,7 +36,7 @@ export async function getReverseLedgerDateGroups({
   const initialPageBalance = isLastPage
     ? account.preExisting && account.balanceAtStart
       ? account.balanceAtStart
-      : new Decimal(0)
+      : new Prisma.Decimal(0)
     : ledgerLines[nextPageOffset].balance;
 
   const { preferredLocale } = await prisma.user.findUniqueOrThrow({
@@ -94,7 +93,7 @@ export async function getReverseLedgerDateGroups({
 export type LedgerDateGroup = {
   date: Date;
   lines: LedgerLine[];
-  balance: Decimal;
+  balance: Prisma.Decimal;
 };
 
 export async function getLedgerLines({
@@ -106,7 +105,7 @@ export async function getLedgerLines({
 }) {
   const bookings = await getBookings({ accountId: account.id, userId });
 
-  let balance = new Decimal(
+  let balance = new Prisma.Decimal(
     (account.preExisting && account.balanceAtStart) || 0
   );
   const lines = [];
@@ -120,7 +119,7 @@ export async function getLedgerLines({
 }
 
 export type LedgerLine = Booking & {
-  balance: Decimal;
+  balance: Prisma.Decimal;
 };
 
 type Booking = Awaited<ReturnType<typeof getBookings>>[number];

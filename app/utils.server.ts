@@ -1,4 +1,4 @@
-import { Decimal } from "@prisma/client/runtime/library";
+import { Prisma } from "@prisma/client";
 
 export function difference<T>(arrayA: T[], arrayB: T[]): T[] {
   const setB = new Set(arrayB);
@@ -6,7 +6,7 @@ export function difference<T>(arrayA: T[], arrayB: T[]): T[] {
 }
 
 export function parseDecimal(value: string) {
-  return new Decimal(value);
+  return new Prisma.Decimal(value);
 }
 
 export function isValidDecimal(value: string) {
