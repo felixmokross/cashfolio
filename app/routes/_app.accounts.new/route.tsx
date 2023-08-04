@@ -1,5 +1,5 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
-import { json , redirect } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
 import type { FormActionData } from "~/components/forms/types";
@@ -12,7 +12,7 @@ import {
 import { getAssetClasses } from "~/models/asset-classes.server";
 import { getTitle } from "~/utils";
 import { hasErrors } from "~/utils.server";
-import { NewAccountPage } from "./new-account-page";
+import { Page } from "./page";
 
 export async function action({ request }: DataFunctionArgs) {
   const userId = await requireUserId(request);
@@ -45,7 +45,7 @@ export default function Route() {
   const loaderData = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
   return (
-    <NewAccountPage
+    <Page
       data={loaderData}
       errors={actionData?.errors}
       values={actionData?.values}

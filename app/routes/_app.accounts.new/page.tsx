@@ -4,16 +4,16 @@ import type { AccountFormProps } from "~/components/accounts";
 import { AccountFormFields } from "~/components/accounts";
 import { Button } from "~/components/button";
 
-export type NewAccountPageProps = {
+export type PageProps = {
   errors: AccountFormProps["errors"];
   values: AccountFormProps["values"];
   data: Omit<AccountFormProps["data"], "account">;
 };
 
-export function NewAccountPage({ data, errors, values }: NewAccountPageProps) {
+export function Page({ data, errors, values }: PageProps) {
   return (
     <div className="flex justify-center">
-      <Form method="post" className="flex max-w-lg flex-col gap-8 p-4">
+      <Form method="post" className="flex max-w-lg flex-col gap-8 px-4 py-8">
         <div className="col-span-6 flex flex-col items-center gap-4">
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-positive-100">
             <PlusIcon className="h-6 w-6 text-positive-600" />

@@ -7,8 +7,8 @@ export function buildUserDto(values: Partial<UserDto> = {}) {
     auth0UserId: createId(),
     preferredLocale: "en",
     refCurrency: "CHF",
-    createdAt: new Date(2020, 5, 3),
-    updatedAt: new Date(2020, 5, 3),
+    createdAt: new Date(2020, 5, 3).toJSON(),
+    updatedAt: new Date(2020, 5, 3).toJSON(),
     ...values,
   } as UserDto;
 }

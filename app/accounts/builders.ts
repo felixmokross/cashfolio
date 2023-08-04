@@ -16,8 +16,8 @@ export function buildAccountDto(values: Partial<AccountDto> = {}) {
     openingDate: null,
     closingDate: null,
     isActive: true,
-    createdAt: new Date(2021, 3, 7),
-    updatedAt: new Date(2021, 3, 7),
+    createdAt: new Date(2021, 3, 7).toJSON(),
+    updatedAt: new Date(2021, 3, 7).toJSON(),
     userId: createId(),
     ...values,
   } as AccountDto;

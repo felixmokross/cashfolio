@@ -2,8 +2,8 @@ import type { Decorator, Meta, StoryObj } from "@storybook/react";
 import { App } from "./app";
 import { unstable_createRemixStub } from "@remix-run/testing";
 import { Navigate } from "react-router-dom";
-import { Page } from "../_app.accounts._index/page";
-import { NewAccountPage } from "../_app.accounts.new/new-account-page";
+import { Page as AccountListPage } from "../_app.accounts._index/page";
+import { Page as NewAccountPage } from "../_app.accounts.new/page";
 import { buildAccountDto } from "~/accounts/builders";
 import { buildExtendedUserDto } from "~/users/builders";
 
@@ -16,7 +16,7 @@ const withMockedRoutesRemixStub: Decorator = (Story) => {
         {
           path: "/accounts",
           element: (
-            <Page
+            <AccountListPage
               accounts={[
                 buildAccountDto({ name: "Checking" }),
                 buildAccountDto({ name: "Savings" }),
