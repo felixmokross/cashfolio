@@ -1,12 +1,11 @@
-import type { SerializeFrom } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 import { I18nProvider } from "react-aria";
-import type { ExtendedUser } from "~/auth.server";
 import { NavBar } from "~/components/nav-bar";
 import { UserProvider } from "~/components/user-context";
+import type { ExtendedUserDto } from "~/users/types";
 
 export type AppProps = {
-  user: SerializeFrom<ExtendedUser>;
+  user: ExtendedUserDto;
 };
 
 export function App({ user }: AppProps) {

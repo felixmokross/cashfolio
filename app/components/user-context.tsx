@@ -1,15 +1,12 @@
-import type { SerializeFrom } from "@remix-run/node";
 import type { PropsWithChildren } from "react";
 import { createContext, useContext } from "react";
 import invariant from "tiny-invariant";
-import type { ExtendedUser } from "~/auth.server";
+import type { ExtendedUserDto } from "~/users/types";
 
-const UserContext = createContext<SerializeFrom<ExtendedUser> | undefined>(
-  undefined
-);
+const UserContext = createContext<ExtendedUserDto | undefined>(undefined);
 
 export type UserProviderProps = PropsWithChildren<{
-  user: SerializeFrom<ExtendedUser>;
+  user: ExtendedUserDto;
 }>;
 
 export function UserProvider({ user, children }: UserProviderProps) {
