@@ -18,9 +18,13 @@ const withMockedRoutesRemixStub: Decorator = (Story) => {
           element: (
             <AccountListPage
               accounts={[
-                buildAccountDto({ name: "Checking" }),
-                buildAccountDto({ name: "Savings" }),
-                buildAccountDto({ name: "Foreign", currency: "EUR" }),
+                buildAccountDto({ name: "Checking", slug: "checking" }),
+                buildAccountDto({ name: "Savings", slug: "savings" }),
+                buildAccountDto({
+                  name: "Foreign",
+                  slug: "foreign",
+                  currency: "EUR",
+                }),
               ]}
             />
           ),

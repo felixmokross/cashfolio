@@ -1,7 +1,7 @@
 import type { DataFunctionArgs } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
-import type { ActionData, SettingsValues } from "./settings-page";
-import { SettingsPage } from "./settings-page";
+import type { ActionData, SettingsValues } from "./page";
+import { Page } from "./page";
 import { getLocalesWithDisplayName } from "~/locales.server";
 import {
   useActionData,
@@ -91,7 +91,7 @@ export default function Route() {
   const navigate = useNavigate();
   const { state } = useNavigation();
   return (
-    <SettingsPage
+    <Page
       message={message}
       locales={locales}
       actionData={actionData}

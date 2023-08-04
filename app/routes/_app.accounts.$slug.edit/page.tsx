@@ -4,7 +4,7 @@ import type { AccountFormProps } from "~/components/accounts";
 import { AccountFormFields } from "~/components/accounts";
 import { Button } from "~/components/button";
 
-export type EditAccountPageProps = {
+export type PageProps = {
   errors: AccountFormProps["errors"];
   values: AccountFormProps["values"];
   data: {
@@ -13,7 +13,7 @@ export type EditAccountPageProps = {
   };
 };
 
-export function Page({ data, errors, values }: EditAccountPageProps) {
+export function Page({ data, errors, values }: PageProps) {
   return (
     <div className="flex justify-center">
       <Form method="post" className="flex max-w-lg flex-col gap-8 p-4">

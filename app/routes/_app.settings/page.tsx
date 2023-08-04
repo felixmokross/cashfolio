@@ -16,7 +16,7 @@ export type SettingsValues = Partial<
   Pick<User, "refCurrency" | "preferredLocale">
 >;
 
-export type SettingsPageProps = {
+export type PageProps = {
   message?: string;
   locales: [string, string][];
   actionData?: ActionData;
@@ -24,13 +24,13 @@ export type SettingsPageProps = {
   state: ReturnType<typeof useNavigation>["state"];
 };
 
-export function SettingsPage({
+export function Page({
   message,
   locales,
   actionData,
   onAlertDismiss,
   state,
-}: SettingsPageProps) {
+}: PageProps) {
   const { preferredLocale, refCurrency } = useUser();
   return (
     <Form method="post" noValidate className="mx-auto flex max-w-sm flex-col">
