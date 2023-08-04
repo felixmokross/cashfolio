@@ -3,11 +3,12 @@ import { Page } from "./page";
 import { AccountUnit } from "@prisma/client";
 import { buildAccountDto } from "~/accounts/builders";
 import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
+import { withRootLayout } from "../../../.storybook/decorators/withRootLayout";
 
 const meta: Meta<typeof Page> = {
   title: "routes/_app/accounts/_index/Page",
   component: Page,
-  decorators: [withAppProviders],
+  decorators: [withAppProviders, withRootLayout],
 };
 
 export default meta;

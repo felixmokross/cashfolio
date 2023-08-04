@@ -1,20 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AccountList } from "./account-list";
 import { AccountUnit } from "@prisma/client";
+import { buildAccountDto } from "~/accounts/builders";
+import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
+import { withRootLayout } from "../../../.storybook/decorators/withRootLayout";
 
 const meta: Meta<typeof AccountList> = {
-  title: "routes/accounts/_index/AccountList",
+  title: "routes/_app/accounts/_index/AccountList",
   component: AccountList,
-  tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <div className="flex items-center justify-center">
-        <div className="w-full max-w-screen-sm">
-          <Story />
-        </div>
-      </div>
-    ),
-  ],
+  decorators: [withAppProviders, withRootLayout],
 };
 
 export default meta;
@@ -25,32 +19,26 @@ export const Default: Story = {
   args: {
     accounts: [
       {
-        account: {
-          name: "Cash",
-          slug: "cash",
-          unit: AccountUnit.CURRENCY,
-          currency: "CHF",
-        },
+        account: buildAccountDto({ name: "Cash", slug: "cash" }),
         balance: "10000",
         balanceInRefCurrency: "10000",
       },
       {
-        account: {
+        account: buildAccountDto({
           name: "Foreign Cash",
           slug: "foreign-cash",
-          unit: AccountUnit.CURRENCY,
           currency: "EUR",
-        },
+        }),
         balance: "10000",
         balanceInRefCurrency: "11000",
       },
       {
-        account: {
+        account: buildAccountDto({
           name: "Stock",
           slug: "stock",
           unit: AccountUnit.STOCK,
           currency: null,
-        },
+        }),
         balance: "1240",
         balanceInRefCurrency: "14000",
       },
