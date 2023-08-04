@@ -15,7 +15,7 @@ import {
 import { getAssetClasses } from "~/models/asset-classes.server";
 import { getTitle } from "~/utils";
 import { hasErrors } from "~/utils.server";
-import { EditAccountPage } from "./edit-account-page";
+import { Page } from "./page";
 
 export async function action({ params, request }: DataFunctionArgs) {
   invariant(params.slug, "slug is required");
@@ -60,7 +60,7 @@ export default function Route() {
   const loaderData = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
   return (
-    <EditAccountPage
+    <Page
       data={loaderData}
       errors={actionData?.errors}
       values={actionData?.values}

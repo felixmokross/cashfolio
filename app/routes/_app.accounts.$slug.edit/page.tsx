@@ -13,11 +13,7 @@ export type EditAccountPageProps = {
   };
 };
 
-export function EditAccountPage({
-  data,
-  errors,
-  values,
-}: EditAccountPageProps) {
+export function Page({ data, errors, values }: EditAccountPageProps) {
   return (
     <div className="flex justify-center">
       <Form method="post" className="flex max-w-lg flex-col gap-8 p-4">
