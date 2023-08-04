@@ -2,10 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { App } from "./app";
 import { unstable_createRemixStub } from "@remix-run/testing";
 import { Navigate } from "react-router-dom";
-import { AccountListPage } from "../_app.accounts._index/account-list-page";
+import { Page } from "../_app.accounts._index/page";
 import { NewAccountPage } from "../_app.accounts.new/new-account-page";
-import type { SerializeFrom } from "@remix-run/node";
-import type { ExtendedUser } from "~/auth.server";
 import { buildAccountDto } from "~/accounts/builders";
 import { buildExtendedUserDto } from "~/users/builders";
 
@@ -22,7 +20,7 @@ const meta: Meta<typeof App> = {
             {
               path: "/accounts",
               element: (
-                <AccountListPage
+                <Page
                   accounts={[
                     buildAccountDto({ name: "Checking" }),
                     buildAccountDto({ name: "Savings" }),

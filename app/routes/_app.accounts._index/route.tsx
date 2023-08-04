@@ -4,7 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
 import { getAccounts } from "~/models/accounts.server";
 import { getTitle } from "~/utils";
-import { AccountListPage } from "./account-list-page";
+import { Page } from "./page";
 
 export async function loader({ request }: DataFunctionArgs) {
   const userId = await requireUserId(request);
@@ -15,5 +15,5 @@ export const meta: V2_MetaFunction = () => [{ title: getTitle("Accounts") }];
 
 export default function Route() {
   const { accounts } = useLoaderData<typeof loader>();
-  return <AccountListPage accounts={accounts} />;
+  return <Page accounts={accounts} />;
 }

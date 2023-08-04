@@ -1,14 +1,13 @@
 import { PlusIcon } from "@heroicons/react/20/solid";
-import type { Account } from "@prisma/client";
-import type { SerializeFrom } from "@remix-run/node";
 import { AccountList } from "./account-list";
 import { LinkButton } from "~/components/link-button";
+import type { AccountDto } from "~/accounts/types";
 
-export type AccountListPageProps = {
-  accounts: SerializeFrom<Account>[];
+export type PageProps = {
+  accounts: AccountDto[];
 };
 
-export function AccountListPage({ accounts }: AccountListPageProps) {
+export function Page({ accounts }: PageProps) {
   return (
     <div className="px-4 sm:px-6">
       <div className="mt-4 flex items-baseline justify-between ">

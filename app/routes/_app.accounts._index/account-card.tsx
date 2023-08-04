@@ -1,11 +1,10 @@
-import type { Account } from "@prisma/client";
 import { AccountUnit } from "@prisma/client";
-import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
+import type { AccountDto } from "~/accounts/types";
 import { useUser } from "~/components/user-context";
 
 export type AccountCardProps = {
-  account: Pick<SerializeFrom<Account>, "name" | "slug" | "unit" | "currency">;
+  account: Pick<AccountDto, "name" | "slug" | "unit" | "currency">;
   balance: string;
   balanceInRefCurrency: string;
 };
