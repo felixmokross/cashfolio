@@ -50,3 +50,15 @@ export const Default: Story = {
     ],
   },
 };
+
+export const WithErrors: Story = {
+  args: {
+    ...Default.args,
+    errors: {
+      date: "Date is required",
+      targetAccountId: "Account is required",
+      balanceChangeCategoryId: "Category is required",
+      amount: "Amount is required",
+    },
+  },
+};

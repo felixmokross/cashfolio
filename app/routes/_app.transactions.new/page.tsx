@@ -11,9 +11,11 @@ import { DateInput } from "~/components/forms/date-input";
 import { FormattedNumberInput } from "~/components/forms/formatted-number-input";
 import { Input } from "~/components/forms/input";
 import { RadioGroup } from "~/components/forms/radio-group";
+import type { FormErrors } from "~/components/forms/types";
 import type {
   TransactionDirection,
   TransactionType,
+  TransactionValues,
 } from "~/models/transactions.server";
 
 const defaultTransactionType: TransactionType = "balanceChange";
@@ -22,12 +24,16 @@ export type PageProps = {
   account: AccountDto;
   accounts: AccountDto[];
   balanceChangeCategories: BalanceChangeCategoryDto[];
+  values?: TransactionValues;
+  errors?: FormErrors<TransactionValues>;
 };
 
 export function Page({
   account,
   accounts,
   balanceChangeCategories,
+  values,
+  errors,
 }: PageProps) {
   const [transactionType, setTransactionType] = useState<TransactionType>(
     defaultTransactionType
@@ -48,9 +54,14 @@ export function Page({
           New Transaction
         </FormPageHeader>
         <div className="grid grid-cols-6 gap-x-4 gap-y-8">
-          <DateInput label="Date" groupClassName="col-span-2" name="date" />
+          <DateInput
+            label="Date"
+            groupClassName="col-span-2"
+            name="date"
+            defaultValue={values?.date}
+            error={errors?.date}
+          />
           <Combobox
-            name="accountId"
             label="Account"
             groupClassName="col-span-4"
             defaultValue={account.id}
@@ -63,7 +74,7 @@ export function Page({
           <RadioGroup<TransactionType>
             name="transactionType"
             groupClassName="col-start-1 col-span-6"
-            defaultValue={defaultTransactionType}
+            defaultValue={values?.type || defaultTransactionType}
             options={[
               { label: "Transfer", value: "transfer" },
               { label: "Balance Change", value: "balanceChange" },
@@ -75,7 +86,7 @@ export function Page({
             <>
               <RadioGroup<TransactionDirection>
                 name="transactionDirection"
-                defaultValue={defaultTransactionDirection}
+                defaultValue={values?.direction || defaultTransactionDirection}
                 onChange={setTransactionDirection}
                 groupClassName="col-span-2"
                 options={[
@@ -87,12 +98,14 @@ export function Page({
                 name="targetAccountId"
                 placeholder="Account"
                 groupClassName="col-span-4"
+                defaultValue={values?.targetAccountId || undefined}
                 options={accounts
                   .filter((a) => a.id !== account.id)
                   .map((a) => ({
                     primaryText: a.name,
                     value: a.id,
                   }))}
+                error={errors?.targetAccountId}
               />
             </>
           )}
@@ -102,7 +115,7 @@ export function Page({
               <RadioGroup<TransactionDirection>
                 name="transactionDirection"
                 groupClassName="col-span-2"
-                defaultValue={defaultTransactionDirection}
+                defaultValue={values?.direction || defaultTransactionDirection}
                 onChange={setTransactionDirection}
                 options={[
                   { label: "Inc.", value: "increase", variant: "positive" },
@@ -114,12 +127,14 @@ export function Page({
                 name="balanceChangeCategoryId"
                 placeholder="Category"
                 groupClassName="col-span-4"
+                defaultValue={values?.balanceChangeCategoryId || undefined}
                 options={balanceChangeCategories
                   .filter((c) => c.type === balanceChangeType)
                   .map((c) => ({
                     value: c.id,
                     primaryText: c.name,
                   }))}
+                error={errors?.balanceChangeCategoryId}
               />
             </>
           )}
@@ -128,7 +143,7 @@ export function Page({
             <RadioGroup<TransactionDirection>
               name="transactionDirection"
               groupClassName="col-span-6"
-              defaultValue={defaultTransactionDirection}
+              defaultValue={values?.direction || defaultTransactionDirection}
               onChange={setTransactionDirection}
               options={[
                 {
@@ -148,6 +163,8 @@ export function Page({
           <Input
             name="note"
             label="Note (optional)"
+            defaultValue={values?.note}
+            error={errors?.note}
             groupClassName="col-span-4"
           />
           <FormattedNumberInput
@@ -155,6 +172,8 @@ export function Page({
             groupClassName="col-span-2"
             label="Amount"
             adornment={account.currency || undefined}
+            defaultValue={values?.amount}
+            error={errors?.amount}
           />
         </div>
 

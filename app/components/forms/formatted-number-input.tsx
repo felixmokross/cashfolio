@@ -35,7 +35,7 @@ export function FormattedNumberInput({
         customInput={Input}
         inputMode="decimal"
       />
-      <input name={name} value={value || ""} type="hidden" />
+      <input name={name} value={value != null ? value : ""} type="hidden" />
     </>
   );
 }
