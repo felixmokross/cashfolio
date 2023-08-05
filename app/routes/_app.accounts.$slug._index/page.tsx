@@ -5,12 +5,12 @@ import type { SerializeFrom } from "@remix-run/node";
 import { Fragment, useState } from "react";
 import { LinkButton } from "~/components/link-button";
 import { Link } from "~/components/link";
-import { Button } from "~/components/button";
 import Modal from "~/components/modal";
 import { useFetcher } from "@remix-run/react";
 import type { GetReverseLedgerDateGroupsResultDto } from "~/ledgers-lines/types";
 import type { AccountDto } from "~/accounts/types";
 import { PageHeader } from "~/components/page-header";
+import { Dropdown } from "~/components/dropdown";
 
 export type PageProps = {
   account: AccountDto;
@@ -90,16 +90,17 @@ export function Page({
                   <td className="whitespace-nowrap py-4 pl-3 pr-1 text-right text-sm font-medium text-positive-600">
                     {line.amountFormatted}
                   </td>
-                  <td className="w-20">
-                    <Button
-                      variant="secondary"
-                      size="compact"
-                      onClick={() =>
-                        setTransactionToDelete(line.transaction.id)
-                      }
-                    >
-                      Delete
-                    </Button>
+                  <td className="w-6 pl-1">
+                    <Dropdown
+                      items={[
+                        {
+                          as: "button",
+                          onClick: () =>
+                            setTransactionToDelete(line.transaction.id),
+                          children: "Delete",
+                        },
+                      ]}
+                    />
                   </td>
                 </tr>
               ))}

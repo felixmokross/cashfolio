@@ -20,7 +20,10 @@ export function IconButton<T extends ElementType>({
   const Component = as || "button";
   const Icon = icon;
   return (
-    <Component className="text-gray-400 hover:text-gray-500" {...props}>
+    <Component
+      className="inline-block rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+      {...props}
+    >
       <span className="sr-only">{altText}</span>
       <Icon
         className={cn({
