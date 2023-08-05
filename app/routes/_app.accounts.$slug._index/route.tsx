@@ -3,7 +3,7 @@ import { json, redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/auth.server";
 import { getAccount, getAccounts } from "~/models/accounts.server";
-import { AccountPage } from "./account-page";
+import { Page } from "./page";
 import { useLoaderData } from "@remix-run/react";
 import { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
 import { createTransaction } from "~/models/transactions.server";
@@ -52,7 +52,7 @@ export default function Route() {
 
   return (
     <>
-      <AccountPage
+      <Page
         account={account}
         ledgerDateGroups={ledgerDateGroups}
         targetAccounts={targetAccounts}

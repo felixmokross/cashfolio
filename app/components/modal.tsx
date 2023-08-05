@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import type { PropsWithChildren } from "react";
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Button } from "./button";
 
 export type ModalProps = PropsWithChildren<{
@@ -22,10 +22,18 @@ export default function Modal({
   onConfirm,
   onDismiss,
 }: ModalProps) {
+  const [isLeaving, setIsLeaving] = useState(false);
   const cancelButtonRef = useRef(null);
 
+  const isDisabled = isBusy || isLeaving;
+
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root
+      show={open}
+      as={Fragment}
+      beforeLeave={() => setIsLeaving(true)}
+      afterLeave={() => setIsLeaving(false)}
+    >
       <Dialog
         as="div"
         className="relative z-10"
@@ -79,7 +87,7 @@ export default function Modal({
                     type="button"
                     onClick={() => onConfirm()}
                     className="ml-3"
-                    disabled={isBusy}
+                    disabled={isDisabled}
                   >
                     {confirmButtonText}
                   </Button>
@@ -88,7 +96,7 @@ export default function Modal({
                     type="button"
                     onClick={() => onDismiss()}
                     ref={cancelButtonRef}
-                    disabled={isBusy}
+                    disabled={isDisabled}
                   >
                     Cancel
                   </Button>

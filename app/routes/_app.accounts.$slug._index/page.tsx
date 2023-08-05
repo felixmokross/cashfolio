@@ -2,15 +2,16 @@ import { PencilIcon } from "@heroicons/react/20/solid";
 import { BookingType } from "@prisma/client";
 import type { BalanceChangeCategory, Account } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { LinkButton } from "~/components/link-button";
 import type { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
 import { NewTransactionForm } from "./new-transaction-form";
 import { Link } from "~/components/link";
 import { Button } from "~/components/button";
-import { useDeleteTransactionModal } from "./delete-transaction-modal";
+import Modal from "~/components/modal";
+import { useFetcher } from "@remix-run/react";
 
-export type AccountPageProps = {
+export type PageProps = {
   account: SerializeFrom<Account>;
   ledgerDateGroups: SerializeFrom<
     Awaited<ReturnType<typeof getReverseLedgerDateGroups>>
@@ -19,14 +20,14 @@ export type AccountPageProps = {
   balanceChangeCategories: SerializeFrom<BalanceChangeCategory>[];
 };
 
-export function AccountPage({
+export function Page({
   account,
   targetAccounts,
   ledgerDateGroups,
   balanceChangeCategories,
-}: AccountPageProps) {
-  const { deleteTransactionModal, deleteTransaction } =
-    useDeleteTransactionModal();
+}: PageProps) {
+  const deleteTransaction = useFetcher();
+  const [transactionToDelete, setTransactionToDelete] = useState<string>();
 
   return (
     <>
@@ -89,7 +90,9 @@ export function AccountPage({
                     <Button
                       variant="secondary"
                       size="compact"
-                      onClick={() => deleteTransaction(line.transaction.id)}
+                      onClick={() =>
+                        setTransactionToDelete(line.transaction.id)
+                      }
                     >
                       Delete
                     </Button>
@@ -107,7 +110,24 @@ export function AccountPage({
           </tr>
         </tbody>
       </table>
-      {deleteTransactionModal}
+      <Modal
+        title="Delete Transaction"
+        confirmButtonText="Delete"
+        open={!!transactionToDelete || deleteTransaction.state !== "idle"}
+        onDismiss={() => setTransactionToDelete(undefined)}
+        onConfirm={() => {
+          deleteTransaction.submit(null, {
+            action: `/transactions/${transactionToDelete}`,
+            method: "DELETE",
+          });
+          setTransactionToDelete(undefined);
+        }}
+        isBusy={deleteTransaction.state !== "idle"}
+      >
+        <p className="text-sm text-gray-500">
+          Are you sure that you want to delete this transaction?
+        </p>
+      </Modal>
     </>
   );
 }
