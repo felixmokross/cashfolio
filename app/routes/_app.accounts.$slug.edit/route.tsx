@@ -53,7 +53,7 @@ export async function loader({ request, params }: DataFunctionArgs) {
 }
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => [
-  { title: getTitle(data!.account.name) },
+  { title: getTitle(`Edit ${data!.account.name}`) },
 ];
 
 export default function Route() {
