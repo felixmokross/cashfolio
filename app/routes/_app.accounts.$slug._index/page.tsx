@@ -11,6 +11,7 @@ import Modal from "~/components/modal";
 import { useFetcher } from "@remix-run/react";
 import type { GetReverseLedgerDateGroupsResultDto } from "~/ledgers-lines/types";
 import type { AccountDto } from "~/accounts/types";
+import { PageHeader } from "~/components/page-header";
 
 export type PageProps = {
   account: AccountDto;
@@ -31,13 +32,15 @@ export function Page({
   return (
     <>
       <div className="px-4 sm:px-6">
-        <div className="mt-4 flex items-baseline justify-between ">
-          <h2 className="text-lg font-medium text-gray-800">{account.name}</h2>
-
-          <LinkButton to="edit" icon={PencilIcon}>
-            Edit
-          </LinkButton>
-        </div>
+        <PageHeader
+          actions={
+            <LinkButton to="edit" icon={PencilIcon}>
+              Edit
+            </LinkButton>
+          }
+        >
+          {account.name}
+        </PageHeader>
 
         <NewTransactionForm
           account={account}

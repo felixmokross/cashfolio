@@ -3,7 +3,7 @@ import { Form } from "@remix-run/react";
 import type { AccountFormProps } from "~/components/accounts";
 import { AccountFormFields } from "~/components/accounts";
 import { Button } from "~/components/button";
-import { PageHeader } from "~/components/page-header";
+import { FormPageHeader } from "~/components/form-page-header";
 
 export type PageProps = {
   errors: AccountFormProps["errors"];
@@ -15,9 +15,9 @@ export function Page({ data, errors, values }: PageProps) {
   return (
     <div className="flex justify-center">
       <Form method="post" className="flex max-w-lg flex-col gap-8 px-4 py-8">
-        <PageHeader icon={PlusIcon} variant="positive">
+        <FormPageHeader icon={PlusIcon} variant="positive">
           New Account
-        </PageHeader>
+        </FormPageHeader>
 
         <AccountFormFields data={data} errors={errors} values={values} />
 

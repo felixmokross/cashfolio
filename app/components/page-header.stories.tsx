@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PageHeader } from "./page-header";
 import { withRootLayout } from "../../.storybook/decorators/withRootLayout";
-import { PencilIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { PageHeader } from "./page-header";
+import { PlusIcon } from "@heroicons/react/20/solid";
+import { Button } from "./button";
 
 const meta: Meta<typeof PageHeader> = {
   title: "components/PageHeader",
@@ -13,18 +14,13 @@ export default meta;
 
 type Story = StoryObj<typeof PageHeader>;
 
-export const Positive: Story = {
+export const Default: Story = {
   args: {
-    children: "New Transaction",
-    icon: PlusIcon,
-    variant: "positive",
-  },
-};
-
-export const Neutral: Story = {
-  args: {
-    children: "Edit Transaction",
-    icon: PencilIcon,
-    variant: "neutral",
+    children: "Accounts",
+    actions: (
+      <>
+        <Button icon={PlusIcon}>New</Button>
+      </>
+    ),
   },
 };

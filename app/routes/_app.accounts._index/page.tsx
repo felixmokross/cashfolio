@@ -2,6 +2,7 @@ import { PlusIcon } from "@heroicons/react/20/solid";
 import { AccountList } from "./account-list";
 import { LinkButton } from "~/components/link-button";
 import type { AccountDto } from "~/accounts/types";
+import { PageHeader } from "~/components/page-header";
 
 export type PageProps = {
   accounts: AccountDto[];
@@ -10,13 +11,15 @@ export type PageProps = {
 export function Page({ accounts }: PageProps) {
   return (
     <div className="px-4 sm:px-6">
-      <div className="mt-4 flex items-baseline justify-between ">
-        <h2 className="text-lg font-medium text-gray-800">Accounts</h2>
-
-        <LinkButton to="new" icon={PlusIcon}>
-          New
-        </LinkButton>
-      </div>
+      <PageHeader
+        actions={
+          <LinkButton to="new" icon={PlusIcon}>
+            New
+          </LinkButton>
+        }
+      >
+        Accounts
+      </PageHeader>
 
       <AccountList
         className="mt-4"
