@@ -4,7 +4,14 @@ import { Input } from "./input";
 const meta: Meta<typeof Input> = {
   title: "components/forms/Input",
   component: Input,
-  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-64">
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

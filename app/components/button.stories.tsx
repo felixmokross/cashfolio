@@ -5,7 +5,6 @@ import { HomeIcon } from "@heroicons/react/20/solid";
 const meta: Meta<typeof Button> = {
   title: "components/Button",
   component: Button,
-  tags: ["autodocs"],
   argTypes: {
     children: {
       description: "The content of the button.",
@@ -22,6 +21,9 @@ const meta: Meta<typeof Button> = {
     icon: {
       control: false,
     },
+  },
+  parameters: {
+    layout: "centered",
   },
 };
 

@@ -5,7 +5,14 @@ import { getLocalesWithDisplayName } from "~/locales.server";
 const meta: Meta<typeof LocaleCombobox> = {
   title: "components/forms/LocaleCombobox",
   component: LocaleCombobox,
-  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-64">
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

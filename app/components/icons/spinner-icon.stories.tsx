@@ -4,7 +4,7 @@ import { SpinnerIcon } from "./spinner-icon";
 const meta: Meta<typeof SpinnerIcon> = {
   title: "components/icons/SpinnerIcon",
   component: SpinnerIcon,
-  tags: ["autodocs"],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

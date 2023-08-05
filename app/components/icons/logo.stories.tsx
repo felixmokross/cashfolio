@@ -4,7 +4,7 @@ import { Logo } from "./logo";
 const meta: Meta<typeof Logo> = {
   title: "components/icons/Logo",
   component: Logo,
-  tags: ["autodocs"],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

@@ -4,7 +4,14 @@ import { CurrencyCombobox } from "./currency-combobox";
 const meta: Meta<typeof CurrencyCombobox> = {
   title: "components/forms/CurrencyCombobox",
   component: CurrencyCombobox,
-  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-64">
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

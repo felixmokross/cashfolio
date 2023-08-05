@@ -4,7 +4,14 @@ import { ErrorMessage } from "./error-message";
 const meta: Meta<typeof ErrorMessage> = {
   title: "components/forms/ErrorMessage",
   component: ErrorMessage,
-  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-64">
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

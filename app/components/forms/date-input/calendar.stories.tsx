@@ -1,24 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Calendar } from "./calendar";
-import { I18nProvider } from "react-aria";
 import { CalendarDate } from "@internationalized/date";
+import { withAppProviders } from "../../../../.storybook/decorators/withAppProviders";
 
 const meta: Meta<typeof Calendar> = {
   title: "components/forms/Calendar",
   component: Calendar,
-  tags: ["autodocs"],
-  decorators: [
-    (Story, context) => (
-      <I18nProvider locale={context.globals.locale}>
-        <Story />
-      </I18nProvider>
-    ),
-    (Story) => (
-      <div className="flex h-screen items-center justify-center">
-        <Story />
-      </div>
-    ),
-  ],
+  decorators: [withAppProviders],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

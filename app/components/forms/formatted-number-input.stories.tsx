@@ -1,10 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { FormattedNumberInput } from "./formatted-number-input";
+import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
 
 const meta: Meta<typeof FormattedNumberInput> = {
   title: "components/forms/FormattedNumberInput",
   component: FormattedNumberInput,
-  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-64">
+        <Story />
+      </div>
+    ),
+    withAppProviders,
+  ],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

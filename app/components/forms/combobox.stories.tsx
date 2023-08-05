@@ -4,7 +4,14 @@ import { Combobox } from "./combobox";
 const meta: Meta<typeof Combobox> = {
   title: "components/forms/Combobox",
   component: Combobox,
-  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-64">
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

@@ -4,7 +4,7 @@ import { LogoSmall } from "./logo-small";
 const meta: Meta<typeof LogoSmall> = {
   title: "components/icons/LogoSmall",
   component: LogoSmall,
-  tags: ["autodocs"],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { LinkButton } from "./link-button";
 import { HomeIcon } from "@heroicons/react/20/solid";
+import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
 
 const meta: Meta<typeof LinkButton> = {
   title: "components/LinkButton",
   component: LinkButton,
-  tags: ["autodocs"],
   argTypes: {
     children: {
       description: "The content of the button.",
@@ -14,6 +14,10 @@ const meta: Meta<typeof LinkButton> = {
     icon: {
       control: false,
     },
+  },
+  decorators: [withAppProviders],
+  parameters: {
+    layout: "centered",
   },
 };
 

@@ -4,7 +4,14 @@ import { DetailedRadioGroup } from "./detailed-radio-group";
 const meta: Meta<typeof DetailedRadioGroup> = {
   title: "components/forms/DetailedRadioGroup",
   component: DetailedRadioGroup,
-  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-96">
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

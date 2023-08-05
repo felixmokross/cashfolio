@@ -4,7 +4,6 @@ import Modal from "./modal";
 const meta: Meta<typeof Modal> = {
   title: "components/Modal",
   component: Modal,
-  tags: ["autodocs"],
 };
 
 export default meta;
@@ -23,5 +22,13 @@ export const Default: Story = {
     ),
     confirmButtonText: "Deactivate",
     open: true,
+    isBusy: false,
+  },
+};
+
+export const Busy: Story = {
+  args: {
+    ...Default.args,
+    isBusy: true,
   },
 };

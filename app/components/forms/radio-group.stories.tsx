@@ -4,7 +4,14 @@ import { RadioGroup } from "./radio-group";
 const meta: Meta<typeof RadioGroup> = {
   title: "components/forms/RadioGroup",
   component: RadioGroup,
-  tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div className="w-64">
+        <Story />
+      </div>
+    ),
+  ],
+  parameters: { layout: "centered" },
 };
 
 export default meta;

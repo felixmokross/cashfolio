@@ -4,26 +4,13 @@ import type { AssetClass } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { createId } from "@paralleldrive/cuid2";
 import { formatISO } from "date-fns";
-import { Form } from "@remix-run/react";
+import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
+import { withRootLayout } from "../../.storybook/decorators/withRootLayout";
 
 const meta: Meta<typeof AccountFormFields> = {
   title: "components/AccountFormFields",
   component: AccountFormFields,
-  tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <Form>
-        <Story />
-      </Form>
-    ),
-    (Story) => (
-      <div className="flex items-center justify-center">
-        <div className="w-full max-w-screen-sm">
-          <Story />
-        </div>
-      </div>
-    ),
-  ],
+  decorators: [withAppProviders, withRootLayout],
 };
 
 export default meta;

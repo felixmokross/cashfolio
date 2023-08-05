@@ -1,18 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { DateInput } from "./date-input";
-import { I18nProvider } from "react-aria";
+import { withAppProviders } from "../../../../.storybook/decorators/withAppProviders";
 
 const meta: Meta<typeof DateInput> = {
   title: "components/forms/DateInput",
   component: DateInput,
-  tags: ["autodocs"],
   decorators: [
-    (Story, context) => (
-      <I18nProvider locale={context.globals.locale}>
+    (Story) => (
+      <div className="w-64">
         <Story />
-      </I18nProvider>
+      </div>
     ),
+    withAppProviders,
   ],
+  parameters: { layout: "centered" },
 };
 
 export default meta;
