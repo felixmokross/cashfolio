@@ -3,6 +3,7 @@ import { Form } from "@remix-run/react";
 import type { AccountFormProps } from "~/components/accounts";
 import { AccountFormFields } from "~/components/accounts";
 import { Button } from "~/components/button";
+import { PageHeading } from "~/components/page-heading";
 
 export type PageProps = {
   errors: AccountFormProps["errors"];
@@ -17,12 +18,9 @@ export function Page({ data, errors, values }: PageProps) {
   return (
     <div className="flex justify-center">
       <Form method="post" className="flex max-w-lg flex-col gap-8 p-4">
-        <div className="col-span-6 flex flex-col items-center gap-4">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-100">
-            <PencilIcon className="h-6 w-6 text-neutral-600" />
-          </span>
-          <h2 className="text-lg font-medium text-gray-800">Edit Account</h2>
-        </div>
+        <PageHeading icon={PencilIcon} variant="neutral">
+          Edit Account
+        </PageHeading>
 
         <AccountFormFields data={data} values={values} errors={errors} />
 
