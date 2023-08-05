@@ -1,4 +1,4 @@
-import { PencilIcon } from "@heroicons/react/20/solid";
+import { PencilIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { BookingType } from "@prisma/client";
 import type { BalanceChangeCategory } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
@@ -34,9 +34,18 @@ export function Page({
       <div className="px-4 sm:px-6">
         <PageHeader
           actions={
-            <LinkButton to="edit" icon={PencilIcon}>
-              Edit
-            </LinkButton>
+            <>
+              <LinkButton
+                variant="primary"
+                to="/transactions/new"
+                icon={PlusIcon}
+              >
+                New Transaction
+              </LinkButton>
+              <LinkButton to="edit" icon={PencilIcon}>
+                Edit
+              </LinkButton>
+            </>
           }
         >
           {account.name}

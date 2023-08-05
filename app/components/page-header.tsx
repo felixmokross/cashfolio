@@ -9,7 +9,7 @@ export function PageHeader({ children, actions }: PageHeaderProps) {
   return (
     <div className="mt-4 flex items-baseline justify-between">
       <PageHeading>{children}</PageHeading>
-      {actions}
+      <div className="flex items-baseline gap-2">{actions}</div>
     </div>
   );
 }
