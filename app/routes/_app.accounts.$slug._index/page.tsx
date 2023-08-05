@@ -1,22 +1,21 @@
 import { PencilIcon } from "@heroicons/react/20/solid";
 import { BookingType } from "@prisma/client";
-import type { BalanceChangeCategory, Account } from "@prisma/client";
+import type { BalanceChangeCategory } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Fragment, useState } from "react";
 import { LinkButton } from "~/components/link-button";
-import type { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
 import { NewTransactionForm } from "./new-transaction-form";
 import { Link } from "~/components/link";
 import { Button } from "~/components/button";
 import Modal from "~/components/modal";
 import { useFetcher } from "@remix-run/react";
+import type { GetReverseLedgerDateGroupsResultDto } from "~/ledgers-lines/types";
+import type { AccountDto } from "~/accounts/types";
 
 export type PageProps = {
-  account: SerializeFrom<Account>;
-  ledgerDateGroups: SerializeFrom<
-    Awaited<ReturnType<typeof getReverseLedgerDateGroups>>
-  >;
-  targetAccounts: SerializeFrom<Account>[];
+  account: AccountDto;
+  ledgerDateGroups: GetReverseLedgerDateGroupsResultDto;
+  targetAccounts: AccountDto[];
   balanceChangeCategories: SerializeFrom<BalanceChangeCategory>[];
 };
 

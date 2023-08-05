@@ -122,7 +122,7 @@ export type LedgerLine = Booking & {
   balance: Prisma.Decimal;
 };
 
-type Booking = Awaited<ReturnType<typeof getBookings>>[number];
+export type Booking = Awaited<ReturnType<typeof getBookings>>[number];
 
 async function getBookings({
   accountId,
