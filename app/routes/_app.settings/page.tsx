@@ -1,3 +1,4 @@
+import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import type { User } from "@prisma/client";
 import { Form, type useNavigation } from "@remix-run/react";
 import { Alert } from "~/components/alert";
@@ -5,6 +6,7 @@ import { Button } from "~/components/button";
 import { CurrencyCombobox } from "~/components/forms/currency-combobox";
 import { LocaleCombobox } from "~/components/forms/locale-combobox";
 import type { FormErrors } from "~/components/forms/types";
+import { PageHeading } from "~/components/page-heading";
 import { useUser } from "~/components/user-context";
 
 export type ActionData = {
@@ -33,9 +35,15 @@ export function Page({
 }: PageProps) {
   const { preferredLocale, refCurrency } = useUser();
   return (
-    <Form method="post" noValidate className="mx-auto flex max-w-sm flex-col">
+    <Form
+      method="post"
+      noValidate
+      className="mx-auto flex max-w-sm flex-col px-4 py-8"
+    >
       <fieldset disabled={state !== "idle"} className="contents">
-        <h2 className="mt-4 text-2xl font-semibold text-gray-900">Settings</h2>
+        <PageHeading icon={Cog6ToothIcon} variant="neutral">
+          Settings
+        </PageHeading>
 
         <div className="mt-10 flex flex-col gap-4">
           {message && state !== "submitting" && (
