@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PageHeading } from "./page-heading";
+import { PageHeader } from "./page-header";
 import { withRootLayout } from "../../.storybook/decorators/withRootLayout";
 import { PencilIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-const meta: Meta<typeof PageHeading> = {
-  title: "components/PageHeading",
-  component: PageHeading,
+const meta: Meta<typeof PageHeader> = {
+  title: "components/PageHeader",
+  component: PageHeader,
   decorators: [withRootLayout],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof PageHeading>;
+type Story = StoryObj<typeof PageHeader>;
 
 export const Positive: Story = {
   args: {

@@ -6,7 +6,7 @@ import { Button } from "~/components/button";
 import { CurrencyCombobox } from "~/components/forms/currency-combobox";
 import { LocaleCombobox } from "~/components/forms/locale-combobox";
 import type { FormErrors } from "~/components/forms/types";
-import { PageHeading } from "~/components/page-heading";
+import { PageHeader } from "~/components/page-header";
 import { useUser } from "~/components/user-context";
 
 export type ActionData = {
@@ -41,9 +41,9 @@ export function Page({
       className="mx-auto flex max-w-sm flex-col px-4 py-8"
     >
       <fieldset disabled={state !== "idle"} className="contents">
-        <PageHeading icon={Cog6ToothIcon} variant="neutral">
+        <PageHeader icon={Cog6ToothIcon} variant="neutral">
           Settings
-        </PageHeading>
+        </PageHeader>
 
         <div className="mt-10 flex flex-col gap-4">
           {message && state !== "submitting" && (
