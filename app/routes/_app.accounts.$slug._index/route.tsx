@@ -1,24 +1,13 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/auth.server";
 import { getAccount, getAccounts } from "~/models/accounts.server";
 import { Page } from "./page";
 import { useLoaderData } from "@remix-run/react";
 import { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
-import { createTransaction } from "~/models/transactions.server";
 import { getBalanceChangeCategories } from "~/models/balance-change-categories";
 import { getTitle } from "~/utils";
-
-export async function action({ request }: DataFunctionArgs) {
-  const userId = await requireUserId(request);
-
-  const form = await request.formData();
-
-  await createTransaction(form, userId);
-
-  return redirect(".");
-}
 
 export async function loader({ request, params }: DataFunctionArgs) {
   invariant(params.slug, "slug is required");

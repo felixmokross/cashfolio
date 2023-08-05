@@ -4,7 +4,6 @@ import type { BalanceChangeCategory } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Fragment, useState } from "react";
 import { LinkButton } from "~/components/link-button";
-import { NewTransactionForm } from "./new-transaction-form";
 import { Link } from "~/components/link";
 import { Button } from "~/components/button";
 import Modal from "~/components/modal";
@@ -37,7 +36,7 @@ export function Page({
             <>
               <LinkButton
                 variant="primary"
-                to="/transactions/new"
+                to={`/transactions/new?account=${account.slug}`}
                 icon={PlusIcon}
               >
                 New Transaction
@@ -50,12 +49,6 @@ export function Page({
         >
           {account.name}
         </PageHeader>
-
-        <NewTransactionForm
-          account={account}
-          targetAccounts={targetAccounts}
-          balanceChangeCategories={balanceChangeCategories}
-        />
       </div>
       <table className="mt-8 w-full">
         <tbody>
