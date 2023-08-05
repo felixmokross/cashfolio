@@ -2,24 +2,25 @@ import { Disclosure } from "@headlessui/react";
 import type { PropsWithChildren, Ref } from "react";
 import { forwardRef } from "react";
 import type { NavLinkProps as RemixNavLinkProps } from "@remix-run/react";
-import { Link, NavLink as RemixNavLink } from "@remix-run/react";
+import { NavLink as RemixNavLink } from "@remix-run/react";
 import { cn } from "./classnames";
 import { currenciesByCode } from "~/currencies";
 import { getDisplayNameOfLocale } from "~/utils";
 import { useUser } from "./user-context";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
+import { LinkIconButton } from "./icon-button";
 
 export function MainMenu() {
   const user = useUser();
   return (
     <>
       <div className="space-y-1 pb-3 pt-2">
-        <MainMenuLink to=".">Home</MainMenuLink>
-        <MainMenuLink to="accounts">Accounts</MainMenuLink>
-        <MainMenuLink to="asset-classes">Asset Classes</MainMenuLink>
-        <MainMenuLink to="balance-change-categories">
+        <MainMenuNavLink to=".">Home</MainMenuNavLink>
+        <MainMenuNavLink to="accounts">Accounts</MainMenuNavLink>
+        <MainMenuNavLink to="asset-classes">Asset Classes</MainMenuNavLink>
+        <MainMenuNavLink to="balance-change-categories">
           Balance Change Categories
-        </MainMenuLink>
+        </MainMenuNavLink>
       </div>
       <div className="border-t border-gray-200 pb-3 pt-4">
         <div className="flex items-center px-4">
@@ -41,26 +42,25 @@ export function MainMenu() {
           </div>
           <div className="flex-shrink-0">
             <Disclosure.Button
-              as={Link}
-              className="text-gray-400 hover:text-gray-500"
+              as={LinkIconButton}
               to="settings"
-            >
-              <span className="sr-only">Settings</span>
-              <Cog6ToothIcon className="h-6 w-6" />
-            </Disclosure.Button>
+              icon={Cog6ToothIcon}
+              altText="Settings"
+              size="large"
+            />
           </div>
         </div>
         <div className="mt-3 space-y-1">
-          <MainMenuLink to="logout">Log Out</MainMenuLink>
+          <MainMenuNavLink to="logout">Log Out</MainMenuNavLink>
         </div>
       </div>
     </>
   );
 }
 
-type MainMenuLinkProps = PropsWithChildren<{ to: NavLinkProps["to"] }>;
+type MainMenuNavLinkProps = PropsWithChildren<{ to: NavLinkProps["to"] }>;
 
-function MainMenuLink({ to, children }: MainMenuLinkProps) {
+function MainMenuNavLink({ to, children }: MainMenuNavLinkProps) {
   return (
     <Disclosure.Button as={NavLink} to={to}>
       {children}
