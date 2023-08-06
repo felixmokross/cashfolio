@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
 import "../app/tailwind.css";
-import { getLocalesWithDisplayName } from "../app/locales.server";
-import { currenciesByCode } from "../app/currencies";
+import { getLocalesWithDisplayName } from "../app/common/locales.server";
+import { currenciesByCode } from "../app/common/currencies";
 
 const availableLocales = [
   "en-US",
