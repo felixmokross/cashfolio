@@ -1,18 +1,18 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
-import { authorize } from "~/auth.server";
+import { authorize } from "~/common/auth.server";
 import {
   getLocales,
   getLocalesWithDisplayName,
   getSuggestedCurrencyForLocale,
-} from "~/locales.server";
+} from "~/common/locales.server";
 import { createUser, getUserIdByAuth0UserId } from "~/users/functions.server";
-import { getSession } from "~/session.server";
-import { safeRedirect, getTitle } from "~/utils";
+import { getSession } from "~/common/session.server";
+import { safeRedirect, getTitle } from "~/common/utils";
 import { pick } from "accept-language-parser";
-import type { FormErrors } from "~/components/forms/types";
-import { hasErrors } from "~/utils.server";
+import type { FormErrors } from "~/common/forms/types";
+import { hasErrors } from "~/common/utils.server";
 import type { SignupValues } from "./types";
 import { Page } from "./page";
 

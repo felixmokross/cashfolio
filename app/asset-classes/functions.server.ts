@@ -1,5 +1,5 @@
 import type { AssetClass } from "@prisma/client";
-import { prisma } from "~/prisma.server";
+import { prisma } from "~/common/prisma.server";
 
 export async function getAssetClasses(userId: AssetClass["userId"]) {
   return await prisma.assetClass.findMany({

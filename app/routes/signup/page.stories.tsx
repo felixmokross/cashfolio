@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Page } from "./page";
-import { getLocalesWithDisplayName } from "~/locales.server";
+import { getLocalesWithDisplayName } from "~/common/locales.server";
 import { withRootFrame } from "../../../.storybook/decorators/withRootFrame";
 import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
 

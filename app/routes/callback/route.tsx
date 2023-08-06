@@ -1,8 +1,8 @@
 import type { LoaderFunction } from "react-router";
 import invariant from "tiny-invariant";
-import { getOidcClient } from "~/auth.server";
-import { createUserSession } from "~/session.server";
-import { getLoginSession } from "~/login-session.server";
+import { getOidcClient } from "~/common/auth.server";
+import { createUserSession } from "~/common/session.server";
+import { getLoginSession } from "~/common/login-session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const oidcClient = await getOidcClient();

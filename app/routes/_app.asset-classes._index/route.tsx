@@ -1,10 +1,10 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { requireUserId } from "~/auth.server";
-import { LinkButton } from "~/components/link-button";
+import { requireUserId } from "~/common/auth.server";
+import { LinkButton } from "~/common/link-button";
 import { getAssetClasses } from "~/asset-classes/functions.server";
-import { getTitle } from "~/utils";
+import { getTitle } from "~/common/utils";
 
 export async function loader({ request }: DataFunctionArgs) {
   const userId = await requireUserId(request);

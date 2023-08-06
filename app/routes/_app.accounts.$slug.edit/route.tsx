@@ -2,8 +2,8 @@ import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import { requireUserId } from "~/auth.server";
-import type { FormActionData } from "~/components/forms/types";
+import { requireUserId } from "~/common/auth.server";
+import type { FormActionData } from "~/common/forms/types";
 import type { AccountValues } from "~/accounts/functions.server";
 import {
   getAccount,
@@ -13,8 +13,8 @@ import {
   validateAccountValues,
 } from "~/accounts/functions.server";
 import { getAssetClasses } from "~/asset-classes/functions.server";
-import { getTitle } from "~/utils";
-import { hasErrors } from "~/utils.server";
+import { getTitle } from "~/common/utils";
+import { hasErrors } from "~/common/utils.server";
 import { Page } from "./page";
 
 export async function action({ params, request }: DataFunctionArgs) {

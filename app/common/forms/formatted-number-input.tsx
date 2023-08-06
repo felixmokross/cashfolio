@@ -4,7 +4,7 @@ import type { InputProps } from "./input";
 import { Input } from "./input";
 import { useMemo, useState } from "react";
 import { useUser } from "../user-context";
-import { getNumberFormatSymbols } from "../../utils";
+import { getNumberFormatSymbols } from "../utils";
 
 export type FormattedNumberInputProps = NumericFormatProps<InputProps>;
 

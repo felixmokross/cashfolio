@@ -1,13 +1,13 @@
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import type { User } from "@prisma/client";
 import { Form, type useNavigation } from "@remix-run/react";
-import { Alert } from "~/components/alert";
-import { Button } from "~/components/button";
-import { CurrencyCombobox } from "~/components/forms/currency-combobox";
-import { LocaleCombobox } from "~/components/forms/locale-combobox";
-import type { FormErrors } from "~/components/forms/types";
-import { FormPageHeader } from "~/components/form-page-header";
-import { useUser } from "~/components/user-context";
+import { Alert } from "~/common/alert";
+import { Button } from "~/common/button";
+import { CurrencyCombobox } from "~/common/forms/currency-combobox";
+import { LocaleCombobox } from "~/common/forms/locale-combobox";
+import type { FormErrors } from "~/common/forms/types";
+import { FormPageHeader } from "~/common/form-page-header";
+import { useUser } from "~/common/user-context";
 
 export type ActionData = {
   errors: FormErrors<SettingsValues>;

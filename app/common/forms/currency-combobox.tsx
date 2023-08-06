@@ -1,4 +1,4 @@
-import { currencyItems } from "../../currencies";
+import { currencyItems } from "../currencies";
 import type { ComboboxProps } from "./combobox";
 import { Combobox } from "./combobox";
 

@@ -1,5 +1,5 @@
 import type { User } from "@prisma/client";
-import { prisma } from "~/prisma.server";
+import { prisma } from "~/common/prisma.server";
 
 export async function getUserIdByAuth0UserId(auth0UserId: User["auth0UserId"]) {
   return (

@@ -1,7 +1,7 @@
 import { AccountUnit } from "@prisma/client";
 import { Link } from "@remix-run/react";
 import type { AccountDto } from "~/accounts/types";
-import { useUser } from "~/components/user-context";
+import { useUser } from "~/common/user-context";
 
 export type AccountCardProps = {
   account: Pick<AccountDto, "name" | "slug" | "unit" | "currency">;

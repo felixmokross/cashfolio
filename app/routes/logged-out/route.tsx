@@ -1,8 +1,8 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { redirect } from "react-router";
-import { getSession } from "~/session.server";
-import { getTitle } from "~/utils";
+import { getSession } from "~/common/session.server";
+import { getTitle } from "~/common/utils";
 
 export async function loader({ request }: DataFunctionArgs) {
   // do not show this page if we are logged in

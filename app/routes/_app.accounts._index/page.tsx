@@ -1,8 +1,8 @@
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { AccountList } from "./account-list";
-import { LinkButton } from "~/components/link-button";
+import { LinkButton } from "~/common/link-button";
 import type { AccountDto } from "~/accounts/types";
-import { PageHeader } from "~/components/page-header";
+import { PageHeader } from "~/common/page-header";
 
 export type PageProps = {
   accounts: AccountDto[];

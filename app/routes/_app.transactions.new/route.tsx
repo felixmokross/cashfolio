@@ -1,7 +1,7 @@
 import { json, type DataFunctionArgs, redirect } from "@remix-run/node";
 import { Page } from "./page";
 import { getAccount, getAccounts } from "~/accounts/functions.server";
-import { requireUserId } from "~/auth.server";
+import { requireUserId } from "~/common/auth.server";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { getBalanceChangeCategories } from "~/balance-change-categories/functions.server";
 import invariant from "tiny-invariant";
@@ -11,8 +11,8 @@ import {
   getTransactionValues,
   validateTransactionValues,
 } from "~/transactions/functions.server";
-import { hasErrors } from "~/utils.server";
-import type { FormActionData } from "~/components/forms/types";
+import { hasErrors } from "~/common/utils.server";
+import type { FormActionData } from "~/common/forms/types";
 
 export async function loader({ request }: DataFunctionArgs) {
   const userId = await requireUserId(request);

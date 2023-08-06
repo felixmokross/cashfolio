@@ -1,7 +1,7 @@
 import { Decorator } from "@storybook/react";
 import { unstable_createRemixStub } from "@remix-run/testing";
 import { buildExtendedUserDto } from "../../app/users/builders";
-import { UserProvider } from "../../app/components/user-context";
+import { UserProvider } from "../../app/common/user-context";
 import { I18nProvider } from "react-aria";
 
 const user = buildExtendedUserDto();

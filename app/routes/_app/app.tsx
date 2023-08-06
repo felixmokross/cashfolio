@@ -1,7 +1,7 @@
 import { Outlet } from "@remix-run/react";
 import { I18nProvider } from "react-aria";
-import { NavBar } from "~/components/nav-bar";
-import { UserProvider } from "~/components/user-context";
+import { NavBar } from "~/common/nav-bar";
+import { UserProvider } from "~/common/user-context";
 import type { ExtendedUserDto } from "~/users/types";
 
 export type AppProps = {

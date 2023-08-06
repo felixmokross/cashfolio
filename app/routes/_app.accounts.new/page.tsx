@@ -4,8 +4,8 @@ import {
   AccountFormFields,
   type AccountFormFieldsProps,
 } from "~/accounts/account-form-fields";
-import { Button } from "~/components/button";
-import { FormPageHeader } from "~/components/form-page-header";
+import { Button } from "~/common/button";
+import { FormPageHeader } from "~/common/form-page-header";
 
 export type PageProps = {
   errors: AccountFormFieldsProps["errors"];

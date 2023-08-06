@@ -2,14 +2,14 @@ import type { Account } from "@prisma/client";
 import { AccountType, AccountUnit } from "@prisma/client";
 import slugify from "slugify";
 import invariant from "tiny-invariant";
-import type { FormErrors } from "~/components/forms/types";
-import { prisma } from "~/prisma.server";
+import type { FormErrors } from "~/common/forms/types";
+import { prisma } from "~/common/prisma.server";
 import {
   isValidDate,
   isValidDecimal,
   parseDate,
   parseDecimal,
-} from "~/utils.server";
+} from "~/common/utils.server";
 
 export async function getAccounts(userId: Account["userId"]) {
   return await prisma.account.findMany({ where: { userId } });

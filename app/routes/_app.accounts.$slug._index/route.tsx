@@ -1,13 +1,13 @@
 import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import invariant from "tiny-invariant";
-import { requireUserId } from "~/auth.server";
+import { requireUserId } from "~/common/auth.server";
 import { getAccount, getAccounts } from "~/accounts/functions.server";
 import { Page } from "./page";
 import { useLoaderData } from "@remix-run/react";
 import { getReverseLedgerDateGroups } from "~/ledgers-lines/functions.server";
 import { getBalanceChangeCategories } from "~/balance-change-categories/functions.server";
-import { getTitle } from "~/utils";
+import { getTitle } from "~/common/utils";
 
 export async function loader({ request, params }: DataFunctionArgs) {
   invariant(params.slug, "slug is required");

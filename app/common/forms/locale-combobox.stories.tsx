@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { LocaleCombobox } from "./locale-combobox";
-import { getLocalesWithDisplayName } from "~/locales.server";
+import { getLocalesWithDisplayName } from "~/common/locales.server";
 
 const meta: Meta<typeof LocaleCombobox> = {
   title: "components/forms/LocaleCombobox",

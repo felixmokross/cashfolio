@@ -5,7 +5,7 @@ import invariant from "tiny-invariant";
 import {
   getUserByAuth0UserId,
   getUserIdByAuth0UserId,
-} from "./users/functions.server";
+} from "../users/functions.server";
 import { getSession } from "./session.server";
 import { createLoginSession } from "./login-session.server";
 import { safeRedirect } from "./utils";

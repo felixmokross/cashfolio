@@ -4,8 +4,8 @@ import { BookingType, Prisma } from "@prisma/client";
 // import { prisma } from "~/db.server";
 // import { formatDate, formatMoney } from "~/formatting.server";
 import type { getAccount } from "../accounts/functions.server";
-import { prisma } from "~/prisma.server";
-import { formatDate, formatMoney } from "~/formatting.server";
+import { prisma } from "~/common/prisma.server";
+import { formatDate, formatMoney } from "~/common/formatting.server";
 
 const pageSize = 100;
 

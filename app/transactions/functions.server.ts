@@ -1,9 +1,9 @@
 import type { Transaction, User } from "@prisma/client";
 import { BookingType, Prisma } from "@prisma/client";
 import invariant from "tiny-invariant";
-import type { FormErrors } from "~/components/forms/types";
-import { prisma } from "~/prisma.server";
-import { isValidDecimal, parseDecimal } from "~/utils.server";
+import type { FormErrors } from "~/common/forms/types";
+import { prisma } from "~/common/prisma.server";
+import { isValidDecimal, parseDecimal } from "~/common/utils.server";
 
 export type TransactionType = "transfer" | "balanceChange" | "valueChange";
 export type TransactionDirection = "increase" | "decrease";

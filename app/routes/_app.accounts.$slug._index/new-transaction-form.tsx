@@ -7,12 +7,12 @@ import {
 import type { SerializeFrom } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import { useState } from "react";
-import { Button } from "~/components/button";
-import { Combobox } from "~/components/forms/combobox";
-import { DateInput } from "~/components/forms/date-input";
-import { FormattedNumberInput } from "~/components/forms/formatted-number-input";
-import { Input } from "~/components/forms/input";
-import { RadioGroup } from "~/components/forms/radio-group";
+import { Button } from "~/common/button";
+import { Combobox } from "~/common/forms/combobox";
+import { DateInput } from "~/common/forms/date-input";
+import { FormattedNumberInput } from "~/common/forms/formatted-number-input";
+import { Input } from "~/common/forms/input";
+import { RadioGroup } from "~/common/forms/radio-group";
 import type {
   TransactionType,
   TransactionDirection,

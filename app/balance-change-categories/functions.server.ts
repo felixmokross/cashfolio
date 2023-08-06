@@ -1,5 +1,5 @@
 import type { BalanceChangeCategory } from "@prisma/client";
-import { prisma } from "~/prisma.server";
+import { prisma } from "~/common/prisma.server";
 
 export async function getBalanceChangeCategories(
   userId: BalanceChangeCategory["userId"]

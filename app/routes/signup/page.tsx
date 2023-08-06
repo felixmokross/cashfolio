@@ -1,12 +1,12 @@
 import { Form } from "@remix-run/react";
-import { Button } from "~/components/button";
-import { CurrencyCombobox } from "~/components/forms/currency-combobox";
-import { LocaleCombobox } from "~/components/forms/locale-combobox";
+import { Button } from "~/common/button";
+import { CurrencyCombobox } from "~/common/forms/currency-combobox";
+import { LocaleCombobox } from "~/common/forms/locale-combobox";
 import type { SignupValues } from "./types";
-import type { FormErrors } from "~/components/forms/types";
-import { FormPageHeader } from "~/components/form-page-header";
+import type { FormErrors } from "~/common/forms/types";
+import { FormPageHeader } from "~/common/form-page-header";
 import { UserIcon } from "@heroicons/react/24/outline";
-import { NavBar } from "~/components/nav-bar";
+import { NavBar } from "~/common/nav-bar";
 
 export type PageProps = {
   suggestedLocale: string;

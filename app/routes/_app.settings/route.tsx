@@ -2,18 +2,18 @@ import type { DataFunctionArgs } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import type { ActionData, SettingsValues } from "./page";
 import { Page } from "./page";
-import { getLocalesWithDisplayName } from "~/locales.server";
+import { getLocalesWithDisplayName } from "~/common/locales.server";
 import {
   useActionData,
   useLoaderData,
   useNavigate,
   useNavigation,
 } from "@remix-run/react";
-import { requireUserId } from "~/auth.server";
+import { requireUserId } from "~/common/auth.server";
 import { updateUser } from "~/users/functions.server";
-import { getSession, sessionStorage } from "~/session.server";
-import type { FormErrors } from "~/components/forms/types";
-import { hasErrors } from "~/utils.server";
+import { getSession, sessionStorage } from "~/common/session.server";
+import type { FormErrors } from "~/common/forms/types";
+import { hasErrors } from "~/common/utils.server";
 
 export async function loader({ request }: DataFunctionArgs) {
   const session = await getSession(request);

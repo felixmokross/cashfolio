@@ -1,7 +1,7 @@
 import type { DataFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { requireUser } from "~/auth.server";
+import { requireUser } from "~/common/auth.server";
 import { App } from "./app";
 
 export async function loader({ request }: DataFunctionArgs) {
