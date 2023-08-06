@@ -39,7 +39,7 @@ export function Dropdown({ children }: DropdownProps) {
   );
 }
 
-export type DropdownItemProps<T extends ElementType = ElementType> = {
+export type DropdownItemProps<T extends ElementType = "button"> = {
   as?: T;
 } & Omit<ComponentPropsWithoutRef<T>, "as">;
 

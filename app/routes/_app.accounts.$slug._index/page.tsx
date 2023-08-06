@@ -10,7 +10,7 @@ import { useFetcher } from "@remix-run/react";
 import type { GetReverseLedgerDateGroupsResultDto } from "~/ledgers-lines/types";
 import type { AccountDto } from "~/accounts/types";
 import { PageHeader } from "~/components/page-header";
-import { Dropdown } from "~/components/dropdown";
+import { Dropdown, DropdownItem } from "~/components/dropdown";
 
 export type PageProps = {
   account: AccountDto;
@@ -91,16 +91,15 @@ export function Page({
                     {line.amountFormatted}
                   </td>
                   <td className="w-6 pl-1">
-                    <Dropdown
-                      items={[
-                        {
-                          as: "button",
-                          onClick: () =>
-                            setTransactionToDelete(line.transaction.id),
-                          children: "Delete",
-                        },
-                      ]}
-                    />
+                    <Dropdown>
+                      <DropdownItem
+                        onClick={() =>
+                          setTransactionToDelete(line.transaction.id)
+                        }
+                      >
+                        Delete
+                      </DropdownItem>
+                    </Dropdown>
                   </td>
                 </tr>
               ))}
