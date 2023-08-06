@@ -54,7 +54,7 @@ test.describe("unauthenticated", () => {
   test("login with redirect", async ({ page }) => {
     const user = await registerUser(createId());
 
-    await page.goto("/other");
+    await page.goto("/asset-classes");
 
     await expect(page).toHaveTitle(/Log in | Cashfolio/);
 
@@ -68,6 +68,6 @@ test.describe("unauthenticated", () => {
     // and this is the first login with this user
     await page.getByRole("button", { name: "Accept" }).click();
 
-    await expect(page).toHaveURL(/\/other$/);
+    await expect(page).toHaveURL(/\/asset-classes$/);
   });
 });
