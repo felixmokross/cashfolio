@@ -42,6 +42,7 @@ export function Page({
             autoFocus={true}
             error={errors?.preferredLocale}
             locales={locales}
+            formattingSampleDate={new Date()}
           />
 
           <CurrencyCombobox
