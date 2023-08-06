@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { AccountFormFields } from "./accounts";
 import type { AssetClass } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { createId } from "@paralleldrive/cuid2";
 import { formatISO } from "date-fns";
 import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
 import { withRootLayout } from "../../.storybook/decorators/withRootLayout";
+import { AccountFormFields } from "./account-form-fields";
 
 const meta: Meta<typeof AccountFormFields> = {
   title: "components/AccountFormFields",

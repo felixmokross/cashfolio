@@ -3,7 +3,7 @@ import { BookingType, Prisma } from "@prisma/client";
 // import { cache } from "~/cache.server";
 // import { prisma } from "~/db.server";
 // import { formatDate, formatMoney } from "~/formatting.server";
-import type { getAccount } from "./accounts.server";
+import type { getAccount } from "../accounts/functions.server";
 import { prisma } from "~/prisma.server";
 import { formatDate, formatMoney } from "~/formatting.server";
 

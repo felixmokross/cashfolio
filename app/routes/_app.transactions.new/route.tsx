@@ -1,6 +1,6 @@
 import { json, type DataFunctionArgs, redirect } from "@remix-run/node";
 import { Page } from "./page";
-import { getAccount, getAccounts } from "~/models/accounts.server";
+import { getAccount, getAccounts } from "~/accounts/functions.server";
 import { requireUserId } from "~/auth.server";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { getBalanceChangeCategories } from "~/models/balance-change-categories";

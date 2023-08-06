@@ -1,16 +1,16 @@
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { Form } from "@remix-run/react";
-import type { AccountFormProps } from "~/components/accounts";
-import { AccountFormFields } from "~/components/accounts";
+import type { AccountFormFieldsProps } from "~/accounts/account-form-fields";
+import { AccountFormFields } from "~/accounts/account-form-fields";
 import { Button } from "~/components/button";
 import { FormPageHeader } from "~/components/form-page-header";
 
 export type PageProps = {
-  errors: AccountFormProps["errors"];
-  values: AccountFormProps["values"];
+  errors: AccountFormFieldsProps["errors"];
+  values: AccountFormFieldsProps["values"];
   data: {
-    assetClasses: AccountFormProps["data"]["assetClasses"];
-    account: Required<AccountFormProps["data"]["account"]>;
+    assetClasses: AccountFormFieldsProps["data"]["assetClasses"];
+    account: Required<AccountFormFieldsProps["data"]["account"]>;
   };
 };
 

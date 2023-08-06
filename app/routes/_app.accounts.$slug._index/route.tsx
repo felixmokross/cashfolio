@@ -2,7 +2,7 @@ import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/auth.server";
-import { getAccount, getAccounts } from "~/models/accounts.server";
+import { getAccount, getAccounts } from "~/accounts/functions.server";
 import { Page } from "./page";
 import { useLoaderData } from "@remix-run/react";
 import { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";

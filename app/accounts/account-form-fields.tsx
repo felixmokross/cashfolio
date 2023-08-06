@@ -1,28 +1,26 @@
-import type { getAssetClasses } from "~/models/asset-classes.server";
 import { AccountType, AccountUnit } from "@prisma/client";
-import type { AccountValues, getAccount } from "~/models/accounts.server";
+import type { AccountValues } from "~/accounts/functions.server";
 import { useState } from "react";
-import type { FormProps } from "./forms/types";
-import { RadioGroup } from "./forms/radio-group";
-import { Input } from "./forms/input";
-import { Select } from "./forms/select";
-import { FormattedNumberInput } from "./forms/formatted-number-input";
-import { DetailedRadioGroup } from "./forms/detailed-radio-group";
-import { CurrencyCombobox } from "./forms/currency-combobox";
-import { DateInput } from "./forms/date-input";
+import type { FormProps } from "../components/forms/types";
+import { RadioGroup } from "../components/forms/radio-group";
+import { Input } from "../components/forms/input";
+import { Select } from "../components/forms/select";
+import { FormattedNumberInput } from "../components/forms/formatted-number-input";
+import { DetailedRadioGroup } from "../components/forms/detailed-radio-group";
+import { CurrencyCombobox } from "../components/forms/currency-combobox";
+import { DateInput } from "../components/forms/date-input";
+import type { AccountFormLoaderData } from "./types";
 
-export type AccountFormLoaderData = {
-  assetClasses: Awaited<ReturnType<typeof getAssetClasses>>;
-  account?: NonNullable<Awaited<ReturnType<typeof getAccount>>>;
-};
-
-export type AccountFormProps = FormProps<AccountValues, AccountFormLoaderData>;
+export type AccountFormFieldsProps = FormProps<
+  AccountValues,
+  AccountFormLoaderData
+>;
 
 export function AccountFormFields({
   data: { account, assetClasses },
   values,
   errors,
-}: AccountFormProps) {
+}: AccountFormFieldsProps) {
   const [type, setType] = useState(account?.type || AccountType.ASSET);
   const [unit, setUnit] = useState(account?.unit || AccountUnit.CURRENCY);
   const [currency, setCurrency] = useState(account?.currency || undefined);

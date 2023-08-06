@@ -2,7 +2,7 @@ import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
-import { getAccounts } from "~/models/accounts.server";
+import { getAccounts } from "~/accounts/functions.server";
 import { getTitle } from "~/utils";
 import { Page } from "./page";
 

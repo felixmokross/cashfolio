@@ -4,14 +4,14 @@ import { useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/auth.server";
 import type { FormActionData } from "~/components/forms/types";
-import type { AccountValues } from "~/models/accounts.server";
+import type { AccountValues } from "~/accounts/functions.server";
 import {
   getAccount,
   getAccountId,
   getAccountValues,
   updateAccount,
   validateAccountValues,
-} from "~/models/accounts.server";
+} from "~/accounts/functions.server";
 import { getAssetClasses } from "~/models/asset-classes.server";
 import { getTitle } from "~/utils";
 import { hasErrors } from "~/utils.server";
