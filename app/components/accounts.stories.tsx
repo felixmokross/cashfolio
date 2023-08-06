@@ -76,7 +76,7 @@ export const WithValues: Story = {
       assetClassId: cashAssetClassId,
       balanceAtStart: null,
       currency: "CHF",
-      openingDate: formatISO(new Date(), { representation: "date" }),
+      openingDate: formatISO(new Date(2023, 7, 5), { representation: "date" }),
       type: "LIABILITY",
       unit: "STOCK",
       preExisting: "on",
