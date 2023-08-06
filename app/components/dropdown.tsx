@@ -1,19 +1,17 @@
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
-import type { ComponentPropsWithoutRef, ElementType } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  ElementType,
+  PropsWithChildren,
+} from "react";
 import { Fragment } from "react";
 import { cn } from "./classnames";
 import { IconButton } from "./icon-button";
 
-export type DropdownProps = {
-  items: DropdownItem[];
-};
+export type DropdownProps = PropsWithChildren;
 
-export type DropdownItem<T extends ElementType = ElementType> = {
-  as?: T;
-} & Omit<ComponentPropsWithoutRef<T>, "as">;
-
-export function Dropdown({ items }: DropdownProps) {
+export function Dropdown({ children }: DropdownProps) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -34,26 +32,32 @@ export function Dropdown({ items }: DropdownProps) {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
-            {items.map((item, i) => (
-              <Menu.Item key={i}>
-                {({ active }) => {
-                  const Component = item.as || "button";
-                  return (
-                    <Component
-                      className={cn(
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block w-full px-4 py-2 text-left text-sm"
-                      )}
-                      {...item}
-                    />
-                  );
-                }}
-              </Menu.Item>
-            ))}
-          </div>
+          <div className="py-1">{children}</div>
         </Menu.Items>
       </Transition>
     </Menu>
+  );
+}
+
+export type DropdownItemProps<T extends ElementType = ElementType> = {
+  as?: T;
+} & Omit<ComponentPropsWithoutRef<T>, "as">;
+
+export function DropdownItem({ as, ...props }: DropdownItemProps) {
+  return (
+    <Menu.Item>
+      {({ active }) => {
+        const Component = as || "button";
+        return (
+          <Component
+            className={cn(
+              active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+              "block w-full px-4 py-2 text-left text-sm"
+            )}
+            {...props}
+          />
+        );
+      }}
+    </Menu.Item>
   );
 }

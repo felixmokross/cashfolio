@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Dropdown } from "./dropdown";
+import { Dropdown, DropdownItem } from "./dropdown";
 import { Link } from "@remix-run/react";
 import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
 
@@ -18,10 +18,16 @@ type Story = StoryObj<typeof Dropdown>;
 
 export const Default: Story = {
   args: {
-    items: [
-      { as: Link, to: "/settings", children: "Go to settings" },
-      { as: Link, to: "/other-page", children: "Other page" },
-      { as: "button", onClick: () => alert("hello"), children: "Button" },
-    ],
+    children: (
+      <>
+        <DropdownItem as={Link} to="/settings">
+          Go to settings
+        </DropdownItem>
+        <DropdownItem as={Link} to="/other-page">
+          Other page
+        </DropdownItem>
+        <DropdownItem onClick={() => alert("hello")}>Button</DropdownItem>
+      </>
+    ),
   },
 };
