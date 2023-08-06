@@ -16,7 +16,7 @@ import type {
   TransactionDirection,
   TransactionType,
   TransactionValues,
-} from "~/models/transactions.server";
+} from "~/transactions/functions.server";
 
 const defaultTransactionType: TransactionType = "balanceChange";
 

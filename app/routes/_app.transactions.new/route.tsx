@@ -3,14 +3,14 @@ import { Page } from "./page";
 import { getAccount, getAccounts } from "~/accounts/functions.server";
 import { requireUserId } from "~/auth.server";
 import { useActionData, useLoaderData } from "@remix-run/react";
-import { getBalanceChangeCategories } from "~/models/balance-change-categories";
+import { getBalanceChangeCategories } from "~/balance-change-categories/functions.server";
 import invariant from "tiny-invariant";
-import type { TransactionValues } from "~/models/transactions.server";
+import type { TransactionValues } from "~/transactions/functions.server";
 import {
   createTransaction,
   getTransactionValues,
   validateTransactionValues,
-} from "~/models/transactions.server";
+} from "~/transactions/functions.server";
 import { hasErrors } from "~/utils.server";
 import type { FormActionData } from "~/components/forms/types";
 

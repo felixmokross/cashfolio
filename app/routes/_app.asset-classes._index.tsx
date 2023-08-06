@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
 import { LinkButton } from "~/components/link-button";
-import { getAssetClasses } from "~/models/asset-classes.server";
+import { getAssetClasses } from "~/asset-classes/functions.server";
 import { getTitle } from "~/utils";
 
 export async function loader({ request }: DataFunctionArgs) {

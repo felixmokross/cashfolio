@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
 import { LinkButton } from "~/components/link-button";
-import { getBalanceChangeCategories } from "~/models/balance-change-categories";
+import { getBalanceChangeCategories } from "~/balance-change-categories/functions.server";
 import { getTitle } from "~/utils";
 
 export async function loader({ request }: DataFunctionArgs) {

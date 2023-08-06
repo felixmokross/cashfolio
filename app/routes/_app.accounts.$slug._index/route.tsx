@@ -5,8 +5,8 @@ import { requireUserId } from "~/auth.server";
 import { getAccount, getAccounts } from "~/accounts/functions.server";
 import { Page } from "./page";
 import { useLoaderData } from "@remix-run/react";
-import { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
-import { getBalanceChangeCategories } from "~/models/balance-change-categories";
+import { getReverseLedgerDateGroups } from "~/ledgers-lines/functions.server";
+import { getBalanceChangeCategories } from "~/balance-change-categories/functions.server";
 import { getTitle } from "~/utils";
 
 export async function loader({ request, params }: DataFunctionArgs) {

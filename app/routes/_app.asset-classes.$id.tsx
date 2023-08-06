@@ -9,7 +9,7 @@ import {
   assetClassExists,
   getAssetClass,
   updateAssetClass,
-} from "~/models/asset-classes.server";
+} from "~/asset-classes/functions.server";
 import { getTitle } from "~/utils";
 
 export async function action({ params, request }: DataFunctionArgs) {

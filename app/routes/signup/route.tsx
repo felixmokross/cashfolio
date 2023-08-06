@@ -7,7 +7,7 @@ import {
   getLocalesWithDisplayName,
   getSuggestedCurrencyForLocale,
 } from "~/locales.server";
-import { createUser, getUserIdByAuth0UserId } from "~/models/users.server";
+import { createUser, getUserIdByAuth0UserId } from "~/users/functions.server";
 import { getSession } from "~/session.server";
 import { safeRedirect, getTitle } from "~/utils";
 import { pick } from "accept-language-parser";

@@ -16,7 +16,7 @@ import { RadioGroup } from "~/components/forms/radio-group";
 import type {
   TransactionType,
   TransactionDirection,
-} from "~/models/transactions.server";
+} from "~/transactions/functions.server";
 
 export type NewTransactionFormProps = {
   account: SerializeFrom<Account>;

@@ -1,6 +1,6 @@
 import invariant from "tiny-invariant";
 import { auth0, getPlaywrightUserEmail } from "./common";
-import { createUser } from "~/models/users.server";
+import { createUser } from "~/users/functions.server";
 
 export async function registerUser(name: string) {
   const email = getPlaywrightUserEmail(name);

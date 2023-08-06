@@ -10,7 +10,7 @@ import {
   useNavigation,
 } from "@remix-run/react";
 import { requireUserId } from "~/auth.server";
-import { updateUser } from "~/models/users.server";
+import { updateUser } from "~/users/functions.server";
 import { getSession, sessionStorage } from "~/session.server";
 import type { FormErrors } from "~/components/forms/types";
 import { hasErrors } from "~/utils.server";

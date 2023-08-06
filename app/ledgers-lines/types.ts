@@ -1,5 +1,5 @@
 import type { SerializeFrom } from "@remix-run/node";
-import type { getReverseLedgerDateGroups } from "~/models/ledger-lines.server";
+import type { getReverseLedgerDateGroups } from "~/ledgers-lines/functions.server";
 
 export type GetReverseLedgerDateGroupsResultDto = SerializeFrom<
   Awaited<ReturnType<typeof getReverseLedgerDateGroups>>

@@ -9,7 +9,7 @@ import {
   getAccountValues,
   validateAccountValues,
 } from "~/accounts/functions.server";
-import { getAssetClasses } from "~/models/asset-classes.server";
+import { getAssetClasses } from "~/asset-classes/functions.server";
 import { getTitle } from "~/utils";
 import { hasErrors } from "~/utils.server";
 import { Page } from "./page";

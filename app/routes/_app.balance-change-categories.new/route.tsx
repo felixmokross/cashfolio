@@ -7,7 +7,7 @@ import { requireUserId } from "~/auth.server";
 import { Button } from "~/components/button";
 import { Input } from "~/components/forms/input";
 import { RadioGroup } from "~/components/forms/radio-group";
-import { createBalanceChangeCategory } from "~/models/balance-change-categories";
+import { createBalanceChangeCategory } from "~/balance-change-categories/functions.server";
 import { getTitle } from "~/utils";
 
 export async function action({ request }: DataFunctionArgs) {

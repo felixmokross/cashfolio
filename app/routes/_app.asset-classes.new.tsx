@@ -5,7 +5,7 @@ import invariant from "tiny-invariant";
 import { requireUserId } from "~/auth.server";
 import { Button } from "~/components/button";
 import { Input } from "~/components/forms/input";
-import { createAssetClass } from "~/models/asset-classes.server";
+import { createAssetClass } from "~/asset-classes/functions.server";
 import { getTitle } from "~/utils";
 
 export async function action({ request }: DataFunctionArgs) {
