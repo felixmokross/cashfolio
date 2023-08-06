@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { MainMenu } from "./main-menu";
 import { Disclosure } from "@headlessui/react";
-import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
 import { withRootLayout } from "../../.storybook/decorators/withRootLayout";
+import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
+import { buildExtendedUserDto } from "~/users/builders";
 
 const meta: Meta<typeof MainMenu> = {
   title: "components/MainMenu",
@@ -13,8 +14,8 @@ const meta: Meta<typeof MainMenu> = {
         <Story />
       </Disclosure>
     ),
-    withAppProviders,
     withRootLayout,
+    withAppProviders,
   ],
 };
 
@@ -23,5 +24,7 @@ export default meta;
 type Story = StoryObj<typeof MainMenu>;
 
 export const Primary: Story = {
-  args: {},
+  args: {
+    user: buildExtendedUserDto(),
+  },
 };

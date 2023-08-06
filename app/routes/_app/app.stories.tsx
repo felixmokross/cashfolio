@@ -6,6 +6,7 @@ import { Page as AccountListPage } from "../_app.accounts._index/page";
 import { Page as NewAccountPage } from "../_app.accounts.new/page";
 import { buildAccountDto } from "~/accounts/builders";
 import { buildExtendedUserDto } from "~/users/builders";
+import { withRootFrame } from "../../../.storybook/decorators/withRootFrame";
 
 const withMockedRoutesRemixStub: Decorator = (Story) => {
   const RemixStub = unstable_createRemixStub([
@@ -47,16 +48,6 @@ const withMockedRoutesRemixStub: Decorator = (Story) => {
     },
   ]);
   return <RemixStub />;
-};
-
-const withRootFrame: Decorator = (Story) => {
-  return (
-    <div className="bg-gray-50">
-      <div className="mx-auto min-h-screen max-w-screen-sm bg-white sm:border-x sm:border-gray-200 sm:shadow-xl">
-        <Story />
-      </div>
-    </div>
-  );
 };
 
 const meta: Meta<typeof App> = {

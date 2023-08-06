@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { NavBar } from "./nav-bar";
-import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
 import { withRootLayout } from "../../.storybook/decorators/withRootLayout";
+import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
+import { buildExtendedUserDto } from "~/users/builders";
 
 const meta: Meta<typeof NavBar> = {
   title: "components/NavBar",
@@ -14,6 +15,10 @@ export default meta;
 
 type Story = StoryObj<typeof NavBar>;
 
-export const Primary: Story = {
-  args: {},
+export const WithUser: Story = {
+  args: { user: buildExtendedUserDto() },
+};
+
+export const WithoutUser: Story = {
+  args: { user: undefined },
 };

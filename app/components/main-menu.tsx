@@ -6,12 +6,15 @@ import { NavLink as RemixNavLink } from "@remix-run/react";
 import { cn } from "./classnames";
 import { currenciesByCode } from "~/currencies";
 import { getDisplayNameOfLocale } from "~/utils";
-import { useUser } from "./user-context";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { LinkIconButton } from "./icon-button";
+import type { ExtendedUserDto } from "~/users/types";
 
-export function MainMenu() {
-  const user = useUser();
+export type MainMenuProps = {
+  user: ExtendedUserDto;
+};
+
+export function MainMenu({ user }: MainMenuProps) {
   return (
     <>
       <div className="space-y-1 pb-3 pt-2">
