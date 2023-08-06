@@ -8,25 +8,27 @@ export type LocaleComboboxProps = Omit<
 > & {
   defaultValue?: string;
   locales: [string, string][];
+  formattingSampleDate: Date;
 };
 
 export function LocaleCombobox({
   locales,
   defaultValue,
   groupClassName,
+  formattingSampleDate,
   ...props
 }: LocaleComboboxProps) {
   const [locale, setLocale] = useState(defaultValue);
   const formattingSamples = useMemo(
     () => [
       new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
-        new Date()
+        formattingSampleDate
       ),
       new Intl.NumberFormat(locale, {
         minimumFractionDigits: 2,
       }).format(45_678.9),
     ],
-    [locale]
+    [locale, formattingSampleDate]
   );
 
   return (

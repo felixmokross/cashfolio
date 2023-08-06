@@ -24,6 +24,7 @@ export type PageProps = {
   actionData?: ActionData;
   onAlertDismiss: () => void;
   state: ReturnType<typeof useNavigation>["state"];
+  formattingSampleDate: Date;
 };
 
 export function Page({
@@ -32,6 +33,7 @@ export function Page({
   actionData,
   onAlertDismiss,
   state,
+  formattingSampleDate,
 }: PageProps) {
   const { preferredLocale, refCurrency } = useUser();
   return (
@@ -55,6 +57,7 @@ export function Page({
             defaultValue={actionData?.values.preferredLocale || preferredLocale}
             error={actionData?.errors?.preferredLocale}
             locales={locales}
+            formattingSampleDate={formattingSampleDate}
           />
 
           <CurrencyCombobox

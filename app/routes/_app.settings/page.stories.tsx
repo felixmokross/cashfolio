@@ -18,6 +18,7 @@ export const Default: Story = {
   args: {
     locales: getLocalesWithDisplayName(),
     state: "idle",
+    formattingSampleDate: new Date("2021-01-23"),
   },
 };
 

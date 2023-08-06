@@ -97,6 +97,7 @@ export default function Route() {
       actionData={actionData}
       onAlertDismiss={() => navigate(".", { replace: true })}
       state={state}
+      formattingSampleDate={new Date()}
     />
   );
 }

@@ -35,7 +35,7 @@ export const Default: Story = {
         unit: AccountUnit.CURRENCY,
         currency: "USD",
         preExisting: false,
-        openingDate: new Date().toJSON(),
+        openingDate: new Date(2023, 7, 5).toJSON(),
         balanceAtStart: null,
         closingDate: null,
       }),

@@ -25,5 +25,6 @@ export const Default: Story = {
     name: "preferredLocale",
     locales: getLocalesWithDisplayName(),
     defaultValue: "en-US",
+    formattingSampleDate: new Date("2021-01-23"),
   },
 };
