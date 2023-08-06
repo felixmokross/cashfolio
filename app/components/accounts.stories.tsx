@@ -38,7 +38,9 @@ export const Default: Story = {
         createdAt: formatISO(new Date(), { representation: "date" }),
         updatedAt: formatISO(new Date(), { representation: "date" }),
         preExisting: false,
-        openingDate: formatISO(new Date(), { representation: "date" }),
+        openingDate: formatISO(new Date(2023, 7, 5), {
+          representation: "date",
+        }),
         balanceAtStart: null,
         closingDate: null,
         userId: createId(),
