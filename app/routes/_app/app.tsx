@@ -12,7 +12,7 @@ export function App({ user }: AppProps) {
   return (
     <I18nProvider locale={user.preferredLocale}>
       <UserProvider user={user}>
-        <NavBar />
+        <NavBar user={user} />
         <Outlet />
       </UserProvider>
     </I18nProvider>
