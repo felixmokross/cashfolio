@@ -43,7 +43,10 @@ export type DropdownItemProps<T extends ElementType = "button"> = {
   as?: T;
 } & Omit<ComponentPropsWithoutRef<T>, "as">;
 
-export function DropdownItem({ as, ...props }: DropdownItemProps) {
+export function DropdownItem<T extends ElementType>({
+  as,
+  ...props
+}: DropdownItemProps<T>) {
   return (
     <Menu.Item>
       {({ active }) => {
