@@ -3,7 +3,7 @@ import { BookingType } from "@prisma/client";
 import type { BalanceChangeCategory } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Fragment, useState } from "react";
-import { LinkButton } from "~/common/link-button";
+import { LinkButton } from "~/common/buttons/link-button";
 import { Link } from "~/common/link";
 import Modal from "~/common/modal";
 import { useFetcher } from "@remix-run/react";
@@ -50,7 +50,7 @@ export function Page({
           {account.name}
         </PageHeader>
       </div>
-      <table className="mt-8 w-full">
+      <table className="mt-4 w-full">
         <tbody>
           {ledgerDateGroups.groups.map((group) => (
             <Fragment key={group.date}>

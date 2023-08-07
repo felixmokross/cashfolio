@@ -3,7 +3,7 @@ import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
-import { Button } from "~/common/button";
+import { Button } from "~/common/buttons/button";
 import { Input } from "~/common/forms/input";
 import { createAssetClass } from "~/asset-classes/functions.server";
 import { getTitle } from "~/common/utils";

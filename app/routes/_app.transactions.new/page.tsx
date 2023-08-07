@@ -4,7 +4,7 @@ import { Form } from "@remix-run/react";
 import { useState } from "react";
 import type { AccountDto } from "~/accounts/types";
 import type { BalanceChangeCategoryDto } from "~/balance-change-categories/types";
-import { Button } from "~/common/button";
+import { Button } from "~/common/buttons/button";
 import { FormPageHeader } from "~/common/form-page-header";
 import { Combobox } from "~/common/forms/combobox";
 import { DateInput } from "~/common/forms/date-input";

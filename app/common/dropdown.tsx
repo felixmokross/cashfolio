@@ -7,7 +7,7 @@ import type {
 } from "react";
 import { Fragment } from "react";
 import { cn } from "./classnames";
-import { IconButton } from "./icon-button";
+import { IconButton } from "./buttons/icon-button";
 
 export type DropdownProps = PropsWithChildren;
 

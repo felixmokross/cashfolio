@@ -2,7 +2,7 @@ import { PencilIcon } from "@heroicons/react/24/outline";
 import { Form } from "@remix-run/react";
 import type { AccountFormFieldsProps } from "~/accounts/account-form-fields";
 import { AccountFormFields } from "~/accounts/account-form-fields";
-import { Button } from "~/common/button";
+import { Button } from "~/common/buttons/button";
 import { FormPageHeader } from "~/common/form-page-header";
 
 export type PageProps = {

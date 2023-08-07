@@ -3,7 +3,7 @@ import { Button } from "./button";
 import { HomeIcon } from "@heroicons/react/20/solid";
 
 const meta: Meta<typeof Button> = {
-  title: "components/Button",
+  title: "components/buttons/Button",
   component: Button,
   argTypes: {
     children: {

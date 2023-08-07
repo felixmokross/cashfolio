@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef, ElementType } from "react";
-import { cn } from "./classnames";
-import type { IconComponentType } from "./icons/types";
+import { cn } from "../classnames";
+import type { IconComponentType } from "../icons/types";
 import { Link } from "@remix-run/react";
 
 export type IconButtonProps<T extends ElementType> = {

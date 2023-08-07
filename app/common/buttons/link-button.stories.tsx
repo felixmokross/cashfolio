@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { LinkButton } from "./link-button";
 import { HomeIcon } from "@heroicons/react/20/solid";
-import { withAppProviders } from "./storybook";
+import { withAppProviders } from "../storybook";
 
 const meta: Meta<typeof LinkButton> = {
-  title: "components/LinkButton",
+  title: "components/buttons/LinkButton",
   component: LinkButton,
   argTypes: {
     children: {

@@ -4,7 +4,7 @@ import {
   AccountFormFields,
   type AccountFormFieldsProps,
 } from "~/accounts/account-form-fields";
-import { Button } from "~/common/button";
+import { Button } from "~/common/buttons/button";
 import { FormPageHeader } from "~/common/form-page-header";
 
 export type PageProps = {

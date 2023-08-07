@@ -7,7 +7,7 @@ import {
 import type { SerializeFrom } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import { useState } from "react";
-import { Button } from "~/common/button";
+import { Button } from "~/common/buttons/button";
 import { Combobox } from "~/common/forms/combobox";
 import { DateInput } from "~/common/forms/date-input";
 import { FormattedNumberInput } from "~/common/forms/formatted-number-input";

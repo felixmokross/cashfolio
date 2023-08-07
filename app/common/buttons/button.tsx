@@ -5,8 +5,8 @@ import type {
   ElementType,
   PropsWithChildren,
 } from "react";
-import { cn } from "./classnames";
-import type { IconComponentType } from "./icons/types";
+import { cn } from "../classnames";
+import type { IconComponentType } from "../icons/types";
 
 function buttonClassName(size: ButtonSize, variant: ButtonVariant) {
   return {

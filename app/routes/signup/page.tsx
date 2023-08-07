@@ -1,5 +1,5 @@
 import { Form } from "@remix-run/react";
-import { Button } from "~/common/button";
+import { Button } from "~/common/buttons/button";
 import { CurrencyCombobox } from "~/common/forms/currency-combobox";
 import { LocaleCombobox } from "~/common/forms/locale-combobox";
 import type { SignupValues } from "./types";

@@ -7,7 +7,7 @@ export type PageHeaderProps = PropsWithChildren<{
 
 export function PageHeader({ children, actions }: PageHeaderProps) {
   return (
-    <div className="mt-4 flex items-baseline justify-between">
+    <div className="flex items-baseline justify-between pt-4">
       <PageHeading>{children}</PageHeading>
       <div className="flex items-baseline gap-2">{actions}</div>
     </div>

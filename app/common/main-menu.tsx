@@ -7,7 +7,7 @@ import { cn } from "./classnames";
 import { currenciesByCode } from "~/common/currencies";
 import { getDisplayNameOfLocale } from "~/common/utils";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
-import { LinkIconButton } from "./icon-button";
+import { LinkIconButton } from "./buttons/icon-button";
 import type { ExtendedUserDto } from "~/users/types";
 
 export type MainMenuProps = {
