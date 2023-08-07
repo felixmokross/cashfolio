@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { DateInput } from "./date-input";
-import { withAppProviders } from "../../../../.storybook/decorators/withAppProviders";
+import { withAppProviders } from "~/common/storybook";
 
 const meta: Meta<typeof DateInput> = {
   title: "components/forms/DateInput",

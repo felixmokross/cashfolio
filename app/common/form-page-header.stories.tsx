@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { FormPageHeader } from "./form-page-header";
-import { withRootLayout } from "../../.storybook/decorators/withRootLayout";
 import { PencilIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { withPageMaxWidth } from "./storybook";
 
 const meta: Meta<typeof FormPageHeader> = {
   title: "components/FormPageHeader",
   component: FormPageHeader,
-  decorators: [withRootLayout],
+  decorators: [withPageMaxWidth],
 };
 
 export default meta;

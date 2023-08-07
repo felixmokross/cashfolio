@@ -7,7 +7,7 @@ import {
   HomeIcon,
 } from "@heroicons/react/20/solid";
 import { Cog6ToothIcon as OutlineCog6ToothIcon } from "@heroicons/react/24/outline";
-import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
+import { withAppProviders } from "./storybook";
 
 const meta: Meta<typeof IconButton> = {
   title: "components/IconButton",

@@ -1,13 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Page } from "./page";
 import { getLocalesWithDisplayName } from "~/common/locales.server";
-import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
-import { withRootLayout } from "../../../.storybook/decorators/withRootLayout";
+import { withAppProviders, withPageMaxWidth } from "~/common/storybook";
 
 const meta: Meta<typeof Page> = {
   title: "routes/_app/settings/Page",
   component: Page,
-  decorators: [withAppProviders, withRootLayout],
+  decorators: [withAppProviders, withPageMaxWidth],
 };
 
 export default meta;

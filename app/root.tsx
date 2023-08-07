@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import styles from "./tailwind.css";
+import { Container } from "./common/container";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
@@ -33,12 +34,12 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-gray-50 antialiased">
-        <div className="mx-auto min-h-screen max-w-screen-sm bg-white sm:border-x sm:border-gray-200 sm:shadow-xl">
+        <Container>
           <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </div>
+        </Container>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
       </body>
     </html>
   );

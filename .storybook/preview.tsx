@@ -1,7 +1,9 @@
-import type { Preview } from "@storybook/react";
+import type { Decorator, Preview } from "@storybook/react";
 import "../app/tailwind.css";
 import { getLocalesWithDisplayName } from "../app/common/locales.server";
 import { currenciesByCode } from "../app/common/currencies";
+import { unstable_createRemixStub } from "@remix-run/testing";
+import React from "react";
 
 const availableLocales = [
   "en-US",
@@ -14,6 +16,17 @@ const availableLocales = [
   "es-ES",
   "es-CO",
 ];
+
+const withRemix: Decorator = (Story) => {
+  const RemixStub = unstable_createRemixStub([
+    {
+      path: "/*",
+      element: <Story />,
+    },
+  ]);
+
+  return <RemixStub />;
+};
 
 const preview: Preview = {
   parameters: {
@@ -54,6 +67,7 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [withRemix],
 };
 
 export default preview;

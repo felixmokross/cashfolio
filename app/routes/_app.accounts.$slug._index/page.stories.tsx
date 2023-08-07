@@ -1,15 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Page } from "./page";
 import { createId } from "@paralleldrive/cuid2";
-import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
-import { withRootLayout } from "../../../.storybook/decorators/withRootLayout";
 import { buildAccountDto } from "~/accounts/builders";
 import { buildGetReverseLedgerDateGroupsResultDto } from "~/ledgers-lines/builders";
+import { withAppProviders, withPageMaxWidth } from "~/common/storybook";
 
 const meta: Meta<typeof Page> = {
   title: "routes/_app/accounts/$slug/_index/Page",
   component: Page,
-  decorators: [withAppProviders, withRootLayout],
+  decorators: [withAppProviders, withPageMaxWidth],
 };
 
 export default meta;

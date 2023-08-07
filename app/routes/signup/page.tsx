@@ -25,7 +25,7 @@ export function Page({
 }: PageProps) {
   return (
     <>
-      <NavBar />
+      <NavBar /> {/*  TODO this should be in a layout */}
       <Form
         method="post"
         noValidate

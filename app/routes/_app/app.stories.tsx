@@ -1,62 +1,14 @@
-import type { Decorator, Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { App } from "./app";
-import { unstable_createRemixStub } from "@remix-run/testing";
-import { Navigate } from "react-router-dom";
-import { Page as AccountListPage } from "../_app.accounts._index/page";
-import { Page as NewAccountPage } from "../_app.accounts.new/page";
-import { buildAccountDto } from "~/accounts/builders";
 import { buildExtendedUserDto } from "~/users/builders";
-import { withRootFrame } from "../../../.storybook/decorators/withRootFrame";
-
-const withMockedRoutesRemixStub: Decorator = (Story) => {
-  const RemixStub = unstable_createRemixStub([
-    {
-      element: <Story />,
-      children: [
-        { path: "/", element: <Navigate to="/accounts" /> },
-        {
-          path: "/accounts",
-          element: (
-            <AccountListPage
-              accounts={[
-                buildAccountDto({ name: "Checking", slug: "checking" }),
-                buildAccountDto({ name: "Savings", slug: "savings" }),
-                buildAccountDto({
-                  name: "Foreign",
-                  slug: "foreign",
-                  currency: "EUR",
-                }),
-              ]}
-            />
-          ),
-        },
-        {
-          path: "/accounts/new",
-          element: (
-            <NewAccountPage
-              data={{ assetClasses: [] }}
-              errors={{}}
-              values={undefined}
-            />
-          ),
-        },
-        {
-          path: "/*",
-          element: <p>Unsupported route</p>,
-        },
-      ],
-    },
-  ]);
-  return <RemixStub />;
-};
+import { PageHeader } from "~/common/page-header";
+import { withContainer } from "~/common/storybook";
 
 const meta: Meta<typeof App> = {
   title: "routes/_app/App",
   component: App,
-  decorators: [withRootFrame, withMockedRoutesRemixStub],
-  parameters: {
-    layout: "fullscreen",
-  },
+  decorators: [withContainer],
+  parameters: { layout: "fullscreen" },
 };
 
 export default meta;
@@ -66,5 +18,10 @@ type Story = StoryObj<typeof App>;
 export const Default: Story = {
   args: {
     user: buildExtendedUserDto(),
+    children: (
+      <>
+        <PageHeader>Example Header</PageHeader>
+      </>
+    ),
   },
 };

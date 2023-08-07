@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Alert } from "./alert";
-import { withRootLayout } from "../../.storybook/decorators/withRootLayout";
+import { withPageMaxWidth } from "./storybook";
 
 const meta: Meta<typeof Alert> = {
   title: "components/Alert",
@@ -11,7 +11,7 @@ const meta: Meta<typeof Alert> = {
       table: { type: { summary: "React.ReactNode" } },
     },
   },
-  decorators: [withRootLayout],
+  decorators: [withPageMaxWidth],
 };
 
 export default meta;

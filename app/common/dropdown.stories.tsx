@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Dropdown, DropdownItem } from "./dropdown";
 import { Link } from "@remix-run/react";
-import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
+import { withAppProviders } from "./storybook";
 
 const meta: Meta<typeof Dropdown> = {
   title: "components/Dropdown",

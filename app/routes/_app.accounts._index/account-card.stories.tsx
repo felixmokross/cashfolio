@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { AccountCard } from "./account-card";
 import { AccountUnit } from "@prisma/client";
-import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
 import { buildAccountDto } from "~/accounts/builders";
+import { withAppProviders } from "~/common/storybook";
 
 const meta: Meta<typeof AccountCard> = {
   title: "routes/_app/accounts/_index/AccountCard",

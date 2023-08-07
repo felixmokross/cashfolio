@@ -1,16 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Page } from "./page";
 import { getLocalesWithDisplayName } from "~/common/locales.server";
-import { withRootFrame } from "../../../.storybook/decorators/withRootFrame";
-import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
+import { withContainer } from "~/common/storybook";
 
 const meta: Meta<typeof Page> = {
   title: "routes/signup/Page",
   component: Page,
-  decorators: [withRootFrame, withAppProviders],
-  parameters: {
-    layout: "fullscreen",
-  },
+  decorators: [withContainer],
+  parameters: { layout: "fullscreen" },
 };
 
 export default meta;

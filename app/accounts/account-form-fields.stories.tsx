@@ -3,14 +3,13 @@ import type { AssetClass } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { createId } from "@paralleldrive/cuid2";
 import { formatISO } from "date-fns";
-import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
-import { withRootLayout } from "../../.storybook/decorators/withRootLayout";
 import { AccountFormFields } from "./account-form-fields";
+import { withAppProviders, withPageMaxWidth } from "~/common/storybook";
 
 const meta: Meta<typeof AccountFormFields> = {
   title: "components/AccountFormFields",
   component: AccountFormFields,
-  decorators: [withAppProviders, withRootLayout],
+  decorators: [withPageMaxWidth, withAppProviders],
 };
 
 export default meta;

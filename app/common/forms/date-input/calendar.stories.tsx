@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Calendar } from "./calendar";
 import { CalendarDate } from "@internationalized/date";
-import { withAppProviders } from "../../../../.storybook/decorators/withAppProviders";
+import { withAppProviders } from "~/common/storybook";
 
 const meta: Meta<typeof Calendar> = {
   title: "components/forms/Calendar",

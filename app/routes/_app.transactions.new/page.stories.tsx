@@ -1,15 +1,14 @@
-import { withRootLayout } from "../../../.storybook/decorators/withRootLayout";
-import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Page } from "./page";
 import { buildAccountDto } from "~/accounts/builders";
 import { buildBalanceChangeCategoryDto } from "~/balance-change-categories/builders";
 import { BalanceChangeType } from "@prisma/client";
+import { withAppProviders, withPageMaxWidth } from "~/common/storybook";
 
 const meta: Meta<typeof Page> = {
   title: "routes/_app/transactions/new/Page",
   component: Page,
-  decorators: [withAppProviders, withRootLayout],
+  decorators: [withAppProviders, withPageMaxWidth],
 };
 
 export default meta;

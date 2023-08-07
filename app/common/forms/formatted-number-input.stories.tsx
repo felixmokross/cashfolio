@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { FormattedNumberInput } from "./formatted-number-input";
-import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
+import { withAppProviders } from "../storybook";
 
 const meta: Meta<typeof FormattedNumberInput> = {
   title: "components/forms/FormattedNumberInput",

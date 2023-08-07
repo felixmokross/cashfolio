@@ -1,6 +1,6 @@
 import type { DataFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import { requireUser } from "~/common/auth.server";
 import { App } from "./app";
 
@@ -11,5 +11,9 @@ export async function loader({ request }: DataFunctionArgs) {
 
 export default function Route() {
   const user = useLoaderData<typeof loader>();
-  return <App user={user} />;
+  return (
+    <App user={user}>
+      <Outlet />
+    </App>
+  );
 }

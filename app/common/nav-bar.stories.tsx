@@ -1,13 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { NavBar } from "./nav-bar";
-import { withRootLayout } from "../../.storybook/decorators/withRootLayout";
-import { withAppProviders } from "../../.storybook/decorators/withAppProviders";
 import { buildExtendedUserDto } from "~/users/builders";
+import { withAppProviders, withPageMaxWidth } from "./storybook";
 
 const meta: Meta<typeof NavBar> = {
   title: "components/NavBar",
   component: NavBar,
-  decorators: [withAppProviders, withRootLayout],
+  decorators: [withAppProviders, withPageMaxWidth],
   parameters: { layout: "fullscreen" },
 };
 

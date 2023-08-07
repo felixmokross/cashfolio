@@ -2,13 +2,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { AccountList } from "./account-list";
 import { AccountUnit } from "@prisma/client";
 import { buildAccountDto } from "~/accounts/builders";
-import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
-import { withRootLayout } from "../../../.storybook/decorators/withRootLayout";
+import { withAppProviders, withPageMaxWidth } from "~/common/storybook";
 
 const meta: Meta<typeof AccountList> = {
   title: "routes/_app/accounts/_index/AccountList",
   component: AccountList,
-  decorators: [withAppProviders, withRootLayout],
+  decorators: [withPageMaxWidth, withAppProviders],
 };
 
 export default meta;

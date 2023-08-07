@@ -2,15 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Page } from "./page";
 import { createId } from "@paralleldrive/cuid2";
 import { AccountType, AccountUnit } from "@prisma/client";
-import { withAppProviders } from "../../../.storybook/decorators/withAppProviders";
-import { withRootLayout } from "../../../.storybook/decorators/withRootLayout";
 import { buildAssetClassDto } from "~/asset-classes/builders";
 import { buildAccountDto } from "~/accounts/builders";
+import { withAppProviders, withPageMaxWidth } from "~/common/storybook";
 
 const meta: Meta<typeof Page> = {
   title: "routes/_app/accounts/$slug/edit/Page",
   component: Page,
-  decorators: [withAppProviders, withRootLayout],
+  decorators: [withAppProviders, withPageMaxWidth],
 };
 
 export default meta;
