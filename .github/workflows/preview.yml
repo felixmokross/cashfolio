@@ -16,20 +16,23 @@ jobs:
           version: 0.1.117
       - run: |
           DB_PW=$(openssl rand -hex 32)
+          GITHUB_SHA_SHORT=${GITHUB_SHA::8}
+          APP_NAME=$PREFIX-$GITHUB_SHA_SHORT
+          DB_APP_NAME=$APP_NAME-db
           flyctl postgres create --name $DB_APP_NAME --region cdg --password $DB_PW --initial-cluster-size 1 --vm-size shared-cpu-1x --volume-size 1
           flyctl apps create --name $APP_NAME
           flyctl postgres attach $DB_APP_NAME --app $APP_NAME
           flyctl secrets set SESSION_SECRET=$(openssl rand -hex 32) \
             BASE_URL="https://$APP_NAME.fly.dev" \
             OIDC_ISSUER=$OIDC_ISSUER \
-            OIDC_CLIENT_ID=$OIDC_CLIENT_ID \ 
+            OIDC_CLIENT_ID=$OIDC_CLIENT_ID \
             OIDC_CLIENT_SECRET=$OIDC_CLIENT_SECRET \
             --app $APP_NAME --stage
           flyctl deploy --app $APP_NAME
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-          APP_NAME: cashfolio-preview-${{ github.sha }}
-          DB_APP_NAME: cashfolio-preview-${{ github.sha }}-db
+          GITHUB_SHA: ${{ github.sha }}
+          PREFIX: cashfolio-preview
           OIDC_ISSUER: ${{ secrets.OIDC_ISSUER }}
           OIDC_CLIENT_ID: ${{ secrets.OIDC_CLIENT_ID }}
           OIDC_CLIENT_SECRET: ${{ secrets.OIDC_CLIENT_SECRET }}
