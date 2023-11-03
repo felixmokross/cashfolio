@@ -8,7 +8,7 @@
     "deploy": "fly deploy --remote-only",
     "dev:remix": "remix dev",
     "dev": "concurrently --raw npm:dev:*",
-    "start": "remix-serve build",
+    "start": "remix-serve ./build/index.js",
     "typecheck": "tsc",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "test": "vitest",
