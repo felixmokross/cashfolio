@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: $NODE_VERSION
+          node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
       - run: npm run lint -- --max-warnings=0
 
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: $NODE_VERSION
+          node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
       - run: npm run typecheck
 
@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: $NODE_VERSION
+          node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
       - run: npm run test
 
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: $NODE_VERSION
+          node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
       - name: Start database
         run: docker-compose up -d && sleep 3
@@ -89,7 +89,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: $NODE_VERSION
+          node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
       - run: npm run chromatic -- --exit-once-uploaded --only-changed
         env:
