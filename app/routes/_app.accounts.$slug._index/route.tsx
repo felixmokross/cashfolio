@@ -1,4 +1,4 @@
-import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
+import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
@@ -36,7 +36,7 @@ export async function loader({ request, params }: DataFunctionArgs) {
   });
 }
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) => [
+export const meta: MetaFunction<typeof loader> = ({ data }) => [
   { title: getTitle(data!.account.name) },
 ];
 

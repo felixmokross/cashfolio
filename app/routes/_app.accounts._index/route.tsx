@@ -1,4 +1,4 @@
-import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
+import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/common/auth.server";
@@ -11,7 +11,7 @@ export async function loader({ request }: DataFunctionArgs) {
   return json({ accounts: await getAccounts(userId) });
 }
 
-export const meta: V2_MetaFunction = () => [{ title: getTitle("Accounts") }];
+export const meta: MetaFunction = () => [{ title: getTitle("Accounts") }];
 
 export default function Route() {
   const { accounts } = useLoaderData<typeof loader>();

@@ -1,4 +1,4 @@
-import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
+import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
@@ -52,7 +52,7 @@ export async function loader({ request, params }: DataFunctionArgs) {
   return json({ assetClasses, account });
 }
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) => [
+export const meta: MetaFunction<typeof loader> = ({ data }) => [
   { title: getTitle(`Edit ${data!.account.name}`) },
 ];
 

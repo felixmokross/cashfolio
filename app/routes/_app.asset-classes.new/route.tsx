@@ -1,4 +1,4 @@
-import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
+import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import invariant from "tiny-invariant";
@@ -22,7 +22,7 @@ export async function action({ request }: DataFunctionArgs) {
   return redirect("/asset-classes");
 }
 
-export const meta: V2_MetaFunction = () => [
+export const meta: MetaFunction = () => [
   { title: getTitle("New Asset Class") },
 ];
 

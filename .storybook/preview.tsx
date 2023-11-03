@@ -2,7 +2,7 @@ import type { Decorator, Preview } from "@storybook/react";
 import "../app/tailwind.css";
 import { getLocalesWithDisplayName } from "../app/common/locales.server";
 import { currenciesByCode } from "../app/common/currencies";
-import { unstable_createRemixStub } from "@remix-run/testing";
+import { createRemixStub } from "@remix-run/testing";
 import React from "react";
 
 const availableLocales = [
@@ -18,10 +18,10 @@ const availableLocales = [
 ];
 
 const withRemix: Decorator = (Story) => {
-  const RemixStub = unstable_createRemixStub([
+  const RemixStub = createRemixStub([
     {
       path: "/*",
-      element: <Story />,
+      Component: Story,
     },
   ]);
 

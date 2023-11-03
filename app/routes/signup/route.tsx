@@ -1,4 +1,4 @@
-import type { DataFunctionArgs, V2_MetaFunction } from "@remix-run/node";
+import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { authorize } from "~/common/auth.server";
@@ -96,7 +96,7 @@ function validateSignupValues({ preferredLocale, refCurrency }: SignupValues) {
   return errors;
 }
 
-export const meta: V2_MetaFunction = () => [
+export const meta: MetaFunction = () => [
   { title: getTitle("Complete Signup") },
 ];
 
