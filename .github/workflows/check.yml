@@ -1,6 +1,5 @@
 name: Check
 on:
-  pull_request:
   workflow_call:
     secrets:
       SESSION_SECRET:
