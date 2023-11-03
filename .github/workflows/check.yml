@@ -2,6 +2,23 @@ name: Check
 on:
   pull_request:
   workflow_call:
+    secrets:
+      SESSION_SECRET:
+        required: true
+      OIDC_ISSUER:
+        required: true
+      OIDC_CLIENT_ID:
+        required: true
+      OIDC_CLIENT_SECRET:
+        required: true
+      PLAYWRIGHT_TESTS_AUTH0_DOMAIN:
+        required: true
+      PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID:
+        required: true
+      PLAYWRIGHT_TESTS_AUTH0_CLIENT_SECRET:
+        required: true
+      CHROMATIC_PROJECT_TOKEN:
+        required: true
 
 env:
   NODE_VERSION: 20
