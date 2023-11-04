@@ -10,6 +10,8 @@ jobs:
     environment:
       name: preview
       url: ${{ env.APP_URL }}
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
@@ -30,6 +32,13 @@ jobs:
           APP_URL=https://$APP_NAME.fly.dev
           echo App URL is $APP_URL
           echo "APP_URL=$APP_URL" >> $GITHUB_ENV
+      - name: Delete if exists
+        run: |
+          flyctl apps destroy --yes --app $APP_NAME || true
+          flyctl apps destroy --yes --app $DB_APP_NAME || true
+        env:
+          APP_NAME: ${{ env.APP_NAME }}
+          DB_APP_NAME: ${{ env.DB_APP_NAME }}
       - name: Create App and DB
         run: |
           DB_PW=$(openssl rand -hex 32)
@@ -53,7 +62,6 @@ jobs:
         env:
           APP_NAME: ${{ env.APP_NAME }}
           DB_APP_NAME: ${{ env.DB_APP_NAME }}
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           PREVIEW_DEPLOYMENT_OIDC_ISSUER: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_ISSUER }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET }}
@@ -61,4 +69,3 @@ jobs:
         run: flyctl deploy --app $APP_NAME
         env:
           APP_NAME: ${{ env.APP_NAME }}
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
