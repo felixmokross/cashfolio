@@ -6,9 +6,23 @@ jobs:
   check:
     uses: ./.github/workflows/check.yml
     secrets: inherit
+  app_name:
+    name: App name
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          GITHUB_SHA_SHORT=${GITHUB_SHA::8}
+          APP_NAME=cashfolio-preview-$GITHUB_SHA_SHORT
+          echo "APP_NAME=$APP_NAME" >> $GITHUB_ENV
+          echo "DB_APP_NAME=$APP_NAME-db" >> $GITHUB_ENV
   deploy:
     name: Preview
     runs-on: ubuntu-latest
+    environment:
+      name: preview
+      url: ${{ env.APP_NAME }}
+    needs: app_name
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
@@ -16,9 +30,6 @@ jobs:
           version: 0.1.117
       - run: |
           DB_PW=$(openssl rand -hex 32)
-          GITHUB_SHA_SHORT=${GITHUB_SHA::8}
-          APP_NAME=$PREFIX-$GITHUB_SHA_SHORT
-          DB_APP_NAME=$APP_NAME-db
 
           echo Creating Postgres cluster $DB_APP_NAME:
           flyctl postgres create --name $DB_APP_NAME --region cdg --password $DB_PW --initial-cluster-size 1 --vm-size shared-cpu-1x --volume-size 1
@@ -41,8 +52,6 @@ jobs:
           flyctl deploy --app $APP_NAME
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-          GITHUB_SHA: ${{ github.sha }}
-          PREFIX: cashfolio-preview
           PREVIEW_DEPLOYMENT_OIDC_ISSUER: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_ISSUER }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET }}
