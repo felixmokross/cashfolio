@@ -22,10 +22,13 @@ jobs:
 
           APP_NAME=cashfolio-preview-$GITHUB_SHA_SHORT
           echo App name is $APP_NAME
-          echo "APP_URL=https://$APP_NAME.fly.dev" >> $GITHUB_ENV
 
           DB_APP_NAME=$APP_NAME-db
           echo DB app name is $DB_APP_NAME
+
+          APP_URL=https://$APP_NAME.fly.dev
+          echo App URL is $APP_URL
+          echo "APP_URL=$APP_URL" >> $GITHUB_ENV
 
           DB_PW=$(openssl rand -hex 32)
 
