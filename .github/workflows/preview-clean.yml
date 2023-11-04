@@ -15,16 +15,23 @@ jobs:
           version: 0.1.117
       - run: |
           flyctl apps list --json \
-            | jq '[
-                .[]
-                  | { ID:.ID, LastReleasedAt: .CurrentRelease.CreatedAt }
-                  | select(.ID | test("^cashfolio-preview-[0-9a-f]{8}$"))
-              ]
-                | sort_by(.LastReleasedAt)
-                | reverse
-                | .[3:]
-                | map(.ID, .ID + "-db")
-                .[]' \
-            | xargs -I {} flyctl apps destroy --yes {}
+          | jq '[
+              .[]
+                | { ID:.ID, LastReleasedAt: .CurrentRelease.CreatedAt }
+                | select(.ID | test("^cashfolio-preview-[0-9a-f]{8}$"))
+            ]'
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+  # flyctl apps list --json \
+  # | jq '[
+  #     .[]
+  #       | { ID:.ID, LastReleasedAt: .CurrentRelease.CreatedAt }
+  #       | select(.ID | test("^cashfolio-preview-[0-9a-f]{8}$"))
+  #   ]
+  #     | sort_by(.LastReleasedAt)
+  #     | reverse
+  #     | .[3:]
+  #     | map(.ID, .ID + "-db")
+  #     .[]' \
+  # | xargs -I {} flyctl apps destroy --yes {}
