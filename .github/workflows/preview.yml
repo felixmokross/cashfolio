@@ -6,11 +6,17 @@ jobs:
   check:
     uses: ./.github/workflows/check.yml
     secrets: inherit
-  app_name:
-    name: App Name
+  deploy:
+    name: Preview
     runs-on: ubuntu-latest
+    environment:
+      name: preview
+      url: ${{ env.APP_NAME }}
     steps:
       - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+        with:
+          version: 0.1.117
       - run: |
           GITHUB_SHA_SHORT=${GITHUB_SHA::8}
 
@@ -20,20 +26,8 @@ jobs:
 
           DB_APP_NAME=$APP_NAME-db
           echo DB app name is $DB_APP_NAME
-          echo "DB_APP_NAME=b" >> $GITHUB_ENV
-  deploy:
-    name: Preview
-    runs-on: ubuntu-latest
-    environment:
-      name: preview
-      url: ${{ env.APP_NAME }}
-    needs: app_name
-    steps:
-      - uses: actions/checkout@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-        with:
-          version: 0.1.117
-      - run: |
+          echo "DB_APP_NAME=$DB_APP_NAME" >> $GITHUB_ENV
+
           DB_PW=$(openssl rand -hex 32)
 
           echo Creating Postgres cluster $DB_APP_NAME:
@@ -56,8 +50,6 @@ jobs:
           echo Deploying app:
           flyctl deploy --app $APP_NAME
         env:
-          APP_NAME: ${{ env.APP_NAME }}
-          DB_APP_NAME: ${{ env.DB_APP_NAME }}
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           PREVIEW_DEPLOYMENT_OIDC_ISSUER: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_ISSUER }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID }}
