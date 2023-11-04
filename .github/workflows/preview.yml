@@ -17,22 +17,26 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
         with:
           version: 0.1.117
-      - run: |
+      - name: Generate App Name
+        run: |
           GITHUB_SHA_SHORT=${GITHUB_SHA::8}
 
           APP_NAME=cashfolio-preview-$GITHUB_SHA_SHORT
           echo App name is $APP_NAME
+          echo "APP_NAME=$APP_NAME" >> $GITHUB_ENV
 
           DB_APP_NAME=$APP_NAME-db
           echo DB app name is $DB_APP_NAME
+          echo "DB_APP_NAME=$DB_APP_NAME" >> $GITHUB_ENV
 
           APP_URL=https://$APP_NAME.fly.dev
           echo App URL is $APP_URL
           echo "APP_URL=$APP_URL" >> $GITHUB_ENV
-
+      - name: Create App and DB
+        run: |
           DB_PW=$(openssl rand -hex 32)
 
-          echo Creating Postgres cluster $DB_APP_NAME:
+          echo Creating postgres cluster $DB_APP_NAME:
           flyctl postgres create --name $DB_APP_NAME --region cdg --password $DB_PW --initial-cluster-size 1 --vm-size shared-cpu-1x --volume-size 1
 
           echo Creating app $APP_NAME:
@@ -48,11 +52,15 @@ jobs:
             OIDC_CLIENT_ID=$PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID \
             OIDC_CLIENT_SECRET=$PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET \
             --app $APP_NAME --stage
-
-          echo Deploying app:
-          flyctl deploy --app $APP_NAME
         env:
+          APP_NAME: ${{ env.APP_NAME }}
+          DB_APP_NAME: ${{ env.DB_APP_NAME }}
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           PREVIEW_DEPLOYMENT_OIDC_ISSUER: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_ISSUER }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET }}
+      - name: Deploy
+        run: flyctl deploy --app $APP_NAME
+        env:
+          APP_NAME: ${{ env.APP_NAME }}
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
