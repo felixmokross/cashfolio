@@ -1,5 +1,7 @@
 # Cashfolio
 
+[![Deploy](https://github.com/felixmokross/cashfolio/actions/workflows/deploy.yml/badge.svg?branch=main&event=deployment_status)](https://github.com/felixmokross/cashfolio/actions/workflows/deploy.yml)
+
 ## Development
 
 Install dependencies:
