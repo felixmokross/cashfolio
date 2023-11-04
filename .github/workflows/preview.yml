@@ -1,11 +1,9 @@
 name: Preview
 on:
   pull_request:
+  workflow_dispatch:
 
 jobs:
-  check:
-    uses: ./.github/workflows/check.yml
-    secrets: inherit
   deploy:
     name: Preview
     runs-on: ubuntu-latest
