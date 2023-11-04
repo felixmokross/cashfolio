@@ -34,8 +34,8 @@ jobs:
           echo "APP_URL=$APP_URL" >> $GITHUB_ENV
       - name: Delete if exists
         run: |
-          flyctl apps destroy --yes --app $APP_NAME || true
-          flyctl apps destroy --yes --app $DB_APP_NAME || true
+          flyctl apps destroy --yes $APP_NAME || true
+          flyctl apps destroy --yes $DB_APP_NAME || true
         env:
           APP_NAME: ${{ env.APP_NAME }}
           DB_APP_NAME: ${{ env.DB_APP_NAME }}
