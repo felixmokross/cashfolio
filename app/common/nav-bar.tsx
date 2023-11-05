@@ -1,6 +1,6 @@
 import { Disclosure } from "@headlessui/react";
 import { Link } from "@remix-run/react";
-import { LogoSmall } from "./icons/logo-small";
+import { LogoSmall } from "./base/icons/logo-small";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
 import { MainMenu } from "./main-menu";
 import type { ExtendedUserDto } from "~/users/types";

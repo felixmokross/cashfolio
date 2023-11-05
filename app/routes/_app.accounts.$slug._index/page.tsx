@@ -3,14 +3,14 @@ import { BookingType } from "@prisma/client";
 import type { BalanceChangeCategory } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Fragment, useState } from "react";
-import { LinkButton } from "~/common/buttons/link-button";
-import { Link } from "~/common/link";
-import Modal from "~/common/modal";
+import { LinkButton } from "~/common/base/buttons/link-button";
+import { Link } from "~/common/base/link";
+import Modal from "~/common/base/modal";
 import { useFetcher } from "@remix-run/react";
 import type { GetReverseLedgerDateGroupsResultDto } from "~/ledgers-lines/types";
 import type { AccountDto } from "~/accounts/types";
 import { PageHeader } from "~/common/page-header";
-import { Dropdown, DropdownItem } from "~/common/dropdown";
+import { Dropdown, DropdownItem } from "~/common/base/dropdown";
 
 export type PageProps = {
   account: AccountDto;

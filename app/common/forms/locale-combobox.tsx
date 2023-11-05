@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import type { ComboboxProps } from "./combobox";
-import { Combobox } from "./combobox";
+import type { ComboboxProps } from "../base/forms/combobox";
+import { Combobox } from "../base/forms/combobox";
 
 export type LocaleComboboxProps = Omit<
   ComboboxProps,

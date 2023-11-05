@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { PageHeader } from "./page-header";
 import { Cog6ToothIcon, PlusIcon } from "@heroicons/react/20/solid";
-import { Button } from "./buttons/button";
+import { Button } from "./base/buttons/button";
 import { withPageMaxWidth } from "./storybook";
 
 const meta: Meta<typeof PageHeader> = {

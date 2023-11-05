@@ -2,7 +2,7 @@ import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/common/auth.server";
-import { LinkButton } from "~/common/buttons/link-button";
+import { LinkButton } from "~/common/base/buttons/link-button";
 import { getBalanceChangeCategories } from "~/balance-change-categories/functions.server";
 import { getTitle } from "~/common/utils";
 

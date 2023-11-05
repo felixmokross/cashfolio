@@ -4,13 +4,13 @@ import { Form } from "@remix-run/react";
 import { useState } from "react";
 import type { AccountDto } from "~/accounts/types";
 import type { BalanceChangeCategoryDto } from "~/balance-change-categories/types";
-import { Button } from "~/common/buttons/button";
+import { Button } from "~/common/base/buttons/button";
 import { FormPageHeader } from "~/common/form-page-header";
-import { Combobox } from "~/common/forms/combobox";
-import { DateInput } from "~/common/forms/date-input";
-import { FormattedNumberInput } from "~/common/forms/formatted-number-input";
-import { Input } from "~/common/forms/input";
-import { RadioGroup } from "~/common/forms/radio-group";
+import { Combobox } from "~/common/base/forms/combobox";
+import { DateInput } from "~/common/base/forms/date-input";
+import { FormattedNumberInput } from "~/common/base/forms/formatted-number-input";
+import { Input } from "~/common/base/forms/input";
+import { RadioGroup } from "~/common/base/forms/radio-group";
 import type { FormErrors } from "~/common/forms/types";
 import type {
   TransactionDirection,

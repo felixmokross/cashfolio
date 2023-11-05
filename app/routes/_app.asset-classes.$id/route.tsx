@@ -3,8 +3,8 @@ import { redirect, json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
-import { Button } from "~/common/buttons/button";
-import { Input } from "~/common/forms/input";
+import { Button } from "~/common/base/buttons/button";
+import { Input } from "~/common/base/forms/input";
 import {
   assetClassExists,
   getAssetClass,
