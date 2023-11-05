@@ -8,7 +8,7 @@ export type PageProps = {
   assetClasses: AssetClassDto[];
 };
 
-export default function Page({ assetClasses }: PageProps) {
+export function Page({ assetClasses }: PageProps) {
   return (
     <div className="space-y-2">
       <PageHeader
