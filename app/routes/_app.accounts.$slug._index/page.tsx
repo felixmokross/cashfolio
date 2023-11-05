@@ -1,4 +1,4 @@
-import { PencilIcon, PlusIcon } from "@heroicons/react/20/solid";
+import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { BookingType } from "@prisma/client";
 import type { BalanceChangeCategory } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
@@ -93,6 +93,7 @@ export function Page({
                   <td className="w-6 pl-1">
                     <Dropdown>
                       <DropdownItem
+                        icon={TrashIcon}
                         onClick={() =>
                           setTransactionToDelete(line.transaction.id)
                         }
