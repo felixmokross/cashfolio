@@ -18,7 +18,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     {
       code_verifier: loginSession.get("codeVerifier"),
       state: loginSession.get("state"),
-    }
+    },
   );
 
   const claims = tokenSet.claims();

@@ -40,7 +40,7 @@ test.describe("unauthenticated", () => {
     await page.getByRole("button", { name: "Accept" }).click();
 
     await expect(
-      page.getByRole("heading", { name: "Complete Signup" })
+      page.getByRole("heading", { name: "Complete Signup" }),
     ).toBeVisible();
 
     await page.getByRole("combobox", { name: "Main Currency" }).type("CHF");

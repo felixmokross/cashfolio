@@ -14,13 +14,13 @@ export function FormattedNumberInput({
   ...props
 }: FormattedNumberInputProps) {
   const [value, setValue] = useState<number | undefined>(
-    defaultValue != null ? Number(defaultValue) : undefined
+    defaultValue != null ? Number(defaultValue) : undefined,
   );
 
   const { preferredLocale } = useUser();
   const { thousandSeparator, decimalSeparator } = useMemo(
     () => getNumberFormatSymbols(preferredLocale),
-    [preferredLocale]
+    [preferredLocale],
   );
 
   return (

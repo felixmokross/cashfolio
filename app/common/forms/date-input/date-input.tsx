@@ -93,7 +93,7 @@ export function DateInput({
             "border-transparent": size === "compact",
           },
           disabled && "cursor-not-allowed bg-gray-50 opacity-50",
-          className
+          className,
         )}
       >
         <input
@@ -163,7 +163,7 @@ function DateFieldSegment({ segment, state }: DateFieldSegmentProps) {
         "rounded-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1",
         {
           "text-gray-500": segment.isPlaceholder || segment.type === "literal",
-        }
+        },
       )}
     >
       <ClientOnly fallback="">{segment.text}</ClientOnly>
@@ -184,7 +184,7 @@ function Popover({ children, state, offset = 8, ...props }: PopoverProps) {
       offset,
       popoverRef,
     },
-    state
+    state,
   );
 
   return (

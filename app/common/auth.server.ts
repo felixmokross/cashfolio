@@ -13,10 +13,10 @@ import type { User } from "@prisma/client";
 
 export async function authorize(
   request: Request,
-  mode: AuthorizeMode = "login"
+  mode: AuthorizeMode = "login",
 ) {
   const redirectTo = safeRedirect(
-    new URL(request.url).searchParams.get("redirectTo")
+    new URL(request.url).searchParams.get("redirectTo"),
   );
 
   // do not execute this loader if we are already logged in
@@ -38,7 +38,7 @@ export async function authorize(
       state,
       code_challenge: codeChallenge,
       code_challenge_method: "S256",
-    })
+    }),
   );
 
   if (mode === "signup") {
@@ -127,8 +127,8 @@ export function getOidcLogoutUrl(idToken: string) {
   return `${
     process.env.OIDC_ISSUER
   }/oidc/logout?id_token_hint=${encodeURIComponent(
-    idToken
+    idToken,
   )}&post_logout_redirect_uri=${encodeURIComponent(
-    `${process.env.BASE_URL}/logged-out`
+    `${process.env.BASE_URL}/logged-out`,
   )}`;
 }

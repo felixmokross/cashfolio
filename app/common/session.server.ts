@@ -47,7 +47,7 @@ export async function createUserSession({
       [
         "Set-Cookie",
         await loginSessionStorage.destroySession(
-          await getLoginSession(request)
+          await getLoginSession(request),
         ),
       ],
     ],

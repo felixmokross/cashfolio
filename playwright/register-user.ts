@@ -6,7 +6,7 @@ export async function registerUser(name: string) {
   const email = getPlaywrightUserEmail(name);
   const password = "testPassword_1234";
 
-  const user = await auth0.createUser({
+  const { data: user } = await auth0.users.create({
     connection: "Username-Password-Authentication",
     email,
     password,

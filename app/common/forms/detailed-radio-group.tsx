@@ -41,7 +41,7 @@ export function DetailedRadioGroup<TValue extends string | undefined>({
                 checked ? "border-transparent" : "border-gray-300",
                 active ? "border-brand-500 ring-2 ring-brand-500" : "",
                 "relative flex rounded-lg border bg-white p-4 shadow-sm focus:outline-none",
-                disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+                disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
               )
             }
           >
@@ -66,7 +66,7 @@ export function DetailedRadioGroup<TValue extends string | undefined>({
                 <CheckCircleIcon
                   className={cn(
                     !checked ? "invisible" : "",
-                    "h-5 w-5 text-brand-600"
+                    "h-5 w-5 text-brand-600",
                   )}
                   aria-hidden="true"
                 />
@@ -74,7 +74,7 @@ export function DetailedRadioGroup<TValue extends string | undefined>({
                   className={cn(
                     active ? "border" : "border-2",
                     checked ? "border-brand-500" : "border-transparent",
-                    "pointer-events-none absolute -inset-px rounded-lg"
+                    "pointer-events-none absolute -inset-px rounded-lg",
                   )}
                   aria-hidden="true"
                 />

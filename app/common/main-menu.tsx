@@ -75,7 +75,7 @@ type NavLinkProps = Omit<RemixNavLinkProps, "className">;
 
 const NavLink = forwardRef(function NavLink(
   props: NavLinkProps,
-  ref: Ref<HTMLAnchorElement>
+  ref: Ref<HTMLAnchorElement>,
 ) {
   return (
     <RemixNavLink
@@ -85,7 +85,7 @@ const NavLink = forwardRef(function NavLink(
           isActive
             ? "border-brand-500 bg-brand-50 text-brand-700"
             : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800",
-          "block border-l-4 py-2 pl-3 pr-4 text-base font-medium"
+          "block border-l-4 py-2 pl-3 pr-4 text-base font-medium",
         )
       }
       ref={ref}

@@ -28,7 +28,7 @@ export function Calendar(props: CalendarProps<DateValue>) {
 
   let { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(
     props,
-    state
+    state,
   );
 
   return (
@@ -84,12 +84,12 @@ function CalendarGrid({ state }: CalendarGridProps) {
                       weekIndex === 0 && i === 0 && "rounded-tl-lg",
                       weekIndex === 0 && i === 6 && "rounded-tr-lg",
                       weekIndex === 5 && i === 0 && "rounded-bl-lg",
-                      weekIndex === 5 && i === 6 && "rounded-br-lg"
+                      weekIndex === 5 && i === 6 && "rounded-br-lg",
                     )}
                   />
                 ) : (
                   <td key={i} />
-                )
+                ),
               )}
           </div>
         ))}
@@ -130,15 +130,15 @@ function CalendarCell({ state, date, className }: CalendarCellProps) {
               "bg-white hover:bg-gray-100",
               isToday(date, state.timeZone)
                 ? "font-semibold text-brand-600"
-                : "text-gray-900"
-            )
+                : "text-gray-900",
+            ),
       )}
     >
       <div
         className={cn(
           isSelected
             ? "-m-1 rounded-full bg-gray-900 p-1 font-semibold text-white"
-            : cn("contents")
+            : cn("contents"),
         )}
       >
         {formattedDate}
@@ -162,7 +162,7 @@ function CalendarButton({ className, ...props }: CalendarButtonProps) {
       ref={ref}
       className={cn(
         "-m1.5 cursor-pointer rounded-md p-1.5 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500",
-        className
+        className,
       )}
     >
       {children}

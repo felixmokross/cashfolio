@@ -24,7 +24,7 @@ export function formatMoney(
   value: Prisma.Decimal,
   currency: string | null,
   locale: string,
-  style: CurrencyFormatStyle = "normal"
+  style: CurrencyFormatStyle = "normal",
 ) {
   if (!currency) return value.toString();
 
@@ -36,7 +36,7 @@ export type CurrencyFormatStyle = "compact" | "normal" | "sign-always";
 function getMoneyFormat(
   locale: string,
   currency: string,
-  style: CurrencyFormatStyle
+  style: CurrencyFormatStyle,
 ) {
   // TODO support cache
   //   const cachedFormat = cache.currencyFormat.read(locale, currency, style);

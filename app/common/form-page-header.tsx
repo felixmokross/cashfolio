@@ -22,7 +22,7 @@ export function FormPageHeader({
           {
             "bg-positive-100": variant === "positive",
             "bg-neutral-100": variant === "neutral",
-          }
+          },
         )}
       >
         <Icon

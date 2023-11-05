@@ -16,7 +16,7 @@ export type LinkButtonProps = {
  */
 export const LinkButton = forwardRef(function LinkButton(
   props: LinkButtonProps,
-  ref: Ref<HTMLButtonElement>
+  ref: Ref<HTMLButtonElement>,
 ) {
   return <Button {...props} as={Link} ref={ref} />;
 });

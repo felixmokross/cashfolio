@@ -16,7 +16,7 @@ export async function loader({ request, params }: DataFunctionArgs) {
   const [account, targetAccounts, balanceChangeCategories] = await Promise.all([
     getAccount(params.slug, userId),
     getAccounts(userId).then((accounts) =>
-      accounts.filter((a) => a.slug !== params.slug)
+      accounts.filter((a) => a.slug !== params.slug),
     ),
     getBalanceChangeCategories(userId),
   ]);

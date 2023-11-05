@@ -45,7 +45,7 @@ export async function action({ request }: DataFunctionArgs) {
   if (hasErrors(errors)) {
     return json<FormActionData<TransactionValues>>(
       { ok: false, errors, values },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
