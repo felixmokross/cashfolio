@@ -58,3 +58,6 @@ jobs:
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET }}
       - name: Deploy
         run: flyctl deploy --app $APP_NAME
+  clean:
+    uses: ./.github/workflows/preview-clean.yml
+    secrets: inherit
