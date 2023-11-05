@@ -17,5 +17,5 @@ export const meta: MetaFunction = () => [{ title: getTitle("Asset Classes") }];
 
 export default function AssetClassListPage() {
   const { assetClasses } = useLoaderData<typeof loader>();
-  return <Page assetClasses={assetClasses}
+  return <Page assetClasses={assetClasses} />;
 }

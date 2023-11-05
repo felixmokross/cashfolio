@@ -10,8 +10,9 @@ export type PageProps = {
 
 export default function Page({ assetClasses }: PageProps) {
   return (
-    <div className="px-4 sm:px-6">
+    <div className="space-y-2">
       <PageHeader
+        className="px-4 sm:px-6"
         actions={
           <LinkButton to="new" icon={PlusIcon}>
             New
@@ -20,13 +21,17 @@ export default function Page({ assetClasses }: PageProps) {
       >
         Asset Classes
       </PageHeader>
-      <ul className="mt-4 space-y-4">
-        {assetClasses.map((a) => (
-          <li key={a.id}>
-            <Link to={a.id}>{a.name}</Link>
-          </li>
-        ))}
-      </ul>
+      <table className="min-w-full divide-y divide-gray-300">
+        <tbody className="divide-y divide-gray-200 bg-white">
+          {assetClasses.map((a) => (
+            <tr key={a.id}>
+              <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                <Link to={a.id}>{a.name}</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
