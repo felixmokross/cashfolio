@@ -43,7 +43,7 @@ jobs:
           flyctl apps create --name $APP_NAME --org $FLY_ORG
 
           echo Attaching Postgres cluster to app:
-          flyctl postgres attach $DB_APP_NAME --app $APP_NAME --org $FLY_ORG
+          flyctl postgres attach $DB_APP_NAME --app $APP_NAME
 
           echo Setting secrets:
           flyctl secrets set SESSION_SECRET=$(openssl rand -hex 32) \
@@ -51,14 +51,10 @@ jobs:
             OIDC_ISSUER=$PREVIEW_DEPLOYMENT_OIDC_ISSUER \
             OIDC_CLIENT_ID=$PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID \
             OIDC_CLIENT_SECRET=$PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET \
-            --app $APP_NAME --stage --org $FLY_ORG
+            --app $APP_NAME --stage
         env:
-          # APP_NAME: ${{ env.APP_NAME }}
-          # DB_APP_NAME: ${{ env.DB_APP_NAME }}
           PREVIEW_DEPLOYMENT_OIDC_ISSUER: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_ISSUER }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET }}
       - name: Deploy
-        run: flyctl deploy --app $APP_NAME --org $FLY_ORG
-        # env:
-        #   APP_NAME: ${{ env.APP_NAME }}
+        run: flyctl deploy --app $APP_NAME
