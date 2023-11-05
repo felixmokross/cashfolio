@@ -18,7 +18,7 @@ jobs:
             | jq '[
                 .[]
                   | { ID:.ID, LastReleasedAt: .CurrentRelease.CreatedAt }
-                  | select(.ID | test("^cashfolio-preview-[0-9a-f]{8}$"))
+                  | select(.ID | (test("^cashfolio-preview-") and (test("-db$") | not)))
               ]
                 | sort_by(.LastReleasedAt)
                 | reverse

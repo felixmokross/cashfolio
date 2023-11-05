@@ -19,9 +19,9 @@ jobs:
           version: 0.1.117
       - name: Generate App Name
         run: |
-          GITHUB_SHA_SHORT=${GITHUB_SHA::8}
+          GITHUB_SHA_SHORT=${GITHUB_SHA::4}
 
-          APP_NAME=cashfolio-preview-$GITHUB_SHA_SHORT
+          APP_NAME=cashfolio-preview-$GITHUB_REF_NAME-$GITHUB_SHA_SHORT
           echo App name is $APP_NAME
           echo "APP_NAME=$APP_NAME" >> $GITHUB_ENV
 
