@@ -1,12 +1,10 @@
 import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { Form } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
-import { Button } from "~/common/base/buttons/button";
-import { Input } from "~/common/base/forms/input";
 import { createAssetClass } from "~/asset-classes/functions.server";
 import { getTitle } from "~/common/utils";
+import { Page } from "./page";
 
 export async function action({ request }: DataFunctionArgs) {
   const userId = await requireUserId(request);
@@ -26,11 +24,6 @@ export const meta: MetaFunction = () => [
   { title: getTitle("New Asset Class") },
 ];
 
-export default function NewAssetClassPage() {
-  return (
-    <Form method="post">
-      <Input name="name" label="Name" />
-      <Button type="submit">Create</Button>
-    </Form>
-  );
+export default function Route() {
+  return <Page />;
 }
