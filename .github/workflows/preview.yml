@@ -12,6 +12,7 @@ jobs:
       url: ${{ env.APP_URL }}
     env:
       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      FLY_ORG: cashfolio
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
@@ -34,23 +35,23 @@ jobs:
           echo "APP_URL=$APP_URL" >> $GITHUB_ENV
       - name: Delete if exists
         run: |
-          flyctl apps destroy --yes $APP_NAME || true
-          flyctl apps destroy --yes $DB_APP_NAME || true
-        env:
-          APP_NAME: ${{ env.APP_NAME }}
-          DB_APP_NAME: ${{ env.DB_APP_NAME }}
+          flyctl apps destroy --yes $APP_NAME --org $FLY_ORG || true
+          flyctl apps destroy --yes $DB_APP_NAME --org $FLY_ORG || true
+        # env:
+        #   APP_NAME: ${{ env.APP_NAME }}
+        #   DB_APP_NAME: ${{ env.DB_APP_NAME }}
       - name: Create App and DB
         run: |
           DB_PW=$(openssl rand -hex 32)
 
           echo Creating postgres cluster $DB_APP_NAME:
-          flyctl postgres create --name $DB_APP_NAME --region cdg --password $DB_PW --initial-cluster-size 1 --vm-size shared-cpu-1x --volume-size 1
+          flyctl postgres create --name $DB_APP_NAME --region cdg --password $DB_PW --initial-cluster-size 1 --vm-size shared-cpu-1x --volume-size 1 --org $FLY_ORG
 
           echo Creating app $APP_NAME:
-          flyctl apps create --name $APP_NAME
+          flyctl apps create --name $APP_NAME --org $FLY_ORG
 
           echo Attaching Postgres cluster to app:
-          flyctl postgres attach $DB_APP_NAME --app $APP_NAME
+          flyctl postgres attach $DB_APP_NAME --app $APP_NAME --org $FLY_ORG
 
           echo Setting secrets:
           flyctl secrets set SESSION_SECRET=$(openssl rand -hex 32) \
@@ -58,14 +59,14 @@ jobs:
             OIDC_ISSUER=$PREVIEW_DEPLOYMENT_OIDC_ISSUER \
             OIDC_CLIENT_ID=$PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID \
             OIDC_CLIENT_SECRET=$PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET \
-            --app $APP_NAME --stage
+            --app $APP_NAME --stage --org $FLY_ORG
         env:
-          APP_NAME: ${{ env.APP_NAME }}
-          DB_APP_NAME: ${{ env.DB_APP_NAME }}
+          # APP_NAME: ${{ env.APP_NAME }}
+          # DB_APP_NAME: ${{ env.DB_APP_NAME }}
           PREVIEW_DEPLOYMENT_OIDC_ISSUER: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_ISSUER }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET }}
       - name: Deploy
-        run: flyctl deploy --app $APP_NAME
-        env:
-          APP_NAME: ${{ env.APP_NAME }}
+        run: flyctl deploy --app $APP_NAME --org $FLY_ORG
+        # env:
+        #   APP_NAME: ${{ env.APP_NAME }}
