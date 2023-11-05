@@ -1,6 +1,6 @@
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { AccountList } from "./account-list";
-import { LinkButton } from "~/common/buttons/link-button";
+import { LinkButton } from "~/common/base/buttons/link-button";
 import type { AccountDto } from "~/accounts/types";
 import { PageHeader } from "~/common/page-header";
 

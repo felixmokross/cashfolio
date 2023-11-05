@@ -1,6 +1,6 @@
 import { currencyItems } from "../currencies";
-import type { ComboboxProps } from "./combobox";
-import { Combobox } from "./combobox";
+import type { ComboboxProps } from "../base/forms/combobox";
+import { Combobox } from "../base/forms/combobox";
 
 export function CurrencyCombobox({
   groupClassName,

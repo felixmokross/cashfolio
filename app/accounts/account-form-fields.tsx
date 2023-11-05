@@ -2,13 +2,13 @@ import { AccountType, AccountUnit } from "@prisma/client";
 import type { AccountValues } from "~/accounts/functions.server";
 import { useState } from "react";
 import type { FormProps } from "../common/forms/types";
-import { RadioGroup } from "../common/forms/radio-group";
-import { Input } from "../common/forms/input";
-import { Select } from "../common/forms/select";
-import { FormattedNumberInput } from "../common/forms/formatted-number-input";
-import { DetailedRadioGroup } from "../common/forms/detailed-radio-group";
+import { RadioGroup } from "../common/base/forms/radio-group";
+import { Input } from "../common/base/forms/input";
+import { Select } from "../common/base/forms/select";
+import { FormattedNumberInput } from "../common/base/forms/formatted-number-input";
+import { DetailedRadioGroup } from "../common/base/forms/detailed-radio-group";
 import { CurrencyCombobox } from "../common/forms/currency-combobox";
-import { DateInput } from "../common/forms/date-input";
+import { DateInput } from "../common/base/forms/date-input";
 import type { AccountFormLoaderData } from "./types";
 
 export type AccountFormFieldsProps = FormProps<

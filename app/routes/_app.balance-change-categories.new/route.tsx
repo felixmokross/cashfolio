@@ -4,9 +4,9 @@ import { redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
-import { Button } from "~/common/buttons/button";
-import { Input } from "~/common/forms/input";
-import { RadioGroup } from "~/common/forms/radio-group";
+import { Button } from "~/common/base/buttons/button";
+import { Input } from "~/common/base/forms/input";
+import { RadioGroup } from "~/common/base/forms/radio-group";
 import { createBalanceChangeCategory } from "~/balance-change-categories/functions.server";
 import { getTitle } from "~/common/utils";
 

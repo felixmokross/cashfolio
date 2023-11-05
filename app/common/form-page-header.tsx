@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import type { IconComponentType } from "./icons/types";
+import type { IconComponentType } from "./base/icons/types";
 import { cn } from "./classnames";
 import { PageHeading } from "./page-heading";
 
