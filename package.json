@@ -17,7 +17,7 @@
     "build-storybook": "storybook build",
     "dev:db": "docker-compose up",
     "e2e:clean": "ts-node -r tsconfig-paths/register -r dotenv/config playwright/clean.ts",
-    "chromatic": "chromatic"
+    "chromatic": "chromatic --only-changed"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
