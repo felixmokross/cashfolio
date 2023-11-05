@@ -61,3 +61,4 @@ jobs:
   clean:
     uses: ./.github/workflows/preview-clean.yml
     secrets: inherit
+    needs: deploy
