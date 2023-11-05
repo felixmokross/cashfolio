@@ -13,8 +13,8 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     environment:
-      name: prod
-      url: https://cashfolio-v2.fly.dev
+      name: production
+      url: https://cashfolio.fly.dev
     needs: check
     steps:
       - uses: actions/checkout@v3

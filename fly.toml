@@ -1,4 +1,4 @@
-app = "cashfolio-v2"
+app = "cashfolio"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "cdg"
