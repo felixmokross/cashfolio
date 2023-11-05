@@ -8,14 +8,14 @@ export function getLocales() {
   // In case that the user chooses such a locale, there might be differences in rendering between server and client
   // Consider to improve the user experience
   return Intl.NumberFormat.supportedLocalesOf(
-    availableLocales.modern.concat(defaultContent)
+    availableLocales.modern.concat(defaultContent),
   );
 }
 
 export function getLocalesWithDisplayName() {
   return getLocales()
     .map(
-      (locale) => [locale, getDisplayNameOfLocale(locale)] as [string, string]
+      (locale) => [locale, getDisplayNameOfLocale(locale)] as [string, string],
     )
     .sort((a, b) => a[1].localeCompare(b[1]));
 }

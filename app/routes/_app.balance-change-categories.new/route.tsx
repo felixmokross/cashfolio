@@ -19,7 +19,7 @@ export async function action({ request }: DataFunctionArgs) {
   invariant(typeof name === "string", "name must be a string!");
   invariant(
     typeof type === "string" && isBalanceChangeType(type),
-    "type must be a valid BalanceChangeType!"
+    "type must be a valid BalanceChangeType!",
   );
 
   await createBalanceChangeCategory(userId, { name, type });
@@ -29,7 +29,7 @@ export async function action({ request }: DataFunctionArgs) {
 
 function isBalanceChangeType(type: string): type is BalanceChangeType {
   return [BalanceChangeType.INCOME, BalanceChangeType.EXPENSE].includes(
-    type as BalanceChangeType
+    type as BalanceChangeType,
   );
 }
 

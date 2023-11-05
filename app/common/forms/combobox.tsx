@@ -31,13 +31,14 @@ export function Combobox({
             .map((t) => t.toLowerCase().trim());
 
           const normalizedTexts = [option.primaryText, option.secondaryText]
-            .flatMap((t) =>
-              t?.split(/[^a-zA-Z0-9]/).map((tk) => tk.toLowerCase().trim())
+            .flatMap(
+              (t) =>
+                t?.split(/[^a-zA-Z0-9]/).map((tk) => tk.toLowerCase().trim()),
             )
             .filter((t) => !!t) as string[];
 
           return queryTokens.every((token) =>
-            normalizedTexts.some((text) => text.startsWith(token))
+            normalizedTexts.some((text) => text.startsWith(token)),
           );
         });
 
@@ -69,7 +70,7 @@ export function Combobox({
               "rounded-md border-gray-300 shadow-sm ": size === "default",
               "border-transparent": size === "compact",
             },
-            className
+            className,
           )}
           displayValue={getDisplayName}
           aria-invalid={error ? "true" : undefined}
@@ -92,7 +93,7 @@ export function Combobox({
                 className={({ active }) =>
                   cn(
                     "relative cursor-default select-none py-2 pl-3 pr-9",
-                    active ? "bg-brand-600 text-white" : "text-gray-900"
+                    active ? "bg-brand-600 text-white" : "text-gray-900",
                   )
                 }
               >
@@ -108,7 +109,7 @@ export function Combobox({
                         <span
                           className={cn(
                             "ml-2 truncate",
-                            active ? "text-brand-100" : "text-gray-500"
+                            active ? "text-brand-100" : "text-gray-500",
                           )}
                         >
                           {option.secondaryText}
@@ -120,7 +121,7 @@ export function Combobox({
                       <span
                         className={cn(
                           "absolute inset-y-0 right-0 flex items-center pr-4",
-                          active ? "text-white" : "text-brand-600"
+                          active ? "text-white" : "text-brand-600",
                         )}
                       >
                         <CheckIcon className="h-5 w-5" aria-hidden="true" />

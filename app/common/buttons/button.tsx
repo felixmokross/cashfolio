@@ -27,7 +27,7 @@ function buttonClassName(size: ButtonSize, variant: ButtonVariant) {
           size === "default",
         "border-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500":
           size === "compact",
-      }
+      },
     ),
     icon: cn("-ml-1.5 h-4 w-4", {
       "text-white": variant === "primary" || variant === "negative",
@@ -53,7 +53,7 @@ export const Button = forwardRef(function Button<T extends ElementType>(
     icon,
     ...props
   }: ButtonProps<T>,
-  ref: Ref<HTMLButtonElement>
+  ref: Ref<HTMLButtonElement>,
 ) {
   const Component = as || "button";
   const Icon = icon;

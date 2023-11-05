@@ -35,7 +35,7 @@ export async function updateUser(
   {
     preferredLocale,
     refCurrency,
-  }: Pick<User, "preferredLocale" | "refCurrency">
+  }: Pick<User, "preferredLocale" | "refCurrency">,
 ) {
   return prisma.user.update({
     where: { id: userId },

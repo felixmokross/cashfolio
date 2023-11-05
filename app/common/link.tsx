@@ -10,7 +10,7 @@ export function Link({ className, ...props }: LinkProps) {
       {...props}
       className={cn(
         "text-brand-600 hover:text-brand-700 hover:underline",
-        className
+        className,
       )}
     />
   );

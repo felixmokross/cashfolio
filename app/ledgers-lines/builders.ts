@@ -11,7 +11,7 @@ import { buildBookingDto, buildTransactionDto } from "~/transactions/builders";
 import { buildAccountDto } from "~/accounts/builders";
 
 export function buildGetReverseLedgerDateGroupsResultDto(
-  values: Partial<GetReverseLedgerDateGroupsResultDto> = {}
+  values: Partial<GetReverseLedgerDateGroupsResultDto> = {},
 ) {
   return {
     initialPageBalance: "10000",
@@ -28,7 +28,7 @@ export function buildGetReverseLedgerDateGroupsResultDto(
 }
 
 export function buildLedgerDateGroupDto(
-  values: Partial<LedgerDateGroupDto> = {}
+  values: Partial<LedgerDateGroupDto> = {},
 ) {
   return {
     date: new Date().toJSON(),
@@ -53,7 +53,7 @@ export function buildLedgerLineDto(values: Partial<LedgerLineDto> = {}) {
 }
 
 export function buildLedgerLineTransactionDto(
-  values: Partial<LedgerLineTransactionDto> = {}
+  values: Partial<LedgerLineTransactionDto> = {},
 ) {
   return {
     ...buildTransactionDto(),
@@ -63,7 +63,7 @@ export function buildLedgerLineTransactionDto(
 }
 
 export function buildLedgerLineBookingDto(
-  values: Partial<LedgerLineBookingDto> = {}
+  values: Partial<LedgerLineBookingDto> = {},
 ) {
   return {
     ...buildBookingDto(),

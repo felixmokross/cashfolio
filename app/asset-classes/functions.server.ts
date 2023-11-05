@@ -9,7 +9,7 @@ export async function getAssetClasses(userId: AssetClass["userId"]) {
 
 export async function assetClassExists(
   id: AssetClass["id"],
-  userId: AssetClass["userId"]
+  userId: AssetClass["userId"],
 ) {
   return !!(await prisma.assetClass.findUnique({
     where: { id_userId: { id, userId } },
@@ -19,7 +19,7 @@ export async function assetClassExists(
 
 export async function getAssetClass(
   id: AssetClass["id"],
-  userId: AssetClass["userId"]
+  userId: AssetClass["userId"],
 ) {
   return await prisma.assetClass.findUnique({
     where: { id_userId: { id, userId } },
@@ -28,7 +28,7 @@ export async function getAssetClass(
 
 export async function createAssetClass(
   userId: AssetClass["userId"],
-  { name }: Pick<AssetClass, "name">
+  { name }: Pick<AssetClass, "name">,
 ) {
   name = name.trim();
 
@@ -43,7 +43,7 @@ export async function createAssetClass(
 export async function updateAssetClass(
   id: AssetClass["id"],
   userId: AssetClass["userId"],
-  { name }: Pick<AssetClass, "name">
+  { name }: Pick<AssetClass, "name">,
 ) {
   name = name.trim();
 

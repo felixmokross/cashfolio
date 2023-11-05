@@ -25,6 +25,6 @@ export async function getObsoletePlaywrightUsers() {
   return (await auth0.users.getAll()).data.filter(
     (u) =>
       u.email?.toLowerCase().startsWith(playwrightUserPrefix.toLowerCase()) &&
-      differenceInHours(new Date(), new Date(u.created_at as string)) > 3
+      differenceInHours(new Date(), new Date(u.created_at as string)) > 3,
   );
 }

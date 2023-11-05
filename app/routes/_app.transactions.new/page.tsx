@@ -36,7 +36,7 @@ export function Page({
   errors,
 }: PageProps) {
   const [transactionType, setTransactionType] = useState<TransactionType>(
-    defaultTransactionType
+    defaultTransactionType,
   );
   const defaultTransactionDirection: TransactionDirection =
     transactionType === "valueChange" ? "increase" : "decrease";

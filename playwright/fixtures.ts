@@ -19,7 +19,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
   // Use the same storage state for all tests in this worker.
   storageState: async (
     { storageState, workerStorageState, authenticated },
-    use
+    use,
   ) => {
     if (authenticated) {
       await use(workerStorageState);
@@ -35,7 +35,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
       const id = test.info().parallelIndex;
       const fileName = path.resolve(
         test.info().project.outputDir,
-        `.auth/${id}.json`
+        `.auth/${id}.json`,
       );
 
       if (fs.existsSync(fileName)) {

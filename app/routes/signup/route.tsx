@@ -31,7 +31,7 @@ export async function loader({ request }: DataFunctionArgs) {
   const user = await getUserIdByAuth0UserId(userId);
   if (user) {
     return redirect(
-      safeRedirect(new URL(request.url).searchParams.get("redirectTo"))
+      safeRedirect(new URL(request.url).searchParams.get("redirectTo")),
     );
   }
 
@@ -50,7 +50,7 @@ export const action = async ({ request }: DataFunctionArgs) => {
   const formData = await request.formData();
 
   const redirectTo = safeRedirect(
-    new URL(request.url).searchParams.get("redirectTo")
+    new URL(request.url).searchParams.get("redirectTo"),
   );
 
   const values = getSignupValues(formData);

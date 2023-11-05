@@ -32,7 +32,7 @@ export function NewTransactionForm({
   balanceChangeCategories,
 }: NewTransactionFormProps) {
   const [transactionType, setTransactionType] = useState<TransactionType>(
-    defaultTransactionType
+    defaultTransactionType,
   );
   const defaultTransactionDirection: TransactionDirection =
     transactionType === "valueChange" ? "increase" : "decrease";

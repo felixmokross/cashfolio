@@ -22,13 +22,13 @@ export function LocaleCombobox({
   const formattingSamples = useMemo(
     () => [
       new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
-        formattingSampleDate
+        formattingSampleDate,
       ),
       new Intl.NumberFormat(locale, {
         minimumFractionDigits: 2,
       }).format(45_678.9),
     ],
-    [locale, formattingSampleDate]
+    [locale, formattingSampleDate],
   );
 
   return (

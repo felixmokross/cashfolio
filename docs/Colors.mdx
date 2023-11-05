@@ -6,7 +6,8 @@ import themeConfig from "../tailwind.config.js";
 <ColorPalette>
   {Object.entries(themeConfig.theme.colors)
     .filter(
-      ([title]) => !["transparent", "current", "black", "white"].includes(title)
+      ([title]) =>
+        !["transparent", "current", "black", "white"].includes(title),
     )
     .map(([title, colors]) => (
       <ColorItem

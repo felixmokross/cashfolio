@@ -21,7 +21,7 @@ export function getNumberFormatSymbols(locale: string) {
 
   invariant(
     decimalSeparator,
-    `decimalSeparator not found for locale ${locale}`
+    `decimalSeparator not found for locale ${locale}`,
   );
 
   return { thousandSeparator, decimalSeparator };
@@ -47,7 +47,7 @@ const DEFAULT_REDIRECT = "/";
  */
 export function safeRedirect(
   to: FormDataEntryValue | string | null | undefined,
-  defaultRedirect: string = DEFAULT_REDIRECT
+  defaultRedirect: string = DEFAULT_REDIRECT,
 ) {
   invariant(process.env.BASE_URL, "BASE_URL must be set");
 

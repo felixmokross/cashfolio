@@ -35,7 +35,7 @@ export const Input = function Input({
               "border-transparent": size === "compact",
             },
             adornment && "pl-14 sm:pl-12",
-            className
+            className,
           )}
           aria-invalid={error ? "true" : undefined}
           aria-describedby={error ? errorId : undefined}

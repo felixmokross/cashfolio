@@ -50,7 +50,7 @@ export function RadioGroup<TValue extends string | undefined>({
             "overflow-hidden border": size === "compact",
           },
           label && "mt-1",
-          className
+          className,
         )}
       >
         {options.map((option) => (
@@ -78,13 +78,13 @@ export function RadioGroup<TValue extends string | undefined>({
                         "hover:bg-brand-700": !option.variant,
                         "hover:bg-positive-700": option.variant === "positive",
                         "hover:bg-negative-700": option.variant === "negative",
-                      }
+                      },
                     )
                   : cn(
                       "border-gray-200 bg-white text-gray-900",
-                      !disabled && "hover:bg-gray-50"
+                      !disabled && "hover:bg-gray-50",
                     ),
-                disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+                disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
               )
             }
           >

@@ -67,7 +67,7 @@ export async function getReverseLedgerDateGroups({
     initialPageBalanceFormatted: formatMoney(
       initialPageBalance,
       account.currency,
-      preferredLocale
+      preferredLocale,
     ),
     groups: Array.from(groupByDate.values()).map((group) => ({
       ...group,
@@ -78,13 +78,13 @@ export async function getReverseLedgerDateGroups({
           line.amount,
           account.currency,
           preferredLocale,
-          "sign-always"
+          "sign-always",
         ),
       })),
       balanceFormatted: formatMoney(
         group.balance,
         account.currency,
-        preferredLocale
+        preferredLocale,
       ),
     })),
   };
@@ -106,7 +106,7 @@ export async function getLedgerLines({
   const bookings = await getBookings({ accountId: account.id, userId });
 
   let balance = new Prisma.Decimal(
-    (account.preExisting && account.balanceAtStart) || 0
+    (account.preExisting && account.balanceAtStart) || 0,
   );
   const lines = [];
 

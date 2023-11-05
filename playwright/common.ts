@@ -9,15 +9,15 @@ export function getPlaywrightUserEmail(name: string) {
 
 invariant(
   process.env.PLAYWRIGHT_TESTS_AUTH0_DOMAIN,
-  "PLAYWRIGHT_TESTS_AUTH0_DOMAIN must be set"
+  "PLAYWRIGHT_TESTS_AUTH0_DOMAIN must be set",
 );
 invariant(
   process.env.PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID,
-  "PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID must be set"
+  "PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID must be set",
 );
 invariant(
   process.env.PLAYWRIGHT_TESTS_AUTH0_CLIENT_SECRET,
-  "PLAYWRIGHT_TESTS_AUTH0_CLIENT_SECRET must be set"
+  "PLAYWRIGHT_TESTS_AUTH0_CLIENT_SECRET must be set",
 );
 
 export const auth0 = new ManagementClient({

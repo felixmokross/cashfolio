@@ -28,7 +28,7 @@ export async function loader({ request }: DataFunctionArgs) {
       headers: {
         "Set-Cookie": await sessionStorage.commitSession(session),
       },
-    }
+    },
   );
 }
 

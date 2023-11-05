@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import { useEffect , useState } from "react";
+import { useEffect, useState } from "react";
 
 type ClientOnlyProps = PropsWithChildren<{
   fallback: ReactNode;

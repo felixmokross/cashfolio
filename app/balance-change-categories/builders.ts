@@ -3,7 +3,7 @@ import type { BalanceChangeCategoryDto } from "./types";
 import { BalanceChangeType } from "@prisma/client";
 
 export function buildBalanceChangeCategoryDto(
-  values: Partial<BalanceChangeCategoryDto> = {}
+  values: Partial<BalanceChangeCategoryDto> = {},
 ) {
   return {
     id: createId(),

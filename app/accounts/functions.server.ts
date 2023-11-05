@@ -17,7 +17,7 @@ export async function getAccounts(userId: Account["userId"]) {
 
 export async function getAccountId(
   slug: Account["slug"],
-  userId: Account["userId"]
+  userId: Account["userId"],
 ) {
   return (
     await prisma.account.findUnique({
@@ -29,7 +29,7 @@ export async function getAccountId(
 
 export async function getAccount(
   slug: Account["slug"],
-  userId: Account["userId"]
+  userId: Account["userId"],
 ) {
   return await prisma.account.findUnique({
     where: { slug_userId: { slug, userId } },
@@ -38,7 +38,7 @@ export async function getAccount(
 
 export async function createAccount(
   userId: Account["userId"],
-  values: AccountValues
+  values: AccountValues,
 ) {
   const trimmedName = values.name.trim();
   return await prisma.account.create({
@@ -62,7 +62,7 @@ export async function createAccount(
 export async function updateAccount(
   id: Account["id"],
   userId: Account["userId"],
-  values: AccountValues
+  values: AccountValues,
 ) {
   const trimmedName = values.name.trim();
   return await prisma.account.update({
@@ -99,7 +99,7 @@ export type AccountValues = {
 };
 
 export async function getAccountValues(
-  request: Request
+  request: Request,
 ): Promise<AccountValues> {
   const formData = await request.formData();
   const name = formData.get("name");
@@ -115,21 +115,21 @@ export async function getAccountValues(
   invariant(typeof type === "string", "type not found");
   invariant(
     !assetClassId || typeof assetClassId === "string",
-    "assetClassId not found"
+    "assetClassId not found",
   );
   invariant(typeof unit === "string", "unit not found");
   invariant(!currency || typeof currency === "string", "currency not found");
   invariant(
     preExisting === "off" || preExisting === "on",
-    "preExisting not found"
+    "preExisting not found",
   );
   invariant(
     !balanceAtStart || typeof balanceAtStart === "string",
-    "balanceAtStart not found"
+    "balanceAtStart not found",
   );
   invariant(
     !openingDate || typeof openingDate === "string",
-    "openingDate not found"
+    "openingDate not found",
   );
 
   return {
@@ -156,7 +156,7 @@ export async function validateAccountValues(
     preExisting,
     balanceAtStart,
     openingDate,
-  }: AccountValues
+  }: AccountValues,
 ) {
   const errors: FormErrors<AccountValues> = {};
 

@@ -11,7 +11,7 @@ export type TransactionDirection = "increase" | "decrease";
 export async function createTransaction(
   values: TransactionValues,
   accountId: string,
-  userId: User["id"]
+  userId: User["id"],
 ) {
   const inputAmount = new Prisma.Decimal(values.amount as string);
   const amount =
@@ -76,7 +76,7 @@ export async function createTransaction(
 
 export async function deleteTransaction(
   id: Transaction["id"],
-  userId: User["id"]
+  userId: User["id"],
 ) {
   await prisma.transaction.delete({
     where: { id_userId: { id, userId } },
@@ -84,7 +84,7 @@ export async function deleteTransaction(
 }
 
 export async function getTransactionValues(
-  request: Request
+  request: Request,
 ): Promise<TransactionValues> {
   const formData = await request.formData();
   const date = formData.get("date");
@@ -100,11 +100,11 @@ export async function getTransactionValues(
   invariant(typeof direction === "string", "direction not found");
   invariant(
     !targetAccountId || typeof targetAccountId === "string",
-    "targetAccountId not found"
+    "targetAccountId not found",
   );
   invariant(
     !balanceChangeCategoryId || typeof balanceChangeCategoryId === "string",
-    "balanceChangeCategoryId not found"
+    "balanceChangeCategoryId not found",
   );
   invariant(typeof note === "string", "note not found");
   invariant(typeof amount === "string", "amount not found");
