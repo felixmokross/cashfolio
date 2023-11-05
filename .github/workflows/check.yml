@@ -106,6 +106,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
-      - run: npm run chromatic -- --exit-once-uploaded --only-changed
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          exitOnceUploaded: true
+          onlyChanged: true

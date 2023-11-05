@@ -66,8 +66,6 @@ npm run chromatic
 
 See [`.env.example`](./.env.example) file.
 
-Additionally, to deploy to Chromatic, the environment variable `CHROMATIC_PROJECT_TOKEN` must be set.
-
 # Tech Stack
 
 - App
