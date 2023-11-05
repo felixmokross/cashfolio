@@ -1,16 +1,15 @@
 import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
-import { Button } from "~/common/base/buttons/button";
-import { Input } from "~/common/base/forms/input";
 import {
   assetClassExists,
   getAssetClass,
   updateAssetClass,
 } from "~/asset-classes/functions.server";
 import { getTitle } from "~/common/utils";
+import { Page } from "./page";
 
 export async function action({ params, request }: DataFunctionArgs) {
   invariant(params.id, "id is required");
@@ -48,10 +47,5 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 
 export default function EditAssetClassPage() {
   const assetClass = useLoaderData<typeof loader>();
-  return (
-    <Form method="post">
-      <Input name="name" label="Name" defaultValue={assetClass.name} />
-      <Button type="submit">Update</Button>
-    </Form>
-  );
+  return <Page assetClass={assetClass} />;
 }
