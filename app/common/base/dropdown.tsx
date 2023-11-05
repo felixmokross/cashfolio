@@ -8,6 +8,7 @@ import type {
 import { Fragment } from "react";
 import { cn } from "../classnames";
 import { IconButton } from "./buttons/icon-button";
+import type { IconProps } from "./icons/types";
 
 export type DropdownProps = PropsWithChildren;
 
@@ -41,10 +42,13 @@ export function Dropdown({ children }: DropdownProps) {
 
 export type DropdownItemProps<T extends ElementType = "button"> = {
   as?: T;
+  icon?: ElementType<IconProps>;
 } & Omit<ComponentPropsWithoutRef<T>, "as">;
 
 export function DropdownItem<T extends ElementType>({
   as,
+  children,
+  icon: Icon,
   ...props
 }: DropdownItemProps<T>) {
   return (
@@ -55,10 +59,20 @@ export function DropdownItem<T extends ElementType>({
           <Component
             className={cn(
               active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-              "block w-full px-4 py-2 text-left text-sm",
+              "flex items-center gap-3 w-full px-4 py-2 text-left text-sm",
             )}
             {...props}
-          />
+          >
+            {Icon && (
+              <Icon
+                className={cn(
+                  "w-5 h-5",
+                  active ? "text-gray-500" : "text-gray-400",
+                )}
+              />
+            )}
+            {children}
+          </Component>
         );
       }}
     </Menu.Item>

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Dropdown, DropdownItem } from "./dropdown";
 import { Link } from "@remix-run/react";
 import { withAppProviders } from "../storybook";
+import { Cog6ToothIcon } from "@heroicons/react/20/solid";
 
 const meta: Meta<typeof Dropdown> = {
   title: "base/Dropdown",
@@ -20,7 +21,7 @@ export const Default: Story = {
   args: {
     children: (
       <>
-        <DropdownItem as={Link} to="/settings">
+        <DropdownItem as={Link} to="/settings" icon={Cog6ToothIcon}>
           Go to settings
         </DropdownItem>
         <DropdownItem as={Link} to="/other-page">
