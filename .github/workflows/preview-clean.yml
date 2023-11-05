@@ -21,7 +21,7 @@ jobs:
               ]
                 | sort_by(.LastReleasedAt)
                 | reverse
-                | .[5:]
+                | .[3:]
                 | map(.ID, .ID + "-db")
                 | .[]' \
               | xargs -I {} flyctl apps destroy --yes {}
