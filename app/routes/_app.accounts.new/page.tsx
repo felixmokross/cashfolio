@@ -18,7 +18,7 @@ export function Page({ data, errors, values }: PageProps) {
     <div className="flex justify-center">
       <Form method="post" className="flex max-w-lg flex-col gap-8 px-4 py-8">
         <FormPageHeader icon={PlusIcon} variant="positive">
-          Add Account
+          New Account
         </FormPageHeader>
 
         <AccountFormFields data={data} errors={errors} values={values} />
