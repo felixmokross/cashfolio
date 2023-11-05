@@ -1,6 +1,6 @@
 import { Link as RemixLink } from "@remix-run/react";
 import type { ComponentProps } from "react";
-import { cn } from "../classnames";
+import { cn } from "./classnames";
 
 export type LinkProps = ComponentProps<typeof RemixLink>;
 

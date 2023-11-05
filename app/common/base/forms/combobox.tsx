@@ -3,7 +3,7 @@ import { useId, useState } from "react";
 import { Combobox as HeadlessCombobox } from "@headlessui/react";
 import { labelClassName } from "./label";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { cn } from "../../classnames";
+import { cn } from "../classnames";
 import { ErrorMessage } from "./error-message";
 
 export function Combobox({

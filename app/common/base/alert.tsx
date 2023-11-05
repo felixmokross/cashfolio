@@ -1,6 +1,6 @@
 import { CheckCircleIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { type PropsWithChildren } from "react";
-import { cn } from "../classnames";
+import { cn } from "./classnames";
 
 type AlertProps = PropsWithChildren<{
   className?: string;

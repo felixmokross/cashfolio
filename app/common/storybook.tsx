@@ -21,10 +21,11 @@ export const withPageMaxWidth: Decorator = (Story) => (
 );
 
 const user = buildExtendedUserDto();
-export const withAppProviders: Decorator = (Story) => {
+export const withAppProviders: Decorator = (Story, context) => {
+  const userWithLocale = { ...user, preferredLocale: context.globals.locale };
   return (
-    <I18nProvider locale={user.preferredLocale}>
-      <UserProvider user={user}>
+    <I18nProvider locale={userWithLocale.preferredLocale}>
+      <UserProvider user={userWithLocale}>
         <Story />
       </UserProvider>
     </I18nProvider>

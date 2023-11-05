@@ -1,5 +1,5 @@
 import type { DetailedHTMLProps, LabelHTMLAttributes } from "react";
-import { cn } from "../../classnames";
+import { cn } from "../classnames";
 
 export const labelClassName = "block text-sm font-medium text-gray-700";
 

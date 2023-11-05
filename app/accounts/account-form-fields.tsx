@@ -10,6 +10,7 @@ import { DetailedRadioGroup } from "../common/base/forms/detailed-radio-group";
 import { CurrencyCombobox } from "../common/forms/currency-combobox";
 import { DateInput } from "../common/base/forms/date-input";
 import type { AccountFormLoaderData } from "./types";
+import { useUser } from "~/common/user-context";
 
 export type AccountFormFieldsProps = FormProps<
   AccountValues,
@@ -25,6 +26,8 @@ export function AccountFormFields({
   const [unit, setUnit] = useState(account?.unit || AccountUnit.CURRENCY);
   const [currency, setCurrency] = useState(account?.currency || undefined);
   const [preExisting, setPreExisting] = useState(account?.preExisting || false);
+  const { preferredLocale } = useUser();
+
   return (
     <div className="grid grid-cols-6 gap-x-4 gap-y-8">
       <Input
@@ -125,6 +128,7 @@ export function AccountFormFields({
           }
           adornment={currency}
           error={errors?.balanceAtStart}
+          locale={preferredLocale}
         />
       ) : (
         <DateInput

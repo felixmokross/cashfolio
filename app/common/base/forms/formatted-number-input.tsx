@@ -3,25 +3,25 @@ import { NumericFormat } from "react-number-format";
 import type { InputProps } from "./input";
 import { Input } from "./input";
 import { useMemo, useState } from "react";
-import { useUser } from "../../user-context";
-import { getNumberFormatSymbols } from "../../utils";
+import { getNumberFormatSymbols } from "../utils";
 
-export type FormattedNumberInputProps = NumericFormatProps<InputProps>;
+export type FormattedNumberInputProps = NumericFormatProps<InputProps> & {
+  locale: string;
+};
 
 export function FormattedNumberInput({
   name,
   defaultValue,
+  locale,
   ...props
 }: FormattedNumberInputProps) {
   const [value, setValue] = useState<number | undefined>(
     defaultValue != null ? Number(defaultValue) : undefined,
   );
 
-  // TODO make independent of user context
-  const { preferredLocale } = useUser();
   const { thousandSeparator, decimalSeparator } = useMemo(
-    () => getNumberFormatSymbols(preferredLocale),
-    [preferredLocale],
+    () => getNumberFormatSymbols(locale),
+    [locale],
   );
 
   return (

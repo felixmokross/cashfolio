@@ -15,7 +15,7 @@ import {
 } from "react-aria";
 import type { CalendarState } from "react-stately";
 import { useCalendarState } from "react-stately";
-import { cn } from "../../../classnames";
+import { cn } from "../../classnames";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 export function Calendar(props: CalendarProps<DateValue>) {
