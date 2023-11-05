@@ -13,6 +13,7 @@ import { DateInput } from "~/common/base/forms/date-input";
 import { FormattedNumberInput } from "~/common/base/forms/formatted-number-input";
 import { Input } from "~/common/base/forms/input";
 import { RadioGroup } from "~/common/base/forms/radio-group";
+import { useUser } from "~/common/user-context";
 import type {
   TransactionType,
   TransactionDirection,
@@ -38,6 +39,8 @@ export function NewTransactionForm({
     transactionType === "valueChange" ? "increase" : "decrease";
   const [transactionDirection, setTransactionDirection] =
     useState<TransactionDirection>(defaultTransactionDirection);
+
+  const { preferredLocale } = useUser();
 
   const balanceChangeType =
     transactionDirection === "increase"
@@ -148,6 +151,7 @@ export function NewTransactionForm({
           placeholder="Amount"
           size="compact"
           adornment={account.currency || undefined}
+          locale={preferredLocale}
         />
       </div>
       <div className="flex gap-px">

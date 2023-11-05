@@ -13,6 +13,9 @@ const meta: Meta<typeof FormattedNumberInput> = {
     ),
     withAppProviders,
   ],
+  render: (args, context) => (
+    <FormattedNumberInput {...args} locale={context.globals.locale} />
+  ),
   parameters: { layout: "centered" },
 };
 

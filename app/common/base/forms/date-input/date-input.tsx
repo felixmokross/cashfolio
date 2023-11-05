@@ -26,8 +26,8 @@ import type {
 import { useDateFieldState, useDatePickerState } from "react-stately";
 import { createCalendar, parseDate } from "@internationalized/date";
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
-import { cn } from "../../../classnames";
-import { ClientOnly } from "../../../client-only";
+import { cn } from "../../classnames";
+import { ClientOnly } from "../../client-only";
 import { Label } from "../label";
 import { Calendar } from "./calendar";
 import { ErrorMessage } from "../error-message";

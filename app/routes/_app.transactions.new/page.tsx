@@ -17,6 +17,7 @@ import type {
   TransactionType,
   TransactionValues,
 } from "~/transactions/functions.server";
+import { useUser } from "~/common/user-context";
 
 const defaultTransactionType: TransactionType = "balanceChange";
 
@@ -42,6 +43,8 @@ export function Page({
     transactionType === "valueChange" ? "increase" : "decrease";
   const [transactionDirection, setTransactionDirection] =
     useState<TransactionDirection>(defaultTransactionDirection);
+
+  const { preferredLocale } = useUser();
 
   const balanceChangeType =
     transactionDirection === "increase"
@@ -174,6 +177,7 @@ export function Page({
             adornment={account.currency || undefined}
             defaultValue={values?.amount}
             error={errors?.amount}
+            locale={preferredLocale}
           />
         </div>
 

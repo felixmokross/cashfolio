@@ -3,7 +3,7 @@ import type { PropsWithChildren, Ref } from "react";
 import { forwardRef } from "react";
 import type { NavLinkProps as RemixNavLinkProps } from "@remix-run/react";
 import { NavLink as RemixNavLink } from "@remix-run/react";
-import { cn } from "./classnames";
+import { cn } from "./base/classnames";
 import { currenciesByCode } from "~/common/currencies";
 import { getDisplayNameOfLocale } from "~/common/utils";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";

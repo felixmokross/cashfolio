@@ -3,7 +3,7 @@ import { useId, useRef } from "react";
 import { Label } from "./label";
 import { ErrorMessage } from "./error-message";
 import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { cn } from "../../classnames";
+import { cn } from "../classnames";
 
 export function Select({
   name,

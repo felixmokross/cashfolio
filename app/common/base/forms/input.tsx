@@ -1,6 +1,6 @@
 import type { DetailedHTMLProps } from "react";
 import { useId } from "react";
-import { cn } from "../../classnames";
+import { cn } from "../classnames";
 import { Label } from "./label";
 import { ErrorMessage } from "./error-message";
 

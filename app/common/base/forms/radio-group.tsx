@@ -2,7 +2,7 @@ import { useId, useState } from "react";
 import { RadioGroup as HeadlessRadioGroup } from "@headlessui/react";
 import { labelClassName } from "./label";
 import { ErrorMessage } from "./error-message";
-import { cn } from "../../classnames";
+import { cn } from "../classnames";
 
 export function RadioGroup<TValue extends string | undefined>({
   groupClassName,

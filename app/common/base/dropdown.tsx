@@ -6,7 +6,7 @@ import type {
   PropsWithChildren,
 } from "react";
 import { Fragment } from "react";
-import { cn } from "../classnames";
+import { cn } from "./classnames";
 import { IconButton } from "./buttons/icon-button";
 import type { IconProps } from "./icons/types";
 

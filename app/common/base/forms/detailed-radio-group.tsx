@@ -3,7 +3,7 @@ import { RadioGroup as HeadlessRadioGroup } from "@headlessui/react";
 import { labelClassName } from "./label";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import { ErrorMessage } from "./error-message";
-import { cn } from "../../classnames";
+import { cn } from "../classnames";
 
 export function DetailedRadioGroup<TValue extends string | undefined>({
   defaultValue,
