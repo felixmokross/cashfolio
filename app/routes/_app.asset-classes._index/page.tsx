@@ -2,6 +2,7 @@ import { PlusIcon } from "@heroicons/react/20/solid";
 import type { AssetClassDto } from "~/asset-classes/types";
 import { LinkButton } from "~/common/base/buttons/link-button";
 import { Link } from "~/common/base/link";
+import { Table } from "~/common/base/table";
 import { PageHeader } from "~/common/page-header";
 
 export type PageProps = {
@@ -21,27 +22,17 @@ export function Page({ assetClasses }: PageProps) {
       >
         Asset Classes
       </PageHeader>
-      <table className="min-w-full divide-y divide-gray-300">
-        <thead>
-          <tr>
-            <th
-              scope="col"
-              className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6 sm:pr-6"
-            >
-              Name
-            </th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-200 bg-white">
-          {assetClasses.map((a) => (
-            <tr key={a.id}>
-              <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 sm:pr-6">
-                <Link to={a.id}>{a.name}</Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table
+        columns={[
+          {
+            name: "Name",
+            field: "name",
+            render: (a) => <Link to={a.id}>{a.name}</Link>,
+          },
+        ]}
+        data={assetClasses}
+        getRowId={(a) => a.id}
+      />
     </div>
   );
 }
