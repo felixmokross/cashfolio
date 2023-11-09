@@ -25,9 +25,3 @@ export const Default: Story = {
     getRowId: (row) => row.id,
   },
 };
-
-export const Busy: Story = {
-  args: {
-    ...Default.args,
-  },
-};
