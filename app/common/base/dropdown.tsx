@@ -8,7 +8,7 @@ import type {
 import { Fragment } from "react";
 import { cn } from "./classnames";
 import { IconButton } from "./buttons/icon-button";
-import type { IconProps } from "./icons/types";
+import type { IconComponentType } from "./icons/types";
 
 export type DropdownProps = PropsWithChildren;
 
@@ -42,7 +42,7 @@ export function Dropdown({ children }: DropdownProps) {
 
 export type DropdownItemProps<T extends ElementType = "button"> = {
   as?: T;
-  icon?: ElementType<IconProps>;
+  icon?: IconComponentType;
 } & Omit<ComponentPropsWithoutRef<T>, "as">;
 
 export function DropdownItem<T extends ElementType>({

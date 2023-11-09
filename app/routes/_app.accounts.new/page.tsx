@@ -1,11 +1,9 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Form } from "@remix-run/react";
 import {
   AccountFormFields,
   type AccountFormFieldsProps,
 } from "~/accounts/account-form-fields";
-import { Button } from "~/common/base/buttons/button";
-import { FormPageHeader } from "~/common/form-page-header";
+import { FormPage } from "~/common/form-page";
 
 export type PageProps = {
   errors: AccountFormFieldsProps["errors"];
@@ -15,20 +13,13 @@ export type PageProps = {
 
 export function Page({ data, errors, values }: PageProps) {
   return (
-    <div className="flex justify-center">
-      <Form method="post" className="flex max-w-lg flex-col gap-8 px-4 py-8">
-        <FormPageHeader icon={PlusIcon} variant="positive">
-          New Account
-        </FormPageHeader>
-
-        <AccountFormFields data={data} errors={errors} values={values} />
-
-        <div className="flex justify-end">
-          <Button type="submit" variant="primary">
-            Create
-          </Button>
-        </div>
-      </Form>
-    </div>
+    <FormPage
+      title="New Account"
+      icon={PlusIcon}
+      variant="positive"
+      submitButtonLabel="Create"
+    >
+      <AccountFormFields data={data} errors={errors} values={values} />
+    </FormPage>
   );
 }
