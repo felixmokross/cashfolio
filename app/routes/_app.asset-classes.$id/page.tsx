@@ -19,7 +19,7 @@ export function Page({ assetClass }: PageProps) {
         name="name"
         label="Name"
         defaultValue={assetClass.name}
-        className="w-full"
+        groupClassName="col-span-6"
       />
     </FormPage>
   );

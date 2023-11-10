@@ -28,7 +28,7 @@ export function FormPage({
             {title}
           </FormPageHeader>
 
-          {children}
+          <div className="grid grid-cols-6 gap-x-4 gap-y-8">{children}</div>
 
           <div className="flex justify-end">
             <Button type="submit" variant="primary">

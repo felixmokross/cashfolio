@@ -29,7 +29,7 @@ export function AccountFormFields({
   const { preferredLocale } = useUser();
 
   return (
-    <div className="grid grid-cols-6 gap-x-4 gap-y-8">
+    <>
       <Input
         name="name"
         label="Name"
@@ -144,6 +144,6 @@ export function AccountFormFields({
           error={errors?.openingDate}
         />
       )}
-    </div>
+    </>
   );
 }

@@ -12,26 +12,24 @@ export function Page() {
       variant="positive"
       submitButtonLabel="Create"
     >
-      <div className="grid grid-cols-6 gap-x-4 gap-y-8">
-        <Input name="name" label="Name" groupClassName="col-span-6" />
-        <RadioGroup
-          name="type"
-          label="Type"
-          groupClassName="col-span-6"
-          options={[
-            {
-              value: BalanceChangeType.INCOME,
-              label: "Income",
-              variant: "positive",
-            },
-            {
-              value: BalanceChangeType.EXPENSE,
-              label: "Expense",
-              variant: "negative",
-            },
-          ]}
-        />
-      </div>
+      <Input name="name" label="Name" groupClassName="col-span-6" />
+      <RadioGroup
+        name="type"
+        label="Type"
+        groupClassName="col-span-6"
+        options={[
+          {
+            value: BalanceChangeType.INCOME,
+            label: "Income",
+            variant: "positive",
+          },
+          {
+            value: BalanceChangeType.EXPENSE,
+            label: "Expense",
+            variant: "negative",
+          },
+        ]}
+      />
     </FormPage>
   );
 }

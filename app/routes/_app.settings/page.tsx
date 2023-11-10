@@ -43,25 +43,27 @@ export function Page({
       submitButtonLabel="Save"
       disabled={state === "submitting"}
     >
-      <div className="mt-10 flex flex-col gap-4">
-        {message && state !== "submitting" && (
-          <Alert onDismiss={onAlertDismiss}>{message}</Alert>
-        )}
-        <LocaleCombobox
-          label="Currency and Date Format"
-          name="preferredLocale"
-          defaultValue={actionData?.values.preferredLocale || preferredLocale}
-          error={actionData?.errors?.preferredLocale}
-          locales={locales}
-          formattingSampleDate={formattingSampleDate}
-        />
-        <CurrencyCombobox
-          label="Main Currency"
-          name="refCurrency"
-          defaultValue={actionData?.values.refCurrency || refCurrency}
-          error={actionData?.errors?.refCurrency}
-        />
-      </div>
+      {message && state !== "submitting" && (
+        <Alert onDismiss={onAlertDismiss} className="col-span-6">
+          {message}
+        </Alert>
+      )}
+      <LocaleCombobox
+        label="Currency and Date Format"
+        name="preferredLocale"
+        defaultValue={actionData?.values.preferredLocale || preferredLocale}
+        error={actionData?.errors?.preferredLocale}
+        locales={locales}
+        formattingSampleDate={formattingSampleDate}
+        groupClassName="col-span-6"
+      />
+      <CurrencyCombobox
+        label="Main Currency"
+        name="refCurrency"
+        defaultValue={actionData?.values.refCurrency || refCurrency}
+        error={actionData?.errors?.refCurrency}
+        groupClassName="col-span-6"
+      />
     </FormPage>
   );
 }

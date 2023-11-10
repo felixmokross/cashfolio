@@ -10,7 +10,7 @@ export function Page() {
       variant="positive"
       submitButtonLabel="Create"
     >
-      <Input name="name" label="Name" className="w-full" />
+      <Input name="name" label="Name" groupClassName="col-span-6" />
     </FormPage>
   );
 }
