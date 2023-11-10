@@ -4,12 +4,16 @@ import type { SerializeFrom } from "@remix-run/node";
 import { createId } from "@paralleldrive/cuid2";
 import { formatISO } from "date-fns";
 import { AccountFormFields } from "./account-form-fields";
-import { withAppProviders, withPageMaxWidth } from "~/common/storybook";
+import {
+  withAppProviders,
+  withFormGrid,
+  withPageMaxWidth,
+} from "~/common/storybook";
 
 const meta: Meta<typeof AccountFormFields> = {
   title: "components/AccountFormFields",
   component: AccountFormFields,
-  decorators: [withPageMaxWidth, withAppProviders],
+  decorators: [withFormGrid, withPageMaxWidth, withAppProviders],
 };
 
 export default meta;

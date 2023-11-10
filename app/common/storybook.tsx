@@ -20,6 +20,12 @@ export const withPageMaxWidth: Decorator = (Story) => (
   </div>
 );
 
+export const withFormGrid: Decorator = (Story) => (
+  <div className="grid grid-cols-6 gap-x-4 gap-y-8">
+    <Story />
+  </div>
+);
+
 const user = buildExtendedUserDto();
 export const withAppProviders: Decorator = (Story, context) => {
   const userWithLocale = { ...user, preferredLocale: context.globals.locale };
