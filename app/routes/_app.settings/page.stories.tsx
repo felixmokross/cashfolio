@@ -27,3 +27,10 @@ export const WithAlert: Story = {
     message: "Settings updated successfully",
   },
 };
+
+export const Submitting: Story = {
+  args: {
+    ...Default.args,
+    state: "submitting",
+  },
+};

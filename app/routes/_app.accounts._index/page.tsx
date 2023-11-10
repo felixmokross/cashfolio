@@ -10,7 +10,7 @@ export type PageProps = {
 
 export function Page({ accounts }: PageProps) {
   return (
-    <div className="px-4 sm:px-6">
+    <div className="space-y-4 px-4 sm:px-6">
       <PageHeader
         actions={
           <LinkButton to="new" icon={PlusIcon}>
@@ -22,7 +22,6 @@ export function Page({ accounts }: PageProps) {
       </PageHeader>
 
       <AccountList
-        className="mt-4"
         accounts={accounts.map((a) => ({
           account: a,
           balance: "10000",
