@@ -32,6 +32,10 @@ jobs:
           APP_URL=https://$APP_NAME.fly.dev
           echo App URL is $APP_URL
           echo "APP_URL=$APP_URL" >> $GITHUB_ENV
+      - name: Delete if exists
+        run: |
+          flyctl apps destroy --yes $APP_NAME || true
+          flyctl apps destroy --yes $DB_APP_NAME || true
       - name: Create App and DB
         run: |
           DB_PW=$(openssl rand -hex 32)
