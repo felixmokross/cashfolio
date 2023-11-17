@@ -24,28 +24,6 @@ env:
   NODE_VERSION: 20
 
 jobs:
-  version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: paulhatch/semantic-version@v5.3.0
-        id: semantic-version
-        with:
-          version_format: "${major}.${minor}.${patch}-pre${increment}"
-      - run: |
-          echo "Version: ${{ steps.semantic-version.outputs.version }}"
-          echo "Major: ${{ steps.semantic-version.outputs.major }}"
-          echo "Minor: ${{ steps.semantic-version.outputs.minor }}"
-          echo "Patch: ${{ steps.semantic-version.outputs.patch }}"
-          echo "Version type: ${{ steps.semantic-version.outputs.version_type }}"
-          echo "Version tag: ${{ steps.semantic-version.outputs.version_tag }}"
-          echo "Changed: ${{ steps.semantic-version.outputs.changed }}"
-          echo "Increment: ${{ steps.semantic-version.outputs.increment }}"
-          echo "Current commit: ${{ steps.semantic-version.outputs.current_commit }}"
-          echo "Is tagged: ${{ steps.semantic-version.outputs.is_tagged }}"
-
   lint:
     name: Lint
     runs-on: ubuntu-latest

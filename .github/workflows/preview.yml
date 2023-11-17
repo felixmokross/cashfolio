@@ -3,9 +3,12 @@ on:
   pull_request:
 
 jobs:
+  version:
+    uses: ./.github/workflows/version.yml
   deploy:
     name: Preview
     runs-on: ubuntu-latest
+    needs: version
     environment:
       name: preview
       url: ${{ env.APP_URL }}
