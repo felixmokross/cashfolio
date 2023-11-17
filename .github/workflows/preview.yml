@@ -2,6 +2,9 @@ name: Preview
 on:
   pull_request:
 
+env:
+  NODE_VERSION: 20
+
 jobs:
   version:
     uses: ./.github/workflows/version.yml
@@ -19,6 +22,10 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
         with:
           version: 0.1.117
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm version ${{ needs.version.outputs.version }} --git-tag-version false
       - name: Generate App Name
         run: |
           GITHUB_SHA_SHORT=${GITHUB_SHA::4}
