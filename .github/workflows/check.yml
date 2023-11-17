@@ -31,9 +31,19 @@ jobs:
         with:
           fetch-depth: 0
       - uses: paulhatch/semantic-version@v5.3.0
+        id: semantic-version
         with:
           debug: true
           version_from_branch: true
+      - run: |
+          echo "Version: ${{ steps.semantic-version.outputs.version }}"
+          echo "Major: ${{ steps.semantic-version.outputs.major }}"
+          echo "Minor: ${{ steps.semantic-version.outputs.minor }}"
+          echo "Patch: ${{ steps.semantic-version.outputs.patch }}"
+          echo "Version type: ${{ steps.semantic-version.outputs.version_type }}"
+          echo "Version tag: ${{ steps.semantic-version.outputs.version_tag }}"
+          echo "Changed: ${{ steps.semantic-version.outputs.changed }}"
+          echo "Debug output: ${{ steps.semantic-version.outputs.debug_output }}"
 
   lint:
     name: Lint
