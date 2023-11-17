@@ -48,4 +48,4 @@ jobs:
           fi
           echo "version=${{ steps.semantic-version.outputs.version }}$pre_release_postfix" >> "$GITHUB_OUTPUT"
       - run: echo "Complete version is ${{ steps.complete-version.outputs.version }}"
-      - run: npm version ${{ steps.complete-version.outputs.version }}
+      - run: npm version ${{ steps.complete-version.outputs.version }} --git-tag-version false
