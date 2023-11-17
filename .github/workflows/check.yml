@@ -32,9 +32,6 @@ jobs:
           fetch-depth: 0
       - uses: paulhatch/semantic-version@v5.3.0
         id: semantic-version
-        with:
-          debug: true
-          version_from_branch: true
       - run: |
           echo "Version: ${{ steps.semantic-version.outputs.version }}"
           echo "Major: ${{ steps.semantic-version.outputs.major }}"
