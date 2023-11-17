@@ -44,7 +44,8 @@ jobs:
           echo "Version tag: ${{ steps.semantic-version.outputs.version_tag }}"
           echo "Changed: ${{ steps.semantic-version.outputs.changed }}"
           echo "Increment: ${{ steps.semantic-version.outputs.increment }}"
-          echo ${{ steps.semantic-version.outputs.debug_output }}
+          echo "Current commit: ${{ steps.semantic-version.outputs.current_commit }}"
+          echo "Is tagged: ${{ steps.semantic-version.outputs.is_tagged }}"
 
   lint:
     name: Lint
