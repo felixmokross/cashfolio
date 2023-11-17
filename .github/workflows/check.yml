@@ -33,7 +33,7 @@ jobs:
       - uses: paulhatch/semantic-version@v5.3.0
         id: semantic-version
         with:
-          version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+          version_format: "${major}.${minor}.${patch}-pre${increment}"
       - run: |
           echo "Version: ${{ steps.semantic-version.outputs.version }}"
           echo "Major: ${{ steps.semantic-version.outputs.major }}"
