@@ -9,6 +9,7 @@ import { getDisplayNameOfLocale } from "~/common/utils";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { LinkIconButton } from "./base/buttons/icon-button";
 import type { ExtendedUserDto } from "~/users/types";
+import { version } from "~/version";
 
 export type MainMenuProps = {
   user: ExtendedUserDto;
@@ -40,7 +41,7 @@ export function MainMenu({ user }: MainMenuProps) {
             </div>
             <div className="text-sm font-medium text-gray-500">
               {getDisplayNameOfLocale(user.preferredLocale)} &middot;{" "}
-              {currenciesByCode[user.refCurrency]}
+              {currenciesByCode[user.refCurrency]} &middot; {version}
             </div>
           </div>
           <div className="flex-shrink-0">
