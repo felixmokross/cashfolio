@@ -30,3 +30,4 @@ jobs:
           echo "Is tagged: ${{ steps.semantic-version.outputs.is_tagged }}"
       - id: complete-version
         run: echo "version=${{ steps.semantic-version.outputs.version }}-$GITHUB_HEAD_REF-${{ steps.semantic-version.outputs.increment }}" >> "$GITHUB_OUTPUT"
+      - run: echo "Complete version is ${{ steps.complete-version.outputs.version }}"
