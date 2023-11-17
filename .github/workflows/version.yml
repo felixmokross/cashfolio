@@ -26,14 +26,17 @@ jobs:
           echo "Patch: ${{ steps.semantic-version.outputs.patch }}"
           echo "Version type: ${{ steps.semantic-version.outputs.version_type }}"
           echo "Version tag: ${{ steps.semantic-version.outputs.version_tag }}"
-          echo "Changed: ${{ steps.semantic-version.outputs.changed }}"
           echo "Increment: ${{ steps.semantic-version.outputs.increment }}"
           echo "Current commit: ${{ steps.semantic-version.outputs.current_commit }}"
           echo "Is tagged: ${{ steps.semantic-version.outputs.is_tagged }}"
       - id: complete-version
         run: |
           if [ "$GITHUB_REF_NAME" == "main" ]; then
-              pre_release_postfix="pre${{ steps.semantic-version.outputs.increment }}"
+              if [ ${{ steps.semantic-version.outputs.is_tagged }} == "true" ]; then
+                  pre_release_postfix=""
+              else
+                  pre_release_postfix="pre${{ steps.semantic-version.outputs.increment }}"
+              fi
           else
               pre_release_postfix="$GITHUB_HEAD_REF-${{ steps.semantic-version.outputs.increment }}"
           fi
