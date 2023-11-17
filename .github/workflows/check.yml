@@ -43,7 +43,7 @@ jobs:
           echo "Version type: ${{ steps.semantic-version.outputs.version_type }}"
           echo "Version tag: ${{ steps.semantic-version.outputs.version_tag }}"
           echo "Changed: ${{ steps.semantic-version.outputs.changed }}"
-          echo "Debug output: ${{ steps.semantic-version.outputs.debug_output }}"
+          echo ${{ steps.semantic-version.outputs.debug_output }}
 
   lint:
     name: Lint
