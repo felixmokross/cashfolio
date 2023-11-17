@@ -35,10 +35,10 @@ jobs:
               if [ ${{ steps.semantic-version.outputs.is_tagged }} == "true" ]; then
                   pre_release_postfix=""
               else
-                  pre_release_postfix="pre${{ steps.semantic-version.outputs.increment }}"
+                  pre_release_postfix="-pre${{ steps.semantic-version.outputs.increment }}"
               fi
           else
-              pre_release_postfix="$GITHUB_HEAD_REF-${{ steps.semantic-version.outputs.increment }}"
+              pre_release_postfix="-$GITHUB_HEAD_REF-${{ steps.semantic-version.outputs.increment }}"
           fi
-          echo "version=${{ steps.semantic-version.outputs.version }}-$pre_release_postfix" >> "$GITHUB_OUTPUT"
+          echo "version=${{ steps.semantic-version.outputs.version }}$pre_release_postfix" >> "$GITHUB_OUTPUT"
       - run: echo "Complete version is ${{ steps.complete-version.outputs.version }}"
