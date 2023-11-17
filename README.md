@@ -66,7 +66,7 @@ npm run chromatic
 
 See [`.env.example`](./.env.example) file.
 
-# Tech Stack
+## Tech Stack
 
 - App
 
@@ -90,3 +90,10 @@ See [`.env.example`](./.env.example) file.
   - Auth0 (managing users in Playwright tests)
   - Storybook
   - ts-node
+
+## Release Process
+
+1. Create a tag for the release version `v<major>.<minor>.<patch>`
+2. Push the tag to the repo
+
+This creates automatically a corresponding release on GitHub and deploys it to production.
