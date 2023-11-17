@@ -3,9 +3,11 @@ on:
   pull_request:
 
 jobs:
+  version:
+    uses: ./.github/workflows/version.yml
   deploy:
-    name: Preview
     runs-on: ubuntu-latest
+    needs: version
     environment:
       name: preview
       url: ${{ env.APP_URL }}
@@ -61,7 +63,7 @@ jobs:
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_ID }}
           PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET: ${{ secrets.PREVIEW_DEPLOYMENT_OIDC_CLIENT_SECRET }}
       - name: Deploy
-        run: flyctl deploy --app $APP_NAME
+        run: flyctl deploy --app $APP_NAME --image-label v${{ needs.version.outputs.version }}
   clean:
     uses: ./.github/workflows/preview-clean.yml
     secrets: inherit
