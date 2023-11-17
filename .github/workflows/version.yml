@@ -6,6 +6,9 @@ on:
         description: "The complete version string"
         value: ${{ jobs.version.outputs.version }}
 
+env:
+  NODE_VERSION: 20
+
 jobs:
   version:
     runs-on: ubuntu-latest
@@ -15,6 +18,9 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
       - uses: paulhatch/semantic-version@v5.3.0
         id: semantic-version
         with:
@@ -42,3 +48,4 @@ jobs:
           fi
           echo "version=${{ steps.semantic-version.outputs.version }}$pre_release_postfix" >> "$GITHUB_OUTPUT"
       - run: echo "Complete version is ${{ steps.complete-version.outputs.version }}"
+      - run: npm version ${{ steps.complete-version.outputs.version }}
