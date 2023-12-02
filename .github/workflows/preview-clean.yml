@@ -20,10 +20,9 @@ jobs:
                 .[]
                   | { ID:.ID, LastReleasedAt: .CurrentRelease.CreatedAt }
                   | select(.ID | (test("^cashfolio-preview-") and (test("-db$") | not)))
-              ]
-                | sort_by(.LastReleasedAt)
-                | reverse
-                | .[3:]
+                  | { ID, LastReleasedDaysAgo: ((now - (.LastReleasedAt | fromdate)) / 60 / 60 / 24) }
+                  | select(.LastReleasedDaysAgo > 4)
+                ]
                 | map(.ID, .ID + "-db")
                 | .[]' \
               | xargs -I {} flyctl apps destroy --yes {}
