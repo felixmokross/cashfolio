@@ -27,7 +27,8 @@ jobs:
             )
             | flatten
             | unique_by(.ID)
-            | map(.ID, .ID + "-db")' \
+            | map(.ID, .ID + "-db")
+            | .[]' \
               | xargs -I {} flyctl apps destroy --yes {}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
