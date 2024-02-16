@@ -28,8 +28,8 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
@@ -39,8 +39,8 @@ jobs:
     name: Typecheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
@@ -50,8 +50,8 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
@@ -62,8 +62,8 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
@@ -88,7 +88,7 @@ jobs:
           PLAYWRIGHT_TESTS_AUTH0_DOMAIN: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_DOMAIN }}
           PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID }}
           PLAYWRIGHT_TESTS_AUTH0_CLIENT_SECRET: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_CLIENT_SECRET }}
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
@@ -99,10 +99,10 @@ jobs:
     name: Chromatic
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
