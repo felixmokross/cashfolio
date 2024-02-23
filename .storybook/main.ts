@@ -1,30 +1,17 @@
-import type { StorybookConfig } from "@storybook/react-webpack5";
-const path = require("path");
+import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
-  webpackFinal: async (config) => ({
-    ...config,
-    resolve: {
-      ...config.resolve,
-      alias: {
-        ...config.resolve?.alias,
-        "~": path.resolve(__dirname, "../app"),
-      },
-    },
-  }),
+  
   stories: ["../docs/**/*.mdx", "../app/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
+    "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
-    {
-      name: "@storybook/addon-styling",
-      options: { postCss: { implementation: require("postcss") } },
-    },
-    "@storybook/addon-mdx-gfm",
+    "@storybook/addon-styling",
   ],
   framework: {
-    name: "@storybook/react-webpack5", // We should migrate to Storybook Vite at some point
+    name: "@storybook/react-vite",
     options: {},
   },
   docs: {
