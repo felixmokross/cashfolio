@@ -1,5 +1,5 @@
 import { BalanceChangeType } from "@prisma/client";
-import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
@@ -7,7 +7,7 @@ import { createBalanceChangeCategory } from "~/balance-change-categories/functio
 import { getTitle } from "~/common/utils";
 import { Page } from "./page";
 
-export async function action({ request }: DataFunctionArgs) {
+export async function action({ request }: LoaderFunctionArgs) {
   const userId = await requireUserId(request);
   const form = await request.formData();
   const name = form.get("name");

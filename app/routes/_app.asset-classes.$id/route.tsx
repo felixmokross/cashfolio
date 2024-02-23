@@ -1,4 +1,8 @@
-import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
+import type {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
@@ -11,7 +15,7 @@ import {
 import { getTitle } from "~/common/utils";
 import { Page } from "./page";
 
-export async function action({ params, request }: DataFunctionArgs) {
+export async function action({ params, request }: ActionFunctionArgs) {
   invariant(params.id, "id is required");
   const userId = await requireUserId(request);
 
@@ -31,7 +35,7 @@ export async function action({ params, request }: DataFunctionArgs) {
   return redirect("/asset-classes");
 }
 
-export async function loader({ request, params }: DataFunctionArgs) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   invariant(params.id, "id is required");
   const userId = await requireUserId(request);
 

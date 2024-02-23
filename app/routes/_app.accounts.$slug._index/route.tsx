@@ -1,4 +1,4 @@
-import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
@@ -9,7 +9,7 @@ import { getReverseLedgerDateGroups } from "~/ledgers-lines/functions.server";
 import { getBalanceChangeCategories } from "~/balance-change-categories/functions.server";
 import { getTitle } from "~/common/utils";
 
-export async function loader({ request, params }: DataFunctionArgs) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   invariant(params.slug, "slug is required");
   const userId = await requireUserId(request);
 

@@ -1,4 +1,8 @@
-import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
+import type {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { authorize } from "~/common/auth.server";
@@ -21,7 +25,7 @@ type ActionData = {
   values: SignupValues;
 };
 
-export async function loader({ request }: DataFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request);
   const userId = session.get("userId");
   if (!userId) {
@@ -46,7 +50,7 @@ export async function loader({ request }: DataFunctionArgs) {
   });
 }
 
-export const action = async ({ request }: DataFunctionArgs) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
 
   const redirectTo = safeRedirect(
