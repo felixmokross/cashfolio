@@ -5,11 +5,11 @@
     "./app/tailwind.css"
   ],
   "scripts": {
-    "build": "remix build",
+    "build": "remix vite:build",
     "deploy": "fly deploy --remote-only",
-    "dev:remix": "remix dev",
+    "dev:remix": "remix vite:dev",
     "dev": "concurrently --raw npm:dev:*",
-    "start": "remix-serve ./build/index.js",
+    "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "test": "vitest",
@@ -85,6 +85,7 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
+    "vite-tsconfig-paths": "^4.3.1",
     "vitest": "^1.3.0"
   },
   "engines": {

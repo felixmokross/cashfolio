@@ -4,5 +4,4 @@ fly.toml
 .DS_Store
 .env
 /.cache
-/public/build
 /build
