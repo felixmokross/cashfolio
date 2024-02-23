@@ -11,11 +11,7 @@ export default defineConfig({
     port: 3000,
   },
   plugins: [
-    !isVitest() &&
-      remix({
-        ignoredRouteFiles: ["**/.*"],
-        serverModuleFormat: "cjs", // TODO could we use esm?
-      }),
+    !isVitest() && remix({ ignoredRouteFiles: ["**/.*"] }),
     tsconfigPaths(),
   ],
   test: {

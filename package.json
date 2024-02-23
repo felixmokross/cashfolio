@@ -4,6 +4,7 @@
   "sideEffects": [
     "./app/tailwind.css"
   ],
+  "type": "module",
   "scripts": {
     "build": "remix vite:build",
     "deploy": "fly deploy --remote-only",
