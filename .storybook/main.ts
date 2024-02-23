@@ -24,7 +24,7 @@ const config: StorybookConfig = {
     "@storybook/addon-mdx-gfm",
   ],
   framework: {
-    name: "@storybook/react-webpack5",
+    name: "@storybook/react-webpack5", // We should migrate to Storybook Vite at some point
     options: {},
   },
   docs: {
