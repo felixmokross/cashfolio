@@ -85,7 +85,7 @@ export type ButtonProps<T extends ElementType> = PropsWithChildren<
     icon?: IconComponentType;
     /** The size of the button. */
     size?: "default" | "compact";
-    innerRef?: Ref<T extends "button" ? HTMLButtonElement : HTMLElement>;
+    innerRef?: T extends "button" ? Ref<HTMLButtonElement> : never;
   } & Omit<ComponentPropsWithoutRef<T>, "as">
 >;
 
