@@ -1,6 +1,4 @@
-import { forwardRef } from "react";
 import type {
-  Ref,
   ComponentPropsWithRef,
   ElementType,
   PropsWithChildren,
@@ -43,18 +41,15 @@ function buttonClassName(size: ButtonSize, variant: ButtonVariant) {
  *
  * For a link button use the `LinkButton` component instead.
  */
-export const Button = forwardRef(function Button<T extends ElementType>(
-  {
-    as,
-    variant = "secondary",
-    size = "default",
-    children,
-    className,
-    icon,
-    ...props
-  }: ButtonProps<T>,
-  ref: Ref<HTMLButtonElement>,
-) {
+export function Button<T extends ElementType = "button">({
+  as,
+  variant = "secondary",
+  size = "default",
+  children,
+  className,
+  icon,
+  ...props
+}: ButtonProps<T>) {
   const Component = as || "button";
   const Icon = icon;
 
@@ -64,13 +59,12 @@ export const Button = forwardRef(function Button<T extends ElementType>(
       className={cn(classNames.button, className)}
       {...(Component === "button" ? { type: "button" } : {})}
       {...props}
-      ref={ref}
     >
       {Icon && <Icon className={classNames.icon} />}
       {children}
     </Component>
   );
-});
+}
 
 export type ButtonProps<T extends ElementType> = PropsWithChildren<
   {

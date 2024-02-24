@@ -17,7 +17,7 @@
     "e2e": "playwright test --ui",
     "dev:storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "dev:db": "docker-compose up",
+    "dev:db": "docker-compose up -d",
     "e2e:clean": "ts-node -r tsconfig-paths/register -r dotenv/config playwright/clean.ts",
     "chromatic": "chromatic --only-changed",
     "prepare": "husky"

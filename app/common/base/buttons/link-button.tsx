@@ -1,8 +1,7 @@
 import { Link } from "@remix-run/react";
 import type { ButtonProps } from "./button";
 import { Button } from "./button";
-import { forwardRef } from "react";
-import type { Ref, ComponentPropsWithRef } from "react";
+import type { ComponentPropsWithRef } from "react";
 
 export type LinkButtonProps = {
   /** The link target. See the Remix `Link` component for details. */
@@ -14,9 +13,6 @@ export type LinkButtonProps = {
  * forwarded to the `Link` component. Use the `to` prop to specify the link
  * target.
  */
-export const LinkButton = forwardRef(function LinkButton(
-  props: LinkButtonProps,
-  ref: Ref<HTMLButtonElement>,
-) {
-  return <Button {...props} as={Link} ref={ref} />;
-});
+export const LinkButton = function LinkButton(props: LinkButtonProps) {
+  return <Button {...props} as={Link} />;
+};
