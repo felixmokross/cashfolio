@@ -17,6 +17,15 @@ export default defineConfig({
   test: {
     exclude: [...configDefaults.exclude, "playwright"],
   },
+
+  // workaround for Prisma bug manifesting in Vite prod build
+  // see https://github.com/prisma/prisma/issues/12504
+  resolve: {
+    alias: {
+      ".prisma/client/index-browser":
+        "./node_modules/.prisma/client/index-browser.js",
+    },
+  },
 });
 
 function isVitest() {
