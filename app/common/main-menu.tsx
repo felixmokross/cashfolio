@@ -21,8 +21,8 @@ export function MainMenu({ user }: MainMenuProps) {
         <MainMenuNavLink to=".">Home</MainMenuNavLink>
         <MainMenuNavLink to="accounts">Accounts</MainMenuNavLink>
         <MainMenuNavLink to="asset-classes">Asset Classes</MainMenuNavLink>
-        <MainMenuNavLink to="balance-change-categories">
-          Balance Change Categories
+        <MainMenuNavLink to="income-categories">
+          Income Categories
         </MainMenuNavLink>
       </div>
       <div className="border-t border-gray-200 pb-3 pt-4">

@@ -42,7 +42,7 @@ export function buildLedgerDateGroupDto(
 export function buildLedgerLineDto(values: Partial<LedgerLineDto> = {}) {
   return {
     id: createId(),
-    type: BookingType.ACCOUNT_CHANGE,
+    type: BookingType.CHARGE,
     transaction: buildLedgerLineTransactionDto(),
     amount: "1000",
     amountFormatted: "1,000.00",
