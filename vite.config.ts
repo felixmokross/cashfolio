@@ -19,7 +19,7 @@ export default defineConfig({
   },
 
   // workaround for Prisma bug manifesting in Vite prod build
-  // see https://github.com/prisma/prisma/issues/12504
+  // see https://github.com/prisma/prisma/issues/12504#issuecomment-1285883083
   resolve: {
     alias: {
       ".prisma/client/index-browser":

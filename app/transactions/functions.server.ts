@@ -49,24 +49,24 @@ export async function createTransaction(
                 user: { connect: { id: userId } },
               }
             : values.type === "balanceChange"
-            ? {
-                type: BookingType.BALANCE_CHANGE,
-                amount: counterAmount,
-                balanceChangeCategory: {
-                  connect: {
-                    id_userId: {
-                      id: values.balanceChangeCategoryId!,
-                      userId,
+              ? {
+                  type: BookingType.BALANCE_CHANGE,
+                  amount: counterAmount,
+                  balanceChangeCategory: {
+                    connect: {
+                      id_userId: {
+                        id: values.balanceChangeCategoryId!,
+                        userId,
+                      },
                     },
                   },
+                  user: { connect: { id: userId } },
+                }
+              : {
+                  type: BookingType.VALUE_CHANGE,
+                  amount: counterAmount,
+                  user: { connect: { id: userId } },
                 },
-                user: { connect: { id: userId } },
-              }
-            : {
-                type: BookingType.VALUE_CHANGE,
-                amount: counterAmount,
-                user: { connect: { id: userId } },
-              },
         ],
       },
       userId,

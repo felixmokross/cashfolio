@@ -31,9 +31,8 @@ export function Combobox({
             .map((t) => t.toLowerCase().trim());
 
           const normalizedTexts = [option.primaryText, option.secondaryText]
-            .flatMap(
-              (t) =>
-                t?.split(/[^a-zA-Z0-9]/).map((tk) => tk.toLowerCase().trim()),
+            .flatMap((t) =>
+              t?.split(/[^a-zA-Z0-9]/).map((tk) => tk.toLowerCase().trim()),
             )
             .filter((t) => !!t) as string[];
 
