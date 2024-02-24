@@ -1,11 +1,11 @@
 import { Link } from "@remix-run/react";
 import type { ButtonProps } from "./button";
 import { Button } from "./button";
-import type { ComponentPropsWithRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
 export type LinkButtonProps = {
   /** The link target. See the Remix `Link` component for details. */
-  to: ComponentPropsWithRef<typeof Link>["to"];
+  to: ComponentPropsWithoutRef<typeof Link>["to"];
 } & Omit<ButtonProps<typeof Link>, "as" | "to">;
 
 /**

@@ -1,7 +1,8 @@
 import type {
-  ComponentPropsWithRef,
+  ComponentPropsWithoutRef,
   ElementType,
   PropsWithChildren,
+  Ref,
 } from "react";
 import { cn } from "../classnames";
 import type { IconComponentType } from "../icons/types";
@@ -48,6 +49,7 @@ export function Button<T extends ElementType = "button">({
   children,
   className,
   icon,
+  innerRef,
   ...props
 }: ButtonProps<T>) {
   const Component = as || "button";
@@ -57,6 +59,7 @@ export function Button<T extends ElementType = "button">({
   return (
     <Component
       className={cn(classNames.button, className)}
+      ref={innerRef}
       {...(Component === "button" ? { type: "button" } : {})}
       {...props}
     >
@@ -82,7 +85,8 @@ export type ButtonProps<T extends ElementType> = PropsWithChildren<
     icon?: IconComponentType;
     /** The size of the button. */
     size?: "default" | "compact";
-  } & Omit<ComponentPropsWithRef<T>, "as">
+    innerRef?: Ref<T extends "button" ? HTMLButtonElement : HTMLElement>;
+  } & Omit<ComponentPropsWithoutRef<T>, "as">
 >;
 
 type ButtonVariant = "primary" | "secondary" | "negative";
