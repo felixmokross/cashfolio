@@ -1,4 +1,8 @@
-import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
+import type {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
@@ -17,7 +21,7 @@ import { getTitle } from "~/common/utils";
 import { hasErrors } from "~/common/utils.server";
 import { Page } from "./page";
 
-export async function action({ params, request }: DataFunctionArgs) {
+export async function action({ params, request }: ActionFunctionArgs) {
   invariant(params.slug, "slug is required");
 
   const userId = await requireUserId(request);
@@ -38,7 +42,7 @@ export async function action({ params, request }: DataFunctionArgs) {
   return redirect(`/accounts/${updatedAccount.slug}`);
 }
 
-export async function loader({ request, params }: DataFunctionArgs) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   invariant(params.slug, "slug is required");
   const userId = await requireUserId(request);
 

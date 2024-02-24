@@ -1,13 +1,12 @@
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import styles from "./tailwind.css";
+import styles from "./tailwind.css?url";
 import { Container } from "./common/container";
 
 export const links: LinksFunction = () => [
@@ -39,7 +38,6 @@ export default function App() {
         </Container>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );

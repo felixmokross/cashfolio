@@ -19,6 +19,6 @@ export type FormErrors<Values> = {
       ? FormErrors<Values[K][number]>[]
       : string
     : Values[K] extends object
-    ? FormErrors<Values[K]>
-    : string;
+      ? FormErrors<Values[K]>
+      : string;
 } & { form?: string };

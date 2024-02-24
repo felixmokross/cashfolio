@@ -1,4 +1,4 @@
-import type { DataFunctionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import type { ActionData, SettingsValues } from "./page";
 import { Page } from "./page";
@@ -15,7 +15,7 @@ import { getSession, sessionStorage } from "~/common/session.server";
 import type { FormErrors } from "~/common/forms/types";
 import { hasErrors } from "~/common/utils.server";
 
-export async function loader({ request }: DataFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request);
   const message = session.get("message") as string | undefined;
 
@@ -32,7 +32,7 @@ export async function loader({ request }: DataFunctionArgs) {
   );
 }
 
-export async function action({ request }: DataFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const session = await getSession(request);
 

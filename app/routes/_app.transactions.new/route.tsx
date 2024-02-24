@@ -1,4 +1,9 @@
-import { json, type DataFunctionArgs, redirect } from "@remix-run/node";
+import {
+  type ActionFunctionArgs,
+  json,
+  type LoaderFunctionArgs,
+  redirect,
+} from "@remix-run/node";
 import { Page } from "./page";
 import { getAccount, getAccounts } from "~/accounts/functions.server";
 import { requireUserId } from "~/common/auth.server";
@@ -14,7 +19,7 @@ import {
 import { hasErrors } from "~/common/utils.server";
 import type { FormActionData } from "~/common/forms/types";
 
-export async function loader({ request }: DataFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const userId = await requireUserId(request);
   const accountSlug = new URL(request.url).searchParams.get("account");
   invariant(typeof accountSlug === "string", "No account provided");
@@ -30,7 +35,7 @@ export async function loader({ request }: DataFunctionArgs) {
   return json({ account, accounts, balanceChangeCategories });
 }
 
-export async function action({ request }: DataFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const userId = await requireUserId(request);
 
   const accountSlug = new URL(request.url).searchParams.get("account");

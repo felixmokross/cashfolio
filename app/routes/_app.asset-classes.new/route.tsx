@@ -1,4 +1,4 @@
-import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
@@ -6,7 +6,7 @@ import { createAssetClass } from "~/asset-classes/functions.server";
 import { getTitle } from "~/common/utils";
 import { Page } from "./page";
 
-export async function action({ request }: DataFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const userId = await requireUserId(request);
   const form = await request.formData();
   let name = form.get("name");

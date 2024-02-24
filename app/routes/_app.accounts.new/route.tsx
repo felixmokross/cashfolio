@@ -1,4 +1,8 @@
-import type { DataFunctionArgs, MetaFunction } from "@remix-run/node";
+import type {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/common/auth.server";
@@ -14,7 +18,7 @@ import { getTitle } from "~/common/utils";
 import { hasErrors } from "~/common/utils.server";
 import { Page } from "./page";
 
-export async function action({ request }: DataFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const userId = await requireUserId(request);
   const values = await getAccountValues(request);
   const errors = await validateAccountValues(userId, undefined, values);
@@ -31,7 +35,7 @@ export async function action({ request }: DataFunctionArgs) {
   return redirect("/accounts");
 }
 
-export async function loader({ request }: DataFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const userId = await requireUserId(request);
 
   const assetClasses = await getAssetClasses(userId);
