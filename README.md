@@ -46,22 +46,6 @@ Start Playwright in UI Mode:
 npm run e2e
 ```
 
-## Deployment
-
-Trigger Fly deployment from the local machine:
-
-```sh
-npm run deploy
-```
-
-## Chromatic/Storybook
-
-To deploy Storybook to Chromatic, use:
-
-```sh
-npm run chromatic
-```
-
 ## Environment Variables
 
 See [`.env.example`](./.env.example) file.
