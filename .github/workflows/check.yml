@@ -21,7 +21,8 @@ on:
         required: true
 
 env:
-  NODE_VERSION: 20
+  NODE_VERSION: ${{ vars.NODE_VERSION }}
+  HUSKY: 0
 
 jobs:
   lint:

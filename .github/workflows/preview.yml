@@ -3,7 +3,7 @@ on:
   pull_request:
 
 env:
-  NODE_VERSION: 20
+  NODE_VERSION: ${{ vars.NODE_VERSION }}
 
 jobs:
   version:
