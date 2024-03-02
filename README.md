@@ -73,7 +73,7 @@ See [`.env.example`](./.env.example) file.
   - Playwright
   - Auth0 (managing users in Playwright tests)
   - Storybook
-  - ts-node
+  - bun (for running e2e clean script)
 
 ## Release Process
 

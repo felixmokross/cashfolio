@@ -18,7 +18,8 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
-      - run: npm run e2e:clean
+      - uses: oven-sh/setup-bun@v1
+      - run: npm run e2e:clean # using bun due to open issue with ts-node on Node 20 https://github.com/TypeStrong/ts-node/issues/1997
         env:
           PLAYWRIGHT_TESTS_AUTH0_DOMAIN: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_DOMAIN }}
           PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID: ${{ secrets.PLAYWRIGHT_TESTS_AUTH0_CLIENT_ID }}
