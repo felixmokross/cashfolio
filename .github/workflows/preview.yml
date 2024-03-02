@@ -47,10 +47,8 @@ jobs:
           flyctl apps destroy --yes $DB_APP_NAME || true
       - name: Create App and DB
         run: |
-          DB_PW=$(openssl rand -hex 32)
-
           echo Creating postgres cluster $DB_APP_NAME:
-          flyctl postgres create --name $DB_APP_NAME --region cdg --password $DB_PW --initial-cluster-size 1 --vm-size shared-cpu-1x --volume-size 1 --org $FLY_ORG
+          flyctl postgres create --name $DB_APP_NAME --region cdg --initial-cluster-size 1 --vm-size shared-cpu-1x --volume-size 1 --org $FLY_ORG
 
           echo Creating app $APP_NAME:
           flyctl apps create --name $APP_NAME --org $FLY_ORG
