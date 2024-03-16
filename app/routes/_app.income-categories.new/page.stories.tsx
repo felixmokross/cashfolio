@@ -3,7 +3,7 @@ import { Page } from "./page";
 import { withAppProviders, withPageMaxWidth } from "~/common/storybook";
 
 const meta: Meta<typeof Page> = {
-  title: "routes/_app/balance-change-categories/new/Page",
+  title: "routes/_app/income-categories/new/Page",
   component: Page,
   decorators: [withPageMaxWidth, withAppProviders],
 };

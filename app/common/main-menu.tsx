@@ -1,6 +1,5 @@
 import { Disclosure } from "@headlessui/react";
-import type { PropsWithChildren, Ref } from "react";
-import { forwardRef } from "react";
+import type { PropsWithChildren } from "react";
 import type { NavLinkProps as RemixNavLinkProps } from "@remix-run/react";
 import { NavLink as RemixNavLink } from "@remix-run/react";
 import { cn } from "./base/classnames";
@@ -22,8 +21,8 @@ export function MainMenu({ user }: MainMenuProps) {
         <MainMenuNavLink to=".">Home</MainMenuNavLink>
         <MainMenuNavLink to="accounts">Accounts</MainMenuNavLink>
         <MainMenuNavLink to="asset-classes">Asset Classes</MainMenuNavLink>
-        <MainMenuNavLink to="balance-change-categories">
-          Balance Change Categories
+        <MainMenuNavLink to="income-categories">
+          Income Categories
         </MainMenuNavLink>
       </div>
       <div className="border-t border-gray-200 pb-3 pt-4">
@@ -74,10 +73,7 @@ function MainMenuNavLink({ to, children }: MainMenuNavLinkProps) {
 
 type NavLinkProps = Omit<RemixNavLinkProps, "className">;
 
-const NavLink = forwardRef(function NavLink(
-  props: NavLinkProps,
-  ref: Ref<HTMLAnchorElement>,
-) {
+function NavLink(props: NavLinkProps) {
   return (
     <RemixNavLink
       {...props}
@@ -89,7 +85,6 @@ const NavLink = forwardRef(function NavLink(
           "block border-l-4 py-2 pl-3 pr-4 text-base font-medium",
         )
       }
-      ref={ref}
     />
   );
-});
+}

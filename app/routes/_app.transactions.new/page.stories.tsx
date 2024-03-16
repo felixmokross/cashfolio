@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Page } from "./page";
 import { buildAccountDto } from "~/accounts/builders";
-import { buildBalanceChangeCategoryDto } from "~/balance-change-categories/builders";
-import { BalanceChangeType } from "@prisma/client";
+import { buildIncomeCategoryDto } from "~/income-categories/builders";
 import { withAppProviders, withPageMaxWidth } from "~/common/storybook";
 
 const meta: Meta<typeof Page> = {
@@ -25,27 +24,9 @@ export const Default: Story = {
       buildAccountDto({ name: "Checking" }),
       buildAccountDto({ name: "Savings" }),
     ],
-    balanceChangeCategories: [
-      buildBalanceChangeCategoryDto({
-        name: "Groceries",
-        type: BalanceChangeType.EXPENSE,
-      }),
-      buildBalanceChangeCategoryDto({
-        name: "Car",
-        type: BalanceChangeType.EXPENSE,
-      }),
-      buildBalanceChangeCategoryDto({
-        name: "Health",
-        type: BalanceChangeType.EXPENSE,
-      }),
-      buildBalanceChangeCategoryDto({
-        name: "Salary",
-        type: BalanceChangeType.INCOME,
-      }),
-      buildBalanceChangeCategoryDto({
-        name: "Side Project",
-        type: BalanceChangeType.INCOME,
-      }),
+    incomeCategories: [
+      buildIncomeCategoryDto({ name: "Salary" }),
+      buildIncomeCategoryDto({ name: "Side Project" }),
     ],
   },
 };
@@ -53,11 +34,11 @@ export const Default: Story = {
 export const WithErrors: Story = {
   args: {
     ...Default.args,
-    errors: {
-      date: "Date is required",
-      targetAccountId: "Account is required",
-      balanceChangeCategoryId: "Category is required",
-      amount: "Amount is required",
-    },
+    // errors: {
+    //   date: "Date is required",
+    //   targetAccountId: "Account is required",
+    //   balanceChangeCategoryId: "Category is required",
+    //   amount: "Amount is required",
+    // },
   },
 };

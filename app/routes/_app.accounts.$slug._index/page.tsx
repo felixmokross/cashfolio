@@ -1,7 +1,5 @@
 import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { BookingType } from "@prisma/client";
-import type { BalanceChangeCategory } from "@prisma/client";
-import type { SerializeFrom } from "@remix-run/node";
 import { Fragment, useState } from "react";
 import { LinkButton } from "~/common/base/buttons/link-button";
 import { Link } from "~/common/base/link";
@@ -15,16 +13,9 @@ import { Dropdown, DropdownItem } from "~/common/base/dropdown";
 export type PageProps = {
   account: AccountDto;
   ledgerDateGroups: GetReverseLedgerDateGroupsResultDto;
-  targetAccounts: AccountDto[];
-  balanceChangeCategories: SerializeFrom<BalanceChangeCategory>[];
 };
 
-export function Page({
-  account,
-  targetAccounts,
-  ledgerDateGroups,
-  balanceChangeCategories,
-}: PageProps) {
+export function Page({ account, ledgerDateGroups }: PageProps) {
   const deleteTransaction = useFetcher();
   const [transactionToDelete, setTransactionToDelete] = useState<string>();
 
@@ -71,7 +62,8 @@ export function Page({
                         .filter((b) => b.id !== line.id)
                         .map((b) => {
                           switch (b.type) {
-                            case BookingType.ACCOUNT_CHANGE:
+                            case BookingType.CHARGE:
+                            case BookingType.DEPOSIT:
                               return (
                                 <Link
                                   key={b.id}

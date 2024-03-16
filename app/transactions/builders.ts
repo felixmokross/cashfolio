@@ -21,7 +21,7 @@ export function buildTransactionDto(values: Partial<TransactionDto> = {}) {
 export function buildBookingDto(values: Partial<BookingDto> = {}) {
   return {
     id: createId(),
-    type: BookingType.ACCOUNT_CHANGE,
+    type: BookingType.CHARGE,
     accountId: createId(),
 
     transactionId: createId(),

@@ -95,7 +95,7 @@ export default function Modal({
                     variant="secondary"
                     type="button"
                     onClick={() => onDismiss()}
-                    ref={cancelButtonRef}
+                    innerRef={cancelButtonRef}
                     disabled={isDisabled}
                   >
                     Cancel

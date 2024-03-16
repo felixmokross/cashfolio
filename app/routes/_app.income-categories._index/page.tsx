@@ -1,15 +1,15 @@
 import { PlusIcon } from "@heroicons/react/20/solid";
-import type { BalanceChangeCategoryDto } from "~/balance-change-categories/types";
 import { LinkButton } from "~/common/base/buttons/link-button";
 import { Link } from "~/common/base/link";
 import { Table } from "~/common/base/table";
 import { PageHeader } from "~/common/page-header";
+import type { IncomeCategoryDto } from "~/income-categories/types";
 
 export type PageProps = {
-  balanceChangeCategories: BalanceChangeCategoryDto[];
+  incomeCategories: IncomeCategoryDto[];
 };
 
-export function Page({ balanceChangeCategories }: PageProps) {
+export function Page({ incomeCategories }: PageProps) {
   return (
     <div className="space-y-4">
       <PageHeader
@@ -20,7 +20,7 @@ export function Page({ balanceChangeCategories }: PageProps) {
           </LinkButton>
         }
       >
-        Balance Change Categories
+        Income Categories
       </PageHeader>
       <Table
         columns={[
@@ -29,12 +29,8 @@ export function Page({ balanceChangeCategories }: PageProps) {
             field: "name",
             render: (bcc) => <Link to={bcc.id}>{bcc.name}</Link>,
           },
-          {
-            name: "Type",
-            field: "type",
-          },
         ]}
-        data={balanceChangeCategories}
+        data={incomeCategories}
         getRowId={(bcc) => bcc.id}
       />
     </div>
