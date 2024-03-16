@@ -93,7 +93,7 @@ jobs:
           OIDC_ISSUER: ${{ secrets.OIDC_ISSUER }}
           OIDC_CLIENT_ID: ${{ secrets.OIDC_CLIENT_ID }}
           OIDC_CLIENT_SECRET: ${{ secrets.OIDC_CLIENT_SECRET }}
-      - run: npx playwright install --with-deps chromium webkit
+      - run: npx playwright install --with-deps chromium
       - run: npx playwright test
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
