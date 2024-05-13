@@ -13,6 +13,7 @@
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
+    "check-format": "npx prettier --check .",
     "test": "vitest",
     "e2e": "playwright test --ui",
     "dev:storybook": "storybook dev -p 6006",
