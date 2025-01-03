@@ -8,7 +8,7 @@
   "scripts": {
     "build": "react-router build",
     "deploy": "fly deploy --remote-only",
-    "dev:remix": "remix vite:dev",
+    "dev:react-router": "react-router dev",
     "dev": "concurrently --raw npm:dev:*",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
@@ -60,6 +60,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "@types/accept-language-parser": "^1.5.3",
     "@types/auth0": "^3.3.1",
+    "@types/node": "^22.10.5",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^8.19.0",
