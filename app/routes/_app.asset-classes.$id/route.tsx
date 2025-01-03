@@ -3,8 +3,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "react-router";
-import { redirect } from "react-router";
-import { useLoaderData } from "react-router";
+import { redirect, useLoaderData } from "react-router";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
 import {

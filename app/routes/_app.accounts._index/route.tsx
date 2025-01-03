@@ -14,5 +14,5 @@ export const meta: MetaFunction = () => [{ title: getTitle("Accounts") }];
 
 export default function Route() {
   const { accounts } = useLoaderData<typeof loader>();
-  return <Page accounts={accounts} />;
+  return <Page accounts={accounts as any} />;
 }

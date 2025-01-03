@@ -3,8 +3,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "react-router";
-import { data, redirect } from "react-router";
-import { useActionData, useLoaderData } from "react-router";
+import { data, redirect, useActionData, useLoaderData } from "react-router";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
 import type { FormActionData } from "~/common/forms/types";
@@ -65,9 +64,9 @@ export default function Route() {
   const actionData = useActionData<typeof action>();
   return (
     <Page
-      data={loaderData}
-      errors={actionData?.data.errors}
-      values={actionData?.data.values}
+      data={loaderData as any}
+      errors={actionData?.errors}
+      values={actionData?.values}
     />
   );
 }

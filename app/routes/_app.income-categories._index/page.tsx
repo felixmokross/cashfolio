@@ -27,7 +27,7 @@ export function Page({ incomeCategories }: PageProps) {
           {
             name: "Name",
             field: "name",
-            render: (bcc) => <Link to={bcc.id}>{bcc.name}</Link>,
+            render: (bcc) => <Link to={bcc.id.toString()}>{bcc.name}</Link>,
           },
         ]}
         data={incomeCategories}

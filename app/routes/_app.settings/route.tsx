@@ -1,9 +1,10 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
-import { data, redirect } from "react-router";
 import type { ActionData, SettingsValues } from "./page";
 import { Page } from "./page";
 import { getLocalesWithDisplayName } from "~/common/locales.server";
 import {
+  data,
+  redirect,
   useActionData,
   useLoaderData,
   useNavigate,
@@ -92,9 +93,9 @@ export default function Route() {
   const { state } = useNavigation();
   return (
     <Page
-      message={loaderData.data.message}
-      locales={loaderData.data.locales}
-      actionData={actionData?.data}
+      message={loaderData.message}
+      locales={loaderData.locales}
+      actionData={actionData}
       onAlertDismiss={() => navigate(".", { replace: true })}
       state={state}
       formattingSampleDate={new Date()}

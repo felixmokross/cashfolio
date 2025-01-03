@@ -124,7 +124,9 @@ export function AccountFormFields({
           label="Balance at Start"
           name="balanceAtStart"
           defaultValue={
-            values?.balanceAtStart || account?.balanceAtStart || undefined
+            values?.balanceAtStart ||
+            account?.balanceAtStart?.toString() ||
+            undefined
           }
           adornment={currency}
           error={errors?.balanceAtStart}
@@ -138,7 +140,7 @@ export function AccountFormFields({
           name="openingDate"
           defaultValue={
             values?.openingDate ||
-            account?.openingDate?.split("T")[0] ||
+            account?.openingDate?.toString().split("T")[0] ||
             undefined
           }
           error={errors?.openingDate}

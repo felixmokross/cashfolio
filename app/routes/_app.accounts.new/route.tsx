@@ -3,8 +3,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "react-router";
-import { data, redirect } from "react-router";
-import { useActionData, useLoaderData } from "react-router";
+import { data, redirect, useActionData, useLoaderData } from "react-router";
 import { requireUserId } from "~/common/auth.server";
 import type { FormActionData } from "~/common/forms/types";
 import type { AccountValues } from "~/accounts/functions.server";
@@ -51,8 +50,8 @@ export default function Route() {
   return (
     <Page
       data={loaderData}
-      errors={actionData?.data.errors}
-      values={actionData?.data.values}
+      errors={actionData?.errors}
+      values={actionData?.values}
     />
   );
 }

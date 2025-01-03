@@ -33,5 +33,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 export default function Route() {
   const { account, ledgerDateGroups } = useLoaderData<typeof loader>();
 
-  return <Page account={account} ledgerDateGroups={ledgerDateGroups} />;
+  return (
+    <Page account={account as any} ledgerDateGroups={ledgerDateGroups as any} />
+  );
 }

@@ -1,4 +1,4 @@
-import type { SerializeFrom } from "react-router";
+import { SerializeFrom } from "~/common/base/utils";
 import type { getReverseLedgerDateGroups } from "~/ledgers-lines/functions.server";
 
 export type GetReverseLedgerDateGroupsResultDto = SerializeFrom<

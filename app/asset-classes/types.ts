@@ -1,4 +1,4 @@
 import type { AssetClass } from "@prisma/client";
-import type { SerializeFrom } from "react-router";
+import { SerializeFrom } from "~/common/base/utils";
 
 export type AssetClassDto = SerializeFrom<AssetClass>;

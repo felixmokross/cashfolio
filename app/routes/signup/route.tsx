@@ -3,8 +3,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "react-router";
-import { data, redirect } from "react-router";
-import { useActionData, useLoaderData } from "react-router";
+import { data, redirect, useActionData, useLoaderData } from "react-router";
 import { authorize } from "~/common/auth.server";
 import {
   getLocales,
@@ -114,8 +113,8 @@ export default function Route() {
       suggestedLocale={suggestedLocale}
       suggestedCurrency={suggestedCurrency}
       locales={locales}
-      values={actionData?.data?.values}
-      errors={actionData?.data?.errors}
+      values={actionData?.values}
+      errors={actionData?.errors}
     />
   );
 }

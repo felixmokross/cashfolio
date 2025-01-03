@@ -44,7 +44,7 @@ export function Page({ account, ledgerDateGroups }: PageProps) {
       <table className="mt-4 w-full">
         <tbody>
           {ledgerDateGroups.groups.map((group) => (
-            <Fragment key={group.date}>
+            <Fragment key={group.date.toString()}>
               <tr className="border-t border-gray-200">
                 <th className="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-gray-900 sm:px-6">
                   {group.dateFormatted}

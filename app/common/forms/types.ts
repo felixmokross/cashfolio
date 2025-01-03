@@ -1,4 +1,4 @@
-import type { SerializeFrom } from "react-router";
+import { SerializeFrom } from "../base/utils";
 
 export type FormActionData<TValues> = {
   ok: boolean;

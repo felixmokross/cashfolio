@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type { AssetClass } from "@prisma/client";
-import type { SerializeFrom } from "react-router";
 import { createId } from "@paralleldrive/cuid2";
 import { formatISO } from "date-fns";
 import { AccountFormFields } from "./account-form-fields";
@@ -9,6 +8,7 @@ import {
   withFormGrid,
   withPageMaxWidth,
 } from "~/common/storybook";
+import { SerializeFrom } from "~/common/base/utils";
 
 const meta: Meta<typeof AccountFormFields> = {
   title: "components/AccountFormFields",
@@ -38,12 +38,10 @@ export const Default: Story = {
         unit: "CURRENCY",
         isActive: true,
         currency: "USD",
-        createdAt: formatISO(new Date(), { representation: "date" }),
-        updatedAt: formatISO(new Date(), { representation: "date" }),
+        createdAt: new Date(),
+        updatedAt: new Date(),
         preExisting: false,
-        openingDate: formatISO(new Date(2023, 7, 5), {
-          representation: "date",
-        }),
+        openingDate: new Date(2023, 7, 5),
         balanceAtStart: null,
         closingDate: null,
         userId: createId(),
