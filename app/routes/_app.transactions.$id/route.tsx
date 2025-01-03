@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs } from "react-router";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
 import { deleteTransaction } from "~/transactions/functions.server";

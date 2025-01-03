@@ -1,14 +1,15 @@
-import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { data, redirect } from "@remix-run/node";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
 import type { ActionData, SettingsValues } from "./page";
 import { Page } from "./page";
 import { getLocalesWithDisplayName } from "~/common/locales.server";
 import {
+  data,
+  redirect,
   useActionData,
   useLoaderData,
   useNavigate,
   useNavigation,
-} from "@remix-run/react";
+} from "react-router";
 import { requireUserId } from "~/common/auth.server";
 import { updateUser } from "~/users/functions.server";
 import { getSession, sessionStorage } from "~/common/session.server";
@@ -92,9 +93,9 @@ export default function Route() {
   const { state } = useNavigation();
   return (
     <Page
-      message={loaderData.data.message}
-      locales={loaderData.data.locales}
-      actionData={actionData?.data}
+      message={loaderData.message}
+      locales={loaderData.locales}
+      actionData={actionData}
       onAlertDismiss={() => navigate(".", { replace: true })}
       state={state}
       formattingSampleDate={new Date()}

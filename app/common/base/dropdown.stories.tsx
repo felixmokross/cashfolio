@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Dropdown, DropdownItem } from "./dropdown";
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 import { withAppProviders } from "../storybook";
 import { Cog6ToothIcon } from "@heroicons/react/20/solid";
 

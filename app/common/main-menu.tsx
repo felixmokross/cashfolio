@@ -1,7 +1,7 @@
 import { DisclosureButton } from "@headlessui/react";
 import type { PropsWithChildren } from "react";
-import type { NavLinkProps as RemixNavLinkProps } from "@remix-run/react";
-import { NavLink as RemixNavLink } from "@remix-run/react";
+import type { NavLinkProps as ReactRouterNavLinkProps } from "react-router";
+import { NavLink as ReactRouterNavLink } from "react-router";
 import { cn } from "./base/classnames";
 import { currenciesByCode } from "~/common/currencies";
 import { getDisplayNameOfLocale } from "~/common/utils";
@@ -71,11 +71,11 @@ function MainMenuNavLink({ to, children }: MainMenuNavLinkProps) {
   );
 }
 
-type NavLinkProps = Omit<RemixNavLinkProps, "className">;
+type NavLinkProps = Omit<ReactRouterNavLinkProps, "className">;
 
 function NavLink(props: NavLinkProps) {
   return (
-    <RemixNavLink
+    <ReactRouterNavLink
       {...props}
       className={({ isActive }: { isActive: boolean }) =>
         cn(

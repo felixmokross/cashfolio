@@ -1,19 +1,21 @@
 import { type ReactNode } from "react";
 import { cn } from "./classnames";
 
-export type TableProps<TData extends Record<string, string | number>> = {
+type RowData = Record<string, string | number | Date>;
+
+export type TableProps<TData extends RowData> = {
   columns: ColDef<TData>[];
   data: TData[];
   getRowId: (row: TData) => string | number;
 };
 
-type ColDef<TData extends Record<string, string | number>> = {
+type ColDef<TData extends RowData> = {
   name: string;
   field: keyof TData;
   render?: (data: TData) => ReactNode;
 };
 
-export function Table<TData extends Record<string, string | number>>({
+export function Table<TData extends RowData>({
   columns,
   data,
   getRowId,
@@ -49,7 +51,11 @@ export function Table<TData extends Record<string, string | number>>({
                   "whitespace-nowrap py-4 text-sm text-gray-500",
                 )}
               >
-                {col.render ? col.render(row) : <>{row[col.field]}</>}
+                {col.render ? (
+                  col.render(row)
+                ) : (
+                  <>{row[col.field].toString()}</>
+                )}
               </td>
             ))}
           </tr>

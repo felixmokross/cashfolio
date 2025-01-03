@@ -1,5 +1,5 @@
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import type { LoaderFunctionArgs, MetaFunction } from "react-router";
+import { useLoaderData } from "react-router";
 import { requireUserId } from "~/common/auth.server";
 import { getAccounts } from "~/accounts/functions.server";
 import { getTitle } from "~/common/utils";
@@ -14,5 +14,5 @@ export const meta: MetaFunction = () => [{ title: getTitle("Accounts") }];
 
 export default function Route() {
   const { accounts } = useLoaderData<typeof loader>();
-  return <Page accounts={accounts} />;
+  return <Page accounts={accounts as any} />;
 }

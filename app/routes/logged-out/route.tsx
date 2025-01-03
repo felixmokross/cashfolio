@@ -1,6 +1,5 @@
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
-import { redirect } from "react-router";
+import type { LoaderFunctionArgs, MetaFunction } from "react-router";
+import { Link, redirect } from "react-router";
 import { getSession } from "~/common/session.server";
 import { getTitle } from "~/common/utils";
 

@@ -1,4 +1,4 @@
-import type { SerializeFrom } from "@remix-run/node";
+import { SerializeFrom } from "../base/utils";
 
 export type FormActionData<TValues> = {
   ok: boolean;

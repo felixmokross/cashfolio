@@ -1,4 +1,4 @@
 import type { IncomeCategory } from "@prisma/client";
-import type { SerializeFrom } from "@remix-run/node";
+import { SerializeFrom } from "~/common/base/utils";
 
 export type IncomeCategoryDto = SerializeFrom<IncomeCategory>;

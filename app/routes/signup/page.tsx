@@ -1,4 +1,4 @@
-import { Form } from "@remix-run/react";
+import { Form } from "react-router";
 import { Button } from "~/common/base/buttons/button";
 import { CurrencyCombobox } from "~/common/forms/currency-combobox";
 import { LocaleCombobox } from "~/common/forms/locale-combobox";

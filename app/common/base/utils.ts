@@ -1,4 +1,7 @@
+import { type useLoaderData } from "react-router";
 import invariant from "tiny-invariant";
+
+export type SerializeFrom<T> = ReturnType<typeof useLoaderData<T>>;
 
 export function getNumberFormatSymbols(locale: string) {
   const numberFormat = new Intl.NumberFormat(locale);

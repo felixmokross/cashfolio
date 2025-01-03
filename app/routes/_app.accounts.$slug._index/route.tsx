@@ -1,9 +1,9 @@
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from "react-router";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
 import { getAccount } from "~/accounts/functions.server";
 import { Page } from "./page";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "react-router";
 import { getReverseLedgerDateGroups } from "~/ledgers-lines/functions.server";
 import { getTitle } from "~/common/utils";
 
@@ -33,5 +33,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 export default function Route() {
   const { account, ledgerDateGroups } = useLoaderData<typeof loader>();
 
-  return <Page account={account} ledgerDateGroups={ledgerDateGroups} />;
+  return (
+    <Page account={account as any} ledgerDateGroups={ledgerDateGroups as any} />
+  );
 }

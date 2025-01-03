@@ -2,9 +2,8 @@ import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
   MetaFunction,
-} from "@remix-run/node";
-import { data, redirect } from "@remix-run/node";
-import { useActionData, useLoaderData } from "@remix-run/react";
+} from "react-router";
+import { data, redirect, useActionData, useLoaderData } from "react-router";
 import { authorize } from "~/common/auth.server";
 import {
   getLocales,
@@ -114,8 +113,8 @@ export default function Route() {
       suggestedLocale={suggestedLocale}
       suggestedCurrency={suggestedCurrency}
       locales={locales}
-      values={actionData?.data?.values}
-      errors={actionData?.data?.errors}
+      values={actionData?.values}
+      errors={actionData?.errors}
     />
   );
 }

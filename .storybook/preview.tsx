@@ -2,7 +2,7 @@ import type { Decorator, Preview } from "@storybook/react";
 import "../app/tailwind.css";
 import { getLocalesWithDisplayName } from "../app/common/locales.server";
 import { currenciesByCode } from "../app/common/currencies";
-import { createRemixStub } from "@remix-run/testing";
+import { createRoutesStub } from "react-router";
 import React from "react";
 
 const availableLocales = [
@@ -17,15 +17,15 @@ const availableLocales = [
   "es-CO",
 ];
 
-const withRemix: Decorator = (Story) => {
-  const RemixStub = createRemixStub([
+const withReactRouter: Decorator = (Story) => {
+  const ReactRouterStub = createRoutesStub([
     {
       path: "/*",
       Component: Story,
     },
   ]);
 
-  return <RemixStub />;
+  return <ReactRouterStub />;
 };
 
 const preview: Preview = {
@@ -66,7 +66,7 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [withRemix],
+  decorators: [withReactRouter],
 };
 
 export default preview;

@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import { LinkButton } from "~/common/base/buttons/link-button";
 import { Link } from "~/common/base/link";
 import Modal from "~/common/base/modal";
-import { useFetcher } from "@remix-run/react";
+import { useFetcher } from "react-router";
 import type { GetReverseLedgerDateGroupsResultDto } from "~/ledgers-lines/types";
 import type { AccountDto } from "~/accounts/types";
 import { PageHeader } from "~/common/page-header";
@@ -44,7 +44,7 @@ export function Page({ account, ledgerDateGroups }: PageProps) {
       <table className="mt-4 w-full">
         <tbody>
           {ledgerDateGroups.groups.map((group) => (
-            <Fragment key={group.date}>
+            <Fragment key={group.date.toString()}>
               <tr className="border-t border-gray-200">
                 <th className="bg-gray-50 px-4 py-2 text-left text-sm font-semibold text-gray-900 sm:px-6">
                   {group.dateFormatted}
