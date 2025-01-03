@@ -80,7 +80,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - uses: bahmutov/npm-install@v1
       - name: Start database
-        run: docker-compose up -d && sleep 3
+        run: docker compose up -d && sleep 3
       - run: npx prisma migrate deploy
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
