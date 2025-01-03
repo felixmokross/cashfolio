@@ -29,6 +29,6 @@ export function getSuggestedCurrencyForLocale(locale: string) {
     region as keyof typeof supplemental.currencyData.region
   ]
     ?.flatMap((o) => Object.entries(o))
-    .filter(([_, v]) => !v._to && v._tender !== "false")
+    .filter(([, v]) => !v._to && v._tender !== "false")
     .map(([c]) => c)[0];
 }

@@ -66,9 +66,9 @@ export function DateInput({
     isDisabled: disabled,
   };
 
-  let state = useDatePickerState(props);
-  let ref = useRef(null);
-  let {
+  const state = useDatePickerState(props);
+  const ref = useRef(null);
+  const {
     groupProps,
     labelProps,
     fieldProps,
@@ -121,15 +121,15 @@ export function DateInput({
 type DateFieldProps = AriaDatePickerProps<DateValue>;
 
 function DateField(props: DateFieldProps) {
-  let { locale } = useLocale();
-  let state = useDateFieldState({
+  const { locale } = useLocale();
+  const state = useDateFieldState({
     ...props,
     locale,
     createCalendar,
   });
 
-  let ref = useRef(null);
-  let { labelProps, fieldProps } = useDateField(props, state, ref);
+  const ref = useRef(null);
+  const { labelProps, fieldProps } = useDateField(props, state, ref);
 
   return (
     <div>
@@ -152,8 +152,8 @@ type DateFieldSegmentProps = {
 };
 
 function DateFieldSegment({ segment, state }: DateFieldSegmentProps) {
-  let ref = useRef(null);
-  let { segmentProps } = useDateSegment(segment, state, ref);
+  const ref = useRef(null);
+  const { segmentProps } = useDateSegment(segment, state, ref);
 
   return (
     <div
@@ -177,8 +177,8 @@ interface PopoverProps extends Omit<AriaPopoverProps, "popoverRef"> {
 }
 
 function Popover({ children, state, offset = 8, ...props }: PopoverProps) {
-  let popoverRef = useRef(null);
-  let { popoverProps, underlayProps } = usePopover(
+  const popoverRef = useRef(null);
+  const { popoverProps, underlayProps } = usePopover(
     {
       ...props,
       offset,
@@ -205,8 +205,8 @@ interface DialogProps extends AriaDialogProps {
 }
 
 function Dialog({ title, children, ...props }: DialogProps) {
-  let ref = useRef(null);
-  let { dialogProps, titleProps } = useDialog(props, ref);
+  const ref = useRef(null);
+  const { dialogProps, titleProps } = useDialog(props, ref);
 
   return (
     <div
@@ -224,10 +224,10 @@ type DatePickerButtonProps = AriaButtonProps<"button"> & {
   className?: string;
 };
 
-function DatePickerButton({ className, ...props }: DatePickerButtonProps) {
-  let ref = useRef(null);
-  let { buttonProps } = useButton(props, ref);
-  let { children } = props;
+function DatePickerButton(props: DatePickerButtonProps) {
+  const ref = useRef(null);
+  const { buttonProps } = useButton(props, ref);
+  const { children } = props;
 
   return (
     <button

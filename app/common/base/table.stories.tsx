@@ -1,14 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Table } from "./table";
 
-const meta: Meta<typeof Table<any>> = {
+const meta: Meta<typeof Table<DataRow>> = {
   title: "base/Table",
   component: Table,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Table<any>>;
+type DataRow = {
+  id: number;
+  name: string;
+  assetClass: string;
+  balance: number;
+};
+
+type Story = StoryObj<typeof Table<DataRow>>;
 
 export const Default: Story = {
   args: {

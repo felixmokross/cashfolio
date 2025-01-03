@@ -3,7 +3,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { data, redirect } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/common/auth.server";
 import type { FormActionData } from "~/common/forms/types";
@@ -24,7 +24,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const errors = await validateAccountValues(userId, undefined, values);
 
   if (hasErrors(errors)) {
-    return json<FormActionData<AccountValues>>(
+    return data<FormActionData<AccountValues>>(
       { ok: false, errors, values },
       { status: 400 },
     );
@@ -40,7 +40,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const assetClasses = await getAssetClasses(userId);
 
-  return json({ assetClasses });
+  return { assetClasses };
 }
 
 export const meta: MetaFunction = () => [{ title: getTitle("New Account") }];
@@ -51,8 +51,8 @@ export default function Route() {
   return (
     <Page
       data={loaderData}
-      errors={actionData?.errors}
-      values={actionData?.values}
+      errors={actionData?.data.errors}
+      values={actionData?.data.values}
     />
   );
 }

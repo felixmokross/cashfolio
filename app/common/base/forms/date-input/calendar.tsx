@@ -19,17 +19,15 @@ import { cn } from "../../classnames";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 export function Calendar(props: CalendarProps<DateValue>) {
-  let { locale } = useLocale();
-  let state = useCalendarState({
+  const { locale } = useLocale();
+  const state = useCalendarState({
     ...props,
     locale,
     createCalendar,
   });
 
-  let { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(
-    props,
-    state,
-  );
+  const { calendarProps, prevButtonProps, nextButtonProps, title } =
+    useCalendar(props, state);
 
   return (
     <div {...calendarProps}>
@@ -51,11 +49,11 @@ export function Calendar(props: CalendarProps<DateValue>) {
 type CalendarGridProps = { state: CalendarState };
 
 function CalendarGrid({ state }: CalendarGridProps) {
-  let { locale } = useLocale();
-  let { gridProps, headerProps, weekDays } = useCalendarGrid({}, state);
+  const { locale } = useLocale();
+  const { gridProps, headerProps, weekDays } = useCalendarGrid({}, state);
 
   // Get the number of weeks in the month so we can render the proper number of rows.
-  let weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
+  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
 
   return (
     <div {...gridProps} className="mt-6  w-full grid-cols-7">
@@ -105,8 +103,8 @@ type CalendarCellProps = {
 };
 
 function CalendarCell({ state, date, className }: CalendarCellProps) {
-  let ref = useRef(null);
-  let {
+  const ref = useRef(null);
+  const {
     cellProps,
     buttonProps,
     isSelected,
@@ -152,9 +150,9 @@ type CalendarButtonProps = AriaButtonProps<"button"> & {
 };
 
 function CalendarButton({ className, ...props }: CalendarButtonProps) {
-  let ref = useRef(null);
-  let { buttonProps } = useButton(props, ref);
-  let { children } = props;
+  const ref = useRef(null);
+  const { buttonProps } = useButton(props, ref);
+  const { children } = props;
 
   return (
     <button

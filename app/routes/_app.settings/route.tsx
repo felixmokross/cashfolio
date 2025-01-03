@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { redirect, json } from "@remix-run/node";
+import { data, redirect } from "@remix-run/node";
 import type { ActionData, SettingsValues } from "./page";
 import { Page } from "./page";
 import { getLocalesWithDisplayName } from "~/common/locales.server";
@@ -19,7 +19,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request);
   const message = session.get("message") as string | undefined;
 
-  return json(
+  return data(
     {
       message,
       locales: getLocalesWithDisplayName(),
@@ -40,7 +40,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const errors = validateSettingsValues(values);
 
   if (hasErrors(errors)) {
-    return json<ActionData>({ errors, values }, { status: 400 });
+    return data<ActionData>({ errors, values }, { status: 400 });
   }
 
   const userId = await requireUserId(request);
@@ -86,15 +86,15 @@ function validateSettingsValues({
 }
 
 export default function Route() {
-  const { message, locales } = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
   const navigate = useNavigate();
   const { state } = useNavigation();
   return (
     <Page
-      message={message}
-      locales={locales}
-      actionData={actionData}
+      message={loaderData.data.message}
+      locales={loaderData.data.locales}
+      actionData={actionData?.data}
       onAlertDismiss={() => navigate(".", { replace: true })}
       state={state}
       formattingSampleDate={new Date()}

@@ -3,7 +3,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { redirect, json } from "@remix-run/node";
+import { data, redirect } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
@@ -31,7 +31,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
   const values = await getAccountValues(request);
   const errors = await validateAccountValues(userId, accountId, values);
   if (hasErrors(errors)) {
-    return json<FormActionData<AccountValues>>(
+    return data<FormActionData<AccountValues>>(
       { ok: false, errors, values },
       { status: 400 },
     );
@@ -53,7 +53,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
   if (!account) throw new Response("Not found", { status: 404 });
 
-  return json({ assetClasses, account });
+  return { assetClasses, account };
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => [
@@ -66,8 +66,8 @@ export default function Route() {
   return (
     <Page
       data={loaderData}
-      errors={actionData?.errors}
-      values={actionData?.values}
+      errors={actionData?.data.errors}
+      values={actionData?.data.values}
     />
   );
 }

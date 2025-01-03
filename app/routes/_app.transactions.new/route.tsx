@@ -1,6 +1,5 @@
 import {
   type ActionFunctionArgs,
-  json,
   type LoaderFunctionArgs,
   redirect,
 } from "@remix-run/node";
@@ -26,7 +25,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   invariant(!!account, "Account not found");
 
-  return json({ account, accounts, incomeCategories });
+  return { account, accounts, incomeCategories };
 }
 
 export async function action({ request }: ActionFunctionArgs) {
