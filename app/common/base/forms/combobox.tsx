@@ -24,7 +24,6 @@ export function Combobox({
   error,
   defaultValue,
   options,
-  autoFocus,
   onChange,
   disabled,
 }: ComboboxProps) {
@@ -62,7 +61,9 @@ export function Combobox({
         onChange={(v) => {
           if (!v) return;
           setValue(v);
-          onChange && onChange(v);
+          if (onChange) {
+            onChange(v);
+          }
         }}
         name={name}
         disabled={disabled}
@@ -81,7 +82,6 @@ export function Combobox({
           displayValue={getDisplayName}
           aria-invalid={error ? "true" : undefined}
           aria-describedby={error ? errorId : undefined}
-          autoFocus={autoFocus}
           placeholder={placeholder}
         />
         <HeadlessComboboxButton className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50">
@@ -172,7 +172,7 @@ export type ComboboxProps = {
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >,
-  "autoFocus" | "disabled"
+  "disabled"
 >;
 
 export type ComboboxOption = {

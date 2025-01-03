@@ -39,7 +39,6 @@ export function Page({
             label="Currency and Date Format"
             name="preferredLocale"
             defaultValue={values?.preferredLocale || suggestedLocale}
-            autoFocus={true}
             error={errors?.preferredLocale}
             locales={locales}
             formattingSampleDate={new Date()}

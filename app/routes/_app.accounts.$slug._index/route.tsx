@@ -1,5 +1,4 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
 import { getAccount } from "~/accounts/functions.server";
@@ -21,10 +20,10 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     userId,
   });
 
-  return json({
+  return {
     account,
     ledgerDateGroups,
-  });
+  };
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => [

@@ -1,12 +1,11 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { requireUser } from "~/common/auth.server";
 import { App } from "./app";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const user = await requireUser(request);
-  return json(user);
+  return user;
 }
 
 export default function Route() {

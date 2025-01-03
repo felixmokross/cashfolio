@@ -3,7 +3,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { redirect, json } from "@remix-run/node";
+import { data, redirect } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { authorize } from "~/common/auth.server";
 import {
@@ -41,13 +41,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const suggestedLocale = getSuggestedLocale(request);
 
-  return json({
+  return {
     locales: getLocalesWithDisplayName(),
     suggestedLocale: suggestedLocale || "en",
     suggestedCurrency:
       (suggestedLocale && getSuggestedCurrencyForLocale(suggestedLocale)) ||
       "USD",
-  });
+  };
 }
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -61,7 +61,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const errors = validateSignupValues(values);
 
   if (hasErrors(errors)) {
-    return json<ActionData>({ errors, values }, { status: 400 });
+    return data<ActionData>({ errors, values }, { status: 400 });
   }
 
   const session = await getSession(request);
@@ -114,8 +114,8 @@ export default function Route() {
       suggestedLocale={suggestedLocale}
       suggestedCurrency={suggestedCurrency}
       locales={locales}
-      values={actionData?.values}
-      errors={actionData?.errors}
+      values={actionData?.data?.values}
+      errors={actionData?.data?.errors}
     />
   );
 }

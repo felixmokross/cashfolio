@@ -17,13 +17,7 @@ export type PageProps = {
   // errors?: FormErrors<TransactionValues>;
 };
 
-export function Page({
-  account,
-  accounts,
-  incomeCategories,
-  // values,
-  // errors,
-}: PageProps) {
+export function Page() {
   // const [bookings, dispatch] = useReducer(bookingsReducer, []);
 
   return (

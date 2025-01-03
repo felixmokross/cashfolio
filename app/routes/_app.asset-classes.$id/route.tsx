@@ -3,7 +3,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { redirect, json } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
@@ -42,7 +42,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   const assetClass = await getAssetClass(params.id, userId);
   if (!assetClass) throw new Response("Not found", { status: 404 });
 
-  return json(assetClass);
+  return assetClass;
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => [

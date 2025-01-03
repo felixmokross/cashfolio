@@ -1,13 +1,12 @@
 import {
   type ActionFunctionArgs,
-  json,
   type LoaderFunctionArgs,
   redirect,
 } from "@remix-run/node";
 import { Page } from "./page";
 import { getAccount, getAccounts } from "~/accounts/functions.server";
 import { requireUserId } from "~/common/auth.server";
-import { useLoaderData } from "@remix-run/react";
+// import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 // import { hasErrors } from "~/common/utils.server";
 // import type { FormActionData } from "~/common/forms/types";
@@ -26,7 +25,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   invariant(!!account, "Account not found");
 
-  return json({ account, accounts, incomeCategories });
+  return { account, accounts, incomeCategories };
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -54,16 +53,16 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function Route() {
-  const { account, accounts, incomeCategories } =
-    useLoaderData<typeof loader>();
+  // const { account, accounts, incomeCategories } =
+  //   useLoaderData<typeof loader>();
   // const actionData = useActionData<typeof action>();
   return (
     <Page
-      account={account}
-      accounts={accounts}
-      incomeCategories={incomeCategories}
-      // values={actionData?.values}
-      // errors={actionData?.errors}
+    // account={account}
+    // accounts={accounts}
+    // incomeCategories={incomeCategories}
+    // values={actionData?.values}
+    // errors={actionData?.errors}
     />
   );
 }

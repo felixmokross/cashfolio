@@ -22,8 +22,10 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
     use,
   ) => {
     if (authenticated) {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       await use(workerStorageState);
     } else {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       await use(storageState);
     }
   },

@@ -33,7 +33,9 @@ export function RadioGroup<TValue extends string | undefined>({
         value={value}
         onChange={(value) => {
           setValue(value);
-          onChange && onChange(value as TValue);
+          if (onChange) {
+            onChange(value as TValue);
+          }
         }}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
