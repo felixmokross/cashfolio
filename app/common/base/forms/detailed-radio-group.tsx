@@ -1,5 +1,10 @@
 import { useId, useState } from "react";
-import { RadioGroup as HeadlessRadioGroup } from "@headlessui/react";
+import {
+  RadioGroup as HeadlessRadioGroup,
+  Radio as HeadlessRadio,
+  Field,
+  Label,
+} from "@headlessui/react";
 import { labelClassName } from "./label";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import { ErrorMessage } from "./error-message";
@@ -18,34 +23,33 @@ export function DetailedRadioGroup<TValue extends string | undefined>({
   const [value, setValue] = useState(defaultValue);
   const errorId = `detailed-radio-group-error-${useId()}`;
   return (
-    <HeadlessRadioGroup
-      value={value}
-      onChange={(value) => {
-        setValue(value);
-        onChange && onChange(value as TValue);
-      }}
-      className={groupClassName}
-      name={name}
-      disabled={disabled}
-    >
-      <HeadlessRadioGroup.Label className={labelClassName}>
-        {label}
-      </HeadlessRadioGroup.Label>
-      <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-6">
+    <Field className={groupClassName}>
+      <Label className={labelClassName}>{label}</Label>
+      <HeadlessRadioGroup
+        value={value}
+        onChange={(value) => {
+          setValue(value);
+          onChange && onChange(value as TValue);
+        }}
+        name={name}
+        disabled={disabled}
+        as="div"
+        className="mt-4 grid grid-cols-2 gap-x-4 gap-y-6"
+      >
         {options.map((option) => (
-          <HeadlessRadioGroup.Option
+          <HeadlessRadio
             key={option.value}
             value={option.value}
-            className={({ checked, active }) =>
+            className={({ checked, focus }) =>
               cn(
                 checked ? "border-transparent" : "border-gray-300",
-                active ? "border-brand-500 ring-2 ring-brand-500" : "",
+                focus ? "border-brand-500 ring-2 ring-brand-500" : "",
                 "relative flex rounded-lg border bg-white p-4 shadow-sm focus:outline-none",
                 disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
               )
             }
           >
-            {({ checked, active }) => (
+            {({ checked, focus }) => (
               <>
                 <span className="flex flex-1">
                   <span className="flex flex-col">
@@ -72,7 +76,7 @@ export function DetailedRadioGroup<TValue extends string | undefined>({
                 />
                 <span
                   className={cn(
-                    active ? "border" : "border-2",
+                    focus ? "border" : "border-2",
                     checked ? "border-brand-500" : "border-transparent",
                     "pointer-events-none absolute -inset-px rounded-lg",
                   )}
@@ -80,11 +84,11 @@ export function DetailedRadioGroup<TValue extends string | undefined>({
                 />
               </>
             )}
-          </HeadlessRadioGroup.Option>
+          </HeadlessRadio>
         ))}
-      </div>
+      </HeadlessRadioGroup>
       <ErrorMessage error={error} errorId={errorId} />
-    </HeadlessRadioGroup>
+    </Field>
   );
 }
 

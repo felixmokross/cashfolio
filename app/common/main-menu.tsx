@@ -1,4 +1,4 @@
-import { Disclosure } from "@headlessui/react";
+import { DisclosureButton } from "@headlessui/react";
 import type { PropsWithChildren } from "react";
 import type { NavLinkProps as RemixNavLinkProps } from "@remix-run/react";
 import { NavLink as RemixNavLink } from "@remix-run/react";
@@ -44,7 +44,7 @@ export function MainMenu({ user }: MainMenuProps) {
             </div>
           </div>
           <div className="flex-shrink-0">
-            <Disclosure.Button
+            <DisclosureButton
               as={LinkIconButton}
               to="settings"
               icon={Cog6ToothIcon}
@@ -65,9 +65,9 @@ type MainMenuNavLinkProps = PropsWithChildren<{ to: NavLinkProps["to"] }>;
 
 function MainMenuNavLink({ to, children }: MainMenuNavLinkProps) {
   return (
-    <Disclosure.Button as={NavLink} to={to}>
+    <DisclosureButton as={NavLink} to={to}>
       {children}
-    </Disclosure.Button>
+    </DisclosureButton>
   );
 }
 

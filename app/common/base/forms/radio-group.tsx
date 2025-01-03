@@ -1,5 +1,9 @@
 import { useId, useState } from "react";
-import { RadioGroup as HeadlessRadioGroup } from "@headlessui/react";
+import {
+  Field,
+  RadioGroup as HeadlessRadioGroup,
+  Label as HeadlessLabel,
+} from "@headlessui/react";
 import { labelClassName } from "./label";
 import { ErrorMessage } from "./error-message";
 import { cn } from "../classnames";
@@ -20,26 +24,23 @@ export function RadioGroup<TValue extends string | undefined>({
   const [isFocused, setIsFocused] = useState(false);
   const errorId = `radio-group-error-${useId()}`;
   return (
-    <HeadlessRadioGroup
-      value={value}
-      onChange={(value) => {
-        setValue(value);
-        onChange && onChange(value as TValue);
-      }}
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
-      className={groupClassName}
-      name={name}
-      aria-invalid={error ? "true" : undefined}
-      aria-describedby={error ? errorId : undefined}
-      disabled={disabled}
-    >
+    <Field className={groupClassName}>
       {label && (
-        <HeadlessRadioGroup.Label className={labelClassName}>
-          {label}
-        </HeadlessRadioGroup.Label>
+        <HeadlessLabel className={labelClassName}>{label}</HeadlessLabel>
       )}
-      <div
+      <HeadlessRadioGroup
+        as="div"
+        value={value}
+        onChange={(value) => {
+          setValue(value);
+          onChange && onChange(value as TValue);
+        }}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        name={name}
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby={error ? errorId : undefined}
+        disabled={disabled}
         className={cn(
           "grid auto-cols-fr grid-flow-col",
           {
@@ -93,9 +94,9 @@ export function RadioGroup<TValue extends string | undefined>({
             </HeadlessRadioGroup.Label>
           </HeadlessRadioGroup.Option>
         ))}
-      </div>
+      </HeadlessRadioGroup>
       <ErrorMessage error={error} errorId={errorId} />
-    </HeadlessRadioGroup>
+    </Field>
   );
 }
 
