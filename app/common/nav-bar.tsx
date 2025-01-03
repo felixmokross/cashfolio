@@ -1,4 +1,8 @@
-import { Disclosure } from "@headlessui/react";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
 import { Link } from "@remix-run/react";
 import { LogoSmall } from "./base/icons/logo-small";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
@@ -23,21 +27,21 @@ export function NavBar({ user }: NavBarProps) {
             </div>
             <div>
               {user && (
-                <Disclosure.Button className="rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
+                <DisclosureButton className="rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
                   <span className="sr-only">Open Main Menu</span>
                   {open ? (
                     <XMarkIcon className="h-5 w-5" />
                   ) : (
                     <Bars3Icon className="h-5 w-5" aria-hidden="true" />
                   )}
-                </Disclosure.Button>
+                </DisclosureButton>
               )}
             </div>
           </div>
           {user && (
-            <Disclosure.Panel>
+            <DisclosurePanel>
               <MainMenu user={user} />
-            </Disclosure.Panel>
+            </DisclosurePanel>
           )}
         </>
       )}

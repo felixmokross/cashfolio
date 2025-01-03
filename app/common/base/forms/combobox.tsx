@@ -1,6 +1,14 @@
 import type { DetailedHTMLProps } from "react";
 import { useId, useState } from "react";
-import { Combobox as HeadlessCombobox } from "@headlessui/react";
+import {
+  Field,
+  Combobox as HeadlessCombobox,
+  Label as HeadlessLabel,
+  ComboboxButton as HeadlessComboboxButton,
+  ComboboxInput as HeadlessComboboxInput,
+  ComboboxOptions as HeadlessComboboxOptions,
+  ComboboxOption as HeadlessComboboxOption,
+} from "@headlessui/react";
 import { labelClassName } from "./label";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { cn } from "../classnames";
@@ -44,24 +52,23 @@ export function Combobox({
   const errorId = `combobox-error-${useId()}`;
   const showLabel = !!label && size === "default";
   return (
-    <HeadlessCombobox
-      as="div"
-      value={value}
-      onChange={(v) => {
-        setValue(v);
-        onChange && onChange(v);
-      }}
-      name={name}
-      className={groupClassName}
-      disabled={disabled}
-    >
+    <Field as="div" className={groupClassName}>
       {showLabel && (
-        <HeadlessCombobox.Label className={labelClassName}>
-          {label}
-        </HeadlessCombobox.Label>
+        <HeadlessLabel className={labelClassName}>{label}</HeadlessLabel>
       )}
-      <div className={cn("relative", showLabel && "mt-1")}>
-        <HeadlessCombobox.Input
+      <HeadlessCombobox
+        as="div"
+        value={value}
+        onChange={(v) => {
+          if (!v) return;
+          setValue(v);
+          onChange && onChange(v);
+        }}
+        name={name}
+        disabled={disabled}
+        className={cn("relative", showLabel && "mt-1")}
+      >
+        <HeadlessComboboxInput
           onChange={(event) => setQuery(event.target.value)}
           className={cn(
             "w-full border bg-white py-2 pl-3 pr-10 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-50 sm:text-sm",
@@ -77,16 +84,16 @@ export function Combobox({
           autoFocus={autoFocus}
           placeholder={placeholder}
         />
-        <HeadlessCombobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50">
+        <HeadlessComboboxButton className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50">
           <ChevronUpDownIcon
             className="h-5 w-5 text-gray-400"
             aria-hidden="true"
           />
-        </HeadlessCombobox.Button>
+        </HeadlessComboboxButton>
         {filteredOptions.length > 0 && (
-          <HeadlessCombobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <HeadlessComboboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {filteredOptions.map((option) => (
-              <HeadlessCombobox.Option
+              <HeadlessComboboxOption
                 key={option.value}
                 value={option.value}
                 className={({ active }) =>
@@ -128,13 +135,13 @@ export function Combobox({
                     )}
                   </>
                 )}
-              </HeadlessCombobox.Option>
+              </HeadlessComboboxOption>
             ))}
-          </HeadlessCombobox.Options>
+          </HeadlessComboboxOptions>
         )}
-      </div>
+      </HeadlessCombobox>
       <ErrorMessage error={error} errorId={errorId} />
-    </HeadlessCombobox>
+    </Field>
   );
 
   function getDisplayName(v: string) {
@@ -159,12 +166,13 @@ export type ComboboxProps = {
   error?: string;
   options: ComboboxOption[];
   onChange?: (value: string | number | readonly string[]) => void;
+  defaultValue?: string;
 } & Pick<
   DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >,
-  "defaultValue" | "autoFocus" | "disabled"
+  "autoFocus" | "disabled"
 >;
 
 export type ComboboxOption = {

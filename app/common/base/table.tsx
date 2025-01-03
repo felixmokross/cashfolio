@@ -1,19 +1,23 @@
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { cn } from "./classnames";
 
-export type TableProps<TData> = {
+export type TableProps<TData extends Record<string, any>> = {
   columns: ColDef<TData>[];
   data: TData[];
   getRowId: (row: TData) => string | number;
 };
 
-type ColDef<TData> = {
+type ColDef<TData extends Record<string, any>> = {
   name: string;
   field: keyof TData;
   render?: (data: TData) => ReactNode;
 };
 
-export function Table<TData>({ columns, data, getRowId }: TableProps<TData>) {
+export function Table<TData extends Record<string, any>>({
+  columns,
+  data,
+  getRowId,
+}: TableProps<TData>) {
   return (
     <table className="min-w-full divide-y divide-gray-300">
       <thead>

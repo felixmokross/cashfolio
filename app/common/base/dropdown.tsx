@@ -1,11 +1,10 @@
-import { Menu, Transition } from "@headlessui/react";
+import { Menu, MenuItem, MenuItems, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import type {
   ComponentPropsWithoutRef,
   ElementType,
   PropsWithChildren,
 } from "react";
-import { Fragment } from "react";
 import { cn } from "./classnames";
 import { IconButton } from "./buttons/icon-button";
 import type { IconComponentType } from "./icons/types";
@@ -24,7 +23,6 @@ export function Dropdown({ children }: DropdownProps) {
       </div>
 
       <Transition
-        as={Fragment}
         enter="transition ease-out duration-100"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"
@@ -32,9 +30,9 @@ export function Dropdown({ children }: DropdownProps) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">{children}</div>
-        </Menu.Items>
+        </MenuItems>
       </Transition>
     </Menu>
   );
@@ -52,7 +50,7 @@ export function DropdownItem<T extends ElementType>({
   ...props
 }: DropdownItemProps<T>) {
   return (
-    <Menu.Item>
+    <MenuItem>
       {({ active }) => {
         const Component = as || "button";
         return (
@@ -75,6 +73,6 @@ export function DropdownItem<T extends ElementType>({
           </Component>
         );
       }}
-    </Menu.Item>
+    </MenuItem>
   );
 }
