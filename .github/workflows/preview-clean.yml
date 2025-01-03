@@ -8,6 +8,9 @@ on:
       FLY_API_TOKEN:
         required: true
 
+env:
+  FLYCTL_VERSION: 0.3.56
+
 jobs:
   clean:
     runs-on: ubuntu-latest
@@ -15,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
         with:
-          version: 0.1.117
+          version: ${{ env.FLYCTL_VERSION }}
       - run: |
           flyctl apps list --json --org $FLY_ORG \
             | jq '[map(

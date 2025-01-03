@@ -9,6 +9,7 @@ on:
 
 env:
   NODE_VERSION: 22
+  FLYCTL_VERSION: 0.3.56
 
 jobs:
   version:
@@ -34,7 +35,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
         with:
-          version: 0.1.117
+          version: ${{ env.FLYCTL_VERSION }}
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
