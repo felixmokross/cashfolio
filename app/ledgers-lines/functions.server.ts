@@ -47,11 +47,11 @@ export async function getReverseLedgerDateGroups({
   const groupByDate = new Map<number, LedgerDateGroup>();
 
   for (const line of pagedLedgerLines) {
-    const dateKey = line.transaction.date.valueOf();
+    const dateKey = line.date.valueOf();
 
     if (!groupByDate.has(dateKey)) {
       groupByDate.set(dateKey, {
-        date: line.transaction.date,
+        date: line.date,
         lines: [line],
         balance: line.balance,
       });
@@ -133,24 +133,25 @@ async function getBookings({
 }) {
   return await prisma.booking.findMany({
     where: {
-      type: BookingType.ACCOUNT_CHANGE,
+      type: { in: [BookingType.DEPOSIT, BookingType.CHARGE] },
       accountId,
       userId,
     },
     select: {
       id: true,
+      date: true,
       type: true,
       transaction: {
         select: {
           id: true,
-          date: true,
           note: true,
           bookings: {
             select: {
               id: true,
               type: true,
               account: { select: { id: true, name: true, slug: true } },
-              balanceChangeCategory: { select: { id: true, name: true } },
+              incomeCategory: { select: { id: true, name: true } },
+              expenseCategory: { select: { id: true, name: true } },
               note: true,
             },
           },
@@ -159,9 +160,6 @@ async function getBookings({
       note: true,
       amount: true,
     },
-    orderBy: [
-      { transaction: { date: "asc" } },
-      { transaction: { createdAt: "asc" } },
-    ],
+    orderBy: [{ date: "asc" }, { transaction: { createdAt: "asc" } }],
   });
 }

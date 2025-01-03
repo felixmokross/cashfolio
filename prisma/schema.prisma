@@ -21,9 +21,10 @@ model User {
 
   accounts                Account[]
   assetClasses            AssetClass[]
-  balanceChangeCategories BalanceChangeCategory[]
   transactions            Transaction[]
   bookings                Booking[]
+  incomeCategories        IncomeCategory[]
+  expenseCategories       ExpenseCategory[]
 }
 
 model Account {
@@ -85,29 +86,39 @@ enum AccountType {
   LIABILITY
 }
 
-model BalanceChangeCategory {
+model IncomeCategory {
   id   String            @default(cuid())
   name String
-  type BalanceChangeType
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   user     User      @relation(fields: [userId], references: [id], onDelete: Restrict)
   userId   String
+
   bookings Booking[]
 
   @@id([id, userId])
 }
 
-enum BalanceChangeType {
-  INCOME
-  EXPENSE
+model ExpenseCategory {
+  id   String            @default(cuid())
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Restrict)
+  userId   String
+
+  bookings Booking[]
+
+  @@id([id, userId])
 }
 
+// TODO think about how to model value changes --> maybe better a separate model beside transaction? or just a special transaction/booking type with guided form? 
 model Transaction {
   id   String   @default(cuid())
-  date DateTime @db.Date
   note String?
 
   bookings Booking[]
@@ -123,6 +134,7 @@ model Transaction {
 
 model Booking {
   id   String      @default(cuid())
+  date DateTime @db.Date
   type BookingType
 
   note String?
@@ -133,8 +145,11 @@ model Booking {
   transaction   Transaction @relation(fields: [transactionId, userId], references: [id, userId], onDelete: Cascade)
   transactionId String
 
-  balanceChangeCategory   BalanceChangeCategory? @relation(fields: [balanceChangeCategoryId, userId], references: [id, userId], onDelete: Restrict)
-  balanceChangeCategoryId String?
+  incomeCategory IncomeCategory? @relation(fields: [incomeCategoryId, userId], references: [id, userId], onDelete: Restrict)
+  incomeCategoryId String?
+
+  expenseCategory ExpenseCategory? @relation(fields: [expenseCategoryId, userId], references: [id, userId], onDelete: Restrict)
+  expenseCategoryId String?
 
   currency String?
 
@@ -149,7 +164,8 @@ model Booking {
 }
 
 enum BookingType {
-  ACCOUNT_CHANGE
-  BALANCE_CHANGE
-  VALUE_CHANGE
+  CHARGE
+  DEPOSIT
+  INCOME
+  EXPENSE
 }

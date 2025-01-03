@@ -50,9 +50,10 @@ export const ManyOptions: Story = {
     name: "my-radio-group",
     defaultValue: "1",
     options: [
-      { value: "1", label: "Transfer" },
-      { value: "2", label: "Balance Change" },
-      { value: "3", label: "Value Change" },
+      { value: "1", label: "Charge" },
+      { value: "2", label: "Deposit" },
+      { value: "3", label: "Income" },
+      { value: "4", label: "Expense" },
     ],
   },
 };
@@ -63,9 +64,10 @@ export const Compact: Story = {
     name: "my-radio-group",
     defaultValue: "1",
     options: [
-      { value: "1", label: "Transfer" },
-      { value: "2", label: "Balance Change" },
-      { value: "3", label: "Value Change" },
+      { value: "1", label: "Charge" },
+      { value: "2", label: "Deposit" },
+      { value: "3", label: "Income" },
+      { value: "4", label: "Expense" },
     ],
   },
 };
