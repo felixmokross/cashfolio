@@ -17,15 +17,15 @@ const availableLocales = [
   "es-CO",
 ];
 
-const withRemix: Decorator = (Story) => {
-  const RemixStub = createRoutesStub([
+const withReactRouter: Decorator = (Story) => {
+  const ReactRouterStub = createRoutesStub([
     {
       path: "/*",
       Component: Story,
     },
   ]);
 
-  return <RemixStub />;
+  return <ReactRouterStub />;
 };
 
 const preview: Preview = {
@@ -66,7 +66,7 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [withRemix],
+  decorators: [withReactRouter],
 };
 
 export default preview;

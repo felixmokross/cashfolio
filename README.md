@@ -22,10 +22,10 @@ Migrate the database:
 npx prisma migrate dev
 ```
 
-Start the **Remix** app in the dev server:
+Start the **React Router** app in the dev server:
 
 ```sh
-npm run dev:remix
+npm run dev:react-router
 ```
 
 Start **Storybook** by
@@ -54,7 +54,7 @@ See [`.env.example`](./.env.example) file.
 
 - App
 
-  - Remix
+  - React Router (framework)
   - Prisma
   - Headless UI
   - openid-client
