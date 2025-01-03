@@ -1,5 +1,5 @@
 import { AccountUnit } from "@prisma/client";
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 import type { AccountDto } from "~/accounts/types";
 import { useUser } from "~/common/user-context";
 

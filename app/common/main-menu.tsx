@@ -1,7 +1,7 @@
 import { DisclosureButton } from "@headlessui/react";
 import type { PropsWithChildren } from "react";
-import type { NavLinkProps as RemixNavLinkProps } from "@remix-run/react";
-import { NavLink as RemixNavLink } from "@remix-run/react";
+import type { NavLinkProps as RemixNavLinkProps } from "react-router";
+import { NavLink as RemixNavLink } from "react-router";
 import { cn } from "./base/classnames";
 import { currenciesByCode } from "~/common/currencies";
 import { getDisplayNameOfLocale } from "~/common/utils";

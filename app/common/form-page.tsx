@@ -1,4 +1,4 @@
-import { Form } from "@remix-run/react";
+import { Form } from "react-router";
 import { FormPageHeader } from "./form-page-header";
 import { Button } from "./base/buttons/button";
 import type { IconComponentType } from "./base/icons/types";

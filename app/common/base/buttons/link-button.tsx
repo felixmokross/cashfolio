@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 import type { ButtonProps } from "./button";
 import { Button } from "./button";
 import type { ComponentPropsWithoutRef } from "react";

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type { AssetClass } from "@prisma/client";
-import type { SerializeFrom } from "@remix-run/node";
+import type { SerializeFrom } from "react-router";
 import { createId } from "@paralleldrive/cuid2";
 import { formatISO } from "date-fns";
 import { AccountFormFields } from "./account-form-fields";

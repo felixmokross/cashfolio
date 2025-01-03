@@ -1,4 +1,4 @@
-import { Link as RemixLink } from "@remix-run/react";
+import { Link as RemixLink } from "react-router";
 import type { ComponentProps } from "react";
 import { cn } from "./classnames";
 

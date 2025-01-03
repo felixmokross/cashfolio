@@ -1,6 +1,6 @@
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import type { User } from "@prisma/client";
-import { type useNavigation } from "@remix-run/react";
+import { type useNavigation } from "react-router";
 import { Alert } from "~/common/base/alert";
 import { CurrencyCombobox } from "~/common/forms/currency-combobox";
 import { LocaleCombobox } from "~/common/forms/locale-combobox";

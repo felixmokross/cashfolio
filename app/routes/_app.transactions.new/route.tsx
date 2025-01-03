@@ -2,7 +2,7 @@ import {
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
   redirect,
-} from "@remix-run/node";
+} from "react-router";
 import { Page } from "./page";
 import { getAccount, getAccounts } from "~/accounts/functions.server";
 import { requireUserId } from "~/common/auth.server";

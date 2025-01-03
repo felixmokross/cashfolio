@@ -1,4 +1,4 @@
-import type { SerializeFrom } from "@remix-run/node";
+import type { SerializeFrom } from "react-router";
 import type { getReverseLedgerDateGroups } from "~/ledgers-lines/functions.server";
 
 export type GetReverseLedgerDateGroupsResultDto = SerializeFrom<

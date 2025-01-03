@@ -3,7 +3,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 import { LogoSmall } from "./base/icons/logo-small";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
 import { MainMenu } from "./main-menu";

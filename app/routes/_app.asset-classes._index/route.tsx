@@ -1,5 +1,5 @@
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import type { LoaderFunctionArgs, MetaFunction } from "react-router";
+import { useLoaderData } from "react-router";
 import { requireUserId } from "~/common/auth.server";
 import { getAssetClasses } from "~/asset-classes/functions.server";
 import { getTitle } from "~/common/utils";

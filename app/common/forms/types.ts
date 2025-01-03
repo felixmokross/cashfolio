@@ -1,4 +1,4 @@
-import type { SerializeFrom } from "@remix-run/node";
+import type { SerializeFrom } from "react-router";
 
 export type FormActionData<TValues> = {
   ok: boolean;

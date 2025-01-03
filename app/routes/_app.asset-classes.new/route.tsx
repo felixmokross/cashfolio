@@ -1,5 +1,5 @@
-import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
+import type { ActionFunctionArgs, MetaFunction } from "react-router";
+import { redirect } from "react-router";
 import invariant from "tiny-invariant";
 import { requireUserId } from "~/common/auth.server";
 import { createAssetClass } from "~/asset-classes/functions.server";

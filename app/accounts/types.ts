@@ -1,5 +1,5 @@
 import type { Account } from "@prisma/client";
-import type { SerializeFrom } from "@remix-run/node";
+import type { SerializeFrom } from "react-router";
 import type { getAccount } from "~/accounts/functions.server";
 import type { getAssetClasses } from "~/asset-classes/functions.server";
 

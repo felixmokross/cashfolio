@@ -1,5 +1,5 @@
 import { createId } from "@paralleldrive/cuid2";
-import { redirect } from "@remix-run/node";
+import { redirect } from "react-router";
 import { generators, Issuer, TokenSet } from "openid-client";
 import invariant from "tiny-invariant";
 import {
