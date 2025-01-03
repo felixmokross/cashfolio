@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_VERSION: ${{ vars.NODE_VERSION }}
+  NODE_VERSION: 22
 
 jobs:
   version:
