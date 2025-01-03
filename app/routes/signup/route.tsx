@@ -114,8 +114,8 @@ export default function Route() {
       suggestedLocale={suggestedLocale}
       suggestedCurrency={suggestedCurrency}
       locales={locales}
-      values={actionData?.data.values}
-      errors={actionData?.data.errors}
+      values={actionData?.data?.values}
+      errors={actionData?.data?.errors}
     />
   );
 }
